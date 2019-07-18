@@ -1,0 +1,34 @@
+language: android
+sudo: required
+jdk: oraclejdk8
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+env:
+  global:
+    - ANDROID_API_LEVEL=28
+    - ANDROID_BUILD_TOOLS_VERSION=29.0.0
+    - ANDROID_EMU_API_LEVEL=25
+    - ANDROID_ABI=armeabi-v7a
+    - ADB_INSTALL_TIMEOUT=5 # minutes (2 minutes by default)
+
+android:
+  components:
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
+    - extra-android_support
+
+  licenses:
+    - android-sdk-preview-licenses-.+
+    - android-sdk-license-.+
+    - google-sdk-license-.+
+
+script:
+  - "./emulate-ci-build.sh"
