@@ -1,4 +1,4 @@
-package config
+package configs
 
 object AndroidConfig {
     const val applicationId = "com.meteoro.omdbarch"
@@ -10,4 +10,6 @@ object AndroidConfig {
     const val buildToolsVersion = "29.0.0"
 
     const val instrumentationTestRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    val noGeneratedDesities = emptySet<String>().toTypedArray()
 }

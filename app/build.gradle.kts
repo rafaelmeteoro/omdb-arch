@@ -1,4 +1,10 @@
-import config.AndroidConfig
+import com.android.build.gradle.internal.dsl.DataBindingOptions
+import configs.AndroidConfig
+import configs.KotlinConfig
+import configs.ProguardConfig
+import dependencies.InstrumentationTestsDependencies.Companion.instrumentationTest
+import dependencies.UnitTestDependencies.Companion.unitTest
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id(BuildPlugins.Ids.androidApplication)
@@ -19,6 +25,11 @@ android {
         testInstrumentationRunner = AndroidConfig.instrumentationTestRunner
         versionCode = Versioning.version.code
         versionName = Versioning.version.name
+
+        vectorDrawables.apply {
+            useSupportLibrary = true
+            generatedDensities(*(AndroidConfig.noGeneratedDesities))
+        }
     }
 
     buildTypes {
@@ -31,9 +42,32 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
 
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            val proguardConfig = ProguardConfig("$rootDir/proguard")
+            proguardFiles(*(proguardConfig.customRules))
+            proguardFiles(getDefaultProguardFile(proguardConfig.androidRules))
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = KotlinConfig.targetJVM
+    }
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+        unitTests.isIncludeAndroidResources = true
+    }
+
+    val action = object : Action<DataBindingOptions> {
+        override fun execute(t: DataBindingOptions) {
+            t.isEnabled = true
+        }
+    }
+    dataBinding(action)
 }
 
 dependencies {
@@ -41,7 +75,16 @@ dependencies {
     implementation(Libraries.appCompat)
     implementation(Libraries.coreAndroidx)
     implementation(Libraries.constraintLayout)
-    testImplementation(Libraries.jUnit)
-    androidTestImplementation(Libraries.androidTestRunner)
-    androidTestImplementation(Libraries.espressoCore)
+
+    unitTest {
+        forEachDependency { testImplementation(it) }
+    }
+
+    instrumentationTest {
+        forEachDependency { androidTestImplementation(it) }
+    }
+}
+
+androidExtensions {
+    extensions.add("experimental", true)
 }
