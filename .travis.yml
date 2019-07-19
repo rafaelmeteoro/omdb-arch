@@ -21,12 +21,12 @@ env:
 
 android:
   components:
-    # - tools
-    # - platform-tools
-    # - tools
     # - android-$ANDROID_EMU_API_LEVEL
     # - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMU_API_LEVEL
+    - tools
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - platform-tools
+    - tools
     - android-$ANDROID_API_LEVEL
     - extra-android_support
 
@@ -46,3 +46,6 @@ script:
   # - "./gradlew clean build jacocoTestReport coveralls --stacktrace"
   # - "./emulate-ci-build.sh"
   - "./gradlew clean build --stacktrace"
+
+after_success:
+  - "./gradlew cobertura coveralls"
