@@ -46,7 +46,4 @@ before_script:
 script:
   # - "./gradlew clean build jacocoTestReport coveralls --stacktrace"
   # - "./emulate-ci-build.sh"
-  - "./gradlew clean build cobertura coveralls --stacktrace"
-
-after_success:
-  - "./gradlew cobertura coveralls"
+  - "./gradlew clean build jacocoTestReport cobertura coveralls --stacktrace"

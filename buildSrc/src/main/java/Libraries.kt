@@ -2,7 +2,7 @@ import configs.KotlinConfig
 
 // Versions for project parameters and forEachDependency
 object Libraries {
-    val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KotlinConfig.version}"
+    val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KotlinConfig.version}"
 
     val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     val coreAndroidx = "androidx.core:core-ktx:${Versions.coreAndroidx}"
