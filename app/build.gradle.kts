@@ -4,6 +4,7 @@ import configs.KotlinConfig
 import configs.ProguardConfig
 import dependencies.InstrumentationTestsDependencies.Companion.instrumentationTest
 import dependencies.UnitTestDependencies.Companion.unitTest
+import modules.ModuleNames
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -75,6 +76,8 @@ dependencies {
     implementation(Libraries.appCompat)
     implementation(Libraries.coreAndroidx)
     implementation(Libraries.constraintLayout)
+    implementation(project(ModuleNames.Logger))
+    implementation(project(ModuleNames.Domain))
 
     unitTest {
         forEachDependency { testImplementation(it) }
