@@ -6,7 +6,7 @@ import org.junit.Test
 class RatingTest {
 
     @Test
-    fun testValuesRating() {
+    fun `test values rating`() {
         val sourceExpected = "source"
         val valueExpected = "value"
 
