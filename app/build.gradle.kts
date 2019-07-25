@@ -37,7 +37,7 @@ android {
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
-            isTestCoverageEnabled = true
+            isTestCoverageEnabled = false
         }
         getByName("release") {
             isMinifyEnabled = true

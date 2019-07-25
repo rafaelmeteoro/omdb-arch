@@ -34,13 +34,13 @@ allprojects {
     }
 
     apply(plugin = BuildPlugins.Ids.detekt)
+    apply(plugin = BuildPlugins.Ids.coveralls)
 
     detekt {
         config = files("$rootDir/default-detekt-config.yml")
     }
 }
 
-apply(plugin = BuildPlugins.Ids.cobertura)
 apply(plugin = BuildPlugins.Ids.coveralls)
 apply(plugin = BuildPlugins.Ids.testLogger)
 apply(plugin = BuildPlugins.Ids.jacocoUnified)
