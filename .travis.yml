@@ -50,7 +50,7 @@ before_script:
 
 script:
   #  - "./gradlew clean build jacocoTestReport assembleAndroidTest coveralls --stacktrace"
-  - "./gradlew androidDependencies --no-daemon --stacktrace"
+  #  - "./gradlew androidDependencies --no-daemon --stacktrace"
   - ./gradlew clean ktlintCheck --no-daemon --stacktrace
   - ./gradlew clean detekt --no-daemon --stacktrace
   - ./gradlew clean jacocoTestReport jacocoTestReportDebug --no-daemon --stacktrace
