@@ -7,5 +7,6 @@ include(
     MainApp,
     Logger,
     Domain,
-    Infrastructure.Networking
+    Infrastructure.Networking,
+    Infrastructure.Rest
 )

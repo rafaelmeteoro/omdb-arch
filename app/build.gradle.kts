@@ -79,6 +79,7 @@ dependencies {
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Infrastructure.Networking))
+    implementation(project(ModuleNames.Infrastructure.Rest))
 
     unitTest {
         forEachDependency { testImplementation(it) }

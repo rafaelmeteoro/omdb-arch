@@ -21,6 +21,7 @@ object BuildPlugins {
         const val kotlinExtensions = "android.extensions"
         const val kotlinKapt = "kapt"
         const val kotlinJVM = "kotlin"
+        const val kotlinxSerialization = "kotlinx-serialization"
         const val cobertura = "net.saliman.cobertura"
         const val coveralls = "com.github.kt3k.coveralls"
         const val testLogger = "com.adarshr.test-logger"

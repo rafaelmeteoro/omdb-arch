@@ -15,6 +15,11 @@ object Libraries {
 
     const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofitGsonConverter}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
+    const val retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofitRxAdapter}"
+
+    const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
+    const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
+    const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
 
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val coreAndroidx = "androidx.core:core-ktx:${Versions.coreAndroidx}"
@@ -36,6 +41,10 @@ object Libraries {
         const val retrofitScalars = "2.0.2"
         const val retrofitKotlinSerialization = "0.4.0"
         const val retrofitGsonConverter = "2.5.0"
+        const val retrofitRxAdapter = "2.3.0"
+        const val rxJava = "2.2.4"
+        const val rxAndroid = "2.1.1"
+        const val rxKotlin = "2.3.0"
         const val gson = "2.8.5"
         const val appCompat = "1.0.2"
         const val coreAndroidx = "1.0.2"
