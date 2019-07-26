@@ -1,7 +1,7 @@
 package com.meteoro.omdbarch.domain
 
-import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
+import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.services.RemoteOmdbService
 
 class FetchMovies(

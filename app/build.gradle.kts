@@ -78,6 +78,7 @@ dependencies {
     implementation(Libraries.constraintLayout)
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))
+    implementation(project(ModuleNames.Infrastructure.Networking))
 
     unitTest {
         forEachDependency { testImplementation(it) }
