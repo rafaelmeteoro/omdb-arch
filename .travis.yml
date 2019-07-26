@@ -49,12 +49,12 @@ before_script:
 #  - adb shell input keyevent 82 &
 
 script:
-  #  - "./gradlew clean build jacocoTestReport assembleAndroidTest coveralls --stacktrace"
   #  - "./gradlew androidDependencies --no-daemon --stacktrace"
-  - ./gradlew clean ktlintCheck --no-daemon --stacktrace
-  - ./gradlew clean detekt --no-daemon --stacktrace
-  - ./gradlew clean jacocoTestReport jacocoTestReportDebug --no-daemon --stacktrace
-  - ./gradlew clean assembleDebug -xlint -PdisablePredex --no-daemon
+  #  - ./gradlew clean ktlintCheck --no-daemon --stacktrace
+  #  - ./gradlew clean detekt --no-daemon --stacktrace
+  #  - ./gradlew clean jacocoTestReport jacocoTestReportDebug --no-daemon --stacktrace
+  #  - ./gradlew clean assembleDebug -xlint -PdisablePredex --no-daemon
+  - "./gradlew clean build jacocoTestReport assembleAndroidTest coveralls --stacktrace"
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
