@@ -21,6 +21,7 @@ dependencies {
     implementation(Libraries.okhttp)
     implementation(Libraries.okhttpLogger)
     implementation(Libraries.retrofit)
+    implementation(Libraries.gson)
     implementation(Libraries.dagger)
     kapt(Libraries.daggerCompiler)
 
