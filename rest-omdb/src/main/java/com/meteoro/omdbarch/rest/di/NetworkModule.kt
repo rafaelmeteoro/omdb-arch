@@ -1,10 +1,11 @@
-package com.meteoro.omdbarch.networking.di
+package com.meteoro.omdbarch.rest.di
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
-import com.meteoro.omdbarch.networking.ApiInterceptor
+import com.meteoro.omdbarch.rest.api.ApiInterceptor
+import com.meteoro.omdbarch.rest.api.OmdbAPI
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -43,7 +44,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl("http://www.omdbapi.com/")
+            .baseUrl(OmdbAPI.API_URL)
             .client(okHttpClient)
             .build()
     }
