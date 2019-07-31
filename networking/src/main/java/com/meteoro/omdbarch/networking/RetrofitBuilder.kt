@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.networking
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
@@ -8,6 +9,7 @@ import retrofit2.Retrofit
 
 object RetrofitBuilder {
 
+    @UnstableDefault
     operator fun invoke(apiURL: String, httpClient: OkHttpClient) =
         with(Retrofit.Builder()) {
             baseUrl(apiURL)
