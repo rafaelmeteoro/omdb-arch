@@ -1,4 +1,5 @@
 language: android
+dist: trusty
 sudo: required
 jdk: openjdk8
 #jdk: oraclejdk8
@@ -11,30 +12,23 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
 
 env:
   global:
     - ANDROID_API_LEVEL=28
     - ANDROID_BUILD_TOOLS_VERSION=29.0.0
-    - ANDROID_EMU_API_LEVEL=25
-    - ANDROID_ABI=armeabi-v7a
-    - ADB_INSTALL_TIMEOUT=5 # minutes (2 minutes by default)
-
-notifications:
-  email:
-    recipients:
-      - fael.anjelus@gmail.com
 
 android:
   components:
-    # - android-$ANDROID_EMU_API_LEVEL
-    # - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMU_API_LEVEL
     - tools
     - tools
     - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     - android-$ANDROID_API_LEVEL
-    - extra-android_support
+    - extra-android-support
+    - extra-android-m2repository
+    - extra-google-m2repository
 
   licenses:
     - android-sdk-preview-licenses-.+
@@ -42,20 +36,7 @@ android:
     - google-sdk-license-.+
     - '.+'
 
-before_script:
-#  - echo -e "Host github.com\n\tHostName github.com\n\tUser git\n\tIdentityFile ~/.ssh/id_travisci\n" >> ~/.ssh/config
-#  - echo no | android create avd --force -n test -t android-$ANDROID_EMU_API_LEVEL --abi google_apis/$ANDROID_ABI
-#  - emulator -avd test -no-window &
-#  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
-#
-
 script:
-  #  - ./gradlew androidDependencies --no-daemon --stacktrace
-  #  - ./gradlew clean ktlintCheck --no-daemon --stacktrace
-  #  - ./gradlew clean detekt --no-daemon --stacktrace
-  #  - ./gradlew clean jacocoTestReport jacocoTestReportDebug --no-daemon --stacktrace
-  #  - ./gradlew clean assembleDebug -xlint -PdisablePredex --no-daemon
   - "./gradlew clean build jacocoTestReport assembleAndroidTest coveralls --stacktrace"
 
 after_success:
