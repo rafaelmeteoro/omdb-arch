@@ -1,9 +1,7 @@
 package com.meteoro.omdbarch.networking
 
 import com.meteoro.omdbarch.domain.errors.ErrorTransformer
-import com.meteoro.omdbarch.domain.errors.NetworkingError.OperationTimeout
-import com.meteoro.omdbarch.domain.errors.NetworkingError.HostUnreachable
-import com.meteoro.omdbarch.domain.errors.NetworkingError.ConnectionSpike
+import com.meteoro.omdbarch.domain.errors.NetworkingError.*
 import java.io.IOException
 import java.net.ConnectException
 import java.net.NoRouteToHostException

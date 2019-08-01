@@ -33,6 +33,7 @@ object Libraries {
     const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
     const val androidTestRunner = "androidx.test:runner:${Versions.androidxTest}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 
     private object Versions {
         const val kotlinSerialization = "0.11.0"

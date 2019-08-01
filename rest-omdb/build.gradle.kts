@@ -21,6 +21,7 @@ dependencies {
     implementation(Libraries.okhttp)
     implementation(Libraries.okhttpLogger)
     implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitRxAdapter)
     implementation(Libraries.retrofitScalars)
     implementation(Libraries.retrofitGsonConverter)
     implementation(Libraries.gson)

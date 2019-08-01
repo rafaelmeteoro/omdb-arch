@@ -16,7 +16,7 @@ class FetchMovies(
                 .switchIfEmpty(Observable.error(NoResultsFound))
         }
 
-    fun fetch(id: String) =
+    fun fetch(id: String): Observable<Movie> =
         when {
             id.isEmpty() -> Observable.error(EmptyTerm)
             else -> omdbService.fetchMovie(id)

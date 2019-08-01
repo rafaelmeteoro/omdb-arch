@@ -3,6 +3,7 @@ package com.meteoro.omdbarch.networking
 import com.google.gson.JsonIOException
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
+import com.google.gson.stream.MalformedJsonException
 import com.meteoro.omdbarch.domain.errors.ErrorTransformer
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.UnexpectedResponse
 import kotlinx.serialization.MissingFieldException
@@ -16,6 +17,7 @@ object SerializationErrorTransformer : ErrorTransformer {
             is JsonIOException,
             is JsonParseException,
             is JsonSyntaxException,
+            is MalformedJsonException,
             is MissingFieldException,
             is UnknownFieldException,
             is SerializationException -> UnexpectedResponse
