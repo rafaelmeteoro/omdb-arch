@@ -1,26 +1,28 @@
 package com.meteoro.omdbarch.networking
 
-import com.google.gson.JsonIOException
-import com.google.gson.JsonParseException
-import com.google.gson.JsonSyntaxException
-import com.google.gson.stream.MalformedJsonException
-import com.meteoro.omdbarch.domain.errors.ErrorTransformer
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.UnexpectedResponse
+import io.reactivex.Observable
+import io.reactivex.ObservableSource
+import io.reactivex.ObservableTransformer
 import kotlinx.serialization.MissingFieldException
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.UnknownFieldException
 
-object SerializationErrorTransformer : ErrorTransformer {
+class SerializationErrorTransformer<T> : ObservableTransformer<T, T> {
 
-    override fun transform(incoming: Throwable): Throwable =
-        when (incoming) {
-            is JsonIOException,
-            is JsonParseException,
-            is JsonSyntaxException,
-            is MalformedJsonException,
+    override fun apply(upstream: Observable<T>): ObservableSource<T> {
+        return upstream.onErrorResumeNext(this::asSerializationError)
+    }
+
+    private fun asSerializationError(error: Throwable) = Observable.error<T>(
+        mapToDomainerror(error)
+    )
+
+    private fun mapToDomainerror(error: Throwable): Throwable =
+        when (error) {
             is MissingFieldException,
             is UnknownFieldException,
             is SerializationException -> UnexpectedResponse
-            else -> incoming
+            else -> error
         }
 }

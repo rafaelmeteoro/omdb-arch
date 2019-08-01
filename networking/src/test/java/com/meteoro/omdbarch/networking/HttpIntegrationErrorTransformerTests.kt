@@ -5,7 +5,6 @@ import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.RemoteSy
 import com.meteoro.omdbarch.networking.CheckErrorTransformation.Companion.checkTransformation
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import retrofit2.HttpException
 import retrofit2.Response
@@ -16,8 +15,8 @@ class HttpIntegrationErrorTransformerTests {
     fun `should transform proper throwable into client origin error`() {
         checkTransformation(
             from = httpException<Any>(418, "Teapot"),
-            using = HttpIntegrationErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(ClientOrigin) }
+            expected = ClientOrigin,
+            using = HttpIntegrationErrorTransformer<Any>()
         )
     }
 
@@ -25,8 +24,8 @@ class HttpIntegrationErrorTransformerTests {
     fun `should transform proper throwable into remote system error`() {
         checkTransformation(
             from = httpException<Any>(503, "Internal Server Error"),
-            using = HttpIntegrationErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(RemoteSystem) }
+            expected = RemoteSystem,
+            using = HttpIntegrationErrorTransformer<Any>()
         )
     }
 
@@ -36,8 +35,8 @@ class HttpIntegrationErrorTransformerTests {
 
         checkTransformation(
             from = otherError,
-            using = HttpIntegrationErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(otherError) }
+            expected = otherError,
+            using = HttpIntegrationErrorTransformer<Any>()
         )
     }
 

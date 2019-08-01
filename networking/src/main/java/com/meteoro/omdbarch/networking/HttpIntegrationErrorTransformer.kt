@@ -1,23 +1,33 @@
 package com.meteoro.omdbarch.networking
 
-import com.meteoro.omdbarch.domain.errors.ErrorTransformer
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
+import io.reactivex.Observable
+import io.reactivex.ObservableSource
+import io.reactivex.ObservableTransformer
 import retrofit2.HttpException
 
-object HttpIntegrationErrorTransformer : ErrorTransformer {
+class HttpIntegrationErrorTransformer<T> : ObservableTransformer<T, T> {
 
-    override fun transform(incoming: Throwable): Throwable =
-        when (incoming) {
-            is HttpException -> translateUsingStatusCode(incoming.code())
-            else -> incoming
-        }
+    override fun apply(upstream: Observable<T>): ObservableSource<T> {
+        return upstream.onErrorResumeNext(this::handleIfRestError)
+    }
 
-    private fun translateUsingStatusCode(code: Int) =
-        when (code) {
-            in FIRST_HTTP_CODE..LAST_HTTP_CODE -> RemoteServiceIntegrationError.ClientOrigin
-            else -> RemoteServiceIntegrationError.RemoteSystem
-        }
+    private fun handleIfRestError(incoming: Throwable): Observable<T> =
+        if (incoming is HttpException) toInfrastructureError(incoming)
+        else Observable.error(incoming)
 
-    private const val FIRST_HTTP_CODE = 400
-    private const val LAST_HTTP_CODE = 499
+    private fun toInfrastructureError(restError: HttpException): Observable<T> {
+        val infraError = translateUsingStatusCode(restError.code())
+        return Observable.error(infraError)
+    }
+
+    private fun translateUsingStatusCode(code: Int) = when (code) {
+        in FIRST_HTTP_CODE..LAST_HTTP_CODE -> RemoteServiceIntegrationError.ClientOrigin
+        else -> RemoteServiceIntegrationError.RemoteSystem
+    }
+
+    companion object {
+        private const val FIRST_HTTP_CODE = 400
+        private const val LAST_HTTP_CODE = 499
+    }
 }

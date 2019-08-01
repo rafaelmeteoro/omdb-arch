@@ -3,7 +3,6 @@ package com.meteoro.omdbarch.networking
 import com.meteoro.omdbarch.domain.errors.NetworkingError.*
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.networking.CheckErrorTransformation.Companion.checkTransformation
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import java.io.IOException
 import java.net.ConnectException
@@ -17,8 +16,8 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper unknown host exception into host unreachable`() {
         checkTransformation(
             from = UnknownHostException("No Internet"),
-            using = NetworkingErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(HostUnreachable) }
+            expected = HostUnreachable,
+            using = NetworkingErrorTransformer<Any>()
         )
     }
 
@@ -26,8 +25,8 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper connect exception into host unreachable`() {
         checkTransformation(
             from = ConnectException(),
-            using = NetworkingErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(HostUnreachable) }
+            expected = HostUnreachable,
+            using = NetworkingErrorTransformer<Any>()
         )
     }
 
@@ -35,8 +34,8 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper no route exception into host unreachable`() {
         checkTransformation(
             from = NoRouteToHostException(),
-            using = NetworkingErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(HostUnreachable) }
+            expected = HostUnreachable,
+            using = NetworkingErrorTransformer<Any>()
         )
     }
 
@@ -44,8 +43,8 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper socket timeout exception into operation timeout`() {
         checkTransformation(
             from = SocketTimeoutException(),
-            using = NetworkingErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(OperationTimeout) }
+            expected = OperationTimeout,
+            using = NetworkingErrorTransformer<Any>()
         )
     }
 
@@ -53,8 +52,8 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper io exception into connection spike`() {
         checkTransformation(
             from = IOException("Canceled"),
-            using = NetworkingErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(ConnectionSpike) }
+            expected = ConnectionSpike,
+            using = NetworkingErrorTransformer<Any>()
         )
     }
 
@@ -64,8 +63,8 @@ class NetworkingErrorTransformerTests {
 
         checkTransformation(
             from = otherError,
-            using = NetworkingErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(otherError) }
+            expected = otherError,
+            using = NetworkingErrorTransformer<Any>()
         )
     }
 }

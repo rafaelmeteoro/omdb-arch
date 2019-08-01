@@ -14,6 +14,7 @@ plugins {
 dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
 
     unitTest {
         forEachDependency { testImplementation(it) }

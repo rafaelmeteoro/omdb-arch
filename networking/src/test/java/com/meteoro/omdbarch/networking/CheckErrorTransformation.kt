@@ -1,18 +1,23 @@
 package com.meteoro.omdbarch.networking
 
-import com.meteoro.omdbarch.domain.errors.ErrorTransformer
+import io.reactivex.Observable
+import io.reactivex.ObservableTransformer
 
-class CheckErrorTransformation(
-    private val original: Throwable,
-    private val transformer: ErrorTransformer
+class CheckErrorTransformation<T : Any?>(
+    private val from: Throwable,
+    private val expected: Throwable,
+    private val transformer: ObservableTransformer<T, T>
 ) {
-    private fun runCheck(check: (Throwable) -> Unit) {
-        val transformed = transformer.transform(original)
-        check(transformed)
+    private fun runCheck() {
+        val execution = Observable.error<T>(from).compose(transformer)
+        execution.test()
+            .assertNotComplete()
+            .assertTerminated()
+            .assertError(expected)
     }
 
     companion object {
-        fun checkTransformation(from: Throwable, using: ErrorTransformer, check: (Throwable) -> Unit) =
-            CheckErrorTransformation(from, using).runCheck { check.invoke(it) }
+        fun <T> checkTransformation(from: Throwable, expected: Throwable, using: ObservableTransformer<T, T>) =
+            CheckErrorTransformation(from, expected, using).runCheck()
     }
 }
