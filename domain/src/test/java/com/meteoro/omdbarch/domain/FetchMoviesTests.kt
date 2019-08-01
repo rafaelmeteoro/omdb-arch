@@ -3,11 +3,11 @@ package com.meteoro.omdbarch.domain
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.domain.model.ResultSearch
 import com.meteoro.omdbarch.domain.services.RemoteOmdbService
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
@@ -17,19 +17,24 @@ class FetchMoviesTests {
     private val omdbService = mock<RemoteOmdbService>()
     private lateinit var usecase: FetchMovies
 
-    private val movies by lazy {
-        listOf(
-            Movie(
-                title = "Movie title",
-                year = "2019"
-            )
-        )
-    }
-
     private val movie by lazy {
         Movie(
             title = "Movie title",
             year = "2019"
+        )
+    }
+
+    private val resultSearch by lazy {
+        ResultSearch(
+            search = listOf(movie),
+            totalResults = 1,
+            response = "True"
+        )
+    }
+
+    private val noResultSearch by lazy {
+        ResultSearch(
+            response = "False"
         )
     }
 
@@ -38,59 +43,51 @@ class FetchMoviesTests {
         usecase = FetchMovies(omdbService)
 
         whenever(omdbService.searchMovies(anyString(), anyString(), anyString()))
-            .thenReturn(Observable.just(movies))
+            .thenReturn(Observable.just(resultSearch))
         whenever(omdbService.fetchMovie(anyString()))
             .thenReturn(Observable.just(movie))
     }
 
     @Test
     fun `should search valid title`() {
-        val testObserver = simpleSearchMovies().test()
-
-        testObserver.assertComplete()
-        testObserver.assertNoErrors()
-        testObserver.assertValue(movies)
-
-        assertThat(simpleSearchMovies().blockingFirst()).isEqualTo(movies)
+        simpleSearchMovies().test()
+            .assertComplete()
+            .assertTerminated()
+            .assertNoErrors()
+            .assertValue(resultSearch)
     }
 
     @Test
     fun `should search invalide title`() {
         whenever(omdbService.searchMovies(anyString(), anyString(), anyString()))
-            .thenReturn(Observable.empty())
+            .thenReturn(Observable.just(noResultSearch))
 
-        val testObserver = simpleSearchMovies().test()
-
-        testObserver.assertNotComplete()
-        testObserver.assertError(NoResultsFound)
-
-        assertThat(testObserver.errors().first()).isEqualTo(NoResultsFound)
+        simpleSearchMovies().test()
+            .assertNotComplete()
+            .assertTerminated()
+            .assertError(NoResultsFound)
     }
 
     @Test
     fun `should throw with invalid term`() {
-        val testObserver = simpleFetchMovie("").test()
-
-        testObserver.assertNotComplete()
-        testObserver.assertError(EmptyTerm)
-
-        assertThat(testObserver.errors().first()).isEqualTo(EmptyTerm)
+        simpleFetchMovie("").test()
+            .assertNotComplete()
+            .assertTerminated()
+            .assertError(EmptyTerm)
     }
 
     @Test
     fun `should fetch valid id`() {
-        val testObserver = simpleFetchMovie("10").test()
-
-        testObserver.assertComplete()
-        testObserver.assertNoErrors()
-        testObserver.assertValue(movie)
-
-        assertThat(simpleFetchMovie("10").blockingFirst()).isEqualTo(movie)
+        simpleFetchMovie("10").test()
+            .assertComplete()
+            .assertTerminated()
+            .assertNoErrors()
+            .assertValue(movie)
     }
 
     private fun simpleSearchMovies() =
-        usecase.search("Avenges", "", "")
+        usecase.searchMovies("Avenges", "", "")
 
     private fun simpleFetchMovie(id: String) =
-        usecase.fetch(id)
+        usecase.fetchMovie(id)
 }

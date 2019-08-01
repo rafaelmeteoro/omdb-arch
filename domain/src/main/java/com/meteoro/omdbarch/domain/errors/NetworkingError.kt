@@ -6,10 +6,9 @@ sealed class NetworkingError : Throwable() {
     object OperationTimeout : NetworkingError()
     object ConnectionSpike : NetworkingError()
 
-    override fun toString() =
-        when (this) {
-            HostUnreachable -> "Cannot reach remote host"
-            OperationTimeout -> "Networking operation timed out"
-            ConnectionSpike -> "In-flight networking operation interrupted"
-        }
+    override fun toString() = when (this) {
+        HostUnreachable -> "Cannot reach remote host"
+        OperationTimeout -> "Networking operation timed out"
+        ConnectionSpike -> "In-flight networking operation interrupted"
+    }
 }
