@@ -1,3 +1,10 @@
 package com.meteoro.omdbarch.rest.response
 
-data class RatingResponse(val source: String?, val value: String?)
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class RatingResponse(
+    @SerialName("Source") val source: String?,
+    @SerialName("Value") val value: String?
+)

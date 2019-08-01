@@ -1,31 +1,33 @@
 package com.meteoro.omdbarch.rest.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MovieResponse(
-    @SerializedName("Title") val title: String? = null,
-    @SerializedName("Year") val year: String? = null,
-    @SerializedName("Rated") val rated: String? = null,
-    @SerializedName("Released") val released: String? = null,
-    @SerializedName("Runtime") val runtime: String? = null,
-    @SerializedName("Genre") val genre: String? = null,
-    @SerializedName("Director") val director: String? = null,
-    @SerializedName("Writer") val writer: String? = null,
-    @SerializedName("Actors") val actors: String? = null,
-    @SerializedName("Plot") val plot: String? = null,
-    @SerializedName("Language") val language: String? = null,
-    @SerializedName("Country") val country: String? = null,
-    @SerializedName("Awards") val awards: String? = null,
-    @SerializedName("Poster") val poster: String? = null,
-    @SerializedName("Ratings") val ratings: List<RatingResponse>? = null,
-    @SerializedName("Metascore") val metascore: String? = null,
-    @SerializedName("imdbRating") val imdbRating: String? = null,
-    @SerializedName("imdbVotes") val imdbVotes: String? = null,
-    @SerializedName("imdbID") val imdbId: String? = null,
-    @SerializedName("Type") val type: String? = null,
-    @SerializedName("DVD") val dvd: String? = null,
-    @SerializedName("BoxOffice") val boxOffice: String? = null,
-    @SerializedName("Production") val production: String? = null,
-    @SerializedName("Website") val website: String? = null,
-    @SerializedName("Response") val response: String? = null
+    @SerialName("Title") val title: String? = null,
+    @SerialName("Year") val year: String? = null,
+    @SerialName("Rated") val rated: String? = null,
+    @SerialName("Released") val released: String? = null,
+    @SerialName("Runtime") val runtime: String? = null,
+    @SerialName("Genre") val genre: String? = null,
+    @SerialName("Director") val director: String? = null,
+    @SerialName("Writer") val writer: String? = null,
+    @SerialName("Actors") val actors: String? = null,
+    @SerialName("Plot") val plot: String? = null,
+    @SerialName("Language") val language: String? = null,
+    @SerialName("Country") val country: String? = null,
+    @SerialName("Awards") val awards: String? = null,
+    @SerialName("Poster") val poster: String? = null,
+    @SerialName("Ratings") val ratings: List<RatingResponse>? = null,
+    @SerialName("Metascore") val metascore: String? = null,
+    @SerialName("imdbRating") val imdbRating: String? = null,
+    @SerialName("imdbVotes") val imdbVotes: String? = null,
+    @SerialName("imdbID") val imdbId: String? = null,
+    @SerialName("Type") val type: String? = null,
+    @SerialName("DVD") val dvd: String? = null,
+    @SerialName("BoxOffice") val boxOffice: String? = null,
+    @SerialName("Production") val production: String? = null,
+    @SerialName("Website") val website: String? = null,
+    @SerialName("Response") val response: String? = null
 )

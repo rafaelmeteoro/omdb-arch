@@ -29,6 +29,7 @@ dependencies {
     implementation(Libraries.dagger)
     kapt(Libraries.daggerCompiler)
 
+    implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))
 
     unitTest {

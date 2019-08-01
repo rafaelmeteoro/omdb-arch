@@ -2,22 +2,22 @@ package com.meteoro.omdbarch.rest.api
 
 import com.meteoro.omdbarch.rest.response.MovieResponse
 import com.meteoro.omdbarch.rest.response.SearchResponse
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface OmdbAPI {
     @GET("/")
-    fun getSearch(
+    fun searchMovies(
         @Query("s") title: String,
         @Query("type") type: String?,
         @Query("y") year: String?
-    ): Call<SearchResponse>
+    ): Observable<SearchResponse>
 
     @GET("/")
-    fun getMovie(
+    fun fetchMovie(
         @Query("i") id: String
-    ): Call<MovieResponse>
+    ): Observable<MovieResponse>
 
     companion object {
         const val API_URL = "http://www.omdbapi.com/"
