@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class SearchResponse(
     @SerialName("Search") val search: List<MovieResponse>? = null,
     @SerialName("totalResults") val totalResult: Int = 0,
-    @SerialName("Response") val response: String? = null
+    @SerialName("Response") val response: String
 )

@@ -1,5 +1,6 @@
 package com.meteoro.omdbarch.rest
 
+import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.*
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.Rating
 import com.meteoro.omdbarch.logger.ConsoleLogger
@@ -26,7 +27,7 @@ internal class MovieInfrastructureTests {
     }
 
     @Test
-    fun `should handle no results search movies`() {
+    fun `should handle result fetch movie`() {
         rule.defineScenario(
             status = 200,
             response = loadFile("200_movie_with_result.json")
@@ -74,7 +75,7 @@ internal class MovieInfrastructureTests {
         )
 
         val testObserver = TestObserver<Movie>()
-        infrastructure.fetchMovie("Avenges")
+        simpleFetchMovie()
             .subscribe(testObserver)
 
         testObserver.assertComplete()
@@ -82,4 +83,55 @@ internal class MovieInfrastructureTests {
             .assertNoErrors()
             .assertValue(movie)
     }
+
+    @Test
+    fun `should handle 200 but broken contract`() {
+        rule.defineScenario(
+            status = 200,
+            response = loadFile("200_movie_broken_contract.json")
+        )
+
+        val testObserver = TestObserver<Movie>()
+        simpleFetchMovie()
+            .subscribe(testObserver)
+
+        testObserver.assertNotComplete()
+            .assertTerminated()
+            .assertError(UnexpectedResponse)
+    }
+
+    @Test
+    fun `should handle 404 not found`() {
+        rule.defineScenario(
+            status = 404,
+            response = loadFile("404_not_found.json")
+        )
+
+        val testObserver = TestObserver<Movie>()
+        simpleFetchMovie()
+            .subscribe(testObserver)
+
+        testObserver.assertNotComplete()
+            .assertTerminated()
+            .assertError(ClientOrigin)
+    }
+
+    @Test
+    fun `should handle 503 internal server error`() {
+        rule.defineScenario(
+            status = 503,
+            response = loadFile("503_internal_server.json")
+        )
+
+        val testObserver = TestObserver<Movie>()
+        simpleFetchMovie()
+            .subscribe(testObserver)
+
+        testObserver.assertNotComplete()
+            .assertTerminated()
+            .assertError(RemoteSystem)
+    }
+
+    private fun simpleFetchMovie() =
+        infrastructure.fetchMovie("10")
 }
