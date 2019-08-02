@@ -30,6 +30,8 @@ object Libraries {
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
 
+    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakyCanary}"
+
     const val jUnit = "junit:junit:${Versions.junit}"
     const val assertj = "org.assertj:assertj-core:${Versions.assertj}"
     const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
@@ -54,6 +56,7 @@ object Libraries {
         const val constraintLayout = "1.1.3"
         const val lifecycle = "2.2.0-alpha02"
         const val dagger = "2.22.1"
+        const val leakyCanary = "2.0-beta-2"
         const val junit = "4.12"
         const val assertj = "3.12.2"
         const val mockitoKotlin = "2.1.0"

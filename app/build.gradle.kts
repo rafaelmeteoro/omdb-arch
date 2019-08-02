@@ -73,14 +73,31 @@ android {
 
 dependencies {
     implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.kotlinSerialization)
     implementation(Libraries.appCompat)
     implementation(Libraries.coreAndroidx)
     implementation(Libraries.constraintLayout)
+    implementation(Libraries.lifecycleCommon)
+    implementation(Libraries.lifecycleJava8)
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
+    implementation(Libraries.okhttp)
+    implementation(Libraries.okhttpLogger)
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitRxAdapter)
+    implementation(Libraries.retrofitScalars)
+    implementation(Libraries.retrofitKotlinSerialization)
+    implementation(Libraries.retrofitGsonConverter)
+    implementation(Libraries.gson)
+    implementation(Libraries.dagger)
+    kapt(Libraries.daggerCompiler)
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Infrastructure.Networking))
     implementation(project(ModuleNames.Infrastructure.Rest))
     implementation(project(ModuleNames.Features.SharedUtilities))
+
+    debugImplementation(Libraries.leakCanary)
 
     unitTest {
         forEachDependency { testImplementation(it) }
