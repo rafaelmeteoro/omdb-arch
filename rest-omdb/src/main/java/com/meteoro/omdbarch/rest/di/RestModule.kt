@@ -3,6 +3,7 @@ package com.meteoro.omdbarch.rest.di
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.logger.ConsoleLogger
+import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.networking.BuildRetrofit
 import com.meteoro.omdbarch.rest.ExecutionErrorHandler
 import com.meteoro.omdbarch.rest.MovieInfrastructure
@@ -40,11 +41,11 @@ class RestModule {
     }
 
     @Provides
-    fun provideSearchInfrastructure(api: OmdbAPI): SearchService {
+    fun provideSearchInfrastructure(api: OmdbAPI, instance: Logger): SearchService {
         return SearchInfrastructure(
             service = api,
             errorHandler = ExecutionErrorHandler(
-                logger = ConsoleLogger
+                logger = instance
             ),
             targetScheduler = Schedulers.io()
         )

@@ -1,15 +1,15 @@
+import dependencies.UnitTestDependencies.Companion.unitTest
 import modules.LibraryModule
 import modules.LibraryType
 import modules.ModuleNames
 
-plugins {
-    id(BuildPlugins.Ids.androidLibrary)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
-}
-
 val module = LibraryModule(rootDir, LibraryType.Android)
 
 apply(from = module.script())
+
+plugins {
+    id(BuildPlugins.Ids.androidLibrary)
+}
 
 dependencies {
     implementation(Libraries.kotlinStdLib)
@@ -22,4 +22,8 @@ dependencies {
 
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))
+
+    unitTest {
+        forEachDependency { testImplementation(it) }
+    }
 }

@@ -2,6 +2,7 @@ package com.meteoro.omdbarch.rest.util
 
 import com.meteoro.omdbarch.networking.BuildRetrofit
 import com.meteoro.omdbarch.rest.api.OmdbAPI
+import kotlinx.serialization.UnstableDefault
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockResponse
@@ -13,6 +14,7 @@ internal class InfrastructureRule : ExternalResource() {
     lateinit var server: MockWebServer
     lateinit var api: OmdbAPI
 
+    @UnstableDefault
     override fun before() {
         super.before()
         server = MockWebServer()

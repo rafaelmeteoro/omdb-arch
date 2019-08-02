@@ -20,7 +20,7 @@ object MovieMapper {
             language = language,
             country = country,
             awards = awards,
-            poster = poster?.replace("300", "1200"),
+            poster = poster.replace("300", "1200"),
             ratings = ratings?.map { RatingMapper(it) },
             metascore = metascore,
             imdbRating = imdbRating,
