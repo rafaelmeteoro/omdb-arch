@@ -81,6 +81,7 @@ dependencies {
     implementation(Libraries.lifecycleJava8)
     implementation(Libraries.rxJava)
     implementation(Libraries.rxKotlin)
+    implementation(Libraries.rxAndroid)
     implementation(Libraries.okhttp)
     implementation(Libraries.okhttpLogger)
     implementation(Libraries.retrofit)
