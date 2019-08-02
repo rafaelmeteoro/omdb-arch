@@ -80,6 +80,7 @@ dependencies {
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Infrastructure.Networking))
     implementation(project(ModuleNames.Infrastructure.Rest))
+    implementation(project(ModuleNames.Features.SharedUtilities))
 
     unitTest {
         forEachDependency { testImplementation(it) }

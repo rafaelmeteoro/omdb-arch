@@ -24,6 +24,8 @@ object Libraries {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val coreAndroidx = "androidx.core:core-ktx:${Versions.coreAndroidx}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val lifecycleCommon = "androidx.lifecycle:lifecycle-common:${Versions.lifecycle}"
+    const val lifecycleJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}"
 
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
@@ -50,6 +52,7 @@ object Libraries {
         const val appCompat = "1.0.2"
         const val coreAndroidx = "1.0.2"
         const val constraintLayout = "1.1.3"
+        const val lifecycle = "2.2.0-alpha02"
         const val dagger = "2.22.1"
         const val junit = "4.12"
         const val assertj = "3.12.2"

@@ -9,4 +9,8 @@ object ModuleNames {
         const val Networking = ":networking"
         const val Rest = ":rest-omdb"
     }
+
+    object Features {
+        const val SharedUtilities = ":shared-utilities"
+    }
 }
