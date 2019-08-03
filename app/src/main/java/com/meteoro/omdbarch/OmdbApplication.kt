@@ -5,9 +5,8 @@ import com.meteoro.omdbarch.di.component.DaggerOmdbComponent
 import com.meteoro.omdbarch.di.component.OmdbComponent
 import com.meteoro.omdbarch.di.module.AppModule
 import com.meteoro.omdbarch.di.module.HomeModule
+import com.meteoro.omdbarch.logger.ConsoleLogger
 import com.meteoro.omdbarch.networking.di.NetworkModule
-import com.meteoro.omdbarch.rest.di.RestModule
-import com.meteoro.omdbarch.utilities.di.SharedUtilitiesModule
 
 class OmdbApplication : Application() {
 
@@ -18,12 +17,12 @@ class OmdbApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val logger = ConsoleLogger
+
         appCompoent = DaggerOmdbComponent
             .builder()
             .appModule(AppModule())
             .networkModule(NetworkModule())
-            .restModule(RestModule())
-            .sharedUtilitiesModule(SharedUtilitiesModule())
             .homeModule(HomeModule())
             .build()
     }

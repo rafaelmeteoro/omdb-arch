@@ -3,10 +3,10 @@ package com.meteoro.omdbarch.networking.di
 import com.meteoro.omdbarch.networking.ApiInterceptor
 import dagger.Module
 import dagger.Provides
-import dagger.Reusable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
@@ -15,9 +15,9 @@ class NetworkModule {
         private const val TIME_OUT = 60L
     }
 
+    @Singleton
     @Provides
-    @Reusable
-    internal fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }

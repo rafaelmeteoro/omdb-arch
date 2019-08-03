@@ -6,10 +6,10 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class SharedUtilitiesModule {
+class SharedUtilitiesModule(private val instance: Logger) {
 
     @Provides
-    fun provideDisposer(instance: Logger): Disposer {
+    fun provideDisposer(): Disposer {
         return Disposer(
             logger = instance
         )
