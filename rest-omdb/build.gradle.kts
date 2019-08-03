@@ -7,7 +7,6 @@ plugins {
     id(BuildPlugins.Ids.kotlinJVM)
     id(BuildPlugins.Ids.kotlinxSerialization)
     id(BuildPlugins.Ids.coveralls)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
 }
 
 val module = LibraryModule(rootDir, LibraryType.Kotlin)
@@ -25,9 +24,9 @@ dependencies {
     implementation(Libraries.retrofitScalars)
     implementation(Libraries.retrofitGsonConverter)
     implementation(Libraries.gson)
-    implementation(Libraries.dagger)
     implementation(Libraries.rxJava)
     implementation(Libraries.rxKotlin)
+    implementation(Libraries.kodein)
 
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))

@@ -1,29 +1,12 @@
 package com.meteoro.omdbarch
 
 import android.app.Application
-import com.meteoro.omdbarch.di.component.DaggerOmdbComponent
-import com.meteoro.omdbarch.di.component.OmdbComponent
-import com.meteoro.omdbarch.di.module.AppModule
-import com.meteoro.omdbarch.di.module.HomeModule
-import com.meteoro.omdbarch.logger.ConsoleLogger
-import com.meteoro.omdbarch.networking.di.NetworkModule
+import kotlinx.serialization.UnstableDefault
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
 
-class OmdbApplication : Application() {
+@UnstableDefault
+class OmdbApplication : Application(), KodeinAware {
 
-    companion object {
-        lateinit var appCompoent: OmdbComponent
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-
-        val logger = ConsoleLogger
-
-        appCompoent = DaggerOmdbComponent
-            .builder()
-            .appModule(AppModule())
-            .networkModule(NetworkModule())
-            .homeModule(HomeModule())
-            .build()
-    }
+    override val kodein: Kodein = DependenciesSetup(this).container
 }
