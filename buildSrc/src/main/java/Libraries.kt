@@ -22,6 +22,9 @@ object Libraries {
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
 
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
+    const val cardView = "androidx.cardview:cardview:${Versions.cardView}"
+    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
+    const val materialDesign = "com.google.android.material:material:${Versions.materialDesign}"
     const val coreAndroidx = "androidx.core:core-ktx:${Versions.coreAndroidx}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val lifecycleCommon = "androidx.lifecycle:lifecycle-common:${Versions.lifecycle}"
@@ -38,6 +41,8 @@ object Libraries {
     const val kodeinAndroid = "org.kodein.di:kodein-di-framework-android-x:${Versions.kodein}"
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakyCanary}"
+
+    val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
 
     const val jUnit = "junit:junit:${Versions.junit}"
     const val assertj = "org.assertj:assertj-core:${Versions.assertj}"
@@ -59,12 +64,16 @@ object Libraries {
         const val rxAndroid = "2.1.1"
         const val gson = "2.8.5"
         const val appCompat = "1.0.2"
+        const val cardView = "1.0.0"
+        const val recyclerView = "1.0.0"
+        const val materialDesign = "1.0.0"
         const val coreAndroidx = "1.0.2"
         const val constraintLayout = "1.1.3"
         const val lifecycle = "2.2.0-alpha02"
         const val dagger = "2.22.1"
         const val kodein = "6.3.3"
         const val leakyCanary = "2.0-beta-2"
+        const val picasso = "2.71828"
         const val junit = "4.12"
         const val assertj = "3.12.2"
         const val mockitoKotlin = "2.1.0"

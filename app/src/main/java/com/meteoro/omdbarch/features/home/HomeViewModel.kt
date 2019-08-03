@@ -1,20 +1,14 @@
 package com.meteoro.omdbarch.features.home
 
 import com.meteoro.omdbarch.domain.FetchSearch
-import io.reactivex.Scheduler
-import java.util.concurrent.TimeUnit
+import com.meteoro.omdbarch.utilities.StateMachine
 
 class HomeViewModel(
     private val fetch: FetchSearch,
-    private val scheduler: Scheduler
+    private val machine: StateMachine<HomePresentation>
 ) {
-
-    companion object {
-        private const val DEBOUNCE_TIME = 750L
-    }
-
     fun searchMovie(movieTitle: String) =
         fetch.searchMovies(movieTitle)
-            .debounce(DEBOUNCE_TIME, TimeUnit.MILLISECONDS)
-            .observeOn(scheduler)
+            .map { BuildHomePresentation(it) }
+            .compose(machine)
 }
