@@ -13,11 +13,11 @@ import org.junit.Test
 
 class HomeViewModelTests {
 
-    lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: HomeViewModel
 
-    val mockFetch = mock<FetchSearch>()
+    private val mockFetch = mock<FetchSearch>()
 
-    val result = ResultSearch(
+    private val result = ResultSearch(
         search = listOf(
             Movie(
                 title = "Avengers",
