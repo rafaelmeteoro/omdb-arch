@@ -11,7 +11,7 @@ import org.junit.rules.ExternalResource
 
 internal class InfrastructureRule : ExternalResource() {
 
-    lateinit var server: MockWebServer
+    private lateinit var server: MockWebServer
     lateinit var api: OmdbAPI
 
     @UnstableDefault

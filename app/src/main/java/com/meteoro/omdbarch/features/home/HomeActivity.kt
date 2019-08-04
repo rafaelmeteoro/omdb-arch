@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.R
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
+import com.meteoro.omdbarch.features.details.MovieDetailActivity
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.*
 import io.reactivex.rxkotlin.subscribeBy
@@ -98,7 +99,8 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
         val toDispose = viewModel
             .searchMovie(title)
             .subscribeBy(
-                onNext = { changeState(it) }
+                onNext = { changeState(it) },
+                onError = { logger.e("Error -> $it") }
             )
 
         disposer.collect(toDispose)
@@ -118,7 +120,7 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
 
         homeView.visibility = View.VISIBLE
         homeView.adapter = MoviesAdapter(home) {
-            logger.d("Movie: $it")
+            startActivity(MovieDetailActivity.newIntent(this, it.imdbId))
         }
     }
 

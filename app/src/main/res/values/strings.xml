@@ -3,4 +3,8 @@
     <string name="error_state_label">Something wen wrong …</string>
     <string name="content_movie_image">Movie image</string>
     <string name="action_search">Search movies</string>
+    <string name="imdb_rating_label">Avaliação iMDB: %s</string>
+    <string name="cast">Elenco\n%s</string>
+    <string name="directors">Direção\n%s</string>
+    <string name="plot">Resumo\n%s</string>
 </resources>

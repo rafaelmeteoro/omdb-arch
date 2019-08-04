@@ -1,6 +1,8 @@
 package com.meteoro.omdbarch.di
 
+import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.FetchSearch
+import com.meteoro.omdbarch.features.details.DetailViewModel
 import com.meteoro.omdbarch.features.home.HomeViewModel
 import com.meteoro.omdbarch.utilities.StateMachine
 import org.kodein.di.Kodein
@@ -17,11 +19,27 @@ val viewModelModule = Kodein.Module("viewModelModule") {
     }
 
     bind() from provider {
+        FetchMovie(
+            service = instance()
+        )
+    }
+
+    bind() from provider {
         HomeViewModel(
             fetch = instance(),
             machine = StateMachine(
                 uiScheduler = instance()
             )
+        )
+    }
+
+    bind() from provider {
+        DetailViewModel(
+            fetch = instance(),
+            machine = StateMachine(
+                uiScheduler = instance()
+            ),
+            resProvider = instance()
         )
     }
 }
