@@ -18,7 +18,7 @@ class StateMachineTests {
     @Test
     fun `verify composition with an empty upstream`() {
         val noResults = Observable.empty<User>().compose(machine)
-        val events = listOf(Launched, Done)
+        val events = listOf(ViewState.Launched, ViewState.Done)
 
         assertMachineExecution(
             incoming = noResults,
@@ -30,7 +30,7 @@ class StateMachineTests {
     fun `verify composition with a broken upstream`() {
         val failure = IllegalStateException("You failed")
         val errorHappened = Observable.error<User>(failure).compose(machine)
-        val events = listOf(Launched, Failed(failure), Done)
+        val events = listOf(ViewState.Launched, ViewState.Failed(failure), ViewState.Done)
 
         assertMachineExecution(
             incoming = errorHappened,
@@ -42,7 +42,7 @@ class StateMachineTests {
     fun `verify composition with an successful upstream`() {
         val user = User("Iron Man")
         val execution = Observable.just(user).compose(machine)
-        val events = listOf(Launched, Result(user), Done)
+        val events = listOf(ViewState.Launched, ViewState.Success(user), ViewState.Done)
 
         assertMachineExecution(
             incoming = execution,
@@ -51,8 +51,8 @@ class StateMachineTests {
     }
 
     private fun assertMachineExecution(
-        incoming: Observable<UIEvent<User>>,
-        expected: List<UIEvent<User>>
+        incoming: Observable<ViewState<User>>,
+        expected: List<ViewState<User>>
     ) {
         incoming.test()
             .assertTerminated()

@@ -10,7 +10,9 @@ import com.meteoro.omdbarch.R
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.utilities.*
+import com.meteoro.omdbarch.utilities.Disposer
+import com.meteoro.omdbarch.utilities.ViewState
+import com.meteoro.omdbarch.utilities.ViewState.*
 import com.squareup.picasso.Picasso
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -65,10 +67,10 @@ class MovieDetailActivity : AppCompatActivity(), KodeinAware {
         disposer.collect(toDispose)
     }
 
-    private fun changeState(event: UIEvent<MovieDetailPresentation>) {
+    private fun changeState(event: ViewState<MovieDetailPresentation>) {
         when (event) {
             is Launched -> startExecution()
-            is Result -> showMovie(event.value)
+            is Success -> showMovie(event.value)
             is Failed -> handleError(event.reason)
             is Done -> finishExecution()
         }

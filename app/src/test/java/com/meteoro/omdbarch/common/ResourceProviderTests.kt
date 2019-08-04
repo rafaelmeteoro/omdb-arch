@@ -11,7 +11,7 @@ import org.mockito.ArgumentMatchers.anyString
 
 class ResourceProviderTests {
 
-    lateinit var provider: ResourceProvider
+    private lateinit var provider: ResourceProvider
 
     private val mockContext = mock<Context>()
 

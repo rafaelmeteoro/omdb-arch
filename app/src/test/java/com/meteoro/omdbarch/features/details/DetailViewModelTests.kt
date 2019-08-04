@@ -4,7 +4,8 @@ import com.meteoro.omdbarch.common.ResourceProvider
 import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.model.Movie
-import com.meteoro.omdbarch.utilities.*
+import com.meteoro.omdbarch.utilities.StateMachine
+import com.meteoro.omdbarch.utilities.ViewState.*
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
@@ -54,7 +55,7 @@ class DetailViewModelTests {
             .assertValueSequence(
                 listOf(
                     Launched,
-                    Result(expected),
+                    Success(expected),
                     Done
                 )
             )

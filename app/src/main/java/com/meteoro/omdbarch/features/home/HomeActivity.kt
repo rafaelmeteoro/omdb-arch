@@ -13,7 +13,9 @@ import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.features.details.MovieDetailActivity
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.utilities.*
+import com.meteoro.omdbarch.utilities.Disposer
+import com.meteoro.omdbarch.utilities.ViewState
+import com.meteoro.omdbarch.utilities.ViewState.*
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_home.*
@@ -106,10 +108,10 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
         disposer.collect(toDispose)
     }
 
-    private fun changeState(event: UIEvent<HomePresentation>) {
+    private fun changeState(event: ViewState<HomePresentation>) {
         when (event) {
             is Launched -> startExecution()
-            is Result -> showMovies(event.value)
+            is Success -> showMovies(event.value)
             is Failed -> handleError(event.reason)
             is Done -> finishExecution()
         }
