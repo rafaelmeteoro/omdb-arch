@@ -9,19 +9,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.R
-import com.meteoro.omdbarch.domain.errors.NetworkingError
-import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
+import com.meteoro.omdbarch.common.ErrorStateResources
 import com.meteoro.omdbarch.features.details.MovieDetailActivity
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
+import com.meteoro.omdbarch.utilities.selfBind
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_home.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 import java.util.concurrent.TimeUnit
 
@@ -32,7 +31,7 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
         private const val DEBOUNCE_TIME = 750L
     }
 
-    override val kodein: Kodein by closestKodein()
+    override val kodein: Kodein by selfBind()
 
     private val viewModel by instance<HomeViewModel>()
     private val disposer by instance<Disposer>()
@@ -129,34 +128,30 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     private fun handleError(reason: Throwable) {
         logger.e("Error -> $reason")
 
-        when (reason) {
-            is NetworkingError,
-            is RemoteServiceIntegrationError -> {
-                reportError(reason.toString())
-            }
-        }
-    }
-
-    private fun reportError(message: String) {
+        val (errorImage, errorMessage) = ErrorStateResources(reason)
         val hasPreviousContent =
             homeView.adapter
                 ?.let { it.itemCount != 0 }
                 ?: false
 
-        if (hasPreviousContent) {
-            errorStateLabel.apply {
-                text = message
-                visibility = View.VISIBLE
-            }
+        when {
+            hasPreviousContent -> Snackbar.make(homeRoot, errorMessage, Snackbar.LENGTH_LONG).show()
+            else -> reportError(errorImage, errorMessage)
         }
+    }
 
-        Snackbar.make(homeRoot, message, Snackbar.LENGTH_LONG).show()
+    private fun reportError(errorImage: Int, errorMessage: Int) {
+        with(errorStateView) {
+            visibility = View.VISIBLE
+            errorStateImage.setImageResource(errorImage)
+            errorStateLabel.setText(errorMessage)
+        }
     }
 
     private fun startExecution() {
         homeView.visibility = View.INVISIBLE
         swipeToRefresh.isRefreshing = true
-        errorStateLabel.visibility = View.GONE
+        errorStateView.visibility = View.GONE
     }
 
     private fun finishExecution() {

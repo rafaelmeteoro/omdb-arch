@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#070707</color>
     <color name="colorAccent">@android:color/white</color>
     <color name="colorBackground">#FBFBFB</color>
+    <color name="errorState">#9E9E9E</color>
 </resources>

@@ -13,12 +13,12 @@ import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
+import com.meteoro.omdbarch.utilities.selfBind
 import com.squareup.picasso.Picasso
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
 class MovieDetailActivity : AppCompatActivity(), KodeinAware {
@@ -32,7 +32,7 @@ class MovieDetailActivity : AppCompatActivity(), KodeinAware {
             }
     }
 
-    override val kodein: Kodein by closestKodein()
+    override val kodein: Kodein by selfBind()
 
     private val viewModel by instance<DetailViewModel>()
     private val disposer by instance<Disposer>()
