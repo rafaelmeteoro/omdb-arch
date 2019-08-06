@@ -9,7 +9,7 @@ tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
 }
 
-android.buildTypes.debug.testCoverageEnabled = true
+//android.buildTypes.debug.testCoverageEnabled = true
 
 //Variáveis necessárias
 

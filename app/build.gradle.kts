@@ -4,8 +4,14 @@ import configs.KotlinConfig
 import configs.ProguardConfig
 import dependencies.InstrumentationTestsDependencies.Companion.instrumentationTest
 import dependencies.UnitTestDependencies.Companion.unitTest
+import modules.LibraryModule
+import modules.LibraryType
 import modules.ModuleNames
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+val jacoco = LibraryModule(rootDir, LibraryType.JacocoUnified)
+
+apply(from = jacoco.script())
 
 plugins {
     id(BuildPlugins.Ids.androidApplication)

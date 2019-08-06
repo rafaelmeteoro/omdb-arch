@@ -4,8 +4,10 @@ import modules.LibraryType
 import modules.ModuleNames
 
 val module = LibraryModule(rootDir, LibraryType.Android)
+val jacoco = LibraryModule(rootDir, LibraryType.JacocoUnified)
 
 apply(from = module.script())
+apply(from = jacoco.script())
 
 plugins {
     id(BuildPlugins.Ids.androidLibrary)
