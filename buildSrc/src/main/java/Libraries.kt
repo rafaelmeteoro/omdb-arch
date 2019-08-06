@@ -50,6 +50,7 @@ object Libraries {
     const val androidTestRunner = "androidx.test:runner:${Versions.androidxTest}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
+    const val roboletric = "org.robolectric:robolectric:${Versions.roboletric}"
 
     private object Versions {
         const val kotlinSerialization = "0.11.0"
@@ -79,5 +80,6 @@ object Libraries {
         const val mockitoKotlin = "2.1.0"
         const val androidxTest = "1.2.0"
         const val espresso = "3.2.0"
+        const val roboletric = "4.3"
     }
 }
