@@ -7,8 +7,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.meteoro.omdbarch.R
-import com.meteoro.omdbarch.domain.errors.NetworkingError
-import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
+import com.meteoro.omdbarch.common.ErrorStateResources
+import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
@@ -92,19 +92,26 @@ class MovieDetailActivity : AppCompatActivity(), KodeinAware {
     private fun handleError(reason: Throwable) {
         logger.e("Error -> $reason")
 
-        when (reason) {
-            is NetworkingError,
-            is RemoteServiceIntegrationError -> {
-                reportError(reason.toString())
-            }
+        if (reason is EmptyTerm) {
+            emptyTerm()
+            return
+        }
+
+        val (errorImage, errorMessage) = ErrorStateResources(reason)
+        reportError(errorImage, errorMessage)
+    }
+
+    private fun reportError(errorImage: Int, errorMessage: Int) {
+        with(errorStateView) {
+            visibility = View.VISIBLE
+            errorStateImage.setImageResource(errorImage)
+            errorStateLabel.setText(errorMessage)
         }
     }
 
-    private fun reportError(message: String) {
-        errorStateLabel.apply {
-            text = message
-            visibility = View.VISIBLE
-        }
+    private fun emptyTerm() {
+        detailView.visibility = View.GONE
+        errorStateView.visibility = View.GONE
     }
 
     private fun startExecution() {

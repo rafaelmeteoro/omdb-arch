@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.R
 import com.meteoro.omdbarch.common.ErrorStateResources
+import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.features.details.MovieDetailActivity
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
@@ -128,6 +129,11 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     private fun handleError(reason: Throwable) {
         logger.e("Error -> $reason")
 
+        if (reason is EmptyTerm) {
+            emptyTerm()
+            return
+        }
+
         val (errorImage, errorMessage) = ErrorStateResources(reason)
         val hasPreviousContent =
             homeView.adapter
@@ -146,6 +152,11 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
             errorStateImage.setImageResource(errorImage)
             errorStateLabel.setText(errorMessage)
         }
+    }
+
+    private fun emptyTerm() {
+        homeView.visibility = View.INVISIBLE
+        errorStateView.visibility = View.GONE
     }
 
     private fun startExecution() {
