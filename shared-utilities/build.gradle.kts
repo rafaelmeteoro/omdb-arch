@@ -11,6 +11,9 @@ apply(from = jacoco.script())
 
 plugins {
     id(BuildPlugins.Ids.androidLibrary)
+    kotlin(BuildPlugins.Ids.kotlinAndroid)
+    kotlin(BuildPlugins.Ids.kotlinExtensions)
+    kotlin(BuildPlugins.Ids.kotlinKapt)
 }
 
 dependencies {
@@ -22,6 +25,10 @@ dependencies {
     implementation(Libraries.lifecycleJava8)
     implementation(Libraries.kodein)
     implementation(Libraries.dagger)
+    implementation(Libraries.daggerAndroid)
+    implementation(Libraries.daggerAndroidSupport)
+    kapt(Libraries.daggerCompiler)
+    kapt(Libraries.daggerAndroidProcessor)
 
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))

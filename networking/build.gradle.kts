@@ -13,6 +13,7 @@ plugins {
     id(BuildPlugins.Ids.kotlinJVM)
     id(BuildPlugins.Ids.kotlinxSerialization)
     id(BuildPlugins.Ids.coveralls)
+    kotlin(BuildPlugins.Ids.kotlinKapt)
 }
 
 dependencies {
@@ -28,6 +29,11 @@ dependencies {
     implementation(Libraries.retrofitRxAdapter)
     implementation(Libraries.retrofitKotlinSerialization)
     implementation(Libraries.kodein)
+    implementation(Libraries.dagger)
+    implementation(Libraries.daggerAndroid)
+    implementation(Libraries.daggerAndroidSupport)
+    kapt(Libraries.daggerCompiler)
+    kapt(Libraries.daggerAndroidProcessor)
 
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))

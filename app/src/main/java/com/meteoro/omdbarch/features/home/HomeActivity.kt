@@ -16,31 +16,34 @@ import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
-import com.meteoro.omdbarch.utilities.selfBind
+import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_home.*
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), KodeinAware {
+class HomeActivity : AppCompatActivity() {
 
     companion object {
         private const val COLUMN_COUNT = 3
         private const val DEBOUNCE_TIME = 750L
     }
 
-    override val kodein: Kodein by selfBind()
+    @Inject
+    lateinit var logger: Logger
 
-    private val viewModel by instance<HomeViewModel>()
-    private val disposer by instance<Disposer>()
-    private val logger by instance<Logger>()
+    @Inject
+    lateinit var disposer: Disposer
+
+    @Inject
+    lateinit var viewModel: HomeViewModel
 
     private val searchSubject = PublishSubject.create<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setupView()

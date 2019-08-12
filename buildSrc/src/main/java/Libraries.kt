@@ -34,7 +34,10 @@ object Libraries {
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
 
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
+    const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
     const val kodein = "org.kodein.di:kodein-di-generic-jvm:${Versions.kodein}"
     const val kodeinConf = "org.kodein.di:kodein-di-conf-jvm:${Versions.kodein}"
@@ -71,7 +74,7 @@ object Libraries {
         const val coreAndroidx = "1.0.2"
         const val constraintLayout = "1.1.3"
         const val lifecycle = "2.2.0-alpha02"
-        const val dagger = "2.22.1"
+        const val dagger = "2.24"
         const val kodein = "6.3.3"
         const val leakyCanary = "2.0-beta-2"
         const val picasso = "2.71828"

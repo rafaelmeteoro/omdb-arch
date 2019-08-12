@@ -13,15 +13,13 @@ import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
-import com.meteoro.omdbarch.utilities.selfBind
 import com.squareup.picasso.Picasso
+import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_movie_detail.*
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
+import javax.inject.Inject
 
-class MovieDetailActivity : AppCompatActivity(), KodeinAware {
+class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
         const val MOVIE_ARG = "MOVIE_ARG"
@@ -32,13 +30,18 @@ class MovieDetailActivity : AppCompatActivity(), KodeinAware {
             }
     }
 
-    override val kodein: Kodein by selfBind()
+    @Inject
+    lateinit var logger: Logger
 
-    private val viewModel by instance<DetailViewModel>()
-    private val disposer by instance<Disposer>()
-    private val logger by instance<Logger>()
+    @Inject
+    lateinit var disposer: Disposer
+
+    @Inject
+    lateinit var viewModel: DetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         setupView()

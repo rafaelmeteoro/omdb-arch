@@ -1,12 +1,27 @@
 package com.meteoro.omdbarch
 
 import android.app.Application
+import com.meteoro.omdbarch.di.AppModule
+import com.meteoro.omdbarch.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import kotlinx.serialization.UnstableDefault
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
+import javax.inject.Inject
 
 @UnstableDefault
-class OmdbApplication : Application(), KodeinAware {
+class OmdbApplication : Application(), HasAndroidInjector {
 
-    override val kodein: Kodein = DependenciesSetup(this).container
+    @Inject
+    lateinit var injector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector(): AndroidInjector<Any> = injector
+
+    override fun onCreate() {
+        super.onCreate()
+        DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build()
+            .inject(this)
+    }
 }
