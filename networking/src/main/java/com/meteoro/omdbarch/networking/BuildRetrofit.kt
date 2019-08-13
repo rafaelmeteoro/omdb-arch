@@ -11,8 +11,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 object BuildRetrofit {
 
     const val API_URL = "http://www.omdbapi.com/"
-    const val API_KEY = "apikey"
-    const val API_KEY_VALUE = "1abc75a6"
 
     @UnstableDefault
     operator fun invoke(apiURL: String, httpClient: OkHttpClient) =

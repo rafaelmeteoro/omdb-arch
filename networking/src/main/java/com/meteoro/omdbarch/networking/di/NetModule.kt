@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetModule {
+class NetModule(private val apiKey: String, private val apiKeyValue: String) {
 
     companion object {
         private const val TIMEOUT = 60L
@@ -29,6 +29,6 @@ class NetModule {
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(logger)
-            .addInterceptor(ApiInterceptor())
+            .addInterceptor(ApiInterceptor(apiKey, apiKeyValue))
             .build()
 }
