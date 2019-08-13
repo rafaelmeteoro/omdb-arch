@@ -16,7 +16,6 @@ plugins {
 dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
-    implementation(Libraries.kodein)
 
     implementation(project(ModuleNames.Features.SharedUtilities))
 

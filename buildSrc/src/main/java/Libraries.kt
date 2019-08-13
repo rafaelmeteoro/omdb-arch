@@ -39,10 +39,6 @@ object Libraries {
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     const val daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
-    const val kodein = "org.kodein.di:kodein-di-generic-jvm:${Versions.kodein}"
-    const val kodeinConf = "org.kodein.di:kodein-di-conf-jvm:${Versions.kodein}"
-    const val kodeinAndroid = "org.kodein.di:kodein-di-framework-android-x:${Versions.kodein}"
-
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakyCanary}"
 
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
@@ -75,7 +71,6 @@ object Libraries {
         const val constraintLayout = "1.1.3"
         const val lifecycle = "2.2.0-alpha02"
         const val dagger = "2.24"
-        const val kodein = "6.3.3"
         const val leakyCanary = "2.0-beta-2"
         const val picasso = "2.71828"
         const val junit = "4.12"

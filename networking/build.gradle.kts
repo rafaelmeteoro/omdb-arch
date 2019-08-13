@@ -28,7 +28,6 @@ dependencies {
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitRxAdapter)
     implementation(Libraries.retrofitKotlinSerialization)
-    implementation(Libraries.kodein)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)

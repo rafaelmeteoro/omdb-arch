@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.dsl.DataBindingOptions
 import configs.AndroidConfig
 import configs.KotlinConfig
 import configs.ProguardConfig
@@ -68,13 +67,6 @@ android {
         unitTests.isReturnDefaultValues = true
         unitTests.isIncludeAndroidResources = true
     }
-
-    val action = object : Action<DataBindingOptions> {
-        override fun execute(t: DataBindingOptions) {
-            t.isEnabled = true
-        }
-    }
-    dataBinding(action)
 }
 
 dependencies {
@@ -102,14 +94,12 @@ dependencies {
     implementation(Libraries.retrofitGsonConverter)
     implementation(Libraries.gson)
     implementation(Libraries.picasso)
-    implementation(Libraries.kodein)
-    implementation(Libraries.kodeinConf)
-    implementation(Libraries.kodeinAndroid)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)
     kapt(Libraries.daggerCompiler)
     kapt(Libraries.daggerAndroidProcessor)
+
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Infrastructure.Networking))

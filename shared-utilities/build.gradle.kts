@@ -23,7 +23,6 @@ dependencies {
     implementation(Libraries.rxKotlin)
     implementation(Libraries.lifecycleCommon)
     implementation(Libraries.lifecycleJava8)
-    implementation(Libraries.kodein)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)

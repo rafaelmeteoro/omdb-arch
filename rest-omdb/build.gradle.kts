@@ -29,7 +29,6 @@ dependencies {
     implementation(Libraries.gson)
     implementation(Libraries.rxJava)
     implementation(Libraries.rxKotlin)
-    implementation(Libraries.kodein)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)
