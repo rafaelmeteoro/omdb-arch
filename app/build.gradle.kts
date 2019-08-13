@@ -46,6 +46,7 @@ android {
 
             buildConfigField("String", "API_KEY", "\"apikey\"")
             buildConfigField("String", "API_KEY_VALUE", "\"1abc75a6\"")
+            buildConfigField("String", "API_URL", "\"http://www.omdbapi.com/\"")
         }
         getByName("release") {
             isMinifyEnabled = true
@@ -53,6 +54,7 @@ android {
 
             buildConfigField("String", "API_KEY", "\"apikey\"")
             buildConfigField("String", "API_KEY_VALUE", "\"1abc75a6\"")
+            buildConfigField("String", "API_URL", "\"http://www.omdbapi.com/\"")
 
             val proguardConfig = ProguardConfig("$rootDir/proguard")
             proguardFiles(*(proguardConfig.customRules))

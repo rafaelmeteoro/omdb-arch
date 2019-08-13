@@ -10,8 +10,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 object BuildRetrofit {
 
-    const val API_URL = "http://www.omdbapi.com/"
-
     @UnstableDefault
     operator fun invoke(apiURL: String, httpClient: OkHttpClient) =
         with(Retrofit.Builder()) {

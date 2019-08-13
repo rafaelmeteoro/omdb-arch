@@ -11,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.Scheduler
+import javax.inject.Singleton
 
 @Module
 abstract class DetailsModule {
@@ -23,16 +24,19 @@ abstract class DetailsModule {
 
         @JvmStatic
         @Provides
+        @Singleton
         fun provideResourceProvider(context: Context): ResourceProvider =
             ResourceProvider(context.applicationContext)
 
         @JvmStatic
         @Provides
+        @Singleton
         fun provideFetchMovie(service: MovieService): FetchMovie =
             FetchMovie(service)
 
         @JvmStatic
         @Provides
+        @Singleton
         fun provideDetailsViewModel(fetch: FetchMovie, scheduler: Scheduler, provider: ResourceProvider) =
             DetailViewModel(
                 fetch = fetch,

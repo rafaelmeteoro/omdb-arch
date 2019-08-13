@@ -17,13 +17,13 @@ import javax.inject.Singleton
 
 @UnstableDefault
 @Module
-class RestModule {
+class RestModule(private val apiUrl: String) {
 
     @Provides
     @Singleton
     fun provideApi(client: OkHttpClient): OmdbAPI {
         val retrofit = BuildRetrofit(
-            apiURL = OmdbAPI.API_URL,
+            apiURL = apiUrl,
             httpClient = client
         )
 
@@ -31,6 +31,7 @@ class RestModule {
     }
 
     @Provides
+    @Singleton
     fun provideMovieService(api: OmdbAPI, logger: Logger): MovieService =
         MovieInfrastructure(
             service = api,
@@ -41,6 +42,7 @@ class RestModule {
         )
 
     @Provides
+    @Singleton
     fun provideSearchService(api: OmdbAPI, logger: Logger): SearchService =
         SearchInfrastructure(
             service = api,

@@ -1,8 +1,8 @@
-import modules.ModuleNames.MainApp
-import modules.ModuleNames.Logger
 import modules.ModuleNames.Domain
-import modules.ModuleNames.Infrastructure
 import modules.ModuleNames.Features
+import modules.ModuleNames.Infrastructure
+import modules.ModuleNames.Logger
+import modules.ModuleNames.MainApp
 
 include(
     MainApp,

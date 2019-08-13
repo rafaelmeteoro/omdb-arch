@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.Scheduler
+import javax.inject.Singleton
 
 @Module
 abstract class HomeModule {
@@ -21,11 +22,13 @@ abstract class HomeModule {
 
         @JvmStatic
         @Provides
+        @Singleton
         fun provideFetchSearch(service: SearchService): FetchSearch =
             FetchSearch(service)
 
         @JvmStatic
         @Provides
+        @Singleton
         fun provideHomeViewModel(fetch: FetchSearch, scheduler: Scheduler): HomeViewModel =
             HomeViewModel(
                 fetch = fetch,

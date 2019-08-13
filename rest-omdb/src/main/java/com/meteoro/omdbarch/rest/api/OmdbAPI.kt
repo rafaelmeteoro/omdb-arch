@@ -18,8 +18,4 @@ interface OmdbAPI {
     fun fetchMovie(
         @Query("i") id: String
     ): Observable<MovieResponse>
-
-    companion object {
-        const val API_URL = "https://www.omdbapi.com/"
-    }
 }
