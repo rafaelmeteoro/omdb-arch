@@ -1,7 +1,6 @@
 package com.meteoro.omdbarch
 
 import android.app.Application
-import com.meteoro.omdbarch.di.AppModule
 import com.meteoro.omdbarch.di.DaggerAppComponent
 import com.meteoro.omdbarch.networking.di.NetModule
 import com.meteoro.omdbarch.rest.di.RestModule
@@ -22,7 +21,7 @@ class OmdbApplication : Application(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
         DaggerAppComponent.builder()
-            .appModule(AppModule(this))
+            .application(this)
             .netModule(NetModule(BuildConfig.API_KEY, BuildConfig.API_KEY_VALUE))
             .restModule(RestModule(BuildConfig.API_URL))
             .build()

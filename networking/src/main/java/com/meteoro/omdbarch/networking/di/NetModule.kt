@@ -3,6 +3,7 @@ package com.meteoro.omdbarch.networking.di
 import com.meteoro.omdbarch.networking.ApiInterceptor
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -24,11 +25,12 @@ class NetModule(private val apiKey: String, private val apiKeyValue: String) {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(logger: HttpLoggingInterceptor): OkHttpClient =
+    fun provideOkHttpClient(cache: Cache, logger: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
+            .cache(cache)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .addInterceptor(logger)
             .addInterceptor(ApiInterceptor(apiKey, apiKeyValue))
+            .addInterceptor(logger)
             .build()
 }
