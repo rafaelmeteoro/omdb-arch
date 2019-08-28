@@ -3,8 +3,7 @@ import configs.KotlinConfig
 // Versions for project parameters and forEachDependency
 object Libraries {
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KotlinConfig.version}"
-    const val kotlinSerialization =
-        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.kotlinSerialization}"
+    const val kotlinSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.kotlinSerialization}"
 
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okhttpLogger = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
@@ -53,14 +52,14 @@ object Libraries {
 
     private object Versions {
         const val kotlinSerialization = "0.11.0"
-        const val okHttp = "4.0.1"
-        const val retrofit = "2.6.0"
-        const val retrofitScalars = "2.0.2"
+        const val okHttp = "4.1.0"
+        const val retrofit = "2.6.1"
+        const val retrofitScalars = "2.6.1"
         const val retrofitKotlinSerialization = "0.4.0"
-        const val retrofitGsonConverter = "2.5.0"
-        const val retrofitRxAdapter = "2.3.0"
-        const val rxJava = "2.2.4"
-        const val rxKotlin = "2.3.0"
+        const val retrofitGsonConverter = "2.6.1"
+        const val retrofitRxAdapter = "2.6.1"
+        const val rxJava = "2.2.12"
+        const val rxKotlin = "2.4.0"
         const val rxAndroid = "2.1.1"
         const val gson = "2.8.5"
         const val appCompat = "1.0.2"
@@ -69,9 +68,9 @@ object Libraries {
         const val materialDesign = "1.0.0"
         const val coreAndroidx = "1.0.2"
         const val constraintLayout = "1.1.3"
-        const val lifecycle = "2.2.0-alpha02"
+        const val lifecycle = "2.2.0-alpha03"
         const val dagger = "2.24"
-        const val leakyCanary = "2.0-beta-2"
+        const val leakyCanary = "2.0-beta-3"
         const val picasso = "2.71828"
         const val junit = "4.12"
         const val assertj = "3.12.2"
