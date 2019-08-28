@@ -54,17 +54,16 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.home_menu, menu)
-        (menu?.findItem(R.id.action_search)?.actionView as? SearchView)?.setOnQueryTextListener(object :
-            SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                searchSubject.onNext(newText ?: "")
-                return true
-            }
-        })
+        (menu?.findItem(R.id.action_search)?.actionView as? SearchView)?.apply {
+            queryHint = getString(R.string.action_search_hint)
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean = true
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    searchSubject.onNext(newText ?: "")
+                    return true
+                }
+            })
+        }
         return true
     }
 
