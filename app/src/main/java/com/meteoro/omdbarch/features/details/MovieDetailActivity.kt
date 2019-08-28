@@ -1,7 +1,5 @@
 package com.meteoro.omdbarch.features.details
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +8,7 @@ import com.meteoro.omdbarch.R
 import com.meteoro.omdbarch.common.ErrorStateResources
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
+import com.meteoro.omdbarch.navigator.MyNavigator
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
@@ -20,15 +19,6 @@ import kotlinx.android.synthetic.main.activity_movie_detail.*
 import javax.inject.Inject
 
 class MovieDetailActivity : AppCompatActivity() {
-
-    companion object {
-        const val MOVIE_ARG = "MOVIE_ARG"
-
-        fun newIntent(context: Context, imdbId: String) =
-            Intent(context, MovieDetailActivity::class.java).apply {
-                putExtra(MOVIE_ARG, imdbId)
-            }
-    }
 
     @Inject
     lateinit var logger: Logger
@@ -45,7 +35,7 @@ class MovieDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         setupView()
-        loadMovie(intent.getStringExtra(MOVIE_ARG))
+        loadMovie(intent.getStringExtra(MyNavigator.ARG_MOVIE))
 
         lifecycle.addObserver(disposer)
     }

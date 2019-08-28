@@ -11,8 +11,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.R
 import com.meteoro.omdbarch.common.ErrorStateResources
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
-import com.meteoro.omdbarch.features.details.MovieDetailActivity
 import com.meteoro.omdbarch.logger.Logger
+import com.meteoro.omdbarch.navigator.MyNavigator
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
@@ -32,6 +32,9 @@ class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var logger: Logger
+
+    @Inject
+    lateinit var navigator: MyNavigator
 
     @Inject
     lateinit var disposer: Disposer
@@ -124,7 +127,7 @@ class HomeActivity : AppCompatActivity() {
 
         homeView.visibility = View.VISIBLE
         homeView.adapter = MoviesAdapter(home) {
-            startActivity(MovieDetailActivity.newIntent(this, it.imdbId))
+            navigator.navigateToDetail(this, it.imdbId)
         }
     }
 

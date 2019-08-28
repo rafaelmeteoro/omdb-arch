@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import com.meteoro.omdbarch.logger.LogcatLogger
 import com.meteoro.omdbarch.logger.Logger
+import com.meteoro.omdbarch.navigation.OmdbNavigator
+import com.meteoro.omdbarch.navigator.MyNavigator
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -39,4 +41,8 @@ class AppModule {
         val httpCacheDirectory = File(application.cacheDir, FOLDER_CACHE_NAME)
         return Cache(httpCacheDirectory, cacheSize)
     }
+
+    @Provides
+    @Singleton
+    fun provideNavigator(): MyNavigator = OmdbNavigator()
 }
