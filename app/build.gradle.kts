@@ -114,6 +114,7 @@ dependencies {
     implementation(project(ModuleNames.Infrastructure.Rest))
     implementation(project(ModuleNames.Features.SharedUtilities))
     implementation(project(ModuleNames.Features.Navigator))
+    implementation(project(ModuleNames.Features.Home))
 
     debugImplementation(Libraries.leakCanary)
 

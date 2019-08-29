@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.di
 import android.app.Application
 import com.meteoro.omdbarch.OmdbApplication
 import com.meteoro.omdbarch.features.details.di.DetailsModule
-import com.meteoro.omdbarch.features.home.di.HomeModule
+import com.meteoro.omdbarch.home.di.HomeModule
 import com.meteoro.omdbarch.networking.di.NetModule
 import com.meteoro.omdbarch.rest.di.RestModule
 import com.meteoro.omdbarch.utilities.di.ShareUtilsModule

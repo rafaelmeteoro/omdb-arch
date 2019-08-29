@@ -5,11 +5,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.meteoro.omdbarch.R
-import com.meteoro.omdbarch.common.ErrorStateResources
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.navigator.MyNavigator
 import com.meteoro.omdbarch.utilities.Disposer
+import com.meteoro.omdbarch.utilities.ErrorStateResources
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
 import com.squareup.picasso.Picasso

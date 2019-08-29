@@ -10,6 +10,8 @@ include(
     Domain,
     Infrastructure.Networking,
     Infrastructure.Rest,
+    Features.SharedAssets,
     Features.SharedUtilities,
-    Features.Navigator
+    Features.Navigator,
+    Features.Home
 )

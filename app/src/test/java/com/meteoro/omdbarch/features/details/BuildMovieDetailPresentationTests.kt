@@ -1,7 +1,7 @@
 package com.meteoro.omdbarch.features.details
 
-import com.meteoro.omdbarch.common.ResourceProvider
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat

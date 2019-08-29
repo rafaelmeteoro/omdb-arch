@@ -1,11 +1,11 @@
 package com.meteoro.omdbarch.features.details.di
 
 import android.content.Context
-import com.meteoro.omdbarch.common.ResourceProvider
 import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.features.details.DetailViewModel
 import com.meteoro.omdbarch.features.details.MovieDetailActivity
+import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
 import dagger.Module
 import dagger.Provides

@@ -1,7 +1,7 @@
 package com.meteoro.omdbarch.features.details
 
-import com.meteoro.omdbarch.common.ResourceProvider
 import com.meteoro.omdbarch.domain.FetchMovie
+import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
 
 class DetailViewModel(

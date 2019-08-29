@@ -1,9 +1,9 @@
 package com.meteoro.omdbarch.features.details
 
-import com.meteoro.omdbarch.common.ResourceProvider
 import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
 import com.meteoro.omdbarch.utilities.ViewState.*
 import com.nhaarman.mockitokotlin2.mock

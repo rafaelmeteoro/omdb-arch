@@ -19,11 +19,19 @@ plugins {
 dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
+    implementation(Libraries.cardView)
     implementation(Libraries.recyclerView)
-    implementation(Libraries.rxJava)
-    implementation(Libraries.rxKotlin)
+    implementation(Libraries.materialDesign)
+    implementation(Libraries.coreAndroidx)
+    implementation(Libraries.constraintLayout)
     implementation(Libraries.lifecycleCommon)
     implementation(Libraries.lifecycleJava8)
+    implementation(Libraries.lifecycleViewModel)
+    implementation(Libraries.lifecycleExtensions)
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
+    implementation(Libraries.rxAndroid)
+    implementation(Libraries.picasso)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)
@@ -33,6 +41,8 @@ dependencies {
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Features.SharedAssets))
+    implementation(project(ModuleNames.Features.SharedUtilities))
+    implementation(project(ModuleNames.Features.Navigator))
 
     unitTest {
         forEachDependency { testImplementation(it) }

@@ -1,8 +1,8 @@
 package com.meteoro.omdbarch.features.details
 
 import com.meteoro.omdbarch.R
-import com.meteoro.omdbarch.common.ResourceProvider
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.utilities.ResourceProvider
 
 object BuildMovieDetailPresentation {
 
