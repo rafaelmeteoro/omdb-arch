@@ -5,6 +5,7 @@ import com.meteoro.omdbarch.OmdbApplication
 import com.meteoro.omdbarch.details.di.DetailsModule
 import com.meteoro.omdbarch.home.di.HomeModule
 import com.meteoro.omdbarch.networking.di.NetModule
+import com.meteoro.omdbarch.onboarding.di.OnboardingModule
 import com.meteoro.omdbarch.rest.di.RestModule
 import com.meteoro.omdbarch.utilities.di.ShareUtilsModule
 import dagger.BindsInstance
@@ -23,6 +24,7 @@ import javax.inject.Singleton
         ShareUtilsModule::class,
         NetModule::class,
         RestModule::class,
+        OnboardingModule::class,
         HomeModule::class,
         DetailsModule::class
     ]

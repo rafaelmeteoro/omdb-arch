@@ -13,6 +13,7 @@ include(
     Features.SharedAssets,
     Features.SharedUtilities,
     Features.Navigator,
+    Features.Onboarding,
     Features.Home,
     Features.Details
 )

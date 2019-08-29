@@ -14,6 +14,7 @@ object ModuleNames {
         const val SharedAssets = ":shared-assets"
         const val SharedUtilities = ":shared-utilities"
         const val Navigator = ":navigator"
+        const val Onboarding = ":onboarding"
         const val Home = ":home"
         const val Details = ":details"
     }

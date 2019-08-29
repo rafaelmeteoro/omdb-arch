@@ -8,5 +8,7 @@ abstract class MyNavigator {
         const val ARG_MOVIE = "arg_movie"
     }
 
+    open fun navigateToHome(activity: Activity) {}
+
     open fun navigateToDetail(activity: Activity, imdbId: String) {}
 }
