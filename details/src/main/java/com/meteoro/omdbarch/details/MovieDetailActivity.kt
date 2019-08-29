@@ -1,10 +1,9 @@
-package com.meteoro.omdbarch.features.details
+package com.meteoro.omdbarch.details
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.meteoro.omdbarch.R
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.navigator.MyNavigator

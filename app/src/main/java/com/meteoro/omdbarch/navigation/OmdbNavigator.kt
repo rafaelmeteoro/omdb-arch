@@ -2,7 +2,7 @@ package com.meteoro.omdbarch.navigation
 
 import android.app.Activity
 import android.content.Intent
-import com.meteoro.omdbarch.features.details.MovieDetailActivity
+import com.meteoro.omdbarch.details.MovieDetailActivity
 import com.meteoro.omdbarch.navigator.MyNavigator
 
 class OmdbNavigator : MyNavigator() {

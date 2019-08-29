@@ -1,6 +1,5 @@
-package com.meteoro.omdbarch.features.details
+package com.meteoro.omdbarch.details
 
-import com.meteoro.omdbarch.R
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.utilities.ResourceProvider
 

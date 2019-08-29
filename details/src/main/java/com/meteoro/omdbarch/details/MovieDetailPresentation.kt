@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.features.details
+package com.meteoro.omdbarch.details
 
 data class MovieDetailPresentation(
     val title: String,

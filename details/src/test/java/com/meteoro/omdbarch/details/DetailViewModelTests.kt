@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.features.details
+package com.meteoro.omdbarch.details
 
 import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.errors.NetworkingError
