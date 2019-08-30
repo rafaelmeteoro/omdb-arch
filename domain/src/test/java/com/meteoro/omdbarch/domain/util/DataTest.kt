@@ -22,3 +22,7 @@ val noResultSearch by lazy {
         response = "False"
     )
 }
+
+val historyResult by lazy {
+    listOf("marvel", "avengers", "spiderman")
+}
