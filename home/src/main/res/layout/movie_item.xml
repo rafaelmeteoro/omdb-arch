@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/displayContainer"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="200dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"

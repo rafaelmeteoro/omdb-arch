@@ -22,7 +22,7 @@ class OmdbApplication : Application(), HasAndroidInjector {
         super.onCreate()
         DaggerAppComponent.builder()
             .application(this)
-            .netModule(NetModule(BuildConfig.API_KEY, BuildConfig.API_KEY_VALUE))
+            .netModule(NetModule(BuildConfig.API_KEY, BuildConfig.API_KEY_VALUE, BuildConfig.DEBUG))
             .restModule(RestModule(BuildConfig.API_URL))
             .build()
             .inject(this)

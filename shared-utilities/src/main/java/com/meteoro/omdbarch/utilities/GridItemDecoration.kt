@@ -4,47 +4,23 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class GridItemDecoration(private val gridSpacingPx: Int, private val gridSize: Int) : RecyclerView.ItemDecoration() {
-
-    private var needLeftSpacing = false
+class GridItemDecoration(private val space: Int, private val noOfColumns: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        val frameWidth = (((parent.width) - (gridSpacingPx * (gridSize - 1)).toFloat()) / gridSize).toInt()
-        val padding = parent.width / gridSize - frameWidth
-        val itemPosition = (view.layoutParams as RecyclerView.LayoutParams).viewAdapterPosition
+        outRect.left = space
+        outRect.right = space
+        outRect.bottom = space
+        outRect.top = space
 
-        if (itemPosition < gridSize) {
-            outRect.top = 0
-        } else {
-            outRect.top = gridSpacingPx
-        }
-
-        if (itemPosition % gridSize == 0) {
-            outRect.left = padding // Colocar 0 se quiser que encoste na borda esquerda
-            outRect.right = padding
-            needLeftSpacing = true
-        } else if ((itemPosition + 1) % gridSize == 0) {
-            outRect.right = padding // Colocar 0 se quiser que encoste na borda direita
-            outRect.left = padding
-            needLeftSpacing = false
-        } else if (needLeftSpacing) {
-            needLeftSpacing = false
-            outRect.left = gridSpacingPx - padding
-            if ((itemPosition + 2) % gridSize == 0) {
-                outRect.right = gridSpacingPx - padding
-            } else {
-                outRect.right = gridSpacingPx / 2
+        when {
+            parent.getChildLayoutPosition(view) % noOfColumns == 0 -> {
+                outRect.left = 0
+                outRect.right = space
             }
-        } else if ((itemPosition + 2) % gridSize == 0) {
-            needLeftSpacing = false
-            outRect.left = gridSpacingPx / 2
-            outRect.right = gridSpacingPx - padding
-        } else {
-            needLeftSpacing = false
-            outRect.left = gridSpacingPx / 2
-            outRect.right = gridSpacingPx / 2
+            parent.getChildLayoutPosition(view) % noOfColumns == noOfColumns - 1 -> {
+                outRect.left = space
+                outRect.right = 0
+            }
         }
-
-        outRect.bottom = 0
     }
 }

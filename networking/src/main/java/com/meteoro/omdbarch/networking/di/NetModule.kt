@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetModule(private val apiKey: String, private val apiKeyValue: String) {
+class NetModule(private val apiKey: String, private val apiKeyValue: String, private val isDebugMode: Boolean) {
 
     companion object {
         private const val TIMEOUT = 60L
@@ -20,7 +20,9 @@ class NetModule(private val apiKey: String, private val apiKeyValue: String) {
     @Singleton
     fun providerHttpLogging(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            if (isDebugMode) {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
         }
 
     @Provides

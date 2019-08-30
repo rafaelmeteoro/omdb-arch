@@ -75,8 +75,8 @@ class HomeActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@HomeActivity, COLUMN_COUNT)
             addItemDecoration(
                 GridItemDecoration(
-                    gridSpacingPx = resources.getDimensionPixelSize(R.dimen.movies_list_spacing),
-                    gridSize = COLUMN_COUNT
+                    space = resources.getDimensionPixelSize(R.dimen.movies_list_spacing),
+                    noOfColumns = COLUMN_COUNT
                 )
             )
         }

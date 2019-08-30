@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="movies_list_spacing">8dp</dimen>
+    <dimen name="movies_list_spacing">4dp</dimen>
 </resources>
