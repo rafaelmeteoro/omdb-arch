@@ -11,4 +11,6 @@ abstract class MyNavigator {
     open fun navigateToHome(activity: Activity) {}
 
     open fun navigateToDetail(activity: Activity, imdbId: String) {}
+
+    open fun navigateToFavorites(activity: Activity) {}
 }

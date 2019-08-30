@@ -32,6 +32,11 @@ object Libraries {
     const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
 
+    const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val navigationRuntimeKtx = "androidx.navigation:navigation-runtime-ktx:${Versions.navigation}"
+    const val navigationCommontKtx = "androidx.navigation:navigation-common-ktx:${Versions.navigation}"
+
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
     const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
@@ -69,6 +74,7 @@ object Libraries {
         const val coreAndroidx = "1.0.2"
         const val constraintLayout = "1.1.3"
         const val lifecycle = "2.2.0-alpha03"
+        const val navigation = "2.2.0-alpha01"
         const val dagger = "2.24"
         const val leakyCanary = "2.0-beta-3"
         const val picasso = "2.71828"

@@ -117,6 +117,7 @@ dependencies {
     implementation(project(ModuleNames.Features.Onboarding))
     implementation(project(ModuleNames.Features.Home))
     implementation(project(ModuleNames.Features.Details))
+    implementation(project(ModuleNames.Features.Favorites))
 
     debugImplementation(Libraries.leakCanary)
 

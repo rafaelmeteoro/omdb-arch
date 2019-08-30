@@ -3,6 +3,7 @@ package com.meteoro.omdbarch.navigation
 import android.app.Activity
 import android.content.Intent
 import com.meteoro.omdbarch.details.MovieDetailActivity
+import com.meteoro.omdbarch.favorites.FavoritesActivity
 import com.meteoro.omdbarch.home.HomeActivity
 import com.meteoro.omdbarch.navigator.MyNavigator
 
@@ -17,5 +18,9 @@ class OmdbNavigator : MyNavigator() {
         activity.startActivity(Intent(activity, MovieDetailActivity::class.java).apply {
             putExtra(ARG_MOVIE, imdbId)
         })
+    }
+
+    override fun navigateToFavorites(activity: Activity) {
+        activity.startActivity(Intent(activity, FavoritesActivity::class.java))
     }
 }

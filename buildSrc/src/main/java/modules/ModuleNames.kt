@@ -17,5 +17,6 @@ object ModuleNames {
         const val Onboarding = ":onboarding"
         const val Home = ":home"
         const val Details = ":details"
+        const val Favorites = ":favorites"
     }
 }

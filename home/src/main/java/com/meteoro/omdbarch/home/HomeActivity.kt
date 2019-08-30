@@ -2,7 +2,9 @@ package com.meteoro.omdbarch.home
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -68,6 +70,14 @@ class HomeActivity : AppCompatActivity() {
             })
         }
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        R.id.action_favorites -> {
+            navigator.navigateToFavorites(this)
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun setupView() {

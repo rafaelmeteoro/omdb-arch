@@ -15,5 +15,6 @@ include(
     Features.Navigator,
     Features.Onboarding,
     Features.Home,
-    Features.Details
+    Features.Details,
+    Features.Favorites
 )
