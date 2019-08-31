@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.home
 
 import com.meteoro.omdbarch.domain.FetchSearch
+import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
@@ -17,6 +18,7 @@ class HomeViewModelTests {
     private lateinit var viewModel: HomeViewModel
 
     private val mockFetch = mock<FetchSearch>()
+    private val mockManager = mock<ManagerSearch>()
 
     private val result = ResultSearch(
         search = listOf(
@@ -34,6 +36,7 @@ class HomeViewModelTests {
     fun `before each test`() {
         viewModel = HomeViewModel(
             fetch = mockFetch,
+            manager = mockManager,
             machine = StateMachine()
         )
     }

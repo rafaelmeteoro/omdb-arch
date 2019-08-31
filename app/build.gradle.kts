@@ -110,6 +110,7 @@ dependencies {
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Infrastructure.Networking))
     implementation(project(ModuleNames.Infrastructure.Rest))
+    implementation(project(ModuleNames.Infrastructure.Persistance))
     implementation(project(ModuleNames.Features.SharedUtilities))
     implementation(project(ModuleNames.Features.Navigator))
     implementation(project(ModuleNames.Features.Onboarding))

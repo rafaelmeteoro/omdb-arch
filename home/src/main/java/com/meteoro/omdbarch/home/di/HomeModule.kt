@@ -1,6 +1,8 @@
 package com.meteoro.omdbarch.home.di
 
 import com.meteoro.omdbarch.domain.FetchSearch
+import com.meteoro.omdbarch.domain.ManagerSearch
+import com.meteoro.omdbarch.domain.services.SearchHistoryService
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.home.HomeActivity
 import com.meteoro.omdbarch.home.HomeViewModel
@@ -29,9 +31,16 @@ abstract class HomeModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideHomeViewModel(fetch: FetchSearch, scheduler: Scheduler): HomeViewModel =
+        fun provideManagerSearch(service: SearchHistoryService): ManagerSearch =
+            ManagerSearch(service)
+
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideHomeViewModel(fetch: FetchSearch, manager: ManagerSearch, scheduler: Scheduler): HomeViewModel =
             HomeViewModel(
                 fetch = fetch,
+                manager = manager,
                 machine = StateMachine(
                     uiScheduler = scheduler
                 )
