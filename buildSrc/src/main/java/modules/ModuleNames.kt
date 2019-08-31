@@ -8,6 +8,7 @@ object ModuleNames {
     object Infrastructure {
         const val Networking = ":networking"
         const val Rest = ":rest-omdb"
+        const val Persistance = ":persistance"
     }
 
     object Features {
