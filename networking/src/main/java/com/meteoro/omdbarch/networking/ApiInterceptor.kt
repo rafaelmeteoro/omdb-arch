@@ -3,14 +3,18 @@ package com.meteoro.omdbarch.networking
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class ApiInterceptor(private val apiKey: String, private val apiKeyValue: String) : Interceptor {
+class ApiInterceptor(private val apiKeyValue: String) : Interceptor {
+
+    companion object {
+        private const val API_KEY = "apikey"
+    }
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
         val originalHttpUrl = original.url
 
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter(apiKey, apiKeyValue)
+            .addQueryParameter(API_KEY, apiKeyValue)
             .build()
 
         val requestBuilder = original.newBuilder()
