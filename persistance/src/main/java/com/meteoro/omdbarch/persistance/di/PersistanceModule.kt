@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.persistance.di
 
 import android.app.Application
+import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.services.SearchHistoryService
 import com.meteoro.omdbarch.persistance.AppPreferencesWrapper
 import com.meteoro.omdbarch.persistance.SearchHistoryInfrastructure
@@ -17,4 +18,9 @@ class PersistanceModule {
         val wrapper = AppPreferencesWrapper(app)
         return SearchHistoryInfrastructure(wrapper.preferences)
     }
+
+    @Provides
+    @Singleton
+    fun provideManagerSearch(service: SearchHistoryService): ManagerSearch =
+        ManagerSearch(service)
 }

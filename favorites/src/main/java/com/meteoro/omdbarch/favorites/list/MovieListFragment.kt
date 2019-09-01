@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.logger.Logger
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_movie_list.*
 import javax.inject.Inject
 
 class MovieListFragment : Fragment() {
@@ -28,5 +30,6 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logger.d("Launch")
+        buttonNext.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.movieDetailsFragment))
     }
 }

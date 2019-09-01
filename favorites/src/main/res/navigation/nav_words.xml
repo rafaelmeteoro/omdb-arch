@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/wordsFragment"
         android:name="com.meteoro.omdbarch.favorites.words.WordsFragment"
-        android:label="WordsFragment"
+        android:label="@string/fragment_words_title"
         tools:layout="@layout/fragment_words" />
 
 </navigation>
