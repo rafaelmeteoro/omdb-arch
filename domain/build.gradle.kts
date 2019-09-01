@@ -3,10 +3,8 @@ import modules.LibraryModule
 import modules.LibraryType
 
 val module = LibraryModule(rootDir, LibraryType.Kotlin)
-val jacoco = LibraryModule(rootDir, LibraryType.JacocoUnified)
 
 apply(from = module.script())
-apply(from = jacoco.script())
 
 plugins {
     id(BuildPlugins.Ids.kotlinJVM)
