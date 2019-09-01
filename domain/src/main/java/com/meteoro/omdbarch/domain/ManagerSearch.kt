@@ -10,6 +10,10 @@ class ManagerSearch(private val service: SearchHistoryService) {
         service.registerNewSearch(search)
     }
 
+    fun delete(search: String) {
+        service.unregisterSearch(search)
+    }
+
     fun fetchSearchList() =
         with(service.lastSearches()) {
             if (isEmpty()) Observable.error(NoResultsFound)

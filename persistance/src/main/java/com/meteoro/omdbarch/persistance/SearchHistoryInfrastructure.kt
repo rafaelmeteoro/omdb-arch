@@ -19,6 +19,14 @@ class SearchHistoryInfrastructure(private val prefs: SharedPreferences) : Search
             .commit()
     }
 
+    @SuppressLint("ApplySharedPref")
+    override fun unregisterSearch(search: String) {
+        val updated = retrieveFromPrefs() - search
+        prefs.edit()
+            .putStringSet(KEY_VALUES, updated)
+            .commit()
+    }
+
     private fun retrieveFromPrefs() =
         prefs.getStringSet(KEY_VALUES, emptySet())
             ?.let { it }

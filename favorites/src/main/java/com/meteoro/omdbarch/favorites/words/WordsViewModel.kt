@@ -11,4 +11,7 @@ class WordsViewModel(
         manager.fetchSearchList()
             .map { BuildWordsPresentation(it) }
             .compose(machine)
+
+    fun deleteWord(word: String) =
+        manager.delete(word)
 }

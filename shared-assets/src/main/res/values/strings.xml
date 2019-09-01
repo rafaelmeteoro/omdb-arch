@@ -24,5 +24,6 @@
 
     <string name="fragment_words_headline">Search Words</string>
     <string name="fragment_words_error">Failed to load words</string>
+    <string name="fragment_words_empty">No words search</string>
 
 </resources>

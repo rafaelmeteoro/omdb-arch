@@ -12,7 +12,7 @@ class ChipsGroupPopulator(
         LayoutInflater.from(group.context)
     }
 
-    fun populate(entries: List<String>) {
+    fun populate(entries: List<String>, onChipClicked: (String) -> Unit) {
         group.removeAllViews()
 
         entries.forEach { entry ->
@@ -20,6 +20,7 @@ class ChipsGroupPopulator(
             group.addView(
                 chip.apply {
                     text = entry
+                    setOnClickListener { onChipClicked(entry) }
                 }
             )
         }

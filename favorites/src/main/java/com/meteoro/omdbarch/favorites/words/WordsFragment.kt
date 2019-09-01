@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
@@ -73,12 +74,21 @@ class WordsFragment : Fragment() {
         val words = presentation.words
 
         ChipsGroupPopulator(historyChipGroup, R.layout.chip_item_word).run {
-            populate(words)
+            populate(words) {
+                viewModel.deleteWord(it)
+                getWordsSaved()
+            }
         }
     }
 
     private fun handleError(reason: Throwable) {
         logger.e("Failed to load words -> $reason")
+
+        if (reason is NoResultsFound) {
+            emptyStateView.visibility = View.VISIBLE
+            return
+        }
+
         showErrorReport(R.string.fragment_words_error)
     }
 
