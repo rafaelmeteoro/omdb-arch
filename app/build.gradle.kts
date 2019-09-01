@@ -26,6 +26,8 @@ android {
         versionCode = Versioning.version.code
         versionName = Versioning.version.name
 
+        multiDexEnabled = true
+
         vectorDrawables.apply {
             useSupportLibrary = true
             generatedDensities(*(AndroidConfig.noGeneratedDesities))
@@ -99,6 +101,10 @@ dependencies {
     implementation(Libraries.daggerAndroidSupport)
     kapt(Libraries.daggerCompiler)
     kapt(Libraries.daggerAndroidProcessor)
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    implementation(Libraries.roomRxJava2)
+    kapt(Libraries.roomCompiler)
 
     implementation(project(ModuleNames.Logger))
     implementation(project(ModuleNames.Domain))

@@ -3,7 +3,8 @@ import configs.KotlinConfig
 // Versions for project parameters and forEachDependency
 object Libraries {
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${KotlinConfig.version}"
-    const val kotlinSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.kotlinSerialization}"
+    const val kotlinSerialization =
+        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.kotlinSerialization}"
 
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okhttpLogger = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
@@ -36,6 +37,12 @@ object Libraries {
     const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val navigationRuntimeKtx = "androidx.navigation:navigation-runtime-ktx:${Versions.navigation}"
     const val navigationCommontKtx = "androidx.navigation:navigation-common-ktx:${Versions.navigation}"
+
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    const val roomRxJava2 = "androidx.room:room-rxjava2:${Versions.room}"
+    const val roomTesting = "androidx.room:room-testing:${Versions.room}"
 
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
@@ -75,6 +82,7 @@ object Libraries {
         const val constraintLayout = "1.1.3"
         const val lifecycle = "2.2.0-alpha03"
         const val navigation = "2.2.0-alpha01"
+        const val room = "2.1.0"
         const val dagger = "2.24"
         const val leakyCanary = "2.0-beta-3"
         const val picasso = "2.71828"

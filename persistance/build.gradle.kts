@@ -23,10 +23,15 @@ dependencies {
     implementation(Libraries.daggerAndroidSupport)
     kapt(Libraries.daggerCompiler)
     kapt(Libraries.daggerAndroidProcessor)
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    implementation(Libraries.roomRxJava2)
+    kapt(Libraries.roomCompiler)
 
     implementation(project(ModuleNames.Domain))
 
     unitTest {
         forEachDependency { testImplementation(it) }
     }
+    testImplementation(Libraries.roomTesting)
 }
