@@ -77,7 +77,7 @@ object Libraries {
         const val appCompat = "1.0.2"
         const val cardView = "1.0.0"
         const val recyclerView = "1.0.0"
-        const val materialDesign = "1.0.0"
+        const val materialDesign = "1.1.0-alpha09"
         const val coreAndroidx = "1.0.2"
         const val constraintLayout = "1.1.3"
         const val lifecycle = "2.2.0-alpha03"

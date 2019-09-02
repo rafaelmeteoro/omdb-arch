@@ -12,10 +12,7 @@ import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
-import com.meteoro.omdbarch.utilities.ViewState.Launched
-import com.meteoro.omdbarch.utilities.ViewState.Success
-import com.meteoro.omdbarch.utilities.ViewState.Failed
-import com.meteoro.omdbarch.utilities.ViewState.Done
+import com.meteoro.omdbarch.utilities.ViewState.*
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_words.*

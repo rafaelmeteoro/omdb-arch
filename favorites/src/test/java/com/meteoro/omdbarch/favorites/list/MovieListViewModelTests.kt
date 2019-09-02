@@ -1,7 +1,8 @@
-package com.meteoro.omdbarch.favorites.words
+package com.meteoro.omdbarch.favorites.list
 
-import com.meteoro.omdbarch.domain.ManagerSearch
+import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
+import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.utilities.StateMachine
 import com.meteoro.omdbarch.utilities.ViewState.*
 import com.nhaarman.mockitokotlin2.mock
@@ -10,30 +11,30 @@ import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
 
-class WordsViewModelTests {
+class MovieListViewModelTests {
 
-    private lateinit var viewModel: WordsViewModel
+    private lateinit var viewModel: MovieListViewModel
 
-    private val mockManager = mock<ManagerSearch>()
-
-    private val result = listOf("matrix", "avengers", "marvel")
+    private val mockCache = mock<CacheMovie>()
 
     @Before
     fun `before each test`() {
-        viewModel = WordsViewModel(
-            manager = mockManager,
+        viewModel = MovieListViewModel(
+            cache = mockCache,
             machine = StateMachine()
         )
     }
 
     @Test
-    fun `should emmit states for successful words presentation`() {
-        val expected = BuildWordsPresentation(result)
+    fun `should emmit states for successful movies presentation`() {
+        val movies = listOf(Movie(imdbId = "imdb", title = "Avengers"))
 
-        whenever(mockManager.fetchSearchList())
-            .thenReturn(Observable.just(result))
+        val expected = BuildMovieListPresentation(movies)
 
-        viewModel.fetchWordsSaved().test()
+        whenever(mockCache.getMovies())
+            .thenReturn(Observable.just(movies))
+
+        viewModel.fetchMoviesSaved().test()
             .assertComplete()
             .assertValueSequence(
                 listOf(
@@ -46,10 +47,10 @@ class WordsViewModelTests {
 
     @Test
     fun `should emmit states for empty values`() {
-        whenever(mockManager.fetchSearchList())
+        whenever(mockCache.getMovies())
             .thenReturn(Observable.error(NoResultsFound))
 
-        viewModel.fetchWordsSaved().test()
+        viewModel.fetchMoviesSaved().test()
             .assertComplete()
             .assertValueSequence(
                 listOf(

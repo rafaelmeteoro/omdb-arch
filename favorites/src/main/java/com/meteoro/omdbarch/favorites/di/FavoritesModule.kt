@@ -1,9 +1,11 @@
 package com.meteoro.omdbarch.favorites.di
 
+import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.favorites.FavoritesActivity
 import com.meteoro.omdbarch.favorites.details.MovieDetailsFragment
 import com.meteoro.omdbarch.favorites.list.MovieListFragment
+import com.meteoro.omdbarch.favorites.list.MovieListViewModel
 import com.meteoro.omdbarch.favorites.words.WordsFragment
 import com.meteoro.omdbarch.favorites.words.WordsViewModel
 import com.meteoro.omdbarch.utilities.StateMachine
@@ -37,6 +39,17 @@ abstract class FavoritesModule {
         fun provideWordsViewModel(manager: ManagerSearch, scheduler: Scheduler): WordsViewModel =
             WordsViewModel(
                 manager = manager,
+                machine = StateMachine(
+                    uiScheduler = scheduler
+                )
+            )
+
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideMovieListViewModel(cache: CacheMovie, scheduler: Scheduler): MovieListViewModel =
+            MovieListViewModel(
+                cache = cache,
                 machine = StateMachine(
                     uiScheduler = scheduler
                 )

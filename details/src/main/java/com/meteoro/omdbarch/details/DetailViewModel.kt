@@ -1,15 +1,15 @@
 package com.meteoro.omdbarch.details
 
+import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.model.Movie
-import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
 import io.reactivex.Observable
 
 class DetailViewModel(
     private val fetch: FetchMovie,
-    private val cache: MovieCacheService,
+    private val cache: CacheMovie,
     private val machine: StateMachine<MovieDetailPresentation>,
     private val resProvider: ResourceProvider
 ) {
@@ -23,6 +23,6 @@ class DetailViewModel(
             .compose(machine)
 
     private fun saveMovie(movie: Movie) {
-        cache.save(movie)
+        cache.saveMovie(movie)
     }
 }

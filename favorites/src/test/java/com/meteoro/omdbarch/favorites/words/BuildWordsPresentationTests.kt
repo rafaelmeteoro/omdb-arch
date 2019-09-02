@@ -6,7 +6,7 @@ import org.junit.Test
 class BuildWordsPresentationTests {
 
     @Test
-    fun `should build presentation`() {
+    fun `should build words presentation`() {
         val provided = listOf("matrix", "avengers", "marvel")
 
         val expected = WordsPresentation(

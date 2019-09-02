@@ -7,8 +7,12 @@ import io.reactivex.Observable
 
 class CacheMovie(private val service: MovieCacheService) {
 
-    fun save(movie: Movie) {
+    fun saveMovie(movie: Movie) {
         service.save(movie)
+    }
+
+    fun deleteMovie(movie: Movie) {
+        service.delete(movie)
     }
 
     fun getMovie(imdbId: String) =

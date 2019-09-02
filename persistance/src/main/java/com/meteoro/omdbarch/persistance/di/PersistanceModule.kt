@@ -2,6 +2,7 @@ package com.meteoro.omdbarch.persistance.di
 
 import android.app.Application
 import androidx.room.Room
+import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.services.SearchHistoryService
@@ -40,4 +41,9 @@ class PersistanceModule {
     @Singleton
     fun provideMovieCacheService(database: OmdbRoomDatabase): MovieCacheService =
         MovieCacheRoomInfrastructure(database.movieDao())
+
+    @Provides
+    @Singleton
+    fun provideCacheMovie(service: MovieCacheService): CacheMovie =
+        CacheMovie(service)
 }

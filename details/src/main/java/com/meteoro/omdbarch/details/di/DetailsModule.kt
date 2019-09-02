@@ -3,8 +3,8 @@ package com.meteoro.omdbarch.details.di
 import android.content.Context
 import com.meteoro.omdbarch.details.DetailViewModel
 import com.meteoro.omdbarch.details.MovieDetailActivity
+import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.FetchMovie
-import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
@@ -40,7 +40,7 @@ abstract class DetailsModule {
         @Singleton
         fun provideDetailsViewModel(
             fetch: FetchMovie,
-            cache: MovieCacheService,
+            cache: CacheMovie,
             scheduler: Scheduler,
             provider: ResourceProvider
         ) = DetailViewModel(

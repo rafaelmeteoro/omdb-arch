@@ -3,7 +3,6 @@ package com.meteoro.omdbarch.details
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.navigator.MyNavigator
@@ -33,19 +32,9 @@ class MovieDetailActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
-        setupView()
         loadMovie(intent.getStringExtra(MyNavigator.ARG_MOVIE))
 
         lifecycle.addObserver(disposer)
-    }
-
-    private fun setupView() {
-        swipeToRefresh.apply {
-            setColorSchemeColors(ContextCompat.getColor(this@MovieDetailActivity, R.color.colorPrimary))
-            setOnRefreshListener {
-                finishExecution()
-            }
-        }
     }
 
     private fun loadMovie(imdbId: String) {
@@ -107,12 +96,12 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun startExecution() {
+        loadingView.visibility = View.VISIBLE
         detailView.visibility = View.GONE
-        swipeToRefresh.isRefreshing = true
         errorStateLabel.visibility = View.GONE
     }
 
     private fun finishExecution() {
-        swipeToRefresh.isRefreshing = false
+        loadingView.visibility = View.GONE
     }
 }

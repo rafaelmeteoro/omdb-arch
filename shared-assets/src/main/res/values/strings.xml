@@ -26,4 +26,11 @@
     <string name="fragment_words_error">Failed to load words</string>
     <string name="fragment_words_empty">No words search</string>
 
+    <string name="fragment_movie_list_error">Failed to load movies</string>
+    <string name="fragment_movie_list_empty">No movies cached</string>
+    <string name="fragment_movie_list_delete_title">Delete</string>
+    <string name="fragment_movie_list_delete_message">Do you want to delete the movie?</string>
+    <string name="fragment_movie_list_delete_positive">Ok</string>
+    <string name="fragment_movie_list_delete_negative">No</string>
+
 </resources>

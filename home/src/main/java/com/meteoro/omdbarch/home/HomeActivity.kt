@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
@@ -50,10 +49,9 @@ class HomeActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        lifecycle.addObserver(disposer)
         setupView()
         setupSubject()
-
-        lifecycle.addObserver(disposer)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -88,13 +86,6 @@ class HomeActivity : AppCompatActivity() {
                     noOfColumns = COLUMN_COUNT
                 )
             )
-        }
-
-        swipeToRefresh.apply {
-            setColorSchemeColors(ContextCompat.getColor(this@HomeActivity, R.color.colorPrimary))
-            setOnRefreshListener {
-                finishExecution()
-            }
         }
 
         setSupportActionBar(toolbar)
@@ -174,12 +165,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun startExecution() {
+        loadingView.visibility = View.VISIBLE
         homeView.visibility = View.INVISIBLE
-        swipeToRefresh.isRefreshing = true
         errorStateView.visibility = View.GONE
     }
 
     private fun finishExecution() {
-        swipeToRefresh.isRefreshing = false
+        loadingView.visibility = View.GONE
     }
 }

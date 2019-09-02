@@ -16,6 +16,11 @@ class MovieCacheRoomInfrastructure(
         dao.insert(movieRoom)
     }
 
+    override fun delete(movie: Movie) {
+        val movieRoom = BuildMovieRoom(movie)
+        dao.remove(movieRoom)
+    }
+
     override fun movieCached(imdbId: String): Observable<Movie> {
         return dao.favoriteMovie(imdbId)
             .map { BuildMovieFromRoom(it) }

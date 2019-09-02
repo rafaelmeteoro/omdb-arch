@@ -7,85 +7,78 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeToRefresh"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/detailView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/detailView"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/detailTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                tools:text="Avenger: Endgame" />
 
-                <TextView
-                    android:id="@+id/detailTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:textSize="32sp"
-                    android:textStyle="bold"
-                    tools:text="Avenger: Endgame" />
+            <TextView
+                android:id="@+id/detailYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:text="2019" />
 
-                <TextView
-                    android:id="@+id/detailYear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    tools:text="2019" />
+            <ImageView
+                android:id="@+id/detailPoster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/content_movie_image"
+                tools:src="@mipmap/ic_launcher" />
 
-                <ImageView
-                    android:id="@+id/detailPoster"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:contentDescription="@string/content_movie_image"
-                    tools:src="@mipmap/ic_launcher" />
+            <TextView
+                android:id="@+id/detailRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:textSize="18sp"
+                tools:text="8.9" />
 
-                <TextView
-                    android:id="@+id/detailRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:textSize="18sp"
-                    tools:text="8.9" />
+            <TextView
+                android:id="@+id/detailCast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth" />
 
-                <TextView
-                    android:id="@+id/detailCast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    tools:text="Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth" />
+            <TextView
+                android:id="@+id/detailDirectors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="18sp"
+                tools:text="Anthony Russo, Joe Russo" />
 
-                <TextView
-                    android:id="@+id/detailDirectors"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:textSize="18sp"
-                    tools:text="Anthony Russo, Joe Russo" />
+            <TextView
+                android:id="@+id/detailPlot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="18sp"
+                tools:text="After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to undo Thanos' actions and restore order to the universe." />
 
-                <TextView
-                    android:id="@+id/detailPlot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:textSize="18sp"
-                    tools:text="After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to undo Thanos' actions and restore order to the universe." />
+        </LinearLayout>
 
-            </LinearLayout>
-
-        </ScrollView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/errorStateView"
@@ -125,5 +118,11 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loadingView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
