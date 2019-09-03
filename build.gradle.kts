@@ -21,6 +21,7 @@ buildscript {
         classpath(BuildPlugins.Dependencies.jacocoUnified)
         classpath(BuildPlugins.Dependencies.sonarCloud)
         classpath(BuildPlugins.Dependencies.detekt)
+        classpath(BuildPlugins.Dependencies.versions)
     }
 }
 
@@ -45,6 +46,7 @@ apply(plugin = BuildPlugins.Ids.coveralls)
 apply(plugin = BuildPlugins.Ids.testLogger)
 apply(plugin = BuildPlugins.Ids.jacocoUnified)
 apply(plugin = BuildPlugins.Ids.sonarCloud)
+apply(plugin = BuildPlugins.Ids.versions)
 
 //tasks.register("clean", Delete::class) {
 //    delete(rootProject.buildDir)

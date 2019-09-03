@@ -13,6 +13,7 @@ object BuildPlugins {
         const val jacocoUnified = "com.vanniktech:gradle-android-junit-jacoco-plugin:${Versions.jacocoUnified}"
         const val sonarCloud = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${Versions.sonarCloud}"
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
+        const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
     }
 
     object Ids {
@@ -31,6 +32,7 @@ object BuildPlugins {
         const val jacocoUnified = "com.vanniktech.android.junit.jacoco"
         const val sonarCloud = "org.sonarqube"
         const val detekt = "io.gitlab.arturbosch.detekt"
+        const val versions = "com.github.ben-manes.versions"
     }
 
     private object Versions {
@@ -42,5 +44,6 @@ object BuildPlugins {
         const val jacocoUnified = "0.15.0"
         const val sonarCloud = "2.7.1"
         const val detekt = "1.0.1"
+        const val versions = "0.24.0"
     }
 }

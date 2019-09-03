@@ -8,6 +8,5 @@ sealed class Screen {
     override fun toString(): String = when (this) {
         HomeMovies -> "Home Screen"
         DetailMovie -> "Detail Screen"
-        else -> super.toString()
     }
 }
