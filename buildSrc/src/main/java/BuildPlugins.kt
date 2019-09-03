@@ -14,6 +14,7 @@ object BuildPlugins {
         const val sonarCloud = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${Versions.sonarCloud}"
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
         const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
+        const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
     }
 
     object Ids {
@@ -33,6 +34,7 @@ object BuildPlugins {
         const val sonarCloud = "org.sonarqube"
         const val detekt = "io.gitlab.arturbosch.detekt"
         const val versions = "com.github.ben-manes.versions"
+        const val safeArgs = "androidx.navigation.safeargs"
     }
 
     private object Versions {
@@ -45,5 +47,6 @@ object BuildPlugins {
         const val sonarCloud = "2.7.1"
         const val detekt = "1.0.1"
         const val versions = "0.24.0"
+        const val safeArgs = "2.2.0-alpha01"
     }
 }

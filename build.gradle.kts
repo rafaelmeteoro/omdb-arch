@@ -22,6 +22,7 @@ buildscript {
         classpath(BuildPlugins.Dependencies.sonarCloud)
         classpath(BuildPlugins.Dependencies.detekt)
         classpath(BuildPlugins.Dependencies.versions)
+        classpath(BuildPlugins.Dependencies.safeArgs)
     }
 }
 

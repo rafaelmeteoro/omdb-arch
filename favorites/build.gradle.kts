@@ -9,6 +9,7 @@ apply(from = module.script())
 
 plugins {
     id(BuildPlugins.Ids.androidLibrary)
+    id(BuildPlugins.Ids.safeArgs)
     kotlin(BuildPlugins.Ids.kotlinAndroid)
     kotlin(BuildPlugins.Ids.kotlinExtensions)
     kotlin(BuildPlugins.Ids.kotlinKapt)
