@@ -31,12 +31,10 @@ class OnboardingActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
+        lifecycle.addObserver(disposer)
 
         logger.d("Launch")
-
         handleLaunch()
-
-        lifecycle.addObserver(disposer)
     }
 
     private fun handleLaunch() {

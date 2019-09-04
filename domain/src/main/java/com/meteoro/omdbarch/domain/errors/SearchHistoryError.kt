@@ -1,3 +1,8 @@
 package com.meteoro.omdbarch.domain.errors
 
-object SearchHistoryError : Throwable("Error when accessing local search")
+object SearchHistoryError : Throwable() {
+
+    override fun toString(): String {
+        return "Error when accessing local search"
+    }
+}

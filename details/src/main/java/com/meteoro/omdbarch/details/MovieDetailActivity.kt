@@ -32,9 +32,9 @@ class MovieDetailActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
-        loadMovie(intent.getStringExtra(MyNavigator.ARG_MOVIE))
-
         lifecycle.addObserver(disposer)
+
+        loadMovie(intent.getStringExtra(MyNavigator.ARG_MOVIE))
     }
 
     private fun loadMovie(imdbId: String) {
@@ -60,7 +60,7 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun showMovie(movie: MovieDetailPresentation) {
         logger.i("Loaded Movies")
 
-        detailView.visibility = View.VISIBLE
+        groupDetailView.visibility = View.VISIBLE
         detailTitle.text = movie.title
         detailYear.text = movie.year
         detailRating.text = movie.rating
@@ -83,22 +83,20 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun reportError(errorImage: Int, errorMessage: Int) {
-        with(errorStateView) {
-            visibility = View.VISIBLE
-            errorStateImage.setImageResource(errorImage)
-            errorStateLabel.setText(errorMessage)
-        }
+        groupStateView.visibility = View.VISIBLE
+        errorStateImage.setImageResource(errorImage)
+        errorStateLabel.setText(errorMessage)
     }
 
     private fun emptyTerm() {
-        detailView.visibility = View.GONE
-        errorStateView.visibility = View.GONE
+        groupDetailView.visibility = View.GONE
+        groupStateView.visibility = View.GONE
     }
 
     private fun startExecution() {
         loadingView.visibility = View.VISIBLE
-        detailView.visibility = View.GONE
-        errorStateLabel.visibility = View.GONE
+        groupDetailView.visibility = View.GONE
+        groupStateView.visibility = View.GONE
     }
 
     private fun finishExecution() {

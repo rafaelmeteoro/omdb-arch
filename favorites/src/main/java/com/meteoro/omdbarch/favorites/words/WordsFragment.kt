@@ -65,8 +65,8 @@ class WordsFragment : Fragment() {
     }
 
     private fun showWords(presentation: WordsPresentation) {
-        logger.d("Filling Content")
-        wordsHeadline.visibility = View.VISIBLE
+        logger.d("${presentation.words}")
+        groupChips.visibility = View.VISIBLE
 
         val words = presentation.words
 
@@ -82,7 +82,7 @@ class WordsFragment : Fragment() {
         logger.e("Failed to load words -> $reason")
 
         if (reason is NoResultsFound) {
-            emptyStateView.visibility = View.VISIBLE
+            groupStateView.visibility = View.VISIBLE
             return
         }
 
@@ -91,6 +91,7 @@ class WordsFragment : Fragment() {
 
     private fun startExecution() {
         loadingWords.visibility = View.VISIBLE
+        groupChips.visibility = View.GONE
     }
 
     private fun finishExecution() {

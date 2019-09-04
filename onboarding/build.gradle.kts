@@ -18,6 +18,7 @@ dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.materialDesign)
+    implementation(Libraries.constraintLayout)
     implementation(Libraries.lifecycleCommon)
     implementation(Libraries.lifecycleJava8)
     implementation(Libraries.lifecycleViewModel)

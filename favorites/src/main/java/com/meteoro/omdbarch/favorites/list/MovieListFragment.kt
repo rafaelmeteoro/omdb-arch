@@ -94,7 +94,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
 
         if (reason is NoResultsFound) {
             movieListView.visibility = View.GONE
-            emptyStateView.visibility = View.VISIBLE
+            groupStateView.visibility = View.VISIBLE
             return
         }
 
@@ -103,6 +103,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
 
     private fun startExecution() {
         loadingMovies.visibility = View.VISIBLE
+        groupStateView.visibility = View.GONE
     }
 
     private fun finishExecution() {

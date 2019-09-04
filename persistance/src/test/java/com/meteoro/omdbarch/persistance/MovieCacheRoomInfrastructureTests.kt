@@ -4,7 +4,7 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
 import com.meteoro.omdbarch.persistance.room.MovieDao
 import com.nhaarman.mockitokotlin2.*
-import io.reactivex.Observable
+import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
@@ -39,7 +39,7 @@ internal class MovieCacheRoomInfrastructureTests {
         val timeInvocation = 1
 
         whenever(dao.favoriteMovie(anyString()))
-            .thenReturn(Observable.just(favoriteMovie))
+            .thenReturn(Maybe.just(favoriteMovie))
 
         cache.movieCached(imdb).test()
             .assertComplete()
@@ -57,7 +57,7 @@ internal class MovieCacheRoomInfrastructureTests {
         val timeInvocation = 1
 
         whenever(dao.allFavoritesMovies())
-            .thenReturn(Observable.just(listOf(favoriteMovie)))
+            .thenReturn(Maybe.just(listOf(favoriteMovie)))
 
         cache.moviesCached().test()
             .assertComplete()

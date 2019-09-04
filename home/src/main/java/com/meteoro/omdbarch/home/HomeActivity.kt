@@ -50,6 +50,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         lifecycle.addObserver(disposer)
+
         setupView()
         setupSubject()
     }
@@ -152,22 +153,20 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun reportError(errorImage: Int, errorMessage: Int) {
-        with(errorStateView) {
-            visibility = View.VISIBLE
-            errorStateImage.setImageResource(errorImage)
-            errorStateLabel.setText(errorMessage)
-        }
+        groupStateView.visibility = View.VISIBLE
+        errorStateImage.setImageResource(errorImage)
+        errorStateLabel.setText(errorMessage)
     }
 
     private fun emptyTerm() {
-        homeView.visibility = View.INVISIBLE
-        errorStateView.visibility = View.GONE
+        homeView.visibility = View.GONE
+        groupStateView.visibility = View.GONE
     }
 
     private fun startExecution() {
         loadingView.visibility = View.VISIBLE
-        homeView.visibility = View.INVISIBLE
-        errorStateView.visibility = View.GONE
+        homeView.visibility = View.GONE
+        groupStateView.visibility = View.GONE
     }
 
     private fun finishExecution() {

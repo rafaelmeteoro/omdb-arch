@@ -2,8 +2,12 @@ package com.meteoro.omdbarch.persistance.room
 
 import androidx.room.*
 import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
-import io.reactivex.Observable
+import io.reactivex.Maybe
 
+/**
+ * Maybe é usado para recuperar os filems para o stram chamar complete
+ * @see https://medium.com/androiddevelopers/room-rxjava-acb0cd4f3757
+ * */
 @Dao
 interface MovieDao {
 
@@ -17,8 +21,8 @@ interface MovieDao {
     fun clear()
 
     @Query("SELECT * FROM favorite_movie WHERE imdbId = :imdbId")
-    fun favoriteMovie(imdbId: String): Observable<FavoriteMovieRoom>
+    fun favoriteMovie(imdbId: String): Maybe<FavoriteMovieRoom>
 
     @Query("SELECT * FROM favorite_movie")
-    fun allFavoritesMovies(): Observable<List<FavoriteMovieRoom>>
+    fun allFavoritesMovies(): Maybe<List<FavoriteMovieRoom>>
 }

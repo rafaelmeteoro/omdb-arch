@@ -33,4 +33,7 @@
     <string name="fragment_movie_list_delete_positive">Ok</string>
     <string name="fragment_movie_list_delete_negative">No</string>
 
+    <string name="fragment_movie_detail_error">Failed to load movie</string>
+    <string name="fragment_movie_detail_empty">No movie cached</string>
+
 </resources>

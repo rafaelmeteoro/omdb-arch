@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
 import com.meteoro.omdbarch.utilities.ViewState.*
+import com.squareup.picasso.Picasso
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.android.synthetic.main.fragment_movie_details.*
 import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment() {
@@ -37,6 +41,7 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lifecycle.addObserver(disposer)
         val imdbId = arguments?.let { MovieDetailsFragmentArgs.fromBundle(it).imdbIdArg } ?: ""
         getMovieSaved(imdbId)
     }
@@ -63,13 +68,43 @@ class MovieDetailsFragment : Fragment() {
 
     private fun handlePresentation(presentation: MovieDetailsPresentation) {
         logger.d("${presentation.movie}")
+
+        val movie = presentation.movie
+        groupDetailsView.visibility = View.VISIBLE
+
+        Picasso.get().load(movie.poster).into(movieDetailPoster)
+        movieDetailTitle.text = movie.title
+        movieDetailYear.text = movie.year
+        movieDetailPlot.text = movie.plot
+        movieDetailActors.text = movie.actors
+        movieDetailDirector.text = movie.director
     }
 
     private fun handleError(reason: Throwable) {
         logger.e("Failed to load movies -> $reason")
+
+        if (reason is NoResultsFound) {
+            groupDetailsView.visibility = View.GONE
+            groupStateView.visibility = View.VISIBLE
+            return
+        }
+
+        showErrorReport(R.string.fragment_movie_detail_error)
     }
 
-    private fun startExecution() {}
+    private fun startExecution() {
+        loadingMovie.visibility = View.VISIBLE
+        groupDetailsView.visibility = View.GONE
+        groupStateView.visibility = View.GONE
+    }
 
-    private fun finishExecution() {}
+    private fun finishExecution() {
+        loadingMovie.visibility = View.GONE
+    }
+
+    private fun showErrorReport(targetMessageId: Int) {
+        Snackbar
+            .make(movieDetailsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
+            .show()
+    }
 }

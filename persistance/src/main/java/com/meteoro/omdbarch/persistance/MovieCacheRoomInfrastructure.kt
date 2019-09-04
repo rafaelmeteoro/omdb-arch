@@ -24,10 +24,12 @@ class MovieCacheRoomInfrastructure(
     override fun movieCached(imdbId: String): Observable<Movie> {
         return dao.favoriteMovie(imdbId)
             .map { BuildMovieFromRoom(it) }
+            .toObservable() // Convert Maybe to Observable
     }
 
     override fun moviesCached(): Observable<List<Movie>> {
         return dao.allFavoritesMovies()
+            .toObservable() // Convert Maybe to Observable
             .flatMap { movies ->
                 Observable.fromIterable(movies)
                     .map { BuildMovieFromRoom(it) }
