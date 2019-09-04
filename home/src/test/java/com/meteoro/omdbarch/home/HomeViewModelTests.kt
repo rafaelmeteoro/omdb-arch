@@ -3,12 +3,12 @@ package com.meteoro.omdbarch.home
 import com.meteoro.omdbarch.domain.FetchSearch
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.errors.NetworkingError
+import com.meteoro.omdbarch.domain.errors.SearchMoviesError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
 import com.meteoro.omdbarch.utilities.StateMachine
 import com.meteoro.omdbarch.utilities.ViewState.*
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -43,12 +43,14 @@ class HomeViewModelTests {
 
     @Test
     fun `should emmit states for successful home presentation`() {
+        val title = "Avengers"
+        val timeInvocation = 1
         val expected = BuildHomePresentation(result)
 
-        whenever(mockFetch.searchMovies("Avengers"))
+        whenever(mockFetch.searchMovies(title))
             .thenReturn(Observable.just(result))
 
-        viewModel.searchMovie("Avengers").test()
+        viewModel.searchMovie(title).test()
             .assertComplete()
             .assertValueSequence(
                 listOf(
@@ -57,14 +59,39 @@ class HomeViewModelTests {
                     Done
                 )
             )
+
+        verify(mockManager, times(timeInvocation)).save(title)
+    }
+
+    @Test
+    fun `should emmit states for error result and never save search`() {
+        val title = ""
+
+        whenever(mockFetch.searchMovies(title))
+            .thenReturn(Observable.error(SearchMoviesError.NoResultsFound))
+
+        viewModel.searchMovie(title).test()
+            .assertComplete()
+            .assertValueSequence(
+                listOf(
+                    Launched,
+                    Failed(SearchMoviesError.NoResultsFound),
+                    Done
+                )
+            )
+
+        verify(mockManager, never()).save(title)
     }
 
     @Test
     fun `should emmit states for errored broking integration`() {
-        whenever(mockFetch.searchMovies("Avengers"))
+        val title = "Avengers"
+        val timeInvocation = 1
+
+        whenever(mockFetch.searchMovies(title))
             .thenReturn(Observable.error(NetworkingError.ConnectionSpike))
 
-        viewModel.searchMovie("Avengers").test()
+        viewModel.searchMovie(title).test()
             .assertComplete()
             .assertValueSequence(
                 listOf(
@@ -73,5 +100,7 @@ class HomeViewModelTests {
                     Done
                 )
             )
+
+        verify(mockManager, times(timeInvocation)).save(title)
     }
 }

@@ -3,8 +3,7 @@ package com.meteoro.omdbarch.domain
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.util.movie
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -29,6 +28,10 @@ class CacheMovieTests {
             .assertComplete()
             .assertTerminated()
             .assertValue(movie)
+
+        verify(service, never()).save(movie)
+        verify(service, never()).delete(movie)
+        verify(service, never()).moviesCached()
     }
 
     @Test
@@ -42,6 +45,10 @@ class CacheMovieTests {
             .assertComplete()
             .assertTerminated()
             .assertValue(movies)
+
+        verify(service, never()).save(movie)
+        verify(service, never()).delete(movie)
+        verify(service, never()).movieCached(anyString())
     }
 
     @Test
@@ -53,5 +60,33 @@ class CacheMovieTests {
             .assertNotComplete()
             .assertTerminated()
             .assertError(NoResultsFound)
+
+        verify(service, never()).save(movie)
+        verify(service, never()).delete(movie)
+        verify(service, never()).movieCached(anyString())
+    }
+
+    @Test
+    fun `shoud call save when movie is provided`() {
+        val timeInvocation = 1
+
+        cache.saveMovie(movie)
+
+        verify(service, times(timeInvocation)).save(movie)
+        verify(service, never()).delete(movie)
+        verify(service, never()).movieCached(anyString())
+        verify(service, never()).moviesCached()
+    }
+
+    @Test
+    fun `should call delete when movie is provided`() {
+        val timeInvocation = 1
+
+        cache.deleteMovie(movie)
+
+        verify(service, times(timeInvocation)).delete(movie)
+        verify(service, never()).save(movie)
+        verify(service, never()).movieCached(anyString())
+        verify(service, never()).moviesCached()
     }
 }

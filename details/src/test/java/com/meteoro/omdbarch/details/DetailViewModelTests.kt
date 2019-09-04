@@ -7,8 +7,7 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
 import com.meteoro.omdbarch.utilities.ViewState.*
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -45,6 +44,8 @@ class DetailViewModelTests {
 
     @Test
     fun `should emmit states for succesful detail presentation`() {
+        val timeInvocation = 1
+
         whenever(mockProvider.getString(anyInt(), anyString()))
             .thenReturn("")
 
@@ -62,6 +63,8 @@ class DetailViewModelTests {
                     Done
                 )
             )
+
+        verify(mockCache, times(timeInvocation)).saveMovie(result)
     }
 
     @Test
@@ -78,5 +81,7 @@ class DetailViewModelTests {
                     Done
                 )
             )
+
+        verify(mockCache, never()).saveMovie(any())
     }
 }

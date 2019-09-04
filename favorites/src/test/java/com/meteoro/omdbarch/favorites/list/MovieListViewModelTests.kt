@@ -5,8 +5,7 @@ import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.utilities.StateMachine
 import com.meteoro.omdbarch.utilities.ViewState.*
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -27,6 +26,8 @@ class MovieListViewModelTests {
 
     @Test
     fun `should emmit states for successful movies presentation`() {
+        val timeInvocation = 1
+
         val movies = listOf(Movie(imdbId = "imdb", title = "Avengers"))
 
         val expected = BuildMovieListPresentation(movies)
@@ -43,10 +44,15 @@ class MovieListViewModelTests {
                     Done
                 )
             )
+
+        verify(mockCache, times(timeInvocation)).getMovies()
+        verify(mockCache, never()).deleteMovie(any())
     }
 
     @Test
     fun `should emmit states for empty values`() {
+        val timeInvocation = 1
+
         whenever(mockCache.getMovies())
             .thenReturn(Observable.error(NoResultsFound))
 
@@ -59,5 +65,18 @@ class MovieListViewModelTests {
                     Done
                 )
             )
+
+        verify(mockCache, times(timeInvocation)).getMovies()
+        verify(mockCache, never()).deleteMovie(any())
+    }
+
+    @Test
+    fun `should call delete movie when provided`() {
+        val timeInvocation = 1
+
+        viewModel.deleteMovie(Movie())
+
+        verify(mockCache, times(timeInvocation)).deleteMovie(any())
+        verify(mockCache, never()).getMovies()
     }
 }

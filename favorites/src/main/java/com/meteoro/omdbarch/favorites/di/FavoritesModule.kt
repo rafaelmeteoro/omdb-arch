@@ -4,6 +4,7 @@ import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.favorites.FavoritesActivity
 import com.meteoro.omdbarch.favorites.details.MovieDetailsFragment
+import com.meteoro.omdbarch.favorites.details.MovieDetailsViewModel
 import com.meteoro.omdbarch.favorites.list.MovieListFragment
 import com.meteoro.omdbarch.favorites.list.MovieListViewModel
 import com.meteoro.omdbarch.favorites.words.WordsFragment
@@ -49,6 +50,17 @@ abstract class FavoritesModule {
         @Singleton
         fun provideMovieListViewModel(cache: CacheMovie, scheduler: Scheduler): MovieListViewModel =
             MovieListViewModel(
+                cache = cache,
+                machine = StateMachine(
+                    uiScheduler = scheduler
+                )
+            )
+
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideMovieDetailsViewModel(cache: CacheMovie, scheduler: Scheduler): MovieDetailsViewModel =
+            MovieDetailsViewModel(
                 cache = cache,
                 machine = StateMachine(
                     uiScheduler = scheduler

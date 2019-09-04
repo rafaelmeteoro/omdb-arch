@@ -4,11 +4,11 @@ import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.utilities.StateMachine
 import com.meteoro.omdbarch.utilities.ViewState.*
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyString
 
 class WordsViewModelTests {
 
@@ -28,6 +28,8 @@ class WordsViewModelTests {
 
     @Test
     fun `should emmit states for successful words presentation`() {
+        val timeInvocation = 1
+
         val expected = BuildWordsPresentation(result)
 
         whenever(mockManager.fetchSearchList())
@@ -42,10 +44,15 @@ class WordsViewModelTests {
                     Done
                 )
             )
+
+        verify(mockManager, times(timeInvocation)).fetchSearchList()
+        verify(mockManager, never()).delete(anyString())
     }
 
     @Test
     fun `should emmit states for empty values`() {
+        val timeInvocation = 1
+
         whenever(mockManager.fetchSearchList())
             .thenReturn(Observable.error(NoResultsFound))
 
@@ -58,5 +65,19 @@ class WordsViewModelTests {
                     Done
                 )
             )
+
+        verify(mockManager, times(timeInvocation)).fetchSearchList()
+        verify(mockManager, never()).delete(anyString())
+    }
+
+    @Test
+    fun `should call delete in manger`() {
+        val mockValue = "avengers"
+        val timeInvocation = 1
+
+        viewModel.deleteWord(mockValue)
+
+        verify(mockManager, times(timeInvocation)).delete(mockValue)
+        verify(mockManager, never()).fetchSearchList()
     }
 }

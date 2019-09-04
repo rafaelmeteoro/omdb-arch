@@ -3,8 +3,7 @@ package com.meteoro.omdbarch.domain
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.util.movie
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -25,19 +24,28 @@ class FetchMovieTests {
 
     @Test
     fun `should throw with invalid term`() {
-        simpleFetchMovie("").test()
+        val id = ""
+
+        simpleFetchMovie(id).test()
             .assertNotComplete()
             .assertTerminated()
             .assertError(EmptyTerm)
+
+        verify(service, never()).fetchMovie(id)
     }
 
     @Test
     fun `should fetch valid id`() {
-        simpleFetchMovie("10").test()
+        val id = "10"
+        val timeInvocation = 1
+
+        simpleFetchMovie(id).test()
             .assertComplete()
             .assertTerminated()
             .assertNoErrors()
             .assertValue(movie)
+
+        verify(service, times(timeInvocation)).fetchMovie(id)
     }
 
     private fun simpleFetchMovie(id: String) =

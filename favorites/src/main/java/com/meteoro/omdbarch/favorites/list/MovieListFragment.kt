@@ -116,7 +116,9 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     }
 
     override fun navigateToMovie(movie: Movie) {
-        findNavController().navigate(R.id.movieDetailsFragment)
+        val action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment()
+        action.imdbIdArg = movie.imdbId
+        findNavController().navigate(action)
     }
 
     override fun deleteMovie(movie: Movie) {
