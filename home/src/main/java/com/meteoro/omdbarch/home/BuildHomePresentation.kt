@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.home
 
 import com.meteoro.omdbarch.domain.model.ResultSearch
+import com.meteoro.omdbarch.domain.model.TypeMovie
 
 object BuildHomePresentation {
 
@@ -10,7 +11,8 @@ object BuildHomePresentation {
                 MoviePresentation(
                     imdbId = it.imdbId ?: defaultImdbId,
                     title = it.title ?: defaultTitle,
-                    photoUrl = it.poster ?: defaultPoster
+                    photoUrl = it.poster ?: defaultPoster,
+                    type = getType(it.type)
                 )
             } ?: emptyList(),
             response = info.response ?: defaultResponse,
@@ -22,4 +24,9 @@ object BuildHomePresentation {
         "https://www.bauducco.com.br/wp/wordpress/wp-content/uploads/2017/09/default-placeholder-1-2.png"
     private const val defaultResponse = "False"
     private const val defaultImdbId = "NoId"
+
+    private fun getType(type: String?): TypeMovie {
+        if (type == null) return TypeMovie.OUTRO
+        return TypeMovie.fromString(type) ?: TypeMovie.OUTRO
+    }
 }

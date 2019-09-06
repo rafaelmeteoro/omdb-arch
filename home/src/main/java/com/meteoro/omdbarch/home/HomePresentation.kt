@@ -1,5 +1,7 @@
 package com.meteoro.omdbarch.home
 
+import com.meteoro.omdbarch.domain.model.TypeMovie
+
 data class HomePresentation(
     val movies: List<MoviePresentation>,
     val response: String,
@@ -9,5 +11,6 @@ data class HomePresentation(
 data class MoviePresentation(
     val imdbId: String,
     val title: String,
-    val photoUrl: String
+    val photoUrl: String,
+    val type: TypeMovie
 )
