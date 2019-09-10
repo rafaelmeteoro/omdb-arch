@@ -47,6 +47,7 @@ class MovieListViewModelTests {
 
         verify(mockCache, times(timeInvocation)).getMovies()
         verify(mockCache, never()).deleteMovie(any())
+        verify(mockCache, never()).deleteAll()
     }
 
     @Test
@@ -68,6 +69,7 @@ class MovieListViewModelTests {
 
         verify(mockCache, times(timeInvocation)).getMovies()
         verify(mockCache, never()).deleteMovie(any())
+        verify(mockCache, never()).deleteAll()
     }
 
     @Test
@@ -78,5 +80,17 @@ class MovieListViewModelTests {
 
         verify(mockCache, times(timeInvocation)).deleteMovie(any())
         verify(mockCache, never()).getMovies()
+        verify(mockCache, never()).deleteAll()
+    }
+
+    @Test
+    fun `should call delete all`() {
+        val timeInvocation = 1
+
+        viewModel.deleteAll()
+
+        verify(mockCache, times(timeInvocation)).deleteAll()
+        verify(mockCache, never()).getMovies()
+        verify(mockCache, never()).deleteMovie(any())
     }
 }

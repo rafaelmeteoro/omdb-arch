@@ -46,7 +46,7 @@ object BuildPlugins {
         const val jacocoUnified = "0.15.0"
         const val sonarCloud = "2.7.1"
         const val detekt = "1.0.1"
-        const val versions = "0.24.0"
-        const val safeArgs = "2.2.0-alpha01"
+        const val versions = "0.25.0"
+        const val safeArgs = "2.2.0-alpha02"
     }
 }

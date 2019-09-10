@@ -16,4 +16,8 @@ class MovieListViewModel(
     fun deleteMovie(movie: Movie) {
         cache.deleteMovie(movie)
     }
+
+    fun deleteAll() {
+        cache.deleteAll()
+    }
 }

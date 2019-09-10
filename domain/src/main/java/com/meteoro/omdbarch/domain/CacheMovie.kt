@@ -15,6 +15,10 @@ class CacheMovie(private val service: MovieCacheService) {
         service.delete(movie)
     }
 
+    fun deleteAll() {
+        service.deleteAll()
+    }
+
     fun getMovie(imdbId: String) =
         service.movieCached(imdbId)
 

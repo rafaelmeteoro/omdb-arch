@@ -2,9 +2,7 @@ package com.meteoro.omdbarch.favorites.list
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,8 +44,23 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycle.addObserver(disposer)
+        setHasOptionsMenu(true)
         setupView()
         getMoviesSaved()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_movie_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.movies_delete_all -> {
+            viewModel.deleteAll()
+            getMoviesSaved()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun setupView() {

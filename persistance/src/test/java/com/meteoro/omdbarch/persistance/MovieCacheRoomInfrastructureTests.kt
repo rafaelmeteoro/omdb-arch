@@ -49,6 +49,7 @@ internal class MovieCacheRoomInfrastructureTests {
         verify(dao, times(timeInvocation)).favoriteMovie(imdb)
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
+        verify(dao, never()).clear()
         verify(dao, never()).allFavoritesMovies()
     }
 
@@ -67,6 +68,7 @@ internal class MovieCacheRoomInfrastructureTests {
         verify(dao, times(timeInvocation)).allFavoritesMovies()
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
+        verify(dao, never()).clear()
         verify(dao, never()).favoriteMovie(anyString())
     }
 
@@ -78,6 +80,7 @@ internal class MovieCacheRoomInfrastructureTests {
 
         verify(dao, times(timeInvocation)).insert(any())
         verify(dao, never()).remove(any())
+        verify(dao, never()).clear()
         verify(dao, never()).favoriteMovie(anyString())
         verify(dao, never()).allFavoritesMovies()
     }
@@ -90,6 +93,20 @@ internal class MovieCacheRoomInfrastructureTests {
 
         verify(dao, times(timeInvocation)).remove(any())
         verify(dao, never()).insert(any())
+        verify(dao, never()).clear()
+        verify(dao, never()).favoriteMovie(anyString())
+        verify(dao, never()).allFavoritesMovies()
+    }
+
+    @Test
+    fun `should clear all movies`() {
+        val timeInvocation = 1
+
+        cache.deleteAll()
+
+        verify(dao, times(timeInvocation)).clear()
+        verify(dao, never()).insert(any())
+        verify(dao, never()).remove(any())
         verify(dao, never()).favoriteMovie(anyString())
         verify(dao, never()).allFavoritesMovies()
     }

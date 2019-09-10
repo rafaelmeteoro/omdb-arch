@@ -21,6 +21,10 @@ class MovieCacheRoomInfrastructure(
         dao.remove(movieRoom)
     }
 
+    override fun deleteAll() {
+        dao.clear()
+    }
+
     override fun movieCached(imdbId: String): Observable<Movie> {
         return dao.favoriteMovie(imdbId)
             .map { BuildMovieFromRoom(it) }

@@ -6,6 +6,7 @@ import io.reactivex.Observable
 interface MovieCacheService {
     fun save(movie: Movie)
     fun delete(movie: Movie)
+    fun deleteAll()
     fun movieCached(imdbId: String): Observable<Movie>
     fun moviesCached(): Observable<List<Movie>>
 }

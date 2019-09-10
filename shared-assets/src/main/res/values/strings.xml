@@ -18,6 +18,8 @@
     <string name="bottom_navigation_movies">Movies</string>
     <string name="bottom_navigation_words">Words</string>
 
+    <string name="menu_movies_delete_all">Delete All</string>
+
     <string name="fragment_words_title">Words Saved</string>
     <string name="fragment_movie_list">List of Movies Visited</string>
     <string name="fragment_movie_details">Movie Visited</string>

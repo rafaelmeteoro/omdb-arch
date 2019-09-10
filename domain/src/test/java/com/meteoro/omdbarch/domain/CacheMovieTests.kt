@@ -31,6 +31,7 @@ class CacheMovieTests {
 
         verify(service, never()).save(movie)
         verify(service, never()).delete(movie)
+        verify(service, never()).deleteAll()
         verify(service, never()).moviesCached()
     }
 
@@ -48,6 +49,7 @@ class CacheMovieTests {
 
         verify(service, never()).save(movie)
         verify(service, never()).delete(movie)
+        verify(service, never()).deleteAll()
         verify(service, never()).movieCached(anyString())
     }
 
@@ -63,6 +65,7 @@ class CacheMovieTests {
 
         verify(service, never()).save(movie)
         verify(service, never()).delete(movie)
+        verify(service, never()).deleteAll()
         verify(service, never()).movieCached(anyString())
     }
 
@@ -74,6 +77,7 @@ class CacheMovieTests {
 
         verify(service, times(timeInvocation)).save(movie)
         verify(service, never()).delete(movie)
+        verify(service, never()).deleteAll()
         verify(service, never()).movieCached(anyString())
         verify(service, never()).moviesCached()
     }
@@ -86,6 +90,20 @@ class CacheMovieTests {
 
         verify(service, times(timeInvocation)).delete(movie)
         verify(service, never()).save(movie)
+        verify(service, never()).deleteAll()
+        verify(service, never()).movieCached(anyString())
+        verify(service, never()).moviesCached()
+    }
+
+    @Test
+    fun `should call delete all`() {
+        val timeInvocation = 1
+
+        cache.deleteAll()
+
+        verify(service, times(timeInvocation)).deleteAll()
+        verify(service, never()).save(movie)
+        verify(service, never()).delete(movie)
         verify(service, never()).movieCached(anyString())
         verify(service, never()).moviesCached()
     }
