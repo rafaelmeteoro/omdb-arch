@@ -2,6 +2,7 @@ package com.meteoro.omdbarch.di
 
 import android.app.Application
 import android.content.Context
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.meteoro.omdbarch.logger.LogcatLogger
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.navigation.OmdbNavigator
@@ -11,6 +12,7 @@ import dagger.Provides
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.Cache
+import okhttp3.Interceptor
 import java.io.File
 import javax.inject.Singleton
 
@@ -45,4 +47,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideNavigator(): MyNavigator = OmdbNavigator()
+
+    @Provides
+    @Singleton
+    fun provideStethoInterceptor(): Interceptor = StethoInterceptor()
 }

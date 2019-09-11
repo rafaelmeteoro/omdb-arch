@@ -96,6 +96,8 @@ dependencies {
     implementation(Libraries.retrofitGsonConverter)
     implementation(Libraries.gson)
     implementation(Libraries.picasso)
+    implementation(Libraries.stetho)
+    implementation(Libraries.stethoOkHttp)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)

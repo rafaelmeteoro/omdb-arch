@@ -52,7 +52,10 @@ object Libraries {
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakyCanary}"
 
-    val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+    const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+
+    const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
+    const val stethoOkHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
 
     const val jUnit = "junit:junit:${Versions.junit}"
     const val assertj = "org.assertj:assertj-core:${Versions.assertj}"
@@ -86,6 +89,7 @@ object Libraries {
         const val dagger = "2.24"
         const val leakyCanary = "2.0-beta-3"
         const val picasso = "2.71828"
+        const val stetho = "1.5.1"
         const val junit = "4.12"
         const val assertj = "3.13.2"
         const val mockitoKotlin = "2.2.0"
