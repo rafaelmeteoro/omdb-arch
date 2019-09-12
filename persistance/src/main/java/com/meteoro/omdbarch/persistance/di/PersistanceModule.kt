@@ -7,11 +7,14 @@ import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.services.SearchHistoryService
 import com.meteoro.omdbarch.persistance.AppPreferencesWrapper
+import com.meteoro.omdbarch.persistance.MovieCacheRealmInfrastructure
 import com.meteoro.omdbarch.persistance.MovieCacheRoomInfrastructure
 import com.meteoro.omdbarch.persistance.SearchHistoryInfrastructure
+import com.meteoro.omdbarch.persistance.model.TypeDatabase
 import com.meteoro.omdbarch.persistance.room.OmdbRoomDatabase
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -39,11 +42,18 @@ class PersistanceModule {
 
     @Provides
     @Singleton
-    fun provideMovieCacheService(database: OmdbRoomDatabase): MovieCacheService =
+    @Named(TypeDatabase.ROOM)
+    fun provideMovieRoomCacheService(database: OmdbRoomDatabase): MovieCacheService =
         MovieCacheRoomInfrastructure(database.movieDao())
 
     @Provides
     @Singleton
-    fun provideCacheMovie(service: MovieCacheService): CacheMovie =
+    @Named(TypeDatabase.REALM)
+    fun provideMovieRealmCacheService(): MovieCacheService =
+        MovieCacheRealmInfrastructure()
+
+    @Provides
+    @Singleton
+    fun provideCacheMovie(@Named(TypeDatabase.ROOM) service: MovieCacheService): CacheMovie =
         CacheMovie(service)
 }

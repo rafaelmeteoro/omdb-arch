@@ -12,6 +12,7 @@ plugins {
     kotlin(BuildPlugins.Ids.kotlinAndroid)
     kotlin(BuildPlugins.Ids.kotlinExtensions)
     kotlin(BuildPlugins.Ids.kotlinKapt)
+    id(BuildPlugins.Ids.realmAndroid)
 }
 
 dependencies {

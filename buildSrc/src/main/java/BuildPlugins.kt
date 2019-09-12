@@ -15,6 +15,7 @@ object BuildPlugins {
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
         const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
+        const val realm = "io.realm:realm-gradle-plugin:${Versions.realm}"
     }
 
     object Ids {
@@ -35,6 +36,7 @@ object BuildPlugins {
         const val detekt = "io.gitlab.arturbosch.detekt"
         const val versions = "com.github.ben-manes.versions"
         const val safeArgs = "androidx.navigation.safeargs"
+        const val realmAndroid = "realm-android"
     }
 
     private object Versions {
@@ -48,5 +50,6 @@ object BuildPlugins {
         const val detekt = "1.0.1"
         const val versions = "0.25.0"
         const val safeArgs = "2.2.0-alpha02"
+        const val realm = "5.15.1"
     }
 }

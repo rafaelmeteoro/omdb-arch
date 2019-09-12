@@ -28,13 +28,16 @@ class NetModule(private val apiKeyValue: String, private val isDebugMode: Boolea
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(cache: Cache, logger: HttpLoggingInterceptor, interceptor: Interceptor): OkHttpClient =
-        OkHttpClient.Builder()
+    fun provideOkHttpClient(cache: Cache, logger: HttpLoggingInterceptor, interceptors: Set<@JvmSuppressWildcards Interceptor>): OkHttpClient {
+        val builder = OkHttpClient.Builder()
             .cache(cache)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(ApiInterceptor(apiKeyValue))
             .addInterceptor(logger)
-            .addNetworkInterceptor(interceptor)
-            .build()
+
+        interceptors.forEach { builder.addNetworkInterceptor(it) }
+
+        return builder.build()
+    }
 }

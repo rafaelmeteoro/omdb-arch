@@ -23,6 +23,7 @@ buildscript {
         classpath(BuildPlugins.Dependencies.detekt)
         classpath(BuildPlugins.Dependencies.versions)
         classpath(BuildPlugins.Dependencies.safeArgs)
+        classpath(BuildPlugins.Dependencies.realm)
     }
 }
 

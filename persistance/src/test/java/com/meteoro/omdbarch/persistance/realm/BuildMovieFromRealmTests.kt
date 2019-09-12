@@ -1,15 +1,15 @@
-package com.meteoro.omdbarch.persistance.room
+package com.meteoro.omdbarch.persistance.realm
 
 import com.meteoro.omdbarch.domain.model.Movie
-import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
+import com.meteoro.omdbarch.persistance.model.FavoriteMovieRealm
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class BuildMovieRoomTests {
+class BuildMovieFromRealmTests {
 
     @Test
-    fun `should build movie room`() {
-        val provided = Movie(
+    fun `should build movie`() {
+        val provided = FavoriteMovieRealm(
             imdbId = "tt2474438",
             title = "Avengers",
             year = "2013",
@@ -26,7 +26,7 @@ class BuildMovieRoomTests {
             type = "movie"
         )
 
-        val expected = FavoriteMovieRoom(
+        val expected = Movie(
             imdbId = "tt2474438",
             title = "Avengers",
             year = "2013",
@@ -43,6 +43,6 @@ class BuildMovieRoomTests {
             type = "movie"
         )
 
-        assertThat(BuildMovieRoom(provided)).isEqualTo(expected)
+        assertThat(BuildMovieFromRealm(provided)).isEqualTo(expected)
     }
 }

@@ -3,12 +3,14 @@ package com.meteoro.omdbarch.di
 import android.app.Application
 import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.meteoro.omdbarch.BuildConfig
 import com.meteoro.omdbarch.logger.LogcatLogger
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.navigation.OmdbNavigator
 import com.meteoro.omdbarch.navigator.MyNavigator
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.ElementsIntoSet
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.Cache
@@ -50,5 +52,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideStethoInterceptor(): Interceptor = StethoInterceptor()
+    @ElementsIntoSet
+    fun provideStethoInterceptor(): Set<Interceptor> =
+        if (BuildConfig.DEBUG) setOf(StethoInterceptor()) else emptySet()
 }
