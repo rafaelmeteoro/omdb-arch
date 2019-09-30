@@ -49,7 +49,7 @@ object BuildPlugins {
         const val sonarCloud = "2.7.1"
         const val detekt = "1.0.1"
         const val versions = "0.25.0"
-        const val safeArgs = "2.2.0-alpha02"
-        const val realm = "5.15.1"
+        const val safeArgs = "2.2.0-alpha03"
+        const val realm = "5.15.2"
     }
 }
