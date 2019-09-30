@@ -2,30 +2,30 @@ package com.meteoro.omdbarch.networking
 
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.ClientOrigin
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.RemoteSystem
-import com.meteoro.omdbarch.networking.CheckErrorTransformation.Companion.checkTransformation
+import com.meteoro.omdbarch.networking.CheckErrorFlowableTransformation.Companion.checkSingleTransformation
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Test
 import retrofit2.HttpException
 import retrofit2.Response
 
-class HttpIntegrationErrorTransformerTests {
+class HttpIntegrationErrorFlowableTransformerTests {
 
     @Test
     fun `should transform proper throwable into client origin error`() {
-        checkTransformation(
+        checkSingleTransformation(
             from = httpException<Any>(418, "Teapot"),
             expected = ClientOrigin,
-            using = HttpIntegrationErrorTransformer<Any>()
+            using = HttpIntegrationErrorFlowableTransformer<Any>()
         )
     }
 
     @Test
     fun `should transform proper throwable into remote system error`() {
-        checkTransformation(
+        checkSingleTransformation(
             from = httpException<Any>(503, "Internal Server Error"),
             expected = RemoteSystem,
-            using = HttpIntegrationErrorTransformer<Any>()
+            using = HttpIntegrationErrorFlowableTransformer<Any>()
         )
     }
 
@@ -33,10 +33,10 @@ class HttpIntegrationErrorTransformerTests {
     fun `should propagate any other error`() {
         val otherError = IllegalStateException("Houston, we have a problem!")
 
-        checkTransformation(
+        checkSingleTransformation(
             from = otherError,
             expected = otherError,
-            using = HttpIntegrationErrorTransformer<Any>()
+            using = HttpIntegrationErrorFlowableTransformer<Any>()
         )
     }
 

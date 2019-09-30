@@ -5,6 +5,7 @@ import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.networking.BuildRetrofit
 import com.meteoro.omdbarch.rest.ExecutionErrorHandler
+import com.meteoro.omdbarch.rest.ExecutionErrorHandlerFlowable
 import com.meteoro.omdbarch.rest.MovieInfrastructure
 import com.meteoro.omdbarch.rest.SearchInfrastructure
 import com.meteoro.omdbarch.rest.api.OmdbAPI
@@ -47,6 +48,9 @@ class RestModule(private val apiUrl: String) {
         SearchInfrastructure(
             service = api,
             errorHandler = ExecutionErrorHandler(
+                logger = logger
+            ),
+            errorHandlerFlowable = ExecutionErrorHandlerFlowable(
                 logger = logger
             ),
             targetScheduler = Schedulers.io()

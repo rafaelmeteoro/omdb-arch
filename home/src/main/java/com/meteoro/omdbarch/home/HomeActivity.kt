@@ -105,7 +105,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun searchMovie(title: String) {
         val toDispose = viewModel
-            .searchMovie(title)
+            .searchMovieFlowable(title)
             .subscribeBy(
                 onNext = { changeState(it) },
                 onError = { logger.e("Error -> $it") }
