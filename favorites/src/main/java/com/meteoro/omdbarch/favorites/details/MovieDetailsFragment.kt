@@ -12,7 +12,6 @@ import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ViewState
-import com.meteoro.omdbarch.utilities.ViewState.*
 import com.squareup.picasso.Picasso
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
@@ -59,10 +58,10 @@ class MovieDetailsFragment : Fragment() {
 
     private fun changeState(event: ViewState<MovieDetailsPresentation>) {
         when (event) {
-            is Launched -> startExecution()
-            is Success -> handlePresentation(event.value)
-            is Failed -> handleError(event.reason)
-            is Done -> finishExecution()
+            is ViewState.Launched -> startExecution()
+            is ViewState.Success -> handlePresentation(event.value)
+            is ViewState.Failed -> handleError(event.reason)
+            is ViewState.Done -> finishExecution()
         }
     }
 

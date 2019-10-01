@@ -1,6 +1,6 @@
 package com.meteoro.omdbarch.networking
 
-import com.meteoro.omdbarch.domain.errors.NetworkingError.*
+import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.networking.CheckErrorTransformation.Companion.checkTransformation
 import org.junit.Test
@@ -16,7 +16,7 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper unknown host exception into host unreachable`() {
         checkTransformation(
             from = UnknownHostException("No Internet"),
-            expected = HostUnreachable,
+            expected = NetworkingError.HostUnreachable,
             using = NetworkingErrorTransformer<Any>()
         )
     }
@@ -25,7 +25,7 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper connect exception into host unreachable`() {
         checkTransformation(
             from = ConnectException(),
-            expected = HostUnreachable,
+            expected = NetworkingError.HostUnreachable,
             using = NetworkingErrorTransformer<Any>()
         )
     }
@@ -34,7 +34,7 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper no route exception into host unreachable`() {
         checkTransformation(
             from = NoRouteToHostException(),
-            expected = HostUnreachable,
+            expected = NetworkingError.HostUnreachable,
             using = NetworkingErrorTransformer<Any>()
         )
     }
@@ -43,7 +43,7 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper socket timeout exception into operation timeout`() {
         checkTransformation(
             from = SocketTimeoutException(),
-            expected = OperationTimeout,
+            expected = NetworkingError.OperationTimeout,
             using = NetworkingErrorTransformer<Any>()
         )
     }
@@ -52,7 +52,7 @@ class NetworkingErrorTransformerTests {
     fun `should transform proper io exception into connection spike`() {
         checkTransformation(
             from = IOException("Canceled"),
-            expected = ConnectionSpike,
+            expected = NetworkingError.ConnectionSpike,
             using = NetworkingErrorTransformer<Any>()
         )
     }

@@ -5,7 +5,6 @@ import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.home.HomeActivity
 import com.meteoro.omdbarch.home.HomeViewModel
-import com.meteoro.omdbarch.utilities.StateFlowableMachine
 import com.meteoro.omdbarch.utilities.StateMachine
 import dagger.Module
 import dagger.Provides
@@ -36,9 +35,6 @@ abstract class HomeModule {
                 fetch = fetch,
                 manager = manager,
                 machine = StateMachine(
-                    uiScheduler = scheduler
-                ),
-                machineFlowable = StateFlowableMachine(
                     uiScheduler = scheduler
                 )
             )

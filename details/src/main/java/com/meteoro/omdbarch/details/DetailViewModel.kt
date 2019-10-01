@@ -5,7 +5,8 @@ import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
-import io.reactivex.Observable
+import com.meteoro.omdbarch.utilities.ViewState
+import io.reactivex.Flowable
 
 class DetailViewModel(
     private val fetch: FetchMovie,
@@ -13,11 +14,11 @@ class DetailViewModel(
     private val machine: StateMachine<MovieDetailPresentation>,
     private val resProvider: ResourceProvider
 ) {
-    fun fetchMovie(idImdb: String) =
+    fun fetchMovie(idImdb: String): Flowable<ViewState<MovieDetailPresentation>> =
         fetch.fetchMovie(idImdb)
             .flatMap { movie ->
                 saveMovie(movie)
-                Observable.just(movie)
+                Flowable.just(movie)
             }
             .map { BuildMovieDetailPresentation(it, resProvider) }
             .compose(machine)

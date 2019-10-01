@@ -4,7 +4,7 @@ import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.util.movie
 import com.nhaarman.mockitokotlin2.*
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
@@ -19,7 +19,7 @@ class FetchMovieTests {
         usecase = FetchMovie(service)
 
         whenever(service.fetchMovie(anyString()))
-            .thenReturn(Observable.just(movie))
+            .thenReturn(Flowable.just(movie))
     }
 
     @Test

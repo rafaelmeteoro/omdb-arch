@@ -15,7 +15,6 @@ import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.GridItemDecoration
 import com.meteoro.omdbarch.utilities.ViewState
-import com.meteoro.omdbarch.utilities.ViewState.*
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_movie_list.*
@@ -88,10 +87,10 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
 
     private fun changeState(event: ViewState<MovieListPresentation>) {
         when (event) {
-            is Launched -> startExecution()
-            is Success -> handlePresentation(event.value)
-            is Failed -> handleError(event.reason)
-            is Done -> finishExecution()
+            is ViewState.Launched -> startExecution()
+            is ViewState.Success -> handlePresentation(event.value)
+            is ViewState.Failed -> handleError(event.reason)
+            is ViewState.Done -> finishExecution()
         }
     }
 

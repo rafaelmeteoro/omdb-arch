@@ -4,13 +4,13 @@ import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.networking.HttpIntegrationErrorTransformer
 import com.meteoro.omdbarch.networking.NetworkingErrorTransformer
 import com.meteoro.omdbarch.networking.SerializationErrorTransformer
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.ObservableTransformer
+import io.reactivex.Flowable
+import io.reactivex.FlowableTransformer
+import org.reactivestreams.Publisher
 
-class ExecutionErrorHandler<T>(private val logger: Logger) : ObservableTransformer<T, T> {
+class ExecutionErrorHandler<T>(private val logger: Logger) : FlowableTransformer<T, T> {
 
-    override fun apply(upstream: Observable<T>): ObservableSource<T> =
+    override fun apply(upstream: Flowable<T>): Publisher<T> =
         upstream
             .compose(HttpIntegrationErrorTransformer())
             .compose(NetworkingErrorTransformer())

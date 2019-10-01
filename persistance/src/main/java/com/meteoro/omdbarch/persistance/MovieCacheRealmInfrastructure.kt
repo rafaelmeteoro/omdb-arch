@@ -7,7 +7,8 @@ import com.meteoro.omdbarch.persistance.model.FavoriteMovieRealm
 import com.meteoro.omdbarch.persistance.realm.BuildMovieFromRealm
 import com.meteoro.omdbarch.persistance.realm.BuildMovieRealm
 import com.meteoro.omdbarch.persistance.realm.RealmManager
-import io.reactivex.Observable
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import io.realm.kotlin.where
 
 class MovieCacheRealmInfrastructure : MovieCacheService {
@@ -37,9 +38,8 @@ class MovieCacheRealmInfrastructure : MovieCacheService {
         }
     }
 
-    override fun movieCached(imdbId: String): Observable<Movie> {
-        return Observable.create { emmiter ->
-
+    override fun movieCached(imdbId: String): Flowable<Movie> {
+        return Flowable.create({ emmiter ->
             val movieRealm = RealmManager.run {
                 realm.where<FavoriteMovieRealm>()
                     .equalTo("imdbId", imdbId)
@@ -53,25 +53,24 @@ class MovieCacheRealmInfrastructure : MovieCacheService {
             } else {
                 emmiter.onError(NoResultsFound)
             }
-        }
+        }, BackpressureStrategy.DROP)
     }
 
-    override fun moviesCached(): Observable<List<Movie>> {
-        return Observable.create { emmiter ->
-
+    override fun moviesCached(): Flowable<List<Movie>> {
+        return Flowable.create({ emmiter ->
             val moviesRealm = RealmManager.run {
                 realm.where<FavoriteMovieRealm>()
                     .findAll()
                     .let { realm.copyFromRealm(it) }
             }
 
-            val converted = Observable.fromIterable(moviesRealm)
+            val converted = Flowable.fromIterable(moviesRealm)
                 .map { BuildMovieFromRealm(it) }
                 .toList()
                 .blockingGet()
 
             emmiter.onNext(converted)
             emmiter.onComplete()
-        }
+        }, BackpressureStrategy.DROP)
     }
 }

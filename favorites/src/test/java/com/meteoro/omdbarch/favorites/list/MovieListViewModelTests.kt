@@ -4,9 +4,9 @@ import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.utilities.StateMachine
-import com.meteoro.omdbarch.utilities.ViewState.*
+import com.meteoro.omdbarch.utilities.ViewState
 import com.nhaarman.mockitokotlin2.*
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 
@@ -26,71 +26,65 @@ class MovieListViewModelTests {
 
     @Test
     fun `should emmit states for successful movies presentation`() {
-        val timeInvocation = 1
-
         val movies = listOf(Movie(imdbId = "imdb", title = "Avengers"))
 
         val expected = BuildMovieListPresentation(movies)
 
         whenever(mockCache.getMovies())
-            .thenReturn(Observable.just(movies))
+            .thenReturn(Flowable.just(movies))
 
         viewModel.fetchMoviesSaved().test()
             .assertComplete()
             .assertValueSequence(
                 listOf(
-                    Launched,
-                    Success(expected),
-                    Done
+                    ViewState.Launched,
+                    ViewState.Success(expected),
+                    ViewState.Done
                 )
             )
 
-        verify(mockCache, times(timeInvocation)).getMovies()
+        verify(mockCache, times(timeInvocation())).getMovies()
         verify(mockCache, never()).deleteMovie(any())
         verify(mockCache, never()).deleteAll()
     }
 
     @Test
     fun `should emmit states for empty values`() {
-        val timeInvocation = 1
-
         whenever(mockCache.getMovies())
-            .thenReturn(Observable.error(NoResultsFound))
+            .thenReturn(Flowable.error(NoResultsFound))
 
         viewModel.fetchMoviesSaved().test()
             .assertComplete()
             .assertValueSequence(
                 listOf(
-                    Launched,
-                    Failed(NoResultsFound),
-                    Done
+                    ViewState.Launched,
+                    ViewState.Failed(NoResultsFound),
+                    ViewState.Done
                 )
             )
 
-        verify(mockCache, times(timeInvocation)).getMovies()
+        verify(mockCache, times(timeInvocation())).getMovies()
         verify(mockCache, never()).deleteMovie(any())
         verify(mockCache, never()).deleteAll()
     }
 
     @Test
     fun `should call delete movie when provided`() {
-        val timeInvocation = 1
-
         viewModel.deleteMovie(Movie())
 
-        verify(mockCache, times(timeInvocation)).deleteMovie(any())
+        verify(mockCache, times(timeInvocation())).deleteMovie(any())
         verify(mockCache, never()).getMovies()
         verify(mockCache, never()).deleteAll()
     }
 
     @Test
     fun `should call delete all`() {
-        val timeInvocation = 1
-
         viewModel.deleteAll()
 
-        verify(mockCache, times(timeInvocation)).deleteAll()
+        verify(mockCache, times(timeInvocation())).deleteAll()
         verify(mockCache, never()).getMovies()
         verify(mockCache, never()).deleteMovie(any())
     }
+
+    private fun timeInvocation() = 1
 }

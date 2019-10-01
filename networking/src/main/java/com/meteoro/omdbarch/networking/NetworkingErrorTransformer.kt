@@ -1,34 +1,33 @@
 package com.meteoro.omdbarch.networking
 
 import com.meteoro.omdbarch.domain.errors.NetworkingError
-import com.meteoro.omdbarch.domain.errors.NetworkingError.*
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.ObservableTransformer
+import io.reactivex.Flowable
+import io.reactivex.FlowableTransformer
+import org.reactivestreams.Publisher
 import java.io.IOException
 import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class NetworkingErrorTransformer<T> : ObservableTransformer<T, T> {
+class NetworkingErrorTransformer<T> : FlowableTransformer<T, T> {
 
-    override fun apply(upstream: Observable<T>): ObservableSource<T> {
+    override fun apply(upstream: Flowable<T>): Publisher<T> {
         return upstream.onErrorResumeNext(this::handleIfNetworkingError)
     }
 
     private fun handleIfNetworkingError(error: Throwable) =
         if (isNetworkingError(error)) asNetworkingError(error)
-        else Observable.error(error)
+        else Flowable.error(error)
 
-    private fun asNetworkingError(error: Throwable) = Observable.error<T>(
+    private fun asNetworkingError(error: Throwable) = Flowable.error<T>(
         mapToDomainError(error)
     )
 
     private fun mapToDomainError(error: Throwable): NetworkingError {
-        if (isConnectionTimeout(error)) return OperationTimeout
-        if (cannotReachHost(error)) return HostUnreachable
-        return ConnectionSpike
+        if (isConnectionTimeout(error)) return NetworkingError.OperationTimeout
+        if (cannotReachHost(error)) return NetworkingError.HostUnreachable
+        return NetworkingError.ConnectionSpike
     }
 
     private fun isNetworkingError(error: Throwable) =

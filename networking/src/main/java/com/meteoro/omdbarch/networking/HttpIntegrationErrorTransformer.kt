@@ -1,24 +1,24 @@
 package com.meteoro.omdbarch.networking
 
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.ObservableTransformer
+import io.reactivex.Flowable
+import io.reactivex.FlowableTransformer
+import org.reactivestreams.Publisher
 import retrofit2.HttpException
 
-class HttpIntegrationErrorTransformer<T> : ObservableTransformer<T, T> {
+class HttpIntegrationErrorTransformer<T> : FlowableTransformer<T, T> {
 
-    override fun apply(upstream: Observable<T>): ObservableSource<T> {
+    override fun apply(upstream: Flowable<T>): Publisher<T> {
         return upstream.onErrorResumeNext(this::handleIfRestError)
     }
 
-    private fun handleIfRestError(incoming: Throwable): Observable<T> =
+    private fun handleIfRestError(incoming: Throwable): Flowable<T> =
         if (incoming is HttpException) toInfrastructureError(incoming)
-        else Observable.error(incoming)
+        else Flowable.error(incoming)
 
-    private fun toInfrastructureError(restError: HttpException): Observable<T> {
+    private fun toInfrastructureError(restError: HttpException): Flowable<T> {
         val infraError = translateUsingStatusCode(restError.code())
-        return Observable.error(infraError)
+        return Flowable.error(infraError)
     }
 
     private fun translateUsingStatusCode(code: Int) = when (code) {

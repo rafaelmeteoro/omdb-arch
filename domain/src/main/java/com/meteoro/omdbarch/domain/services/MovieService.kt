@@ -1,8 +1,8 @@
 package com.meteoro.omdbarch.domain.services
 
 import com.meteoro.omdbarch.domain.model.Movie
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 interface MovieService {
-    fun fetchMovie(id: String): Observable<Movie>
+    fun fetchMovie(id: String): Flowable<Movie>
 }

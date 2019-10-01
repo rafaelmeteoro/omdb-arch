@@ -9,7 +9,6 @@ import com.meteoro.omdbarch.navigator.MyNavigator
 import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ErrorStateResources
 import com.meteoro.omdbarch.utilities.ViewState
-import com.meteoro.omdbarch.utilities.ViewState.*
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
@@ -50,10 +49,10 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun changeState(event: ViewState<MovieDetailPresentation>) {
         when (event) {
-            is Launched -> startExecution()
-            is Success -> showMovie(event.value)
-            is Failed -> handleError(event.reason)
-            is Done -> finishExecution()
+            is ViewState.Launched -> startExecution()
+            is ViewState.Success -> showMovie(event.value)
+            is ViewState.Failed -> handleError(event.reason)
+            is ViewState.Done -> finishExecution()
         }
     }
 

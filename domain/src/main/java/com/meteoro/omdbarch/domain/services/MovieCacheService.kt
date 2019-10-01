@@ -1,12 +1,12 @@
 package com.meteoro.omdbarch.domain.services
 
 import com.meteoro.omdbarch.domain.model.Movie
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 interface MovieCacheService {
     fun save(movie: Movie)
     fun delete(movie: Movie)
     fun deleteAll()
-    fun movieCached(imdbId: String): Observable<Movie>
-    fun moviesCached(): Observable<List<Movie>>
+    fun movieCached(imdbId: String): Flowable<Movie>
+    fun moviesCached(): Flowable<List<Movie>>
 }

@@ -1,6 +1,6 @@
 package com.meteoro.omdbarch.utilities
 
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 
@@ -17,7 +17,7 @@ class StateMachineTests {
 
     @Test
     fun `verify composition with an empty upstream`() {
-        val noResults = Observable.empty<User>().compose(machine)
+        val noResults = Flowable.empty<User>().compose(machine)
         val events = listOf(ViewState.Launched, ViewState.Done)
 
         assertMachineExecution(
@@ -29,7 +29,7 @@ class StateMachineTests {
     @Test
     fun `verify composition with a broken upstream`() {
         val failure = IllegalStateException("You failed")
-        val errorHappened = Observable.error<User>(failure).compose(machine)
+        val errorHappened = Flowable.error<User>(failure).compose(machine)
         val events = listOf(ViewState.Launched, ViewState.Failed(failure), ViewState.Done)
 
         assertMachineExecution(
@@ -41,7 +41,7 @@ class StateMachineTests {
     @Test
     fun `verify composition with an successful upstream`() {
         val user = User("Iron Man")
-        val execution = Observable.just(user).compose(machine)
+        val execution = Flowable.just(user).compose(machine)
         val events = listOf(ViewState.Launched, ViewState.Success(user), ViewState.Done)
 
         assertMachineExecution(
@@ -51,7 +51,7 @@ class StateMachineTests {
     }
 
     private fun assertMachineExecution(
-        incoming: Observable<ViewState<User>>,
+        incoming: Flowable<ViewState<User>>,
         expected: List<ViewState<User>>
     ) {
         incoming.test()

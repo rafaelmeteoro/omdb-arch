@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.domain
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.services.MovieCacheService
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 class CacheMovie(private val service: MovieCacheService) {
 
@@ -19,16 +19,16 @@ class CacheMovie(private val service: MovieCacheService) {
         service.deleteAll()
     }
 
-    fun getMovie(imdbId: String) =
+    fun getMovie(imdbId: String): Flowable<Movie> =
         service.movieCached(imdbId)
 
-    fun getMovies() =
+    fun getMovies(): Flowable<List<Movie>> =
         service.moviesCached()
             .flatMap { movies ->
                 if (movies.isEmpty()) {
-                    Observable.error(NoResultsFound)
+                    Flowable.error(NoResultsFound)
                 } else {
-                    Observable.just(movies)
+                    Flowable.just(movies)
                 }
             }
 }

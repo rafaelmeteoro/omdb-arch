@@ -15,7 +15,6 @@ import com.meteoro.omdbarch.utilities.Disposer
 import com.meteoro.omdbarch.utilities.ErrorStateResources
 import com.meteoro.omdbarch.utilities.GridItemDecoration
 import com.meteoro.omdbarch.utilities.ViewState
-import com.meteoro.omdbarch.utilities.ViewState.*
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
@@ -105,7 +104,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun searchMovie(title: String) {
         val toDispose = viewModel
-            .searchMovieFlowable(title)
+            .searchMovie(title)
             .subscribeBy(
                 onNext = { changeState(it) },
                 onError = { logger.e("Error -> $it") }
@@ -116,10 +115,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun changeState(event: ViewState<HomePresentation>) {
         when (event) {
-            is Launched -> startExecution()
-            is Success -> showMovies(event.value)
-            is Failed -> handleError(event.reason)
-            is Done -> finishExecution()
+            is ViewState.Launched -> startExecution()
+            is ViewState.Success -> showMovies(event.value)
+            is ViewState.Failed -> handleError(event.reason)
+            is ViewState.Done -> finishExecution()
         }
     }
 

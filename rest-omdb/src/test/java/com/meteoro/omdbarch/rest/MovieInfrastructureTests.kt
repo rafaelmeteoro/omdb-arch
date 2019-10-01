@@ -1,12 +1,12 @@
 package com.meteoro.omdbarch.rest
 
-import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.*
+import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.Rating
 import com.meteoro.omdbarch.logger.ConsoleLogger
 import com.meteoro.omdbarch.rest.util.InfrastructureRule
 import com.meteoro.omdbarch.rest.util.loadFile
-import io.reactivex.observers.TestObserver
+import io.reactivex.subscribers.TestSubscriber
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -74,11 +74,11 @@ internal class MovieInfrastructureTests {
             response = "True"
         )
 
-        val testObserver = TestObserver<Movie>()
+        val testSubscriber = TestSubscriber<Movie>()
         simpleFetchMovie()
-            .subscribe(testObserver)
+            .subscribe(testSubscriber)
 
-        testObserver.assertComplete()
+        testSubscriber.assertComplete()
             .assertTerminated()
             .assertNoErrors()
             .assertValue(movie)
@@ -91,13 +91,13 @@ internal class MovieInfrastructureTests {
             response = loadFile("200_movie_broken_contract.json")
         )
 
-        val testObserver = TestObserver<Movie>()
+        val testSubscriber = TestSubscriber<Movie>()
         simpleFetchMovie()
-            .subscribe(testObserver)
+            .subscribe(testSubscriber)
 
-        testObserver.assertNotComplete()
+        testSubscriber.assertNotComplete()
             .assertTerminated()
-            .assertError(UnexpectedResponse)
+            .assertError(RemoteServiceIntegrationError.UnexpectedResponse)
     }
 
     @Test
@@ -107,13 +107,13 @@ internal class MovieInfrastructureTests {
             response = loadFile("404_not_found.json")
         )
 
-        val testObserver = TestObserver<Movie>()
+        val testSubscriber = TestSubscriber<Movie>()
         simpleFetchMovie()
-            .subscribe(testObserver)
+            .subscribe(testSubscriber)
 
-        testObserver.assertNotComplete()
+        testSubscriber.assertNotComplete()
             .assertTerminated()
-            .assertError(ClientOrigin)
+            .assertError(RemoteServiceIntegrationError.ClientOrigin)
     }
 
     @Test
@@ -123,13 +123,13 @@ internal class MovieInfrastructureTests {
             response = loadFile("503_internal_server.json")
         )
 
-        val testObserver = TestObserver<Movie>()
+        val testSubscriber = TestSubscriber<Movie>()
         simpleFetchMovie()
-            .subscribe(testObserver)
+            .subscribe(testSubscriber)
 
-        testObserver.assertNotComplete()
+        testSubscriber.assertNotComplete()
             .assertTerminated()
-            .assertError(RemoteSystem)
+            .assertError(RemoteServiceIntegrationError.RemoteSystem)
     }
 
     private fun simpleFetchMovie() =

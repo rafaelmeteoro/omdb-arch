@@ -5,7 +5,7 @@ import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.persistance.room.BuildMovieFromRoom
 import com.meteoro.omdbarch.persistance.room.BuildMovieRoom
 import com.meteoro.omdbarch.persistance.room.MovieDao
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 class MovieCacheRoomInfrastructure(
     private val dao: MovieDao
@@ -25,20 +25,20 @@ class MovieCacheRoomInfrastructure(
         dao.clear()
     }
 
-    override fun movieCached(imdbId: String): Observable<Movie> {
+    override fun movieCached(imdbId: String): Flowable<Movie> {
         return dao.favoriteMovie(imdbId)
             .map { BuildMovieFromRoom(it) }
-            .toObservable() // Convert Maybe to Observable
+            .toFlowable() // Convert Maybe to Flowable
     }
 
-    override fun moviesCached(): Observable<List<Movie>> {
+    override fun moviesCached(): Flowable<List<Movie>> {
         return dao.allFavoritesMovies()
-            .toObservable() // Convert Maybe to Observable
+            .toFlowable() // Convert Maybe to Flowable
             .flatMap { movies ->
-                Observable.fromIterable(movies)
+                Flowable.fromIterable(movies)
                     .map { BuildMovieFromRoom(it) }
                     .toList()
-                    .toObservable()
+                    .toFlowable()
             }
     }
 }

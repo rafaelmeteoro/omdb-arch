@@ -6,9 +6,9 @@ import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.utilities.ResourceProvider
 import com.meteoro.omdbarch.utilities.StateMachine
-import com.meteoro.omdbarch.utilities.ViewState.*
+import com.meteoro.omdbarch.utilities.ViewState
 import com.nhaarman.mockitokotlin2.*
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
@@ -44,44 +44,44 @@ class DetailViewModelTests {
 
     @Test
     fun `should emmit states for succesful detail presentation`() {
-        val timeInvocation = 1
-
         whenever(mockProvider.getString(anyInt(), anyString()))
             .thenReturn("")
 
         val expected = BuildMovieDetailPresentation(result, mockProvider)
 
         whenever(mockFetch.fetchMovie(anyString()))
-            .thenReturn(Observable.just(result))
+            .thenReturn(Flowable.just(result))
 
         viewModel.fetchMovie("10").test()
             .assertComplete()
             .assertValueSequence(
                 listOf(
-                    Launched,
-                    Success(expected),
-                    Done
+                    ViewState.Launched,
+                    ViewState.Success(expected),
+                    ViewState.Done
                 )
             )
 
-        verify(mockCache, times(timeInvocation)).saveMovie(result)
+        verify(mockCache, times(timeInvocation())).saveMovie(result)
     }
 
     @Test
     fun `should emmit states for errored broking integration`() {
         whenever(mockFetch.fetchMovie(anyString()))
-            .thenReturn(Observable.error(NetworkingError.ConnectionSpike))
+            .thenReturn(Flowable.error(NetworkingError.ConnectionSpike))
 
         viewModel.fetchMovie("10").test()
             .assertComplete()
             .assertValueSequence(
                 listOf(
-                    Launched,
-                    Failed(NetworkingError.ConnectionSpike),
-                    Done
+                    ViewState.Launched,
+                    ViewState.Failed(NetworkingError.ConnectionSpike),
+                    ViewState.Done
                 )
             )
 
         verify(mockCache, never()).saveMovie(any())
     }
+
+    private fun timeInvocation() = 1
 }

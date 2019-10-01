@@ -4,7 +4,7 @@ import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.util.movie
 import com.nhaarman.mockitokotlin2.*
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
@@ -22,7 +22,7 @@ class CacheMovieTests {
     @Test
     fun `should return a movie`() {
         whenever(service.movieCached(anyString()))
-            .thenReturn(Observable.just(movie))
+            .thenReturn(Flowable.just(movie))
 
         cache.getMovie("").test()
             .assertComplete()
@@ -40,7 +40,7 @@ class CacheMovieTests {
         val movies = listOf(movie)
 
         whenever(service.moviesCached())
-            .thenReturn(Observable.just(movies))
+            .thenReturn(Flowable.just(movies))
 
         cache.getMovies().test()
             .assertComplete()
@@ -56,7 +56,7 @@ class CacheMovieTests {
     @Test
     fun `should return error when no has movie cached`() {
         whenever(service.moviesCached())
-            .thenReturn(Observable.just(emptyList()))
+            .thenReturn(Flowable.just(emptyList()))
 
         cache.getMovies().test()
             .assertNotComplete()

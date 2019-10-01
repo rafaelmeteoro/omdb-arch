@@ -1,18 +1,18 @@
 package com.meteoro.omdbarch.utilities
 
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.ObservableTransformer
+import io.reactivex.Flowable
+import io.reactivex.FlowableTransformer
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
+import org.reactivestreams.Publisher
 
 class StateMachine<T>(private val uiScheduler: Scheduler = Schedulers.trampoline()) :
-    ObservableTransformer<T, ViewState<T>> {
+    FlowableTransformer<T, ViewState<T>> {
 
-    override fun apply(upstream: Observable<T>): ObservableSource<ViewState<T>> {
+    override fun apply(upstream: Flowable<T>): Publisher<ViewState<T>> {
 
         val beggining = ViewState.Launched
-        val end = Observable.just(ViewState.Done)
+        val end = Flowable.just(ViewState.Done)
 
         return upstream
             .map { value: T -> ViewState.Success(value) as ViewState<T> }

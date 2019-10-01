@@ -6,7 +6,7 @@ import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.navigator.MyNavigator
 import com.meteoro.omdbarch.utilities.Disposer
 import dagger.android.AndroidInjection
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.rxkotlin.subscribeBy
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -38,7 +38,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun handleLaunch() {
-        val toDispose = Observable
+        val toDispose = Flowable
             .timer(TIMER_COUNT, TimeUnit.MILLISECONDS)
             .subscribeBy(
                 onComplete = { goToHome() }

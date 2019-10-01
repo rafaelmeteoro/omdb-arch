@@ -36,7 +36,6 @@ internal class MovieCacheRoomInfrastructureTests {
     @Test
     fun `should return a movie`() {
         val imdb = "imdb"
-        val timeInvocation = 1
 
         whenever(dao.favoriteMovie(anyString()))
             .thenReturn(Maybe.just(favoriteMovie))
@@ -46,7 +45,7 @@ internal class MovieCacheRoomInfrastructureTests {
             .assertTerminated()
             .assertValue(movie)
 
-        verify(dao, times(timeInvocation)).favoriteMovie(imdb)
+        verify(dao, times(timeInvocation())).favoriteMovie(imdb)
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).clear()
@@ -55,8 +54,6 @@ internal class MovieCacheRoomInfrastructureTests {
 
     @Test
     fun `should return a list movie`() {
-        val timeInvocation = 1
-
         whenever(dao.allFavoritesMovies())
             .thenReturn(Maybe.just(listOf(favoriteMovie)))
 
@@ -65,7 +62,7 @@ internal class MovieCacheRoomInfrastructureTests {
             .assertTerminated()
             .assertValue(listOf(movie))
 
-        verify(dao, times(timeInvocation)).allFavoritesMovies()
+        verify(dao, times(timeInvocation())).allFavoritesMovies()
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).clear()
@@ -74,11 +71,9 @@ internal class MovieCacheRoomInfrastructureTests {
 
     @Test
     fun `should save movie when provided`() {
-        val timeInvocation = 1
-
         cache.save(movie)
 
-        verify(dao, times(timeInvocation)).insert(any())
+        verify(dao, times(timeInvocation())).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).clear()
         verify(dao, never()).favoriteMovie(anyString())
@@ -87,11 +82,9 @@ internal class MovieCacheRoomInfrastructureTests {
 
     @Test
     fun `should delete movie when provided`() {
-        val timeInvocation = 1
-
         cache.delete(movie)
 
-        verify(dao, times(timeInvocation)).remove(any())
+        verify(dao, times(timeInvocation())).remove(any())
         verify(dao, never()).insert(any())
         verify(dao, never()).clear()
         verify(dao, never()).favoriteMovie(anyString())
@@ -100,14 +93,14 @@ internal class MovieCacheRoomInfrastructureTests {
 
     @Test
     fun `should clear all movies`() {
-        val timeInvocation = 1
-
         cache.deleteAll()
 
-        verify(dao, times(timeInvocation)).clear()
+        verify(dao, times(timeInvocation())).clear()
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).favoriteMovie(anyString())
         verify(dao, never()).allFavoritesMovies()
     }
+
+    private fun timeInvocation() = 1
 }
