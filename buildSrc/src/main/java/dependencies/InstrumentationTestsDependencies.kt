@@ -5,6 +5,9 @@ class InstrumentationTestsDependencies {
     private val all by lazy {
         listOf(
             Libraries.jUnit,
+            Libraries.jUnitExt,
+            Libraries.jUnitExtKtx,
+            Libraries.archCoreTesting,
             Libraries.mockitoKotlin,
             Libraries.androidTestRunner,
             Libraries.espressoCore

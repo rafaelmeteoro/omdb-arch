@@ -1,3 +1,4 @@
+import dependencies.InstrumentationTestsDependencies.Companion.instrumentationTest
 import dependencies.UnitTestDependencies.Companion.unitTest
 import modules.LibraryModule
 import modules.LibraryType
@@ -28,6 +29,8 @@ dependencies {
     implementation(Libraries.roomKtx)
     implementation(Libraries.roomRxJava2)
     kapt(Libraries.roomCompiler)
+    implementation(Libraries.archCoreCommon)
+    implementation(Libraries.archCoreRuntime)
 
     implementation(project(ModuleNames.Domain))
 
@@ -35,4 +38,9 @@ dependencies {
         forEachDependency { testImplementation(it) }
     }
     testImplementation(Libraries.roomTesting)
+
+    instrumentationTest {
+        forEachDependency { androidTestImplementation(it) }
+    }
+    androidTestImplementation(Libraries.roomTesting)
 }

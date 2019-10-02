@@ -38,6 +38,10 @@ object Libraries {
     const val navigationRuntimeKtx = "androidx.navigation:navigation-runtime-ktx:${Versions.navigation}"
     const val navigationCommontKtx = "androidx.navigation:navigation-common-ktx:${Versions.navigation}"
 
+    const val archCoreCommon = "androidx.arch.core:core-common:${Versions.archCore}"
+    const val archCoreRuntime = "androidx.arch.core:core-runtime:${Versions.archCore}"
+    const val archCoreTesting = "androidx.arch.core:core-testing:${Versions.archCore}"
+
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
@@ -58,6 +62,8 @@ object Libraries {
     const val stethoOkHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
 
     const val jUnit = "junit:junit:${Versions.junit}"
+    const val jUnitExt = "androidx.test.ext:junit:${Versions.junitExt}"
+    const val jUnitExtKtx = "androidx.test.ext:junit-ktx:${Versions.junitExt}"
     const val assertj = "org.assertj:assertj-core:${Versions.assertj}"
     const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
     const val androidTestRunner = "androidx.test:runner:${Versions.androidxTest}"
@@ -67,7 +73,7 @@ object Libraries {
 
     private object Versions {
         const val kotlinSerialization = "0.13.0"
-        const val okHttp = "4.2.0"
+        const val okHttp = "4.2.1"
         const val retrofit = "2.6.2"
         const val retrofitScalars = "2.6.2"
         const val retrofitKotlinSerialization = "0.4.0"
@@ -82,6 +88,7 @@ object Libraries {
         const val recyclerView = "1.1.0-beta04"
         const val materialDesign = "1.1.0-alpha10"
         const val coreAndroidx = "1.1.0"
+        const val archCore = "2.1.0"
         const val constraintLayout = "2.0.0-beta2"
         const val lifecycle = "2.2.0-alpha05"
         const val navigation = "2.2.0-alpha03"
@@ -91,6 +98,7 @@ object Libraries {
         const val picasso = "2.71828"
         const val stetho = "1.5.1"
         const val junit = "4.12"
+        const val junitExt = "1.1.1"
         const val assertj = "3.13.2"
         const val mockitoKotlin = "2.2.0"
         const val androidxTest = "1.2.0"

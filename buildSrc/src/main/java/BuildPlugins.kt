@@ -41,15 +41,15 @@ object BuildPlugins {
 
     private object Versions {
         const val agp = "3.5.0"
-        const val ktlint = "8.2.0"
+        const val ktlint = "9.0.0"
         const val cobertura = "2.6.1"
         const val coveralls = "2.8.4"
         const val testLogger = "1.7.0"
         const val jacocoUnified = "0.15.0"
-        const val sonarCloud = "2.7.1"
+        const val sonarCloud = "2.8"
         const val detekt = "1.0.1"
         const val versions = "0.25.0"
         const val safeArgs = "2.2.0-alpha03"
-        const val realm = "5.15.2"
+        const val realm = "6.0.0"
     }
 }
