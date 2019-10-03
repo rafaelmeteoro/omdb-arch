@@ -1,4 +1,3 @@
-import dependencies.InstrumentationTestsDependencies.Companion.instrumentationTest
 import dependencies.UnitTestDependencies.Companion.unitTest
 import modules.LibraryModule
 import modules.LibraryType
@@ -38,9 +37,4 @@ dependencies {
         forEachDependency { testImplementation(it) }
     }
     testImplementation(Libraries.roomTesting)
-
-    instrumentationTest {
-        forEachDependency { androidTestImplementation(it) }
-    }
-    androidTestImplementation(Libraries.roomTesting)
 }
