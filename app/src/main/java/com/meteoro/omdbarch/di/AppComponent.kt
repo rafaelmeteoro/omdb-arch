@@ -2,6 +2,7 @@ package com.meteoro.omdbarch.di
 
 import android.app.Application
 import com.meteoro.omdbarch.OmdbApplication
+import com.meteoro.omdbarch.components.di.ComponentsModule
 import com.meteoro.omdbarch.details.di.DetailsModule
 import com.meteoro.omdbarch.favorites.di.FavoritesModule
 import com.meteoro.omdbarch.home.di.HomeModule
@@ -9,7 +10,6 @@ import com.meteoro.omdbarch.networking.di.NetModule
 import com.meteoro.omdbarch.onboarding.di.OnboardingModule
 import com.meteoro.omdbarch.persistance.di.PersistanceModule
 import com.meteoro.omdbarch.rest.di.RestModule
-import com.meteoro.omdbarch.utilities.di.ShareUtilsModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -23,7 +23,7 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         AppModule::class,
-        ShareUtilsModule::class,
+        ComponentsModule::class,
         NetModule::class,
         RestModule::class,
         PersistanceModule::class,

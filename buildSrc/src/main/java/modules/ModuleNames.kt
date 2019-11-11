@@ -2,22 +2,21 @@ package modules
 
 object ModuleNames {
     const val MainApp = ":app"
-    const val Logger = ":logger"
     const val Domain = ":domain"
 
-    object Infrastructure {
-        const val Networking = ":networking"
-        const val Rest = ":rest-omdb"
-        const val Persistance = ":persistance"
+    object Libraries {
+        const val Logger = ":libraries:logger"
+        const val Networking = ":libraries:networking"
+        const val Rest = ":libraries:rest-omdb"
+        const val Persistance = ":libraries:persistance"
+        const val Navigator = ":libraries:navigator"
+        const val UiComponents = ":libraries:ui-components"
     }
 
     object Features {
-        const val SharedAssets = ":shared-assets"
-        const val SharedUtilities = ":shared-utilities"
-        const val Navigator = ":navigator"
-        const val Onboarding = ":onboarding"
-        const val Home = ":home"
-        const val Details = ":details"
-        const val Favorites = ":favorites"
+        const val Onboarding = ":features:onboarding"
+        const val Home = ":features:home"
+        const val Details = ":features:details"
+        const val Favorites = ":features:favorites"
     }
 }
