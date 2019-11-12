@@ -85,7 +85,7 @@ object Libraries {
         const val gson = "2.8.6"
         const val appCompat = "1.1.0"
         const val cardView = "1.0.0"
-        const val recyclerView = "1.1.0-beta04"
+        const val recyclerView = "1.1.0-rc01"
         const val materialDesign = "1.1.0-alpha10"
         const val coreAndroidx = "1.2.0-beta02"
         const val archCore = "2.1.0"
