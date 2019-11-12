@@ -14,6 +14,8 @@ plugins {
     id(BuildPlugins.Ids.realmAndroid)
 }
 
+apply(from = BuildPlugins.Dependencies.moduleGraph)
+
 android {
     compileSdkVersion(AndroidConfig.compileSdk)
     buildToolsVersion(AndroidConfig.buildToolsVersion)

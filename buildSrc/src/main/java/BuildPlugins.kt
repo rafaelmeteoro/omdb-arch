@@ -16,6 +16,7 @@ object BuildPlugins {
         const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
         const val realm = "io.realm:realm-gradle-plugin:${Versions.realm}"
+        const val moduleGraph = "https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle"
     }
 
     object Ids {
