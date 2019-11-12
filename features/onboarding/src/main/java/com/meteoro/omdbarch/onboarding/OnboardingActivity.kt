@@ -2,9 +2,9 @@ package com.meteoro.omdbarch.onboarding
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.navigator.MyNavigator
 import dagger.android.AndroidInjection
 import io.reactivex.Flowable
 import io.reactivex.rxkotlin.subscribeBy
@@ -19,9 +19,6 @@ class OnboardingActivity : AppCompatActivity() {
 
     @Inject
     lateinit var logger: Logger
-
-    @Inject
-    lateinit var navigator: MyNavigator
 
     @Inject
     lateinit var disposer: Disposer
@@ -48,6 +45,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun goToHome() {
-        navigator.navigateToHome(this)
+        startActivity(Actions.openHomeIntent(this))
+        finish()
     }
 }

@@ -9,8 +9,8 @@ object ModuleNames {
         const val Networking = ":libraries:networking"
         const val Rest = ":libraries:rest-omdb"
         const val Persistance = ":libraries:persistance"
-        const val Navigator = ":libraries:navigator"
         const val UiComponents = ":libraries:ui-components"
+        const val Actions = ":libraries:actions"
     }
 
     object Features {

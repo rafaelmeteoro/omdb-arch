@@ -3,12 +3,13 @@ package com.meteoro.omdbarch.details
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.meteoro.omdbarch.actions.EXTRA_IMDB
+import com.meteoro.omdbarch.actions.ImdbArgs
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ErrorStateResources
 import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.navigator.MyNavigator
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
@@ -33,7 +34,8 @@ class MovieDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movie_detail)
         lifecycle.addObserver(disposer)
 
-        loadMovie(intent.getStringExtra(MyNavigator.ARG_MOVIE))
+        val args = intent.getParcelableExtra(EXTRA_IMDB) as ImdbArgs
+        loadMovie(args.imdbId)
     }
 
     private fun loadMovie(imdbId: String) {

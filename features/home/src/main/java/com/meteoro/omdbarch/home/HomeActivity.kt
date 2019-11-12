@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ErrorStateResources
 import com.meteoro.omdbarch.components.GridItemDecoration
 import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.navigator.MyNavigator
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
@@ -31,9 +31,6 @@ class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var logger: Logger
-
-    @Inject
-    lateinit var navigator: MyNavigator
 
     @Inject
     lateinit var disposer: Disposer
@@ -71,7 +68,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
         R.id.action_favorites -> {
-            navigator.navigateToFavorites(this)
+            startActivity(Actions.openFavoritesIntent(this))
             true
         }
         else -> super.onOptionsItemSelected(item)
@@ -127,7 +124,7 @@ class HomeActivity : AppCompatActivity() {
 
         homeView.visibility = View.VISIBLE
         homeView.adapter = MoviesAdapter(home) {
-            navigator.navigateToDetail(this, it.imdbId)
+            startActivity(Actions.openDetailIntent(this, it.imdbId))
         }
     }
 

@@ -6,8 +6,6 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.meteoro.omdbarch.BuildConfig
 import com.meteoro.omdbarch.logger.LogcatLogger
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.navigation.OmdbNavigator
-import com.meteoro.omdbarch.navigator.MyNavigator
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
@@ -45,10 +43,6 @@ class AppModule {
         val httpCacheDirectory = File(application.cacheDir, FOLDER_CACHE_NAME)
         return Cache(httpCacheDirectory, cacheSize)
     }
-
-    @Provides
-    @Singleton
-    fun provideNavigator(): MyNavigator = OmdbNavigator()
 
     @Provides
     @Singleton

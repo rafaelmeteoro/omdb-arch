@@ -38,8 +38,8 @@ dependencies {
 
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Libraries.Logger))
-    implementation(project(ModuleNames.Libraries.Navigator))
     implementation(project(ModuleNames.Libraries.UiComponents))
+    implementation(project(ModuleNames.Libraries.Actions))
 
     unitTest {
         forEachDependency { testImplementation(it) }

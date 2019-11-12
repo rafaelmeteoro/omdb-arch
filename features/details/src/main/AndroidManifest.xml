@@ -6,7 +6,12 @@
         <activity
             android:name=".MovieDetailActivity"
             android:label="@string/app_name"
-            android:theme="@style/OmdbTheme" />
+            android:theme="@style/OmdbTheme">
+            <intent-filter>
+                <action android:name="com.meteoro.omdbarch.details.open" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

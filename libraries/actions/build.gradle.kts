@@ -1,7 +1,6 @@
 import dependencies.UnitTestDependencies.Companion.unitTest
 import modules.LibraryModule
 import modules.LibraryType
-import modules.ModuleNames
 
 val module = LibraryModule(rootDir, LibraryType.Android)
 
@@ -13,11 +12,8 @@ plugins {
 
 dependencies {
     implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.appCompat)
+    implementation(Libraries.coreAndroidx)
 
-    implementation(project(ModuleNames.Libraries.UiComponents))
-
-    testImplementation(Libraries.roboletric)
     unitTest {
         forEachDependency { testImplementation(it) }
     }
