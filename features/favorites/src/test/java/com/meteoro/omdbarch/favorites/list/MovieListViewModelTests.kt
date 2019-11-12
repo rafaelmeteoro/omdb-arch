@@ -1,10 +1,10 @@
 package com.meteoro.omdbarch.favorites.list
 
+import com.meteoro.omdbarch.components.StateMachine
+import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
-import com.meteoro.omdbarch.utilities.StateMachine
-import com.meteoro.omdbarch.utilities.ViewState
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Flowable
 import org.junit.Before

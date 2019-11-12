@@ -17,6 +17,7 @@ plugins {
 dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
+    implementation(Libraries.materialDesign)
     implementation(Libraries.recyclerView)
     implementation(Libraries.rxJava)
     implementation(Libraries.rxKotlin)
