@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.meteoro.omdbarch.onboarding">
 
-    <application>
+    <application android:theme="@style/OmdbTheme">
         <activity android:name=".OnboardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

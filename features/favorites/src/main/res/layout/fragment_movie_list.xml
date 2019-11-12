@@ -22,7 +22,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="gone" />
+            tools:itemCount="3"
+            tools:listitem="@layout/movie_list_item"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView2"
