@@ -45,7 +45,7 @@ object BuildPlugins {
         const val ktlint = "8.2.0"
         const val cobertura = "2.6.1"
         const val coveralls = "2.8.4"
-        const val testLogger = "1.7.0"
+        const val testLogger = "2.0.0"
         const val jacocoUnified = "0.15.0"
         const val sonarCloud = "2.8"
         const val detekt = "1.1.1"
