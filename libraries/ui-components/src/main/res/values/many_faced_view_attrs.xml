@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ManyFacedView">
+        <attr name="mfv_content" format="reference" />
+        <attr name="mfv_loading" format="reference" />
+        <attr name="mfv_error" format="reference" />
+        <attr name="mfv_empty" format="reference" />
+
+        <attr name="mfv_state" format="enum">
+            <enum name="content" value="1" />
+            <enum name="loading" value="2" />
+            <enum name="error" value="3" />
+            <enum name="empty" value="4" />
+        </attr>
+
+        <attr name="mfv_animateChanges" format="boolean" />
+        <attr name="mfv_outAnimation" format="reference" />
+        <attr name="mfv_inAnimation" format="reference" />
+    </declare-styleable>
+</resources>
