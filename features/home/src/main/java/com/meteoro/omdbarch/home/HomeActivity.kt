@@ -11,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ErrorStateResources
-import com.meteoro.omdbarch.components.GridItemDecoration
+import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.components.Disposer
-import com.meteoro.omdbarch.components.GridItemDecoration
+import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie

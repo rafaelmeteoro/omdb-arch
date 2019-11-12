@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.components
+package com.meteoro.omdbarch.components.decoration
 
 import android.graphics.Rect
 import android.view.View
