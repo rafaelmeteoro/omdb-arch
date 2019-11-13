@@ -6,11 +6,14 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.components.Disposer
-import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.ViewState
+import com.meteoro.omdbarch.components.decoration.GridItemDecoration
+import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
+import com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.favorites.R
@@ -31,13 +34,21 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     @Inject
     lateinit var viewModel: MovieListViewModel
 
+    private lateinit var stateView: ManyFacedView
+    private lateinit var movieListView: RecyclerView
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
+
+        stateView = view.findViewById(R.id.state_view)
+        movieListView = view.findViewById(R.id.movie_list_view)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,14 +101,14 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
             is ViewState.Launched -> startExecution()
             is ViewState.Success -> handlePresentation(event.value)
             is ViewState.Failed -> handleError(event.reason)
-            is ViewState.Done -> finishExecution()
+            is ViewState.Done -> Unit
         }
     }
 
     private fun handlePresentation(presentation: MovieListPresentation) {
         logger.d("${presentation.movies}")
 
-        movieListView.visibility = View.VISIBLE
+        stateView.setState(FacedViewState.CONTENT)
         movieListView.adapter = MovieListAdapter(presentation, this)
     }
 
@@ -105,21 +116,16 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
         logger.e("Failed to load movies -> $reason")
 
         if (reason is NoResultsFound) {
-            movieListView.visibility = View.GONE
-            groupStateView.visibility = View.VISIBLE
+            stateView.setState(FacedViewState.EMPTY)
             return
         }
 
+        stateView.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_movie_list_error)
     }
 
     private fun startExecution() {
-        loadingMovies.visibility = View.VISIBLE
-        groupStateView.visibility = View.GONE
-    }
-
-    private fun finishExecution() {
-        loadingMovies.visibility = View.GONE
+        stateView.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {

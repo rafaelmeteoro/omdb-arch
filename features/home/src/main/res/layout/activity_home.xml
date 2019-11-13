@@ -23,75 +23,17 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
+        android:id="@+id/state_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/homeView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="8"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/movie_item"
-            tools:spanCount="3" />
-
-        <ImageView
-            android:id="@+id/errorStateImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/content_movie_image"
-            app:layout_constraintBottom_toTopOf="@+id/errorStateLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:src="@drawable/img_bug_found" />
-
-        <TextView
-            android:id="@+id/errorStateLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textColor="@color/errorState"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/errorStateImage"
-            tools:text="Sorry, no results for this search." />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/groupStateView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="errorStateImage,errorStateLabel"
-            tools:visibility="visible" />
-
-        <ProgressBar
-            android:id="@+id/loadingView"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:indeterminateDrawable="@drawable/progress_color"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:mfv_content="@layout/state_home_content"
+        app:mfv_empty="@layout/state_home_empty"
+        app:mfv_error="@layout/state_home_error"
+        app:mfv_loading="@layout/state_home_loading"
+        app:mfv_state="empty"
+        tools:mfv_animateChanges="false"
+        tools:mfv_state="content" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

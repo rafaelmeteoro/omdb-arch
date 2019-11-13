@@ -3,16 +3,22 @@ package com.meteoro.omdbarch.home
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ErrorStateResources
-import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.ViewState
+import com.meteoro.omdbarch.components.decoration.GridItemDecoration
+import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
+import com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.logger.Logger
 import dagger.android.AndroidInjection
@@ -38,6 +44,13 @@ class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: HomeViewModel
 
+    private lateinit var toolbar: Toolbar
+    private lateinit var stateView: ManyFacedView
+    private lateinit var homeView: RecyclerView
+    private lateinit var errorStateImage: ImageView
+    private lateinit var errorStateLabel: TextView
+    private lateinit var loadingView: ProgressBar
+
     private val searchSubject = PublishSubject.create<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +60,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         lifecycle.addObserver(disposer)
 
+        initViews()
         setupView()
         setupSubject()
     }
@@ -72,6 +86,15 @@ class HomeActivity : AppCompatActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun initViews() {
+        toolbar = findViewById(R.id.toolbar)
+        stateView = findViewById(R.id.state_view)
+        homeView = findViewById(R.id.home_view)
+        errorStateImage = findViewById(R.id.error_state_image)
+        errorStateLabel = findViewById(R.id.error_state_label)
+        loadingView = findViewById(R.id.loading_view)
     }
 
     private fun setupView() {
@@ -115,14 +138,14 @@ class HomeActivity : AppCompatActivity() {
             is ViewState.Launched -> startExecution()
             is ViewState.Success -> showMovies(event.value)
             is ViewState.Failed -> handleError(event.reason)
-            is ViewState.Done -> finishExecution()
+            is ViewState.Done -> Unit
         }
     }
 
     private fun showMovies(home: HomePresentation) {
         logger.i("Loaded Movies")
 
-        homeView.visibility = View.VISIBLE
+        stateView.setState(FacedViewState.CONTENT)
         homeView.adapter = MoviesAdapter(home) {
             startActivity(Actions.openDetailIntent(this, it.imdbId))
         }
@@ -143,29 +166,25 @@ class HomeActivity : AppCompatActivity() {
                 ?: false
 
         when {
-            hasPreviousContent -> Snackbar.make(homeRoot, errorMessage, Snackbar.LENGTH_LONG).show()
+            hasPreviousContent -> {
+                Snackbar.make(homeRoot, errorMessage, Snackbar.LENGTH_LONG).show()
+                emptyTerm()
+            }
             else -> reportError(errorImage, errorMessage)
         }
     }
 
     private fun reportError(errorImage: Int, errorMessage: Int) {
-        groupStateView.visibility = View.VISIBLE
+        stateView.setState(FacedViewState.ERROR)
         errorStateImage.setImageResource(errorImage)
         errorStateLabel.setText(errorMessage)
     }
 
     private fun emptyTerm() {
-        homeView.visibility = View.GONE
-        groupStateView.visibility = View.GONE
+        stateView.setState(FacedViewState.EMPTY)
     }
 
     private fun startExecution() {
-        loadingView.visibility = View.VISIBLE
-        homeView.visibility = View.GONE
-        groupStateView.visibility = View.GONE
-    }
-
-    private fun finishExecution() {
-        loadingView.visibility = View.GONE
+        stateView.setState(FacedViewState.LOADING)
     }
 }

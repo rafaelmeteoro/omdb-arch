@@ -10,6 +10,8 @@
     <string name="cast">Elenco\n%s</string>
     <string name="directors">Direção\n%s</string>
     <string name="plot">Resumo\n%s</string>
+    <string name="empty_results">Start searching</string>
+    <string name="empty_detail_results">No results found</string>
     <string name="error_no_results">Sorry, no results for this search</string>
     <string name="error_bug_found">Seems that we\'ve found a bug. Please, try again</string>
     <string name="error_server_down">Remote system is facing a hard time. Please, try again later</string>

@@ -7,67 +7,16 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
+        android:id="@+id/state_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movieListView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:padding="8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="3"
-            tools:listitem="@layout/movie_list_item"
-            tools:visibility="visible" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_hourglass_empty"
-            app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/fragment_movie_list_empty"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textColor="@color/errorState"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/groupStateView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="appCompatImageView2,appCompatTextView2"
-            tools:visibility="gone" />
-
-        <ProgressBar
-            android:id="@+id/loadingMovies"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:indeterminateDrawable="@drawable/progress_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:mfv_content="@layout/state_list_content"
+        app:mfv_empty="@layout/state_list_empty"
+        app:mfv_error="@layout/state_list_error"
+        app:mfv_loading="@layout/state_list_loading"
+        app:mfv_state="loading"
+        tools:mfv_animateChanges="false"
+        tools:mfv_state="content" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

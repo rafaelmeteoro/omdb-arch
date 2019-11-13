@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ViewState
+import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
+import com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.logger.Logger
@@ -29,13 +33,31 @@ class MovieDetailsFragment : Fragment() {
     @Inject
     lateinit var viewModel: MovieDetailsViewModel
 
+    private lateinit var stateView: ManyFacedView
+    private lateinit var movieDetailPoster: ImageView
+    private lateinit var movieDetailTitle: TextView
+    private lateinit var movieDetailYear: TextView
+    private lateinit var movieDetailPlot: TextView
+    private lateinit var movieDetailActors: TextView
+    private lateinit var movieDetailDirector: TextView
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
+        val view = inflater.inflate(R.layout.fragment_movie_details, container, false)
+
+        stateView = view.findViewById(R.id.state_view)
+        movieDetailPoster = view.findViewById(R.id.movie_detail_poster)
+        movieDetailTitle = view.findViewById(R.id.movie_detail_title)
+        movieDetailYear = view.findViewById(R.id.movie_detail_year)
+        movieDetailPlot = view.findViewById(R.id.movie_detail_plot)
+        movieDetailActors = view.findViewById(R.id.movie_detail_actors)
+        movieDetailDirector = view.findViewById(R.id.movie_detail_director)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,7 +83,7 @@ class MovieDetailsFragment : Fragment() {
             is ViewState.Launched -> startExecution()
             is ViewState.Success -> handlePresentation(event.value)
             is ViewState.Failed -> handleError(event.reason)
-            is ViewState.Done -> finishExecution()
+            is ViewState.Done -> Unit
         }
     }
 
@@ -69,7 +91,7 @@ class MovieDetailsFragment : Fragment() {
         logger.d("${presentation.movie}")
 
         val movie = presentation.movie
-        groupDetailsView.visibility = View.VISIBLE
+        stateView.setState(FacedViewState.CONTENT)
 
         Picasso.get().load(movie.poster).into(movieDetailPoster)
         movieDetailTitle.text = movie.title
@@ -83,22 +105,16 @@ class MovieDetailsFragment : Fragment() {
         logger.e("Failed to load movies -> $reason")
 
         if (reason is NoResultsFound) {
-            groupDetailsView.visibility = View.GONE
-            groupStateView.visibility = View.VISIBLE
+            stateView.setState(FacedViewState.EMPTY)
             return
         }
 
+        stateView.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_movie_detail_error)
     }
 
     private fun startExecution() {
-        loadingMovie.visibility = View.VISIBLE
-        groupDetailsView.visibility = View.GONE
-        groupStateView.visibility = View.GONE
-    }
-
-    private fun finishExecution() {
-        loadingMovie.visibility = View.GONE
+        stateView.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {

@@ -7,7 +7,13 @@ import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState.Companion.LOADING
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState.Companion.UNKNOWN
 
-@Target(AnnotationTarget.TYPE, AnnotationTarget.PROPERTY, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FUNCTION, AnnotationTarget.FIELD)
+@Target(
+    AnnotationTarget.TYPE,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.FIELD
+)
 @IntDef(UNKNOWN, CONTENT, LOADING, ERROR, EMPTY)
 @Retention(AnnotationRetention.SOURCE)
 annotation class FacedViewState {

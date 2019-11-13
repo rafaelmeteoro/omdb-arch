@@ -3,8 +3,8 @@
 set -ex
 
 ./gradlew --stop
-./gradlew clean ktlintCheck --no-daemon --stacktrace
-./gradlew clean detekt --no-daemon --stacktrace
-./gradlew clean test --no-daemon --stacktrace
-./gradlew clean jacocoTestReport --no-daemon --stacktrace
-./gradlew clean assembleDebug -xlint --no-daemon --stacktrace
+./gradlew clean ktlintCheck --stacktrace
+./gradlew clean detekt --stacktrace
+./gradlew clean test --stacktrace
+./gradlew clean jacocoTestReport --stacktrace
+./gradlew clean assembleDebug -xlint --stacktrace
