@@ -113,7 +113,6 @@ dependencies {
 
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Libraries.Logger))
-    implementation(project(ModuleNames.Libraries.Networking))
     implementation(project(ModuleNames.Libraries.Rest))
     implementation(project(ModuleNames.Libraries.Persistance))
     implementation(project(ModuleNames.Libraries.UiComponents))

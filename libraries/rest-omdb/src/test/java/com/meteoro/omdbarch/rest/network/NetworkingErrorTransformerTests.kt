@@ -1,8 +1,8 @@
-package com.meteoro.omdbarch.networking
+package com.meteoro.omdbarch.rest.network
 
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
-import com.meteoro.omdbarch.networking.CheckErrorTransformation.Companion.checkTransformation
+import com.meteoro.omdbarch.rest.network.CheckErrorTransformation.Companion.checkTransformation
 import org.junit.Test
 import java.io.IOException
 import java.net.ConnectException

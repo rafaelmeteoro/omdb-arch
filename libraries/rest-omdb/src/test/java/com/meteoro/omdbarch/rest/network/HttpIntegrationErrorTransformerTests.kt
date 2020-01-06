@@ -1,8 +1,7 @@
-package com.meteoro.omdbarch.networking
+package com.meteoro.omdbarch.rest.network
 
-import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.ClientOrigin
-import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.RemoteSystem
-import com.meteoro.omdbarch.networking.CheckErrorTransformation.Companion.checkTransformation
+import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
+import com.meteoro.omdbarch.rest.network.CheckErrorTransformation.Companion.checkTransformation
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Test
@@ -15,7 +14,7 @@ class HttpIntegrationErrorTransformerTests {
     fun `should transform proper throwable into client origin error`() {
         checkTransformation(
             from = httpException<Any>(418, "Teapot"),
-            expected = ClientOrigin,
+            expected = RemoteServiceIntegrationError.ClientOrigin,
             using = HttpIntegrationErrorTransformer<Any>()
         )
     }
@@ -24,7 +23,7 @@ class HttpIntegrationErrorTransformerTests {
     fun `should transform proper throwable into remote system error`() {
         checkTransformation(
             from = httpException<Any>(503, "Internal Server Error"),
-            expected = RemoteSystem,
+            expected = RemoteServiceIntegrationError.RemoteSystem,
             using = HttpIntegrationErrorTransformer<Any>()
         )
     }

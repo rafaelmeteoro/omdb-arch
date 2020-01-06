@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.networking
+package com.meteoro.omdbarch.rest.network
 
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer

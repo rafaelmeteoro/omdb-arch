@@ -6,7 +6,6 @@ object ModuleNames {
 
     object Libraries {
         const val Logger = ":libraries:logger"
-        const val Networking = ":libraries:networking"
         const val Rest = ":libraries:rest-omdb"
         const val Persistance = ":libraries:persistance"
         const val UiComponents = ":libraries:ui-components"

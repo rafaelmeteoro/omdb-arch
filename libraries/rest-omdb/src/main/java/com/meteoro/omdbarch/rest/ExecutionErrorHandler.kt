@@ -1,9 +1,9 @@
 package com.meteoro.omdbarch.rest
 
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.networking.HttpIntegrationErrorTransformer
-import com.meteoro.omdbarch.networking.NetworkingErrorTransformer
-import com.meteoro.omdbarch.networking.SerializationErrorTransformer
+import com.meteoro.omdbarch.rest.network.HttpIntegrationErrorTransformer
+import com.meteoro.omdbarch.rest.network.NetworkingErrorTransformer
+import com.meteoro.omdbarch.rest.network.SerializationErrorTransformer
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
 import org.reactivestreams.Publisher

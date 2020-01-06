@@ -7,7 +7,6 @@ include(
     MainApp,
     Domain,
     Libraries.Logger,
-    Libraries.Networking,
     Libraries.Rest,
     Libraries.Persistance,
     Libraries.UiComponents,

@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.networking
+package com.meteoro.omdbarch.rest.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

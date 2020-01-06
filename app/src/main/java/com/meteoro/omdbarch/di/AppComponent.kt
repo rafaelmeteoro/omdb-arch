@@ -6,7 +6,6 @@ import com.meteoro.omdbarch.components.di.ComponentsModule
 import com.meteoro.omdbarch.details.di.DetailsModule
 import com.meteoro.omdbarch.favorites.di.FavoritesModule
 import com.meteoro.omdbarch.home.di.HomeModule
-import com.meteoro.omdbarch.networking.di.NetModule
 import com.meteoro.omdbarch.onboarding.di.OnboardingModule
 import com.meteoro.omdbarch.persistance.di.PersistanceModule
 import com.meteoro.omdbarch.rest.di.RestModule
@@ -24,7 +23,6 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         ComponentsModule::class,
-        NetModule::class,
         RestModule::class,
         PersistanceModule::class,
         OnboardingModule::class,
@@ -41,8 +39,6 @@ interface AppComponent : AndroidInjector<OmdbApplication> {
     interface Builder {
         @BindsInstance
         fun application(application: Application): Builder
-
-        fun netModule(module: NetModule): Builder
 
         fun restModule(module: RestModule): Builder
 

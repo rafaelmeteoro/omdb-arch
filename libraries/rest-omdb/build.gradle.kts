@@ -3,15 +3,17 @@ import modules.LibraryModule
 import modules.LibraryType
 import modules.ModuleNames
 
-val module = LibraryModule(rootDir, LibraryType.Kotlin)
+val module = LibraryModule(rootDir, LibraryType.Android)
 
 apply(from = module.script())
 
 plugins {
-    id(BuildPlugins.Ids.kotlinJVM)
+    id(BuildPlugins.Ids.androidLibrary)
+    kotlin(BuildPlugins.Ids.kotlinAndroid)
+    kotlin(BuildPlugins.Ids.kotlinExtensions)
+    kotlin(BuildPlugins.Ids.kotlinKapt)
     id(BuildPlugins.Ids.kotlinxSerialization)
     id(BuildPlugins.Ids.coveralls)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
 }
 
 dependencies {
@@ -24,6 +26,7 @@ dependencies {
     implementation(Libraries.retrofitRxAdapter)
     implementation(Libraries.retrofitScalars)
     implementation(Libraries.retrofitGsonConverter)
+    implementation(Libraries.retrofitKotlinSerialization)
     implementation(Libraries.gson)
     implementation(Libraries.rxJava)
     implementation(Libraries.rxKotlin)
@@ -35,7 +38,6 @@ dependencies {
 
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Libraries.Logger))
-    implementation(project(ModuleNames.Libraries.Networking))
 
     unitTest {
         forEachDependency { testImplementation(it) }

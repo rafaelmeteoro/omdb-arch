@@ -1,6 +1,6 @@
 package com.meteoro.omdbarch.rest.util
 
-import com.meteoro.omdbarch.networking.BuildRetrofit
+import com.meteoro.omdbarch.rest.BuildRetrofit
 import com.meteoro.omdbarch.rest.api.OmdbAPI
 import kotlinx.serialization.UnstableDefault
 import okhttp3.OkHttpClient

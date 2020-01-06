@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.networking
+package com.meteoro.omdbarch.rest
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.UnstableDefault

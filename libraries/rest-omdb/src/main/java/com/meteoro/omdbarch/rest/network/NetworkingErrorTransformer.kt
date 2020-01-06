@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.networking
+package com.meteoro.omdbarch.rest.network
 
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import io.reactivex.Flowable

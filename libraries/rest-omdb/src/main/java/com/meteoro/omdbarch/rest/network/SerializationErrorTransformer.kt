@@ -1,6 +1,6 @@
-package com.meteoro.omdbarch.networking
+package com.meteoro.omdbarch.rest.network
 
-import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError.UnexpectedResponse
+import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.logger.Logger
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
@@ -21,7 +21,7 @@ class SerializationErrorTransformer<T>(private val logger: Logger) : FlowableTra
         val mapped = when (error) {
             is MissingFieldException,
             is UnknownFieldException,
-            is SerializationException -> UnexpectedResponse
+            is SerializationException -> RemoteServiceIntegrationError.UnexpectedResponse
             else -> error
         }
 

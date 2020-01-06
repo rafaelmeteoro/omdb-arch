@@ -3,7 +3,6 @@ package com.meteoro.omdbarch
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.meteoro.omdbarch.di.DaggerAppComponent
-import com.meteoro.omdbarch.networking.di.NetModule
 import com.meteoro.omdbarch.persistance.realm.RealmDatabase
 import com.meteoro.omdbarch.rest.di.RestModule
 import dagger.android.AndroidInjector
@@ -26,8 +25,7 @@ class OmdbApplication : Application(), HasAndroidInjector {
         super.onCreate()
         DaggerAppComponent.builder()
             .application(this)
-            .netModule(NetModule(BuildConfig.API_KEY_VALUE, BuildConfig.DEBUG))
-            .restModule(RestModule(BuildConfig.API_URL))
+            .restModule(RestModule(BuildConfig.API_URL, BuildConfig.API_KEY_VALUE))
             .build()
             .inject(this)
 
