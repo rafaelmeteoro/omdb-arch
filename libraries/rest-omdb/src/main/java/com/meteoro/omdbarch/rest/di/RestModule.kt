@@ -1,5 +1,6 @@
 package com.meteoro.omdbarch.rest.di
 
+import android.app.Application
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.logger.Logger
@@ -14,6 +15,7 @@ import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -23,6 +25,8 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
 
     companion object {
         private const val TIMEOUT = 60L
+        private const val FOLDER_CACHE_NAME = "http-cache"
+        private const val CACHE_SIZE = 10 * 1024 * 1024 // 10 MB
     }
 
     @Provides
@@ -32,6 +36,14 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
             level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
             else HttpLoggingInterceptor.Level.NONE
         }
+
+    @Provides
+    @Singleton
+    fun provideCache(application: Application): Cache {
+        val cacheSize = CACHE_SIZE.toLong()
+        val httpCacheDirectory = File(application.cacheDir, FOLDER_CACHE_NAME)
+        return Cache(httpCacheDirectory, cacheSize)
+    }
 
     @Provides
     @Singleton

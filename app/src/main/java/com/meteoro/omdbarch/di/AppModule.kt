@@ -11,18 +11,11 @@ import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
-import okhttp3.Cache
 import okhttp3.Interceptor
-import java.io.File
 import javax.inject.Singleton
 
 @Module
 class AppModule {
-
-    companion object {
-        private const val FOLDER_CACHE_NAME = "http-cache"
-        private const val CACHE_SIZE = 10 * 1024 * 1024 // 10 MB
-    }
 
     @Provides
     @Singleton
@@ -35,14 +28,6 @@ class AppModule {
     @Provides
     @Singleton
     fun provideUiScheduler(): Scheduler = AndroidSchedulers.mainThread()
-
-    @Provides
-    @Singleton
-    fun provideCache(application: Application): Cache {
-        val cacheSize = CACHE_SIZE.toLong()
-        val httpCacheDirectory = File(application.cacheDir, FOLDER_CACHE_NAME)
-        return Cache(httpCacheDirectory, cacheSize)
-    }
 
     @Provides
     @Singleton

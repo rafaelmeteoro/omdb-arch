@@ -2,12 +2,15 @@ import dependencies.UnitTestDependencies.Companion.unitTest
 import modules.LibraryModule
 import modules.LibraryType
 
-val module = LibraryModule(rootDir, LibraryType.Kotlin)
+val module = LibraryModule(rootDir, LibraryType.Android)
 
 apply(from = module.script())
 
 plugins {
-    id(BuildPlugins.Ids.kotlinJVM)
+    id(BuildPlugins.Ids.androidLibrary)
+    kotlin(BuildPlugins.Ids.kotlinAndroid)
+    kotlin(BuildPlugins.Ids.kotlinExtensions)
+    kotlin(BuildPlugins.Ids.kotlinKapt)
     id(BuildPlugins.Ids.coveralls)
 }
 
