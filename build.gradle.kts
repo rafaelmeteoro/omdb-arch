@@ -55,5 +55,5 @@ apply(plugin = BuildPlugins.Ids.versions)
 //}
 
 configure<JunitJacocoExtension> {
-    jacocoVersion = "0.8.4"
+    jacocoVersion = "0.8.5"
 }

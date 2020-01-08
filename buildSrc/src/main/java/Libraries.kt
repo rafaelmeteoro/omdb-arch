@@ -72,7 +72,7 @@ object Libraries {
     const val roboletric = "org.robolectric:robolectric:${Versions.roboletric}"
 
     private object Versions {
-        const val kotlinSerialization = "0.13.0"
+        const val kotlinSerialization = "0.14.0"
         const val okHttp = "4.3.1"
         const val retrofit = "2.7.1"
         const val retrofitScalars = "2.7.1"
