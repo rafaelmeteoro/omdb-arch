@@ -31,11 +31,26 @@ Compile debug sources
 fastlane android lint
 ```
 Android lint
-### android test
+### android assemble
 ```
-fastlane android test
+fastlane android assemble
 ```
-Runs all the tests
+Assemble source and test APK
+### android unit_test
+```
+fastlane android unit_test
+```
+Unit test
+### android instrumentation_test
+```
+fastlane android instrumentation_test
+```
+Instrumentation test
+### android pipeline
+```
+fastlane android pipeline
+```
+Local pipeline execution
 
 ----
 

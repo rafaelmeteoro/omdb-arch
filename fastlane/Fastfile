@@ -40,8 +40,32 @@ platform :android do
     gradle(task: "lintDebug")
   end
 
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
+  desc "Assemble source and test APK"
+  lane :assemble do
+    gradle(task: "assembleDebug")
+    gradle(task: "assembleDebugAndroidTest")
+  end
+
+  desc "Unit test"
+  lane :unit_test do
+    gradle(task: "testDebugUnitTest")
+  end
+
+  desc "Instrumentation test"
+  lane :instrumentation_test do
+    automated_test_emulator_run(
+      AVD_setup_path: "fastlane/AVD_setup.json",
+      AVD_recreate_new: false,
+      AVD_clean_after: false,
+      gradle_task: "connectedDebugAndroidTest")
+  end
+
+  desc "Local pipeline execution"
+  lane :pipeline do
+    compile
+    lint
+    assemble
+    unit_test
+    notification(subtitle: "Pipeline finished", message: "Execution successful.")
   end
 end
