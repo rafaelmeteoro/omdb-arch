@@ -65,3 +65,7 @@ ktlint-report-in-checkstyle-format.xml
 
 # Proguard mapping
 proguard/mapping.txt
+
+# Fastlane
+Gemfile.lock
+/fastlane/report.xml
