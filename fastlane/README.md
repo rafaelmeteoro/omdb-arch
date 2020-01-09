@@ -26,6 +26,11 @@ Output configuration for debugging
 fastlane android compile
 ```
 Compile debug sources
+### android lint
+```
+fastlane android lint
+```
+Android lint
 ### android test
 ```
 fastlane android test

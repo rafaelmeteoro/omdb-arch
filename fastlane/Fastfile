@@ -35,6 +35,11 @@ platform :android do
     gradle(task: "compileDebugAndroidTestSources")
   end
 
+  desc "Android lint"
+  lane :lint do
+    gradle(task: "lintDebug")
+  end
+
   desc "Runs all the tests"
   lane :test do
     gradle(task: "test")
