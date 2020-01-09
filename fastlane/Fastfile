@@ -28,6 +28,13 @@ platform :android do
     gradle(task: "properties")
   end
 
+  desc "Compile debug sources"
+  lane :compile do
+    gradle(task: "compileDebugSources")
+    gradle(task: "compileDebugUnitTestSources")
+    gradle(task: "compileDebugAndroidTestSources")
+  end
+
   desc "Runs all the tests"
   lane :test do
     gradle(task: "test")
