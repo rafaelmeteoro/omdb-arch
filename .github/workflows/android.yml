@@ -1,8 +1,30 @@
 name: Android CI
 
+# Execute Push Pipeline on push to master
 on: [push]
 
 jobs:
+  ##########################################################
+  # Compile Job:
+  # Install dependencies and compile debug and test sources
+  ##########################################################
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+
+      - name: Run Fastlane Compile Lane
+        run: fastlane compile
+
   build:
 
     runs-on: ubuntu-latest

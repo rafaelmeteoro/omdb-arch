@@ -28,33 +28,38 @@ platform :android do
     gradle(task: "properties")
   end
 
-  desc "Compile debug sources"
+  desc "Show update dependencies"
+  lane :dependency_updates do
+    gradle(task: "dependencyUpdates")
+  end
+
+  desc "Compile debug and test sources"
   lane :compile do
     gradle(task: "compileDebugSources")
     gradle(task: "compileDebugUnitTestSources")
     gradle(task: "compileDebugAndroidTestSources")
   end
 
-  desc "Android lint"
+  desc "Execute Android lint"
   lane :lint do
     gradle(task: "lintDebug")
   end
 
-  desc "Assemble source and test APK"
+  desc "Assemble source and test APKs"
   lane :assemble do
     gradle(task: "assembleDebug")
     gradle(task: "assembleDebugAndroidTest")
   end
 
-  desc "Unit test"
+  desc "Execute unit test"
   lane :unit_test do
     gradle(task: "testDebugUnitTest")
   end
 
-  desc "Instrumentation test"
+  desc "Execute instrumentation test on Emulator"
   lane :instrumentation_test do
     automated_test_emulator_run(
-      AVD_setup_path: "fastlane/AVD_setup.json",
+      AVD_setup_path: "fastlane/avd_setup.json",
       AVD_recreate_new: false,
       AVD_clean_after: false,
       gradle_task: "connectedDebugAndroidTest")

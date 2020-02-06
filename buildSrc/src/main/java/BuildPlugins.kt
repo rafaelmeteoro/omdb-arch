@@ -16,7 +16,8 @@ object BuildPlugins {
         const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
         const val realm = "io.realm:realm-gradle-plugin:${Versions.realm}"
-        const val moduleGraph = "https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle"
+        const val moduleGraph =
+            "https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle"
     }
 
     object Ids {
@@ -48,9 +49,9 @@ object BuildPlugins {
         const val testLogger = "2.0.0"
         const val jacocoUnified = "0.15.0"
         const val sonarCloud = "2.8"
-        const val detekt = "1.2.2"
+        const val detekt = "1.5.1"
         const val versions = "0.27.0"
-        const val safeArgs = "2.2.0-rc04"
-        const val realm = "6.0.2"
+        const val safeArgs = "2.2.1"
+        const val realm = "6.1.0"
     }
 }

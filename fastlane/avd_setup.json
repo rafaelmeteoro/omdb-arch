@@ -1,0 +1,17 @@
+{
+  "avd_list": [
+    {
+      "avd_name": "Pixel_3_API_29",
+      "create_avd_package": "system-images;android-29;google_apis_playstore;x86",
+      "create_avd_device": "Pixel 3 API 29",
+      "create_avd_tag": "google_apis",
+      "create_avd_abi": "x86",
+      "create_avd_additional_options": "",
+      "create_avd_hardware_config_filepath": "",
+      "launch_avd_port": "",
+      "launch_avd_snapshot_filepath": "",
+      "launch_avd_launch_binary_name": "emulator",
+      "launch_avd_additional_options": "-skin 1080x2160 -gpu on"
+    }
+  ]
+}

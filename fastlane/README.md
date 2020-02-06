@@ -21,31 +21,36 @@ or alternatively using `brew cask install fastlane`
 fastlane android config
 ```
 Output configuration for debugging
+### android dependency_updates
+```
+fastlane android dependency_updates
+```
+Show update dependencies
 ### android compile
 ```
 fastlane android compile
 ```
-Compile debug sources
+Compile debug and test sources
 ### android lint
 ```
 fastlane android lint
 ```
-Android lint
+Execute Android lint
 ### android assemble
 ```
 fastlane android assemble
 ```
-Assemble source and test APK
+Assemble source and test APKs
 ### android unit_test
 ```
 fastlane android unit_test
 ```
-Unit test
+Execute unit test
 ### android instrumentation_test
 ```
 fastlane android instrumentation_test
 ```
-Instrumentation test
+Execute instrumentation test on Emulator
 ### android pipeline
 ```
 fastlane android pipeline
