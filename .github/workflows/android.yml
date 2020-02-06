@@ -91,6 +91,24 @@ jobs:
       - name: Run Fastlane Unit Test Lane
         run: fastlane unit_test
 
+  ##########################################################
+  # Instrumentation Test Job:
+  # Install dependencies and execute instrumentation tests
+  # - Using macOS to initiate Android Emulator
+  ##########################################################
+  instrumentation_test:
+    needs: assemble
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Run Instrumentation Tests on Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 28
+          script: ./gradlew connectedDebugAndroidTest
+
 #  build:
 #
 #    runs-on: ubuntu-latest
