@@ -25,15 +25,81 @@ jobs:
       - name: Run Fastlane Compile Lane
         run: fastlane compile
 
-  build:
-
+  ##########################################################
+  # Lint Job:
+  # Install dependencies and execute lint debug
+  ##########################################################
+  lint:
+    needs: compile
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v1
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
         with:
-          java-version: 1.8
-      - name: Build with Gradle
-        run: ./gradlew clean build jacocoTestReport assembleAndroidTest coveralls --stacktrace
+          ruby-version: 2.6.x
+
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+
+      - name: Run Fastlane Lint Lane
+        run: fastlane lint
+
+  ##########################################################
+  # Assemble Job:
+  # Install dependencies and assemble debug and test APKs
+  ##########################################################
+  assemble:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+
+      - name: Run Fastlane Assemble Lane
+        run: fastlane assemble
+
+  ##########################################################
+  # Unit Test Job:
+  # Install dependencies and execute unit tests
+  ##########################################################
+  unit_test:
+    needs: assemble
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+
+      - name: Run Fastlane Unit Test Lane
+        run: fastlane unit_test
+
+#  build:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: set up JDK 1.8
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 1.8
+#      - name: Build with Gradle
+#        run: ./gradlew clean build jacocoTestReport assembleAndroidTest coveralls --stacktrace
