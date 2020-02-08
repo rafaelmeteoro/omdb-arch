@@ -67,6 +67,7 @@ platform :android do
 
   desc "Local pipeline execution"
   lane :pipeline do
+    gradle(task: "clean")
     compile
     lint
     assemble
