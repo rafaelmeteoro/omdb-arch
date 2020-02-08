@@ -17,7 +17,7 @@ class ClickShrinkEffect(view: View) {
 
     init {
         if (!view.hasOnClickListeners()) view.setOnClickListener { }
-        view.setOnTouchListener { v, event ->
+        view.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> buildShrinkAnimator()?.start()
                 MotionEvent.ACTION_UP -> buildGrowAnimator()?.start()

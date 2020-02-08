@@ -1,12 +1,14 @@
 package com.meteoro.omdbarch.rest.di
 
 import android.app.Application
+import com.meteoro.omdbarch.domain.services.ConnectivityService
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.rest.*
 import com.meteoro.omdbarch.rest.api.OmdbAPI
 import com.meteoro.omdbarch.rest.interceptor.ApiInterceptor
+import com.meteoro.omdbarch.rest.interceptor.NetworkConnectionInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -31,6 +33,12 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
 
     @Provides
     @Singleton
+    fun provideConnectManager(application: Application): ConnectivityService {
+        return ConnectManager.Builder(application).build()
+    }
+
+    @Provides
+    @Singleton
     fun provideHttpLogging(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
@@ -48,6 +56,7 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
     @Provides
     @Singleton
     fun provideOkHttpClient(
+        service: ConnectivityService,
         cache: Cache,
         logger: HttpLoggingInterceptor,
         interceptors: Set<@JvmSuppressWildcards Interceptor>
@@ -56,6 +65,7 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
             .cache(cache)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .addInterceptor(NetworkConnectionInterceptor(service))
             .addInterceptor(ApiInterceptor(apiKeyValue))
             .addInterceptor(logger)
 
