@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class CacheMovieTests {
+class CacheMovieTest {
 
     private val service = mock<MovieCacheService>()
     private lateinit var cache: CacheMovie

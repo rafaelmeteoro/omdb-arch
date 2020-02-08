@@ -14,7 +14,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 
-class DetailViewModelTests {
+class DetailViewModelTest {
 
     private lateinit var viewModel: DetailViewModel
 

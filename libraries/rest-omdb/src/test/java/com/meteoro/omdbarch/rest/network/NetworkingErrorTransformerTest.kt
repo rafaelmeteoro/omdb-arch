@@ -10,7 +10,7 @@ import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class NetworkingErrorTransformerTests {
+class NetworkingErrorTransformerTest {
 
     @Test
     fun `should transform proper unknown host exception into host unreachable`() {

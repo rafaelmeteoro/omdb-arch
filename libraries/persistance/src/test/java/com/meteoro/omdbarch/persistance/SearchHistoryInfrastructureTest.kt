@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-internal class SearchHistoryInfrastructureTests {
+internal class SearchHistoryInfrastructureTest {
 
     lateinit var service: SearchHistoryService
 

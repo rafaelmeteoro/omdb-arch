@@ -9,7 +9,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 
-class BuildMovieDetailPresentationTests {
+class BuildMovieDetailPresentationTest {
 
     private val resMock = mock<ResourceProvider>()
     private val resTest = "teste"

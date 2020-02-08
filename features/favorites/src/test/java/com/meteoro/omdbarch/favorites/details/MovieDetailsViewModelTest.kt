@@ -14,7 +14,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class MovieDetailsViewModelTests {
+class MovieDetailsViewModelTest {
 
     private lateinit var viewModel: MovieDetailsViewModel
 

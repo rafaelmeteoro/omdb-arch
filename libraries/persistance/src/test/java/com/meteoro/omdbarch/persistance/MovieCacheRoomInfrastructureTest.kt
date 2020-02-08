@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-internal class MovieCacheRoomInfrastructureTests {
+internal class MovieCacheRoomInfrastructureTest {
 
     private val dao = mock<MovieDao>()
     lateinit var cache: MovieCacheRoomInfrastructure

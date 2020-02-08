@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-internal class MovieInfrastructureTests {
+internal class MovieInfrastructureTest {
 
     @get:Rule
     val rule = InfrastructureRule()

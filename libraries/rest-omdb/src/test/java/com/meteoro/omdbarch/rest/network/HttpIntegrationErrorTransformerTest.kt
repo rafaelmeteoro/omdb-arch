@@ -8,7 +8,7 @@ import org.junit.Test
 import retrofit2.HttpException
 import retrofit2.Response
 
-class HttpIntegrationErrorTransformerTests {
+class HttpIntegrationErrorTransformerTest {
 
     @Test
     fun `should transform proper throwable into client origin error`() {

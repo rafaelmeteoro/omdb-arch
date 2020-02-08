@@ -8,7 +8,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class ManagerSearchTests {
+class ManagerSearchTest {
 
     private val service = mock<SearchHistoryService>()
     private lateinit var manager: ManagerSearch

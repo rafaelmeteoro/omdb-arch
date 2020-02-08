@@ -5,11 +5,11 @@ import com.meteoro.omdbarch.persistance.model.FavoriteMovieRealm
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class BuildMovieRealmTests {
+class BuildMovieFromRealmTest {
 
     @Test
-    fun `should build movie realm`() {
-        val provided = Movie(
+    fun `should build movie`() {
+        val provided = FavoriteMovieRealm(
             imdbId = "tt2474438",
             title = "Avengers",
             year = "2013",
@@ -26,7 +26,7 @@ class BuildMovieRealmTests {
             type = "movie"
         )
 
-        val expected = FavoriteMovieRealm(
+        val expected = Movie(
             imdbId = "tt2474438",
             title = "Avengers",
             year = "2013",
@@ -43,6 +43,6 @@ class BuildMovieRealmTests {
             type = "movie"
         )
 
-        assertThat(BuildMovieRealm(provided)).isEqualTo(expected)
+        assertThat(BuildMovieFromRealm(provided)).isEqualTo(expected)
     }
 }

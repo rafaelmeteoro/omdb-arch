@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.domain.errors
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class SearchHistoryErrorTests {
+class SearchHistoryErrorTest {
 
     @Test
     fun `should be search history error`() {

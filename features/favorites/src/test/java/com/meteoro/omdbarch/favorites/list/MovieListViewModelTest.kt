@@ -10,7 +10,7 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 
-class MovieListViewModelTests {
+class MovieListViewModelTest {
 
     private lateinit var viewModel: MovieListViewModel
 

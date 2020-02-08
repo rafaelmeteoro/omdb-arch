@@ -5,7 +5,7 @@ import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class BuildMovieFromRoomTests {
+class BuildMovieFromRoomTest {
 
     @Test
     fun `should build movie`() {

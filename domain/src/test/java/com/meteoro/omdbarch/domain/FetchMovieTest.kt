@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class FetchMovieTests {
+class FetchMovieTest {
 
     private val service = mock<MovieService>()
     private lateinit var usecase: FetchMovie

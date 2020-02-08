@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.favorites.words
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class BuildWordsPresentationTests {
+class BuildWordsPresentationTest {
 
     @Test
     fun `should build words presentation`() {

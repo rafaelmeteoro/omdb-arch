@@ -10,7 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class FetchSearchTests {
+class FetchSearchTest {
 
     private val service = mock<SearchService>()
     private lateinit var usecase: FetchSearch

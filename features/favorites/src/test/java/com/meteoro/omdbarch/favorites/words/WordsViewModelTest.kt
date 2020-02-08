@@ -10,7 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class WordsViewModelTests {
+class WordsViewModelTest {
 
     private lateinit var viewModel: WordsViewModel
 

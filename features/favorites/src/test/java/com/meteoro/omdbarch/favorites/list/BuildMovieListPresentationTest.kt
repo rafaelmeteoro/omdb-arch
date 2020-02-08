@@ -4,7 +4,7 @@ import com.meteoro.omdbarch.domain.model.Movie
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class BuildMovieListPresentationTests {
+class BuildMovieListPresentationTest {
 
     @Test
     fun `should build movie list presentation`() {

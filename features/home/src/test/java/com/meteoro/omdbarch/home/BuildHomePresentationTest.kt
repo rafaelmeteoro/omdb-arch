@@ -6,7 +6,7 @@ import com.meteoro.omdbarch.domain.model.TypeMovie
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class BuildHomePresentationTests {
+class BuildHomePresentationTest {
 
     @Test
     fun `should build presentation with type series`() {
