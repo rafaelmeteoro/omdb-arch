@@ -27,7 +27,7 @@ class MovieDetailActivity : AppCompatActivity() {
     lateinit var disposer: Disposer
 
     @Inject
-    lateinit var viewModel: DetailViewModel
+    lateinit var viewModel: DetailViewModelContract
 
     private lateinit var stateView: ManyFacedView
     private lateinit var detailTitle: TextView

@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.util
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.launchActivity
@@ -21,7 +22,7 @@ class ActivityScenarioLauncher<T : Activity>(private val scenario: ActivityScena
     }
 
     companion object {
-        inline fun <reified T : Activity> scenarioLauncher() =
-            ActivityScenarioLauncher(launchActivity<T>())
+        inline fun <reified T : Activity> scenarioLauncher(intent: Intent? = null) =
+            ActivityScenarioLauncher(launchActivity<T>(intent))
     }
 }

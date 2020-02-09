@@ -16,7 +16,7 @@ import org.mockito.ArgumentMatchers.anyString
 
 class DetailViewModelTest {
 
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModel: DetailViewModelContract
 
     private val mockFetch = mock<FetchMovie>()
     private val mockCache = mock<CacheMovie>()

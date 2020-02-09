@@ -13,8 +13,9 @@ class DetailViewModel(
     private val cache: CacheMovie,
     private val machine: StateMachine<MovieDetailPresentation>,
     private val resProvider: ResourceProvider
-) {
-    fun fetchMovie(idImdb: String): Flowable<ViewState<MovieDetailPresentation>> =
+) : DetailViewModelContract {
+
+    override fun fetchMovie(idImdb: String): Flowable<ViewState<MovieDetailPresentation>> =
         fetch.fetchMovie(idImdb)
             .flatMap { movie ->
                 saveMovie(movie)

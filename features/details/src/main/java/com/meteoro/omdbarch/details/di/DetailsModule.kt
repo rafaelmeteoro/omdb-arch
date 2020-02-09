@@ -4,6 +4,7 @@ import android.content.Context
 import com.meteoro.omdbarch.components.ResourceProvider
 import com.meteoro.omdbarch.components.StateMachine
 import com.meteoro.omdbarch.details.DetailViewModel
+import com.meteoro.omdbarch.details.DetailViewModelContract
 import com.meteoro.omdbarch.details.MovieDetailActivity
 import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.FetchMovie
@@ -43,7 +44,7 @@ abstract class DetailsModule {
             cache: CacheMovie,
             scheduler: Scheduler,
             provider: ResourceProvider
-        ) = DetailViewModel(
+        ): DetailViewModelContract = DetailViewModel(
             fetch = fetch,
             cache = cache,
             machine = StateMachine(
