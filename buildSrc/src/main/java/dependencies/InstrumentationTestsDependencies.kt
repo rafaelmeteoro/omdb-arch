@@ -9,8 +9,11 @@ class InstrumentationTestsDependencies {
             Libraries.jUnitExtKtx,
             Libraries.archCoreTesting,
             Libraries.mockitoKotlin,
+            Libraries.androidTestCore,
+            Libraries.androidTestCoreKtx,
             Libraries.androidTestRunner,
-            Libraries.espressoCore
+            Libraries.espressoCore,
+            Libraries.barista
         )
     }
 

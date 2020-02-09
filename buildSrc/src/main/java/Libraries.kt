@@ -67,10 +67,13 @@ object Libraries {
     const val jUnitExtKtx = "androidx.test.ext:junit-ktx:${Versions.junitExt}"
     const val assertj = "org.assertj:assertj-core:${Versions.assertj}"
     const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
+    const val androidTestCore = "androidx.test:core:${Versions.androidxTest}"
+    const val androidTestCoreKtx = "androidx.test:core-ktx:${Versions.androidxTest}"
     const val androidTestRunner = "androidx.test:runner:${Versions.androidxTest}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
     const val roboletric = "org.robolectric:robolectric:${Versions.roboletric}"
+    const val barista = "com.schibsted.spain:barista:${Versions.barista}"
 
     private object Versions {
         const val kotlinSerialization = "0.14.0"
@@ -105,5 +108,6 @@ object Libraries {
         const val androidxTest = "1.2.0"
         const val espresso = "3.2.0"
         const val roboletric = "4.3"
+        const val barista = "3.2.0"
     }
 }
