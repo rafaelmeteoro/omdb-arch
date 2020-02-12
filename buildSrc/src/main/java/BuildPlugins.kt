@@ -42,7 +42,7 @@ object BuildPlugins {
     }
 
     private object Versions {
-        const val agp = "3.5.1"
+        const val agp = "3.5.3"
         const val ktlint = "8.2.0"
         const val cobertura = "3.0.0"
         const val coveralls = "2.8.4"
