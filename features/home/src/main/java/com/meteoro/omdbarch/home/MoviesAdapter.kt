@@ -1,11 +1,10 @@
 package com.meteoro.omdbarch.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.meteoro.omdbarch.home.databinding.MovieItemBinding
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MoviesAdapter(
     private val presentation: HomePresentation,
@@ -14,8 +13,8 @@ class MoviesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
         val inflate = LayoutInflater.from(parent.context)
-        val view = inflate.inflate(R.layout.movie_item, parent, false)
-        return MovieHolder(view)
+        val binding = MovieItemBinding.inflate(inflate, parent, false)
+        return MovieHolder(binding)
     }
 
     override fun getItemCount(): Int = presentation.movies.size
@@ -24,15 +23,12 @@ class MoviesAdapter(
         holder.bind(presentation.movies[position], shareAction)
     }
 
-    inner class MovieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MovieHolder(private val itemBinding: MovieItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(row: MoviePresentation, action: (MoviePresentation) -> Unit) {
-            itemView.run {
-                movieTitle.text = row.title
-                Picasso.get().load(row.photoUrl).into(movieImage)
-
-                setOnClickListener { action.invoke(row) }
-            }
+            itemBinding.movieTitle.text = row.title
+            Picasso.get().load(row.photoUrl).into(itemBinding.movieImage)
+            itemBinding.displayContainer.setOnClickListener { action.invoke(row) }
         }
     }
 }

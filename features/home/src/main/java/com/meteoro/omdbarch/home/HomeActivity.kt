@@ -3,12 +3,9 @@ package com.meteoro.omdbarch.home
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -18,13 +15,14 @@ import com.meteoro.omdbarch.components.ErrorStateResources
 import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
-import com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
+import com.meteoro.omdbarch.home.databinding.ActivityHomeBinding
+import com.meteoro.omdbarch.home.databinding.StateHomeContentBinding
+import com.meteoro.omdbarch.home.databinding.StateHomeErrorBinding
 import com.meteoro.omdbarch.logger.Logger
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.activity_home.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -44,12 +42,9 @@ class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: HomeViewModel
 
-    private lateinit var toolbar: Toolbar
-    private lateinit var stateView: ManyFacedView
-    private lateinit var homeView: RecyclerView
-    private lateinit var errorStateImage: ImageView
-    private lateinit var errorStateLabel: TextView
-    private lateinit var loadingView: ProgressBar
+    private lateinit var binding: ActivityHomeBinding
+    private lateinit var bindingContent: StateHomeContentBinding
+    private lateinit var bindingError: StateHomeErrorBinding
 
     private val searchSubject = PublishSubject.create<String>()
 
@@ -57,10 +52,12 @@ class HomeActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        bindingContent = StateHomeContentBinding.bind(getHomeView())
+        bindingError = StateHomeErrorBinding.bind(getErrorView())
+        setContentView(binding.root)
         lifecycle.addObserver(disposer)
 
-        initViews()
         setupView()
         setupSubject()
     }
@@ -88,17 +85,11 @@ class HomeActivity : AppCompatActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
-    private fun initViews() {
-        toolbar = findViewById(R.id.toolbar)
-        stateView = findViewById(R.id.state_view)
-        homeView = findViewById(R.id.home_view)
-        errorStateImage = findViewById(R.id.error_state_image)
-        errorStateLabel = findViewById(R.id.error_state_label)
-        loadingView = findViewById(R.id.loading_view)
-    }
+    private fun getHomeView() = binding.stateView.getView<RecyclerView>(FacedViewState.CONTENT)
+    private fun getErrorView() = binding.stateView.getView<View>(FacedViewState.ERROR)
 
     private fun setupView() {
-        homeView.apply {
+        bindingContent.homeView.apply {
             layoutManager = GridLayoutManager(this@HomeActivity, COLUMN_COUNT)
             addItemDecoration(
                 GridItemDecoration(
@@ -108,7 +99,7 @@ class HomeActivity : AppCompatActivity() {
             )
         }
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
     }
 
     private fun setupSubject() {
@@ -145,8 +136,8 @@ class HomeActivity : AppCompatActivity() {
     private fun showMovies(home: HomePresentation) {
         logger.i("Loaded Movies")
 
-        stateView.setState(FacedViewState.CONTENT)
-        homeView.adapter = MoviesAdapter(home) {
+        binding.stateView.setState(FacedViewState.CONTENT)
+        bindingContent.homeView.adapter = MoviesAdapter(home) {
             startActivity(Actions.openDetailIntent(this, it.imdbId))
         }
     }
@@ -161,13 +152,13 @@ class HomeActivity : AppCompatActivity() {
 
         val (errorImage, errorMessage) = ErrorStateResources(reason)
         val hasPreviousContent =
-            homeView.adapter
+            bindingContent.homeView.adapter
                 ?.let { it.itemCount != 0 }
                 ?: false
 
         when {
             hasPreviousContent -> {
-                Snackbar.make(homeRoot, errorMessage, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.homeRoot, errorMessage, Snackbar.LENGTH_LONG).show()
                 emptyTerm()
             }
             else -> reportError(errorImage, errorMessage)
@@ -175,16 +166,16 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun reportError(errorImage: Int, errorMessage: Int) {
-        stateView.setState(FacedViewState.ERROR)
-        errorStateImage.setImageResource(errorImage)
-        errorStateLabel.setText(errorMessage)
+        binding.stateView.setState(FacedViewState.ERROR)
+        bindingError.errorStateImage.setImageResource(errorImage)
+        bindingError.errorStateLabel.setText(errorMessage)
     }
 
     private fun emptyTerm() {
-        stateView.setState(FacedViewState.EMPTY)
+        binding.stateView.setState(FacedViewState.EMPTY)
     }
 
     private fun startExecution() {
-        stateView.setState(FacedViewState.LOADING)
+        binding.stateView.setState(FacedViewState.LOADING)
     }
 }

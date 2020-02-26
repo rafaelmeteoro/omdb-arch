@@ -6,21 +6,20 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
-import com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.favorites.R
+import com.meteoro.omdbarch.favorites.databinding.FragmentMovieListBinding
+import com.meteoro.omdbarch.favorites.databinding.StateListContentBinding
 import com.meteoro.omdbarch.logger.Logger
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.fragment_movie_list.*
 import javax.inject.Inject
 
 class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
@@ -34,8 +33,8 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     @Inject
     lateinit var viewModel: MovieListViewModel
 
-    private lateinit var stateView: ManyFacedView
-    private lateinit var movieListView: RecyclerView
+    private lateinit var binding: FragmentMovieListBinding
+    private lateinit var bindingContent: StateListContentBinding
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -43,12 +42,10 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
+        binding = FragmentMovieListBinding.inflate(inflater, container, false)
+        bindingContent = StateListContentBinding.bind(getContentView())
 
-        stateView = view.findViewById(R.id.state_view)
-        movieListView = view.findViewById(R.id.movie_list_view)
-
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,8 +70,10 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
         else -> super.onOptionsItemSelected(item)
     }
 
+    private fun getContentView() = binding.stateView.getView<View>(FacedViewState.CONTENT)
+
     private fun setupView() {
-        movieListView.apply {
+        bindingContent.movieListView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             addItemDecoration(
                 GridItemDecoration(
@@ -108,29 +107,29 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     private fun handlePresentation(presentation: MovieListPresentation) {
         logger.d("${presentation.movies}")
 
-        stateView.setState(FacedViewState.CONTENT)
-        movieListView.adapter = MovieListAdapter(presentation, this)
+        binding.stateView.setState(FacedViewState.CONTENT)
+        bindingContent.movieListView.adapter = MovieListAdapter(presentation, this)
     }
 
     private fun handleError(reason: Throwable) {
         logger.e("Failed to load movies -> $reason")
 
         if (reason is NoResultsFound) {
-            stateView.setState(FacedViewState.EMPTY)
+            binding.stateView.setState(FacedViewState.EMPTY)
             return
         }
 
-        stateView.setState(FacedViewState.ERROR)
+        binding.stateView.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_movie_list_error)
     }
 
     private fun startExecution() {
-        stateView.setState(FacedViewState.LOADING)
+        binding.stateView.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {
         Snackbar
-            .make(moviesListScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
+            .make(binding.moviesListScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
             .show()
     }
 

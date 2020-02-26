@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.logger.Logger
+import com.meteoro.omdbarch.onboarding.databinding.ActivityOnboardingBinding
 import dagger.android.AndroidInjection
 import io.reactivex.Flowable
 import io.reactivex.rxkotlin.subscribeBy
@@ -23,11 +24,14 @@ class OnboardingActivity : AppCompatActivity() {
     @Inject
     lateinit var disposer: Disposer
 
+    private lateinit var binding: ActivityOnboardingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         lifecycle.addObserver(disposer)
 
         logger.d("Launch")

@@ -42,7 +42,7 @@ object BuildPlugins {
     }
 
     private object Versions {
-        const val agp = "3.5.3"
+        const val agp = "3.6.0"
         const val ktlint = "8.2.0"
         const val cobertura = "3.0.0"
         const val coveralls = "2.8.4"
@@ -50,7 +50,7 @@ object BuildPlugins {
         const val jacocoUnified = "0.15.0"
         const val sonarCloud = "2.8"
         const val detekt = "1.5.1"
-        const val versions = "0.27.0"
+        const val versions = "0.28.0"
         const val safeArgs = "2.2.1"
         const val realm = "6.1.0"
     }

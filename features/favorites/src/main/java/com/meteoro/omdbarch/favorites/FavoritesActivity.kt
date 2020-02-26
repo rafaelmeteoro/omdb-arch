@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.meteoro.omdbarch.favorites.databinding.ActivityFavoritesBinding
 import com.meteoro.omdbarch.logger.Logger
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_favorites.*
 import javax.inject.Inject
 
 class FavoritesActivity : AppCompatActivity() {
@@ -16,13 +16,16 @@ class FavoritesActivity : AppCompatActivity() {
     @Inject
     lateinit var logger: Logger
 
+    private lateinit var binding: ActivityFavoritesBinding
+
     private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorites)
+        binding = ActivityFavoritesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         logger.d("Launch")
 
@@ -43,8 +46,8 @@ class FavoritesActivity : AppCompatActivity() {
      * Called on first creation and when restoring state.
      * */
     private fun setupBottomNavigationBar() {
-        setSupportActionBar(toolbar)
-        val bottomNavigationView = bottom_nav
+        setSupportActionBar(binding.toolbar)
+        val bottomNavigationView = binding.bottomNav
 
         val navGraphIds = listOf(R.navigation.nav_movie, R.navigation.nav_words)
 

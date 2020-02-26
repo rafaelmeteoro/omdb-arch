@@ -64,6 +64,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    viewBinding {
+        isEnabled = true
+    }
+
     tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = KotlinConfig.targetJVM
     }

@@ -6,18 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
-import com.meteoro.omdbarch.components.widgets.manyfacedview.view.ManyFacedView
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.favorites.R
+import com.meteoro.omdbarch.favorites.databinding.FragmentWordsBinding
+import com.meteoro.omdbarch.favorites.databinding.StateWordsContentBinding
 import com.meteoro.omdbarch.logger.Logger
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.fragment_words.*
 import javax.inject.Inject
 
 class WordsFragment : Fragment() {
@@ -31,8 +30,8 @@ class WordsFragment : Fragment() {
     @Inject
     lateinit var viewModel: WordsViewModel
 
-    private lateinit var stateView: ManyFacedView
-    private lateinit var historyChipGroup: ChipGroup
+    private lateinit var binding: FragmentWordsBinding
+    private lateinit var bindingContent: StateWordsContentBinding
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -40,12 +39,10 @@ class WordsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_words, container, false)
+        binding = FragmentWordsBinding.inflate(inflater, container, false)
+        bindingContent = StateWordsContentBinding.bind(getContentView())
 
-        stateView = view.findViewById(R.id.state_view)
-        historyChipGroup = view.findViewById(R.id.history_chip_group)
-
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +50,8 @@ class WordsFragment : Fragment() {
         lifecycle.addObserver(disposer)
         getWordsSaved()
     }
+
+    private fun getContentView() = binding.stateView.getView<View>(FacedViewState.CONTENT)
 
     private fun getWordsSaved() {
         val toDispose = viewModel
@@ -76,11 +75,11 @@ class WordsFragment : Fragment() {
 
     private fun showWords(presentation: WordsPresentation) {
         logger.d("${presentation.words}")
-        stateView.setState(FacedViewState.CONTENT)
+        binding.stateView.setState(FacedViewState.CONTENT)
 
         val words = presentation.words
 
-        ChipsGroupPopulator(historyChipGroup, R.layout.chip_item_word).run {
+        ChipsGroupPopulator(bindingContent.historyChipGroup, R.layout.chip_item_word).run {
             populate(words) {
                 viewModel.deleteWord(it)
                 getWordsSaved()
@@ -92,21 +91,21 @@ class WordsFragment : Fragment() {
         logger.e("Failed to load words -> $reason")
 
         if (reason is NoResultsFound) {
-            stateView.setState(FacedViewState.EMPTY)
+            binding.stateView.setState(FacedViewState.EMPTY)
             return
         }
 
-        stateView.setState(FacedViewState.ERROR)
+        binding.stateView.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_words_error)
     }
 
     private fun startExecution() {
-        stateView.setState(FacedViewState.LOADING)
+        binding.stateView.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {
         Snackbar
-            .make(wordsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
+            .make(binding.wordsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
             .show()
     }
 }
