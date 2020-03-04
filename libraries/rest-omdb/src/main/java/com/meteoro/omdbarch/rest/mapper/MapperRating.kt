@@ -3,12 +3,11 @@ package com.meteoro.omdbarch.rest.mapper
 import com.meteoro.omdbarch.domain.model.Rating
 import com.meteoro.omdbarch.rest.response.RatingResponse
 
-object RatingMapper {
+class MapperRating {
 
-    operator fun invoke(response: RatingResponse) = with(response) {
+    fun fromResponse(response: RatingResponse): Rating =
         Rating(
-            source = source,
-            value = value
+            source = response.source,
+            value = response.value
         )
-    }
 }

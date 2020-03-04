@@ -3,9 +3,17 @@ package com.meteoro.omdbarch.rest.mapper
 import com.meteoro.omdbarch.domain.model.Rating
 import com.meteoro.omdbarch.rest.response.RatingResponse
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Test
 
-class RatingMapperTest {
+class MapperRatingTest {
+
+    lateinit var mapper: MapperRating
+
+    @Before
+    fun `before each test`() {
+        mapper = MapperRating()
+    }
 
     @Test
     fun `should map rating from response`() {
@@ -19,6 +27,6 @@ class RatingMapperTest {
             value = "value"
         )
 
-        assertThat(RatingMapper(response)).isEqualTo(expected)
+        assertThat(mapper.fromResponse(response)).isEqualTo(expected)
     }
 }

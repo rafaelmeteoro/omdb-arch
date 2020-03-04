@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.rest
 import com.meteoro.omdbarch.domain.model.ResultSearch
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.rest.api.OmdbAPI
-import com.meteoro.omdbarch.rest.mapper.ResultSearchMapper
+import com.meteoro.omdbarch.rest.mapper.MapperResultSearch
 import com.meteoro.omdbarch.rest.response.SearchResponse
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
@@ -20,5 +20,5 @@ class SearchInfrastructure(
             .searchMovies(title, type, year)
             .subscribeOn(targetScheduler)
             .compose(errorHandler)
-            .map { ResultSearchMapper(it) }
+            .map { MapperResultSearch().fromResponse(it) }
 }

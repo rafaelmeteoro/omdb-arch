@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.rest
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.rest.api.OmdbAPI
-import com.meteoro.omdbarch.rest.mapper.MovieMapper
+import com.meteoro.omdbarch.rest.mapper.MapperMovie
 import com.meteoro.omdbarch.rest.response.MovieResponse
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
@@ -20,5 +20,5 @@ class MovieInfrastructure(
             .fetchMovie(id)
             .subscribeOn(targetScheduler)
             .compose(errorHandler)
-            .map { MovieMapper(it) }
+            .map { MapperMovie().fromResponse(it) }
 }

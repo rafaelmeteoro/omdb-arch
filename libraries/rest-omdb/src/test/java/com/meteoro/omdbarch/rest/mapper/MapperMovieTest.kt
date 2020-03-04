@@ -5,9 +5,17 @@ import com.meteoro.omdbarch.domain.model.Rating
 import com.meteoro.omdbarch.rest.response.MovieResponse
 import com.meteoro.omdbarch.rest.response.RatingResponse
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Test
 
-class MovieMapperTest {
+class MapperMovieTest {
+
+    lateinit var mapper: MapperMovie
+
+    @Before
+    fun `before each test`() {
+        mapper = MapperMovie()
+    }
 
     @Test
     fun `should map movie from response`() {
@@ -93,6 +101,6 @@ class MovieMapperTest {
             response = "True"
         )
 
-        assertThat(MovieMapper(response)).isEqualTo(expected)
+        assertThat(mapper.fromResponse(response)).isEqualTo(expected)
     }
 }
