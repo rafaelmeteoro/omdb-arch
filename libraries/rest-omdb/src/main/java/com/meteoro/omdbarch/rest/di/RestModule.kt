@@ -34,7 +34,7 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
     @Provides
     @Singleton
     fun provideConnectManager(application: Application): ConnectivityService {
-        return ConnectManager.Builder(application).build()
+        return NetworkHandler(application)
     }
 
     @Provides
