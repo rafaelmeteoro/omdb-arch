@@ -1,7 +1,6 @@
 package com.meteoro.omdbarch.components
 
 import com.meteoro.omdbarch.domain.errors.NetworkingError
-import com.meteoro.omdbarch.domain.errors.NoConnectivityError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError
 
@@ -24,7 +23,7 @@ data class ErrorStateResources(
                     R.drawable.img_no_results,
                     R.string.error_no_results
                 )
-                is NoConnectivityError -> ErrorStateResources(
+                is NetworkingError.NoInternetConnection -> ErrorStateResources(
                     R.drawable.img_no_connect,
                     R.string.error_no_connectivity
                 )

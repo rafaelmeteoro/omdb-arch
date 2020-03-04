@@ -7,8 +7,9 @@ import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.rest.*
 import com.meteoro.omdbarch.rest.api.OmdbAPI
+import com.meteoro.omdbarch.rest.executor.RemoteExecutor
+import com.meteoro.omdbarch.rest.executor.RemoteExecutorImpl
 import com.meteoro.omdbarch.rest.interceptor.ApiInterceptor
-import com.meteoro.omdbarch.rest.interceptor.NetworkConnectionInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -56,7 +57,6 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        service: ConnectivityService,
         cache: Cache,
         logger: HttpLoggingInterceptor,
         interceptors: Set<@JvmSuppressWildcards Interceptor>
@@ -65,7 +65,6 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
             .cache(cache)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .addInterceptor(NetworkConnectionInterceptor(service))
             .addInterceptor(ApiInterceptor(apiKeyValue))
             .addInterceptor(logger)
 
@@ -87,23 +86,31 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
 
     @Provides
     @Singleton
-    fun provideMovieService(api: OmdbAPI, logger: Logger): MovieService =
-        MovieInfrastructure(
-            service = api,
-            errorHandler = ExecutionErrorHandler(
-                logger = logger
-            ),
+    fun provideExecutor(service: ConnectivityService): RemoteExecutor =
+        RemoteExecutorImpl(
+            service = service,
             targetScheduler = Schedulers.io()
         )
 
     @Provides
     @Singleton
-    fun provideSearchService(api: OmdbAPI, logger: Logger): SearchService =
-        SearchInfrastructure(
+    fun provideMovieService(api: OmdbAPI, executor: RemoteExecutor, logger: Logger): MovieService =
+        MovieInfrastructure(
             service = api,
+            executor = executor,
             errorHandler = ExecutionErrorHandler(
                 logger = logger
-            ),
-            targetScheduler = Schedulers.io()
+            )
+        )
+
+    @Provides
+    @Singleton
+    fun provideSearchService(api: OmdbAPI, executor: RemoteExecutor, logger: Logger): SearchService =
+        SearchInfrastructure(
+            service = api,
+            executor = executor,
+            errorHandler = ExecutionErrorHandler(
+                logger = logger
+            )
         )
 }

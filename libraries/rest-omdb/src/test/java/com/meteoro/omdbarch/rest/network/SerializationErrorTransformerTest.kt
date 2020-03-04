@@ -3,7 +3,6 @@ package com.meteoro.omdbarch.rest.network
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.logger.ConsoleLogger
 import com.meteoro.omdbarch.rest.network.CheckErrorTransformation.Companion.checkTransformation
-import com.nhaarman.mockitokotlin2.any
 import kotlinx.serialization.MissingFieldException
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.UnknownFieldException
@@ -23,7 +22,7 @@ class SerializationErrorTransformerTest {
     @Test
     fun `should handle unknown field error`() {
         checkTransformation(
-            from = UnknownFieldException(any()),
+            from = UnknownFieldException(0),
             expected = RemoteServiceIntegrationError.UnexpectedResponse,
             using = SerializationErrorTransformer<Any>(ConsoleLogger)
         )

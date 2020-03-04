@@ -1,11 +1,17 @@
 package com.meteoro.omdbarch.rest
 
+import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
+import com.meteoro.omdbarch.domain.services.ConnectivityService
 import com.meteoro.omdbarch.logger.ConsoleLogger
+import com.meteoro.omdbarch.rest.executor.RemoteExecutor
+import com.meteoro.omdbarch.rest.executor.RemoteExecutorImpl
 import com.meteoro.omdbarch.rest.util.InfrastructureRule
 import com.meteoro.omdbarch.rest.util.loadFile
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.subscribers.TestSubscriber
 import org.junit.Before
 import org.junit.Rule
@@ -16,14 +22,20 @@ internal class SearchInfrastructureTest {
     @get:Rule
     val rule = InfrastructureRule()
 
+    private val service = mock<ConnectivityService>()
+    private lateinit var executor: RemoteExecutor
     private lateinit var infrastructure: SearchInfrastructure
 
     @Before
     fun `before each test`() {
+        executor = RemoteExecutorImpl(service)
         infrastructure = SearchInfrastructure(
             service = rule.api,
+            executor = executor,
             errorHandler = ExecutionErrorHandler(ConsoleLogger)
         )
+
+        whenever(service.isConnected()).thenReturn(true)
     }
 
     @Test
@@ -110,6 +122,19 @@ internal class SearchInfrastructureTest {
         testSubscriber.assertNotComplete()
             .assertTerminated()
             .assertError(RemoteServiceIntegrationError.RemoteSystem)
+    }
+
+    @Test
+    fun `should handle no internet connection`() {
+        whenever(service.isConnected()).thenReturn(false)
+
+        val testSubscriber = TestSubscriber<ResultSearch>()
+        simpleSearchMovies()
+            .subscribe(testSubscriber)
+
+        testSubscriber.assertNotComplete()
+            .assertTerminated()
+            .assertError(NetworkingError.NoInternetConnection)
     }
 
     private fun simpleSearchMovies() =

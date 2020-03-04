@@ -28,4 +28,12 @@ class NetworkingErrorTest {
 
         assertThat(error.toString()).isEqualTo(message)
     }
+
+    @Test
+    fun `should be no internet connection`() {
+        val error: NetworkingError = NetworkingError.NoInternetConnection
+        val message = "No Internet Connection"
+
+        assertThat(error.toString()).isEqualTo(message)
+    }
 }
