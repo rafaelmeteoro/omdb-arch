@@ -3,9 +3,27 @@ package com.meteoro.omdbarch.persistance.room
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
 
-object BuildMovieRoom {
+class MapperMovieRoom {
 
-    operator fun invoke(movie: Movie) =
+    fun fromRoom(room: FavoriteMovieRoom): Movie =
+        Movie(
+            imdbId = room.imdbId,
+            title = room.title,
+            year = room.year,
+            released = room.released,
+            runtime = room.runtime,
+            genre = room.genre,
+            director = room.director,
+            actors = room.actors,
+            plot = room.plot,
+            country = room.country,
+            poster = room.poster,
+            imdbRating = room.imdbRating,
+            imdbVotes = room.imdbVotes,
+            type = room.type
+        )
+
+    fun fromMovie(movie: Movie): FavoriteMovieRoom =
         FavoriteMovieRoom(
             imdbId = movie.imdbId ?: "",
             title = movie.title,

@@ -4,8 +4,7 @@ import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.persistance.model.FavoriteMovieRealm
-import com.meteoro.omdbarch.persistance.realm.BuildMovieFromRealm
-import com.meteoro.omdbarch.persistance.realm.BuildMovieRealm
+import com.meteoro.omdbarch.persistance.realm.MapperMovieRealm
 import com.meteoro.omdbarch.persistance.realm.RealmManager
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -14,7 +13,7 @@ import io.realm.kotlin.where
 class MovieCacheRealmInfrastructure : MovieCacheService {
 
     override fun save(movie: Movie) {
-        val movieRealm = BuildMovieRealm(movie)
+        val movieRealm = MapperMovieRealm().fromMovie(movie)
         RealmManager.run {
             realm.executeTransaction { it.copyToRealmOrUpdate(movieRealm) }
         }
@@ -48,7 +47,7 @@ class MovieCacheRealmInfrastructure : MovieCacheService {
             }
 
             if (movieRealm != null) {
-                emmiter.onNext(BuildMovieFromRealm(movieRealm))
+                emmiter.onNext(MapperMovieRealm().fromRealm(movieRealm))
                 emmiter.onComplete()
             } else {
                 emmiter.onError(NoResultsFound)
@@ -65,7 +64,7 @@ class MovieCacheRealmInfrastructure : MovieCacheService {
             }
 
             val converted = Flowable.fromIterable(moviesRealm)
-                .map { BuildMovieFromRealm(it) }
+                .map { MapperMovieRealm().fromRealm(it) }
                 .toList()
                 .blockingGet()
 
