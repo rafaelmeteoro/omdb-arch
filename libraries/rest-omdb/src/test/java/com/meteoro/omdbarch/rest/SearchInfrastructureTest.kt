@@ -5,6 +5,7 @@ import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
 import com.meteoro.omdbarch.domain.services.ConnectivityService
+import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.logger.ConsoleLogger
 import com.meteoro.omdbarch.rest.executor.RemoteExecutor
 import com.meteoro.omdbarch.rest.executor.RemoteExecutorImpl
@@ -24,7 +25,7 @@ internal class SearchInfrastructureTest {
 
     private val service = mock<ConnectivityService>()
     private lateinit var executor: RemoteExecutor
-    private lateinit var infrastructure: SearchInfrastructure
+    private lateinit var infrastructure: SearchService
 
     @Before
     fun `before each test`() {

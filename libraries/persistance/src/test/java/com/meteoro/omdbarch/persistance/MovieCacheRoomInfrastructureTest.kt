@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.persistance
 
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
 import com.meteoro.omdbarch.persistance.room.MovieDao
 import com.nhaarman.mockitokotlin2.*
@@ -12,7 +13,7 @@ import org.mockito.ArgumentMatchers.anyString
 internal class MovieCacheRoomInfrastructureTest {
 
     private val dao = mock<MovieDao>()
-    lateinit var cache: MovieCacheRoomInfrastructure
+    lateinit var cache: MovieCacheService
 
     private val movie by lazy {
         Movie(

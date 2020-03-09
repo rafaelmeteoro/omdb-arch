@@ -1,8 +1,8 @@
 package com.meteoro.omdbarch.favorites.details
 
-import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.domain.repository.CacheRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.domain.state.ViewState
 import com.nhaarman.mockitokotlin2.mock
@@ -18,12 +18,12 @@ class MovieDetailsViewModelTest {
 
     private lateinit var viewModel: MovieDetailsViewModel
 
-    private val mockCache = mock<CacheMovie>()
+    private val mockCache = mock<CacheRepository>()
 
     @Before
     fun `before each test`() {
         viewModel = MovieDetailsViewModel(
-            cache = mockCache,
+            cacheRepository = mockCache,
             machine = StateMachine()
         )
     }

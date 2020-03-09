@@ -2,15 +2,13 @@ package com.meteoro.omdbarch.persistance.di
 
 import android.app.Application
 import androidx.room.Room
-import com.meteoro.omdbarch.domain.CacheMovie
-import com.meteoro.omdbarch.domain.ManagerSearch
+import com.meteoro.omdbarch.domain.model.TypeDatabase
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.services.SearchHistoryService
 import com.meteoro.omdbarch.persistance.AppPreferencesWrapper
 import com.meteoro.omdbarch.persistance.MovieCacheRealmInfrastructure
 import com.meteoro.omdbarch.persistance.MovieCacheRoomInfrastructure
 import com.meteoro.omdbarch.persistance.SearchHistoryInfrastructure
-import com.meteoro.omdbarch.persistance.model.TypeDatabase
 import com.meteoro.omdbarch.persistance.room.OmdbRoomDatabase
 import dagger.Module
 import dagger.Provides
@@ -26,11 +24,6 @@ class PersistanceModule {
         val wrapper = AppPreferencesWrapper(app)
         return SearchHistoryInfrastructure(wrapper.preferences)
     }
-
-    @Provides
-    @Singleton
-    fun provideManagerSearch(service: SearchHistoryService): ManagerSearch =
-        ManagerSearch(service)
 
     @Provides
     @Singleton
@@ -51,9 +44,4 @@ class PersistanceModule {
     @Named(TypeDatabase.REALM)
     fun provideMovieRealmCacheService(): MovieCacheService =
         MovieCacheRealmInfrastructure()
-
-    @Provides
-    @Singleton
-    fun provideCacheMovie(@Named(TypeDatabase.ROOM) service: MovieCacheService): CacheMovie =
-        CacheMovie(service)
 }

@@ -5,9 +5,8 @@ import com.meteoro.omdbarch.components.ResourceProvider
 import com.meteoro.omdbarch.details.DetailViewModel
 import com.meteoro.omdbarch.details.DetailViewModelContract
 import com.meteoro.omdbarch.details.MovieDetailActivity
-import com.meteoro.omdbarch.domain.CacheMovie
-import com.meteoro.omdbarch.domain.FetchMovie
-import com.meteoro.omdbarch.domain.services.MovieService
+import com.meteoro.omdbarch.domain.repository.CacheRepository
+import com.meteoro.omdbarch.domain.repository.MovieRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import dagger.Module
 import dagger.Provides
@@ -33,20 +32,14 @@ abstract class DetailsModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideFetchMovie(service: MovieService): FetchMovie =
-            FetchMovie(service)
-
-        @JvmStatic
-        @Provides
-        @Singleton
         fun provideDetailsViewModel(
-            fetch: FetchMovie,
-            cache: CacheMovie,
+            fetch: MovieRepository,
+            cache: CacheRepository,
             scheduler: Scheduler,
             provider: ResourceProvider
         ): DetailViewModelContract = DetailViewModel(
-            fetch = fetch,
-            cache = cache,
+            movieRepository = fetch,
+            cacheRepository = cache,
             machine = StateMachine(
                 uiScheduler = scheduler
             ),

@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.domain
 
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
+import com.meteoro.omdbarch.domain.repository.ManagerRepository
 import com.meteoro.omdbarch.domain.services.SearchHistoryService
 import com.meteoro.omdbarch.domain.util.historyResult
 import com.nhaarman.mockitokotlin2.*
@@ -11,7 +12,7 @@ import org.mockito.ArgumentMatchers.anyString
 class ManagerSearchTest {
 
     private val service = mock<SearchHistoryService>()
-    private lateinit var manager: ManagerSearch
+    private lateinit var manager: ManagerRepository
 
     @Before
     fun `before each test`() {

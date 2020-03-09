@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.domain
 
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
+import com.meteoro.omdbarch.domain.repository.MovieRepository
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.util.movie
 import com.nhaarman.mockitokotlin2.*
@@ -12,7 +13,7 @@ import org.mockito.ArgumentMatchers.anyString
 class FetchMovieTest {
 
     private val service = mock<MovieService>()
-    private lateinit var usecase: FetchMovie
+    private lateinit var usecase: MovieRepository
 
     @Before
     fun `before each test`() {

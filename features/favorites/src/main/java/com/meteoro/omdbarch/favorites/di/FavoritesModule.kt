@@ -1,7 +1,7 @@
 package com.meteoro.omdbarch.favorites.di
 
-import com.meteoro.omdbarch.domain.CacheMovie
-import com.meteoro.omdbarch.domain.ManagerSearch
+import com.meteoro.omdbarch.domain.repository.CacheRepository
+import com.meteoro.omdbarch.domain.repository.ManagerRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.favorites.FavoritesActivity
 import com.meteoro.omdbarch.favorites.details.MovieDetailsFragment
@@ -37,9 +37,9 @@ abstract class FavoritesModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideWordsViewModel(manager: ManagerSearch, scheduler: Scheduler): WordsViewModel =
+        fun provideWordsViewModel(manager: ManagerRepository, scheduler: Scheduler): WordsViewModel =
             WordsViewModel(
-                manager = manager,
+                managerRepository = manager,
                 machine = StateMachine(
                     uiScheduler = scheduler
                 )
@@ -48,9 +48,9 @@ abstract class FavoritesModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideMovieListViewModel(cache: CacheMovie, scheduler: Scheduler): MovieListViewModel =
+        fun provideMovieListViewModel(cache: CacheRepository, scheduler: Scheduler): MovieListViewModel =
             MovieListViewModel(
-                cache = cache,
+                cacheRepository = cache,
                 machine = StateMachine(
                     uiScheduler = scheduler
                 )
@@ -59,9 +59,9 @@ abstract class FavoritesModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideMovieDetailsViewModel(cache: CacheMovie, scheduler: Scheduler): MovieDetailsViewModel =
+        fun provideMovieDetailsViewModel(cache: CacheRepository, scheduler: Scheduler): MovieDetailsViewModel =
             MovieDetailsViewModel(
-                cache = cache,
+                cacheRepository = cache,
                 machine = StateMachine(
                     uiScheduler = scheduler
                 )

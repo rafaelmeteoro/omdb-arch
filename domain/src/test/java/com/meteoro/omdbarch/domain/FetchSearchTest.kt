@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.domain
 
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
+import com.meteoro.omdbarch.domain.repository.SearchRepository
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.domain.util.noResultSearch
 import com.meteoro.omdbarch.domain.util.resultSearch
@@ -13,7 +14,7 @@ import org.mockito.ArgumentMatchers.anyString
 class FetchSearchTest {
 
     private val service = mock<SearchService>()
-    private lateinit var usecase: FetchSearch
+    private lateinit var usecase: SearchRepository
 
     @Before
     fun `before each test`() {

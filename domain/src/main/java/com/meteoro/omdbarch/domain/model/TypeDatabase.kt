@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.persistance.model
+package com.meteoro.omdbarch.domain.model
 
 object TypeDatabase {
     const val ROOM = "room"

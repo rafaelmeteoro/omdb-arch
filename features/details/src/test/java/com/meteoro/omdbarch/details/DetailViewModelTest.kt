@@ -1,10 +1,10 @@
 package com.meteoro.omdbarch.details
 
 import com.meteoro.omdbarch.components.ResourceProvider
-import com.meteoro.omdbarch.domain.CacheMovie
-import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.domain.repository.CacheRepository
+import com.meteoro.omdbarch.domain.repository.MovieRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.domain.state.ViewState
 import com.nhaarman.mockitokotlin2.*
@@ -18,8 +18,8 @@ class DetailViewModelTest {
 
     private lateinit var viewModel: DetailViewModelContract
 
-    private val mockFetch = mock<FetchMovie>()
-    private val mockCache = mock<CacheMovie>()
+    private val mockFetch = mock<MovieRepository>()
+    private val mockCache = mock<CacheRepository>()
     private val mockProvider = mock<ResourceProvider>()
 
     private val result = Movie(
@@ -35,8 +35,8 @@ class DetailViewModelTest {
     @Before
     fun `before each test`() {
         viewModel = DetailViewModel(
-            fetch = mockFetch,
-            cache = mockCache,
+            movieRepository = mockFetch,
+            cacheRepository = mockCache,
             machine = StateMachine(),
             resProvider = mockProvider
         )

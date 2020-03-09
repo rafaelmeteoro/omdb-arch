@@ -1,23 +1,23 @@
 package com.meteoro.omdbarch.home
 
-import com.meteoro.omdbarch.domain.FetchSearch
-import com.meteoro.omdbarch.domain.ManagerSearch
+import com.meteoro.omdbarch.domain.repository.ManagerRepository
+import com.meteoro.omdbarch.domain.repository.SearchRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.domain.state.ViewState
 import io.reactivex.Flowable
 
 class HomeViewModel(
-    private val fetch: FetchSearch,
-    private val manager: ManagerSearch,
+    private val searchRepository: SearchRepository,
+    private val managerRepository: ManagerRepository,
     private val machine: StateMachine<HomePresentation>
 ) {
     fun searchMovie(movieTitle: String): Flowable<ViewState<HomePresentation>> =
-        fetch.searchMovies(movieTitle)
+        searchRepository.searchMovies(movieTitle)
             .map { BuildHomePresentation(it) }
             .compose(machine)
             .doOnComplete { saveSearch(movieTitle) }
 
     private fun saveSearch(search: String) {
-        if (search.isNotEmpty()) manager.save(search)
+        if (search.isNotEmpty()) managerRepository.save(search)
     }
 }

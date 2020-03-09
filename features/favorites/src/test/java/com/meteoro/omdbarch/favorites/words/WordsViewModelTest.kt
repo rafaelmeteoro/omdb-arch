@@ -1,7 +1,7 @@
 package com.meteoro.omdbarch.favorites.words
 
-import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
+import com.meteoro.omdbarch.domain.repository.ManagerRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.domain.state.ViewState
 import com.nhaarman.mockitokotlin2.*
@@ -14,14 +14,14 @@ class WordsViewModelTest {
 
     private lateinit var viewModel: WordsViewModel
 
-    private val mockManager = mock<ManagerSearch>()
+    private val mockManager = mock<ManagerRepository>()
 
     private val result = listOf("matrix", "avengers", "marvel")
 
     @Before
     fun `before each test`() {
         viewModel = WordsViewModel(
-            manager = mockManager,
+            managerRepository = mockManager,
             machine = StateMachine()
         )
     }

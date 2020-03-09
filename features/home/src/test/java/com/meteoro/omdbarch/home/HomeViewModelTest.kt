@@ -1,11 +1,11 @@
 package com.meteoro.omdbarch.home
 
-import com.meteoro.omdbarch.domain.FetchSearch
-import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
+import com.meteoro.omdbarch.domain.repository.ManagerRepository
+import com.meteoro.omdbarch.domain.repository.SearchRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.domain.state.ViewState
 import com.nhaarman.mockitokotlin2.*
@@ -17,8 +17,8 @@ class HomeViewModelTest {
 
     private lateinit var viewModel: HomeViewModel
 
-    private val mockFetch = mock<FetchSearch>()
-    private val mockManager = mock<ManagerSearch>()
+    private val mockFetch = mock<SearchRepository>()
+    private val mockManager = mock<ManagerRepository>()
 
     private val result = ResultSearch(
         search = listOf(
@@ -35,8 +35,8 @@ class HomeViewModelTest {
     @Before
     fun `before each test`() {
         viewModel = HomeViewModel(
-            fetch = mockFetch,
-            manager = mockManager,
+            searchRepository = mockFetch,
+            managerRepository = mockManager,
             machine = StateMachine()
         )
     }

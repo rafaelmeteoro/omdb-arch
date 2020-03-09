@@ -1,6 +1,7 @@
 package com.meteoro.omdbarch.domain
 
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
+import com.meteoro.omdbarch.domain.repository.CacheRepository
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.util.movie
 import com.nhaarman.mockitokotlin2.*
@@ -12,7 +13,7 @@ import org.mockito.ArgumentMatchers.anyString
 class CacheMovieTest {
 
     private val service = mock<MovieCacheService>()
-    private lateinit var cache: CacheMovie
+    private lateinit var cache: CacheRepository
 
     @Before
     fun `before each test`() {

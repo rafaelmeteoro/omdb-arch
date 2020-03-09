@@ -2,27 +2,28 @@ package com.meteoro.omdbarch.domain
 
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.domain.repository.CacheRepository
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import io.reactivex.Flowable
 
-class CacheMovie(private val service: MovieCacheService) {
+class CacheMovie(private val service: MovieCacheService) : CacheRepository {
 
-    fun saveMovie(movie: Movie) {
+    override fun saveMovie(movie: Movie) {
         service.save(movie)
     }
 
-    fun deleteMovie(movie: Movie) {
+    override fun deleteMovie(movie: Movie) {
         service.delete(movie)
     }
 
-    fun deleteAll() {
+    override fun deleteAll() {
         service.deleteAll()
     }
 
-    fun getMovie(imdbId: String): Flowable<Movie> =
+    override fun getMovie(imdbId: String): Flowable<Movie> =
         service.movieCached(imdbId)
 
-    fun getMovies(): Flowable<List<Movie>> =
+    override fun getMovies(): Flowable<List<Movie>> =
         service.moviesCached()
             .flatMap { movies ->
                 if (movies.isEmpty()) {
