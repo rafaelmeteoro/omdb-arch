@@ -20,7 +20,10 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Install Dependencies
-        run: gem install bundler && bundle install && install fastlane
+        run: gem install bundler && bundle install
+
+      - name: Install Fastlane
+        run: gem install fastlane
 
       - name: Run Fastlane Compile Lane
         run: fastlane compile
@@ -42,7 +45,10 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Install Dependencies
-        run: gem install bundler && bundle install && install fastlane
+        run: gem install bundler && bundle install
+
+      - name: Install Fastlane
+        run: gem install fastlane
 
       - name: Run Fastlane Lint Lane
         run: fastlane lint
@@ -64,7 +70,10 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Install Dependencies
-        run: gem install bundler && bundle install && install fastlane
+        run: gem install bundler && bundle install
+
+      - name: Install Fastlane
+        run: gem install fastlane
 
       - name: Run Fastlane Assemble Lane
         run: fastlane assemble
@@ -86,7 +95,10 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Install Dependencies
-        run: gem install bundler && bundle install && install fastlane
+        run: gem install bundler && bundle install
+
+      - name: Install Fastlane
+        run: gem install fastlane
 
       - name: Run Fastlane Unit Test Lane
         run: fastlane unit_test
