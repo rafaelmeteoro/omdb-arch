@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.meteoro.omdbarch.components.Disposer
-import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
+import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
+import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.favorites.databinding.FragmentWordsBinding
 import com.meteoro.omdbarch.favorites.databinding.StateWordsContentBinding

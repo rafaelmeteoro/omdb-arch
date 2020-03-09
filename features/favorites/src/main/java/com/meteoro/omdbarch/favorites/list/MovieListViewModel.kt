@@ -1,9 +1,9 @@
 package com.meteoro.omdbarch.favorites.list
 
-import com.meteoro.omdbarch.components.StateMachine
-import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.domain.state.StateMachine
+import com.meteoro.omdbarch.domain.state.ViewState
 import io.reactivex.Flowable
 
 class MovieListViewModel(

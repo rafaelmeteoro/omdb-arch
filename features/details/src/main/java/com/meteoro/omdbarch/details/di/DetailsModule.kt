@@ -2,13 +2,13 @@ package com.meteoro.omdbarch.details.di
 
 import android.content.Context
 import com.meteoro.omdbarch.components.ResourceProvider
-import com.meteoro.omdbarch.components.StateMachine
 import com.meteoro.omdbarch.details.DetailViewModel
 import com.meteoro.omdbarch.details.DetailViewModelContract
 import com.meteoro.omdbarch.details.MovieDetailActivity
 import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.services.MovieService
+import com.meteoro.omdbarch.domain.state.StateMachine
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector

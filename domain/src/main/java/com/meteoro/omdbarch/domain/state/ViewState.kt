@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.components
+package com.meteoro.omdbarch.domain.state
 
 sealed class ViewState<out T> {
     object Launched : ViewState<Nothing>()

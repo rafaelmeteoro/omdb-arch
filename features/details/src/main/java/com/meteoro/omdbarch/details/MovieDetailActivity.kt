@@ -5,14 +5,14 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.meteoro.omdbarch.actions.EXTRA_IMDB
 import com.meteoro.omdbarch.actions.ImdbArgs
-import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ErrorStateResources
-import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.details.databinding.ActivityMovieDetailBinding
 import com.meteoro.omdbarch.details.databinding.StateDetailContentBinding
 import com.meteoro.omdbarch.details.databinding.StateDetailErrorBinding
+import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
+import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.logger.Logger
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection

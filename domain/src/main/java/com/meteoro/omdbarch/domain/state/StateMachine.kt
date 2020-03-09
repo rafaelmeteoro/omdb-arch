@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.components
+package com.meteoro.omdbarch.domain.state
 
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
@@ -10,7 +10,6 @@ class StateMachine<T>(private val uiScheduler: Scheduler = Schedulers.trampoline
     FlowableTransformer<T, ViewState<T>> {
 
     override fun apply(upstream: Flowable<T>): Publisher<ViewState<T>> {
-
         val beggining = ViewState.Launched
         val end = Flowable.just(ViewState.Done)
 

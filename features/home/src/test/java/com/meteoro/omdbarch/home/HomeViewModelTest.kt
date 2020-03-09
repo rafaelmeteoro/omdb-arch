@@ -1,13 +1,13 @@
 package com.meteoro.omdbarch.home
 
-import com.meteoro.omdbarch.components.StateMachine
-import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.FetchSearch
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
+import com.meteoro.omdbarch.domain.state.StateMachine
+import com.meteoro.omdbarch.domain.state.ViewState
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Flowable
 import org.junit.Before

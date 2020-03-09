@@ -6,8 +6,8 @@ import androidx.test.rule.ActivityTestRule
 import com.meteoro.omdbarch.OmdbApplication
 import com.meteoro.omdbarch.actions.EXTRA_IMDB
 import com.meteoro.omdbarch.actions.ImdbArgs
-import com.meteoro.omdbarch.components.Disposer
-import com.meteoro.omdbarch.components.ViewState
+import com.meteoro.omdbarch.domain.disposer.Disposer
+import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.dsl.Visibility
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.util.ActivityScenarioLauncher.Companion.scenarioLauncher

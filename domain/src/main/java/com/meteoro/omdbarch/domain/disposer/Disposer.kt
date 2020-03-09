@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.components
+package com.meteoro.omdbarch.domain.disposer
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner

@@ -1,8 +1,8 @@
 package com.meteoro.omdbarch.favorites.di
 
-import com.meteoro.omdbarch.components.StateMachine
 import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.ManagerSearch
+import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.favorites.FavoritesActivity
 import com.meteoro.omdbarch.favorites.details.MovieDetailsFragment
 import com.meteoro.omdbarch.favorites.details.MovieDetailsViewModel

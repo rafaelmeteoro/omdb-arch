@@ -1,4 +1,4 @@
-package com.meteoro.omdbarch.components
+package com.meteoro.omdbarch.domain.state
 
 import io.reactivex.Flowable
 import org.junit.Before

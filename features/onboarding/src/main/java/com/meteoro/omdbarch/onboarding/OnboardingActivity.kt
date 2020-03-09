@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.onboarding
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.meteoro.omdbarch.actions.Actions
-import com.meteoro.omdbarch.components.Disposer
+import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.onboarding.databinding.ActivityOnboardingBinding
 import dagger.android.AndroidInjection

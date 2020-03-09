@@ -99,17 +99,17 @@ jobs:
   ##########################################################
   instrumentation_test:
 #    needs: assemble
-    needs: lint
-    runs-on: macOS-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-
-      - name: Run Instrumentation Tests on Emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 28
-          script: ./gradlew connectedDebugAndroidTest
+#    needs: lint
+#    runs-on: macOS-latest
+#    steps:
+#      - name: Checkout Repo
+#        uses: actions/checkout@v2
+#
+#      - name: Run Instrumentation Tests on Emulator
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 28
+#          script: ./gradlew connectedDebugAndroidTest
 
 #  build:
 #

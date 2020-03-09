@@ -1,10 +1,10 @@
 package com.meteoro.omdbarch.favorites.details
 
-import com.meteoro.omdbarch.components.StateMachine
-import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.CacheMovie
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError
 import com.meteoro.omdbarch.domain.model.Movie
+import com.meteoro.omdbarch.domain.state.StateMachine
+import com.meteoro.omdbarch.domain.state.ViewState
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify

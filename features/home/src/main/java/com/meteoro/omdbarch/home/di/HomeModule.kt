@@ -1,9 +1,9 @@
 package com.meteoro.omdbarch.home.di
 
-import com.meteoro.omdbarch.components.StateMachine
 import com.meteoro.omdbarch.domain.FetchSearch
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.services.SearchService
+import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.home.HomeActivity
 import com.meteoro.omdbarch.home.HomeViewModel
 import dagger.Module

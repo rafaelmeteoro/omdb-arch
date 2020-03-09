@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.actions.Actions
-import com.meteoro.omdbarch.components.Disposer
 import com.meteoro.omdbarch.components.ErrorStateResources
-import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
+import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
+import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.home.databinding.ActivityHomeBinding
 import com.meteoro.omdbarch.home.databinding.StateHomeContentBinding
 import com.meteoro.omdbarch.home.databinding.StateHomeErrorBinding

@@ -1,9 +1,9 @@
 package com.meteoro.omdbarch.home
 
-import com.meteoro.omdbarch.components.StateMachine
-import com.meteoro.omdbarch.components.ViewState
 import com.meteoro.omdbarch.domain.FetchSearch
 import com.meteoro.omdbarch.domain.ManagerSearch
+import com.meteoro.omdbarch.domain.state.StateMachine
+import com.meteoro.omdbarch.domain.state.ViewState
 import io.reactivex.Flowable
 
 class HomeViewModel(
