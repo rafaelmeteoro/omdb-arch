@@ -4,9 +4,17 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
 import com.meteoro.omdbarch.domain.model.TypeMovie
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Test
 
-class BuildHomePresentationTest {
+class HomePresentationMapperTest {
+
+    lateinit var mapper: HomePresentationMapper
+
+    @Before
+    fun `before each test`() {
+        mapper = HomePresentationMapper()
+    }
 
     @Test
     fun `should build presentation with type series`() {
@@ -36,7 +44,7 @@ class BuildHomePresentationTest {
             totalResults = 1
         )
 
-        assertThat(BuildHomePresentation(provided)).isEqualTo(expected)
+        assertThat(mapper.fromDomain(provided)).isEqualTo(expected)
     }
 
     @Test
@@ -67,7 +75,7 @@ class BuildHomePresentationTest {
             totalResults = 1
         )
 
-        assertThat(BuildHomePresentation(provided)).isEqualTo(expected)
+        assertThat(mapper.fromDomain(provided)).isEqualTo(expected)
     }
 
     @Test
@@ -98,7 +106,7 @@ class BuildHomePresentationTest {
             totalResults = 1
         )
 
-        assertThat(BuildHomePresentation(provided)).isEqualTo(expected)
+        assertThat(mapper.fromDomain(provided)).isEqualTo(expected)
     }
 
     @Test
@@ -129,6 +137,6 @@ class BuildHomePresentationTest {
             totalResults = 1
         )
 
-        assertThat(BuildHomePresentation(provided)).isEqualTo(expected)
+        assertThat(mapper.fromDomain(provided)).isEqualTo(expected)
     }
 }

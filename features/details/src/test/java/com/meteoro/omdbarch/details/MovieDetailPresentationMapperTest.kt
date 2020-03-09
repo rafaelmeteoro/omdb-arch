@@ -5,14 +5,22 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 
-class BuildMovieDetailPresentationTest {
+class MovieDetailPresentationMapperTest {
 
     private val resMock = mock<ResourceProvider>()
+    lateinit var mapper: MovieDetailPresentationMapper
+
     private val resTest = "teste"
+
+    @Before
+    fun `before each test`() {
+        mapper = MovieDetailPresentationMapper()
+    }
 
     @Test
     fun `should build presentation`() {
@@ -39,6 +47,6 @@ class BuildMovieDetailPresentationTest {
             poster = "http://www.avengers/movie"
         )
 
-        assertThat(BuildMovieDetailPresentation(provided, resMock)).isEqualTo(expected)
+        assertThat(mapper.fromDomain(provided, resMock)).isEqualTo(expected)
     }
 }

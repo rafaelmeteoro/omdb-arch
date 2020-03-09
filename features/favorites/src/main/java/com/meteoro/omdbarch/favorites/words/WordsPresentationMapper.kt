@@ -1,8 +1,8 @@
 package com.meteoro.omdbarch.favorites.words
 
-object BuildWordsPresentation {
+class WordsPresentationMapper {
 
-    operator fun invoke(result: List<String>) =
+    fun fromDomain(result: List<String>): WordsPresentation =
         WordsPresentation(
             words = result
         )

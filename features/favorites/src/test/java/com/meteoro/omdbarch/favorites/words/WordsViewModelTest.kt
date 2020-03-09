@@ -28,7 +28,7 @@ class WordsViewModelTest {
 
     @Test
     fun `should emmit states for successful words presentation`() {
-        val expected = BuildWordsPresentation(result)
+        val expected = WordsPresentationMapper().fromDomain(result)
 
         whenever(mockManager.fetchSearchList())
             .thenReturn(Flowable.just(result))

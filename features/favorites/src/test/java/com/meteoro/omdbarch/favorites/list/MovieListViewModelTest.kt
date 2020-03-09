@@ -28,7 +28,7 @@ class MovieListViewModelTest {
     fun `should emmit states for successful movies presentation`() {
         val movies = listOf(Movie(imdbId = "imdb", title = "Avengers"))
 
-        val expected = BuildMovieListPresentation(movies)
+        val expected = MovieListPresentationMapper().fromDomain(movies)
 
         whenever(mockCache.getMovies())
             .thenReturn(Flowable.just(movies))

@@ -3,9 +3,16 @@ package com.meteoro.omdbarch.details
 import com.meteoro.omdbarch.components.ResourceProvider
 import com.meteoro.omdbarch.domain.model.Movie
 
-object BuildMovieDetailPresentation {
+class MovieDetailPresentationMapper {
 
-    operator fun invoke(info: Movie, resProvider: ResourceProvider) =
+    companion object {
+        private const val defaultTitle = "No Title"
+        private const val defaultYear = "????"
+        private const val defaultFormat = "-"
+        private const val defaultPoster = ""
+    }
+
+    fun fromDomain(info: Movie, resProvider: ResourceProvider): MovieDetailPresentation =
         MovieDetailPresentation(
             title = info.title ?: defaultTitle,
             year = info.year ?: defaultYear,
@@ -15,9 +22,4 @@ object BuildMovieDetailPresentation {
             plot = resProvider.getString(R.string.plot, info.plot ?: defaultFormat),
             poster = info.poster ?: defaultPoster
         )
-
-    private const val defaultTitle = "No Title"
-    private const val defaultYear = "????"
-    private const val defaultFormat = "-"
-    private const val defaultPoster = ""
 }

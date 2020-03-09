@@ -11,6 +11,6 @@ class MovieDetailsViewModel(
 ) {
     fun fetchMovieSaved(imdbId: String): Flowable<ViewState<MovieDetailsPresentation>> =
         cacheRepository.getMovie(imdbId)
-            .map { BuildMovieDetailsPresentation(it) }
+            .map { MovieDetailsPresentationMapper().fromDomain(it) }
             .compose(machine)
 }

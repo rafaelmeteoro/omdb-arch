@@ -13,7 +13,7 @@ class HomeViewModel(
 ) {
     fun searchMovie(movieTitle: String): Flowable<ViewState<HomePresentation>> =
         searchRepository.searchMovies(movieTitle)
-            .map { BuildHomePresentation(it) }
+            .map { HomePresentationMapper().fromDomain(it) }
             .compose(machine)
             .doOnComplete { saveSearch(movieTitle) }
 

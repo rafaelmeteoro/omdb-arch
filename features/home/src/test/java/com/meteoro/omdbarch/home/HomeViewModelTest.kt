@@ -44,7 +44,7 @@ class HomeViewModelTest {
     @Test
     fun `should emmit states for successful home presentation`() {
         val title = "Avengers"
-        val expected = BuildHomePresentation(result)
+        val expected = HomePresentationMapper().fromDomain(result)
 
         whenever(mockFetch.searchMovies(title))
             .thenReturn(Flowable.just(result))

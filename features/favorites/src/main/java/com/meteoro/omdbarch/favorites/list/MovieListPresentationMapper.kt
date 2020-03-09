@@ -2,9 +2,9 @@ package com.meteoro.omdbarch.favorites.list
 
 import com.meteoro.omdbarch.domain.model.Movie
 
-object BuildMovieListPresentation {
+class MovieListPresentationMapper {
 
-    operator fun invoke(movies: List<Movie>) =
+    fun fromDomain(movies: List<Movie>): MovieListPresentation =
         MovieListPresentation(
             movies = movies
         )

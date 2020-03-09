@@ -47,7 +47,7 @@ class DetailViewModelTest {
         whenever(mockProvider.getString(anyInt(), anyString()))
             .thenReturn("")
 
-        val expected = BuildMovieDetailPresentation(result, mockProvider)
+        val expected = MovieDetailPresentationMapper().fromDomain(result, mockProvider)
 
         whenever(mockFetch.fetchMovie(anyString()))
             .thenReturn(Flowable.just(result))

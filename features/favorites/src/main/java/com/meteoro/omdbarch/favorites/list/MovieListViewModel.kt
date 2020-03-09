@@ -12,7 +12,7 @@ class MovieListViewModel(
 ) {
     fun fetchMoviesSaved(): Flowable<ViewState<MovieListPresentation>> =
         cacheRepository.getMovies()
-            .map { BuildMovieListPresentation(it) }
+            .map { MovieListPresentationMapper().fromDomain(it) }
             .compose(machine)
 
     fun deleteMovie(movie: Movie) {

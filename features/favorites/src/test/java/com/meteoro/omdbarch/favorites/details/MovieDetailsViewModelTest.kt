@@ -32,7 +32,7 @@ class MovieDetailsViewModelTest {
     fun `should emmit states for successful movie presentation`() {
         val imdb = "imdb"
         val movie = Movie(imdbId = imdb, title = "Avengers")
-        val expected = BuildMovieDetailsPresentation(movie)
+        val expected = MovieDetailsPresentationMapper().fromDomain(movie)
 
         whenever(mockCache.getMovie(anyString()))
             .thenReturn(Flowable.just(movie))

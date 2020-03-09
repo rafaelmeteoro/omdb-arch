@@ -11,7 +11,7 @@ class WordsViewModel(
 ) {
     fun fetchWordsSaved(): Flowable<ViewState<WordsPresentation>> =
         managerRepository.fetchSearchList()
-            .map { BuildWordsPresentation(it) }
+            .map { WordsPresentationMapper().fromDomain(it) }
             .compose(machine)
 
     fun deleteWord(word: String) =

@@ -21,7 +21,7 @@ class DetailViewModel(
                 saveMovie(movie)
                 Flowable.just(movie)
             }
-            .map { BuildMovieDetailPresentation(it, resProvider) }
+            .map { MovieDetailPresentationMapper().fromDomain(it, resProvider) }
             .compose(machine)
 
     private fun saveMovie(movie: Movie) {

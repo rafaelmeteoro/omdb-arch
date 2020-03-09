@@ -47,6 +47,9 @@ jobs:
       - name: Install Dependencies
         run: gem install bundler && bundle install
 
+      - name: Update fastlane
+        run: gem install fastlane
+
       - name: Run Fastlane Lint Lane
         run: fastlane lint
 
@@ -68,6 +71,9 @@ jobs:
 #
 #      - name: Install Dependencies
 #        run: gem install bundler && bundle install
+#
+#      - name: Update fastlane
+#          run: gem install fastlane
 #
 #      - name: Run Fastlane Assemble Lane
 #        run: fastlane assemble
@@ -91,6 +97,9 @@ jobs:
 
       - name: Install Dependencies
         run: gem install bundler && bundle install
+
+      - name: Update fastlane
+        run: gem install fastlane
 
       - name: Run Fastlane Unit Test Lane
         run: fastlane unit_test
