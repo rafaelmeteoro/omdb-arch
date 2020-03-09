@@ -20,10 +20,7 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Install Dependencies
-        run: gem install bundler && bundle install
-
-      - name: Update fastlane
-        run: gem install fastlane
+        run: gem install bundler && bundle install && install fastlane
 
       - name: Run Fastlane Compile Lane
         run: fastlane compile
@@ -45,10 +42,7 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Install Dependencies
-        run: gem install bundler && bundle install
-
-      - name: Update fastlane
-        run: gem install fastlane
+        run: gem install bundler && bundle install && install fastlane
 
       - name: Run Fastlane Lint Lane
         run: fastlane lint
@@ -57,33 +51,7 @@ jobs:
   # Assemble Job:
   # Install dependencies and assemble debug and test APKs
   ##########################################################
-#  assemble:
-#    needs: lint
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout Repo
-#        uses: actions/checkout@v2
-#
-#      - name: Set up Ruby 2.6
-#        uses: actions/setup-ruby@v1
-#        with:
-#          ruby-version: 2.6.x
-#
-#      - name: Install Dependencies
-#        run: gem install bundler && bundle install
-#
-#      - name: Update fastlane
-#          run: gem install fastlane
-#
-#      - name: Run Fastlane Assemble Lane
-#        run: fastlane assemble
-
-  ##########################################################
-  # Unit Test Job:
-  # Install dependencies and execute unit tests
-  ##########################################################
-  unit_test:
-#    needs: assemble
+  assemble:
     needs: lint
     runs-on: ubuntu-latest
     steps:
@@ -96,10 +64,29 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Install Dependencies
-        run: gem install bundler && bundle install
+        run: gem install bundler && bundle install && install fastlane
 
-      - name: Update fastlane
-        run: gem install fastlane
+      - name: Run Fastlane Assemble Lane
+        run: fastlane assemble
+
+  ##########################################################
+  # Unit Test Job:
+  # Install dependencies and execute unit tests
+  ##########################################################
+  unit_test:
+    needs: assemble
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install Dependencies
+        run: gem install bundler && bundle install && install fastlane
 
       - name: Run Fastlane Unit Test Lane
         run: fastlane unit_test
@@ -109,19 +96,18 @@ jobs:
   # Install dependencies and execute instrumentation tests
   # - Using macOS to initiate Android Emulator
   ##########################################################
-#  instrumentation_test:
-#    needs: assemble
-#    needs: lint
-#    runs-on: macOS-latest
-#    steps:
-#      - name: Checkout Repo
-#        uses: actions/checkout@v2
-#
-#      - name: Run Instrumentation Tests on Emulator
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          api-level: 28
-#          script: ./gradlew connectedDebugAndroidTest
+  instrumentation_test:
+    needs: assemble
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Run Instrumentation Tests on Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 28
+          script: ./gradlew connectedDebugAndroidTest
 
 #  build:
 #
