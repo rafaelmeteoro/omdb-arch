@@ -79,10 +79,10 @@ object Libraries {
 
     private object Versions {
         const val kotlinSerialization = "0.14.0"
-        const val okHttp = "4.4.0"
+        const val okHttp = "4.4.1"
         const val retrofit = "2.7.2"
         const val retrofitScalars = "2.7.2"
-        const val retrofitKotlinSerialization = "0.4.0"
+        const val retrofitKotlinSerialization = "0.5.0"
         const val retrofitGsonConverter = "2.7.2"
         const val retrofitRxAdapter = "2.7.2"
         const val rxJava = "2.2.18"
@@ -107,7 +107,7 @@ object Libraries {
         const val junitExt = "1.1.1"
         const val assertj = "3.15.0"
         const val mockitoKotlin = "2.2.0"
-        const val mockitoAndroid = "3.3.0"
+        const val mockitoAndroid = "3.3.1"
         const val androidxTest = "1.2.0"
         const val espresso = "3.2.0"
         const val roboletric = "4.3"
