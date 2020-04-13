@@ -9,14 +9,14 @@ object Libraries {
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okhttpLogger = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val retrofitScalars = "com.squareup.retrofit2:converter-scalars:${Versions.retrofitScalars}"
+    const val retrofitScalars = "com.squareup.retrofit2:converter-scalars:${Versions.retrofit}"
     const val retrofitKotlinSerialization =
         "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofitKotlinSerialization}"
 
     const val retrofitGsonConverter =
-        "com.squareup.retrofit2:converter-gson:${Versions.retrofitGsonConverter}"
+        "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
-    const val retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofitRxAdapter}"
+    const val retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
 
     const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
@@ -79,13 +79,10 @@ object Libraries {
 
     private object Versions {
         const val kotlinSerialization = "0.14.0"
-        const val okHttp = "4.4.1"
-        const val retrofit = "2.7.2"
-        const val retrofitScalars = "2.7.2"
+        const val okHttp = "4.5.0"
+        const val retrofit = "2.8.1"
         const val retrofitKotlinSerialization = "0.5.0"
-        const val retrofitGsonConverter = "2.7.2"
-        const val retrofitRxAdapter = "2.7.2"
-        const val rxJava = "2.2.18"
+        const val rxJava = "2.2.19"
         const val rxKotlin = "2.4.0"
         const val rxAndroid = "2.1.1"
         const val gson = "2.8.6"
@@ -98,8 +95,8 @@ object Libraries {
         const val constraintLayout = "2.0.0-beta4"
         const val lifecycle = "2.2.0"
         const val navigation = "2.2.1"
-        const val room = "2.2.4"
-        const val dagger = "2.26"
+        const val room = "2.2.5"
+        const val dagger = "2.27"
         const val leakyCanary = "2.2"
         const val picasso = "2.71828"
         const val stetho = "1.5.1"
@@ -107,10 +104,10 @@ object Libraries {
         const val junitExt = "1.1.1"
         const val assertj = "3.15.0"
         const val mockitoKotlin = "2.2.0"
-        const val mockitoAndroid = "3.3.1"
+        const val mockitoAndroid = "3.3.3"
         const val androidxTest = "1.2.0"
         const val espresso = "3.2.0"
         const val roboletric = "4.3"
-        const val barista = "3.2.0"
+        const val barista = "3.3.0"
     }
 }

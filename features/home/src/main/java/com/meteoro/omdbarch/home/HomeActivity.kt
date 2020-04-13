@@ -13,6 +13,7 @@ import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.components.ErrorStateResources
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
+import com.meteoro.omdbarch.domain.connectivity.base.ConnectivityProvider
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.state.ViewState
@@ -26,7 +27,7 @@ import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityStateListener {
 
     companion object {
         private const val COLUMN_COUNT = 3
@@ -41,6 +42,8 @@ class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModel: HomeViewModel
+
+    private val provider: ConnectivityProvider by lazy { ConnectivityProvider.createProvider(this) }
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var bindingContent: StateHomeContentBinding
@@ -60,6 +63,25 @@ class HomeActivity : AppCompatActivity() {
 
         setupView()
         setupSubject()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        provider.addListener(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        provider.removeListener(this)
+    }
+
+    override fun onStateChange(state: ConnectivityProvider.NetworkState) {
+        val hasInternet = state.hasInternet()
+        Snackbar.make(binding.homeRoot, "Connectivity (via callback): $hasInternet", Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun ConnectivityProvider.NetworkState.hasInternet(): Boolean {
+        return (this as? ConnectivityProvider.NetworkState.ConnectedState)?.hasInternet == true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
