@@ -49,7 +49,7 @@ object BuildPlugins {
         const val testLogger = "2.0.0"
         const val jacocoUnified = "0.16.0"
         const val sonarCloud = "2.8"
-        const val detekt = "1.7.4"
+        const val detekt = "1.9.0"
         const val versions = "0.28.0"
         const val safeArgs = "2.2.1"
         const val realm = "6.1.0"

@@ -59,6 +59,8 @@ object Libraries {
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakyCanary}"
 
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
+    const val coilBase = "io.coil-kt:coil-base:${Versions.coil}"
 
     const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
     const val stethoOkHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
@@ -79,7 +81,7 @@ object Libraries {
 
     private object Versions {
         const val kotlinSerialization = "0.14.0"
-        const val okHttp = "4.5.0"
+        const val okHttp = "4.6.0"
         const val retrofit = "2.8.1"
         const val retrofitKotlinSerialization = "0.5.0"
         const val rxJava = "2.2.19"
@@ -92,22 +94,23 @@ object Libraries {
         const val materialDesign = "1.1.0-rc02"
         const val coreAndroidx = "1.2.0"
         const val archCore = "2.1.0"
-        const val constraintLayout = "2.0.0-beta4"
+        const val constraintLayout = "2.0.0-beta6"
         const val lifecycle = "2.2.0"
         const val navigation = "2.2.1"
         const val room = "2.2.5"
         const val dagger = "2.27"
-        const val leakyCanary = "2.2"
+        const val leakyCanary = "2.3"
         const val picasso = "2.71828"
+        const val coil = "0.11.0"
         const val stetho = "1.5.1"
         const val junit = "4.13"
         const val junitExt = "1.1.1"
-        const val assertj = "3.15.0"
+        const val assertj = "3.16.1"
         const val mockitoKotlin = "2.2.0"
         const val mockitoAndroid = "3.3.3"
         const val androidxTest = "1.2.0"
         const val espresso = "3.2.0"
         const val roboletric = "4.3"
-        const val barista = "3.3.0"
+        const val barista = "3.5.0"
     }
 }

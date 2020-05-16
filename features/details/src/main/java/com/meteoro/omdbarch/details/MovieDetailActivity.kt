@@ -3,6 +3,7 @@ package com.meteoro.omdbarch.details
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import coil.api.load
 import com.meteoro.omdbarch.actions.EXTRA_IMDB
 import com.meteoro.omdbarch.actions.ImdbArgs
 import com.meteoro.omdbarch.components.ErrorStateResources
@@ -14,7 +15,6 @@ import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.logger.Logger
-import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -80,7 +80,9 @@ class MovieDetailActivity : AppCompatActivity() {
         bindingContent.detailCast.text = movie.cast
         bindingContent.detailDirectors.text = movie.directors
         bindingContent.detailPlot.text = movie.plot
-        Picasso.get().load(movie.poster).into(bindingContent.detailPoster)
+        bindingContent.detailPoster.load(movie.poster) {
+            crossfade(true)
+        }
     }
 
     private fun handleError(reason: Throwable) {

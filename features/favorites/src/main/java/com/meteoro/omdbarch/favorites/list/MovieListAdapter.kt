@@ -3,9 +3,9 @@ package com.meteoro.omdbarch.favorites.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.favorites.databinding.MovieListItemBinding
-import com.squareup.picasso.Picasso
 
 class MovieListAdapter(
     private val presentation: MovieListPresentation,
@@ -31,7 +31,9 @@ class MovieListAdapter(
             itemBinding.movieListTitle.text = row.title
             itemBinding.movieListYear.text = row.year
             itemBinding.movieListRating.text = row.imdbRating
-            Picasso.get().load(row.poster).into(itemBinding.movieListImage)
+            itemBinding.movieListImage.load(row.poster) {
+                crossfade(true)
+            }
 
             itemBinding.iconDelete.setOnClickListener { listener.deleteMovie(row) }
             itemBinding.displayContainer.setOnClickListener { listener.navigateToMovie(row) }

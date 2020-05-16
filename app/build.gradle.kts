@@ -64,6 +64,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    lintOptions {
+        isAbortOnError = false
+    }
+
     viewBinding {
         isEnabled = true
     }
@@ -103,6 +107,8 @@ dependencies {
     implementation(Libraries.retrofitGsonConverter)
     implementation(Libraries.gson)
     implementation(Libraries.picasso)
+    implementation(Libraries.coil)
+    implementation(Libraries.coilBase)
     implementation(Libraries.stetho)
     implementation(Libraries.stethoOkHttp)
     implementation(Libraries.dagger)

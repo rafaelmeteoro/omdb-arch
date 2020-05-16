@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import coil.api.load
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.disposer.Disposer
@@ -15,7 +16,6 @@ import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.favorites.databinding.FragmentMovieDetailsBinding
 import com.meteoro.omdbarch.favorites.databinding.StateDetailsContentBinding
 import com.meteoro.omdbarch.logger.Logger
-import com.squareup.picasso.Picasso
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -81,7 +81,9 @@ class MovieDetailsFragment : Fragment() {
         val movie = presentation.movie
         binding.stateView.setState(FacedViewState.CONTENT)
 
-        Picasso.get().load(movie.poster).into(bindingContent.movieDetailPoster)
+        bindingContent.movieDetailPoster.load(movie.poster) {
+            crossfade(true)
+        }
         bindingContent.movieDetailTitle.text = movie.title
         bindingContent.movieDetailYear.text = movie.year
         bindingContent.movieDetailPlot.text = movie.plot

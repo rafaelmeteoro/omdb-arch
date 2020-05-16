@@ -35,6 +35,8 @@ dependencies {
     implementation(Libraries.rxKotlin)
     implementation(Libraries.rxAndroid)
     implementation(Libraries.picasso)
+    implementation(Libraries.coil)
+    implementation(Libraries.coilBase)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)

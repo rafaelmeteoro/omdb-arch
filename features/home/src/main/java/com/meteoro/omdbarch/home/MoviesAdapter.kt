@@ -3,8 +3,8 @@ package com.meteoro.omdbarch.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.meteoro.omdbarch.home.databinding.MovieItemBinding
-import com.squareup.picasso.Picasso
 
 class MoviesAdapter(
     private val presentation: HomePresentation,
@@ -27,7 +27,9 @@ class MoviesAdapter(
 
         fun bind(row: MoviePresentation, action: (MoviePresentation) -> Unit) {
             itemBinding.movieTitle.text = row.title
-            Picasso.get().load(row.photoUrl).into(itemBinding.movieImage)
+            itemBinding.movieImage.load(row.photoUrl) {
+                crossfade(true)
+            }
             itemBinding.displayContainer.setOnClickListener { action.invoke(row) }
         }
     }
