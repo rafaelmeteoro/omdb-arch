@@ -131,8 +131,6 @@ internal class MovieInfrastructureTest {
 
     @Test
     fun `should handle 503 internal server error`() {
-
-
         rule.defineScenario(
             status = 503,
             response = loadFile("503_internal_server.json")

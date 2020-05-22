@@ -18,7 +18,7 @@ class WordsPresentationMapperTest {
         val provided = listOf("matrix", "avengers", "marvel")
 
         val expected = WordsPresentation(
-            words =  listOf("matrix", "avengers", "marvel")
+            words = listOf("matrix", "avengers", "marvel")
         )
 
         assertThat(mapper.fromDomain(provided)).isEqualTo(expected)
