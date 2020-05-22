@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.rest.network
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
 
-class CheckErrorTransformation<T : Any?>(
+internal class CheckErrorTransformation<T : Any?>(
     private val from: Throwable,
     private val expected: Throwable,
     private val transformer: FlowableTransformer<T, T>

@@ -4,7 +4,7 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 
-class StateMachineTest {
+internal class StateMachineTest {
 
     data class User(val name: String)
 

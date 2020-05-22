@@ -11,6 +11,8 @@ class LibraryModule(private val rootDir: File, private val type: LibraryType) {
         LibraryType.Android -> androidBuildLogic
         LibraryType.JacocoUnified -> jacocoUnifiedLogic
         LibraryType.JacocoUnitTest -> jacocoUnitLogic
+        LibraryType.DependencyGraph -> dependencyGraph
+        LibraryType.KtLint -> ktlint
     }
 
     private companion object {
@@ -18,5 +20,7 @@ class LibraryModule(private val rootDir: File, private val type: LibraryType) {
         const val kotlinBuildLogic = "kotlin-module.gradle"
         const val jacocoUnifiedLogic = "jacoco-unified.gradle"
         const val jacocoUnitLogic = "jacoco-unit-test.gradle"
+        const val dependencyGraph = "projectDependencyGraph.gradle"
+        const val ktlint = "ktlint.gradle"
     }
 }

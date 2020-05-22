@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class HomePresentationMapperTest {
+internal class HomePresentationMapperTest {
 
     lateinit var mapper: HomePresentationMapper
 

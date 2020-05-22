@@ -6,8 +6,8 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.DispatchingAndroidInjector_Factory
 import javax.inject.Provider
 
-inline fun <reified T : Activity> createFakeMainActivityInjector(crossinline block: T.() -> Unit)
-        : DispatchingAndroidInjector<Any> {
+inline fun <reified T : Activity> createFakeMainActivityInjector(crossinline block: T.() -> Unit):
+        DispatchingAndroidInjector<Any> {
 
     val injector = AndroidInjector<Activity> { instance ->
         if (instance is T) {

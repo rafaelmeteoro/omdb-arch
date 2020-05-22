@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class MovieDetailsPresentationMapperTest {
+internal class MovieDetailsPresentationMapperTest {
 
     lateinit var mapper: MovieDetailsPresentationMapper
 

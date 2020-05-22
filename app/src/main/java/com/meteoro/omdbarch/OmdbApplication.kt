@@ -10,8 +10,8 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import kotlinx.serialization.UnstableDefault
 import javax.inject.Inject
+import kotlinx.serialization.UnstableDefault
 
 @UnstableDefault
 class OmdbApplication : Application(), HasAndroidInjector {

@@ -10,7 +10,7 @@ import io.reactivex.subscribers.TestSubscriber
 import org.junit.Before
 import org.junit.Test
 
-class RemoteExecutorImplTest {
+internal class RemoteExecutorImplTest {
 
     private val service = mock<ConnectivityService>()
 

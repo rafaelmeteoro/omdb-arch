@@ -10,7 +10,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 
-class MovieDetailPresentationMapperTest {
+internal class MovieDetailPresentationMapperTest {
 
     private val resMock = mock<ResourceProvider>()
     lateinit var mapper: MovieDetailPresentationMapper

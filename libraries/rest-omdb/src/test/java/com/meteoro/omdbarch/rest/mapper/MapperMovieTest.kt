@@ -8,7 +8,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class MapperMovieTest {
+internal class MapperMovieTest {
 
     lateinit var mapper: MapperMovie
 

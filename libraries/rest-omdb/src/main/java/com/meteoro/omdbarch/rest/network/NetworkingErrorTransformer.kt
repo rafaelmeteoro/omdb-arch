@@ -3,12 +3,12 @@ package com.meteoro.omdbarch.rest.network
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
-import org.reactivestreams.Publisher
 import java.io.IOException
 import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import org.reactivestreams.Publisher
 
 class NetworkingErrorTransformer<T> : FlowableTransformer<T, T> {
 

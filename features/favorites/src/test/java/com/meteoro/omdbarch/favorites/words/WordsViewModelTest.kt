@@ -4,13 +4,17 @@ import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.repository.ManagerRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.domain.state.ViewState
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class WordsViewModelTest {
+internal class WordsViewModelTest {
 
     private lateinit var viewModel: WordsViewModel
 

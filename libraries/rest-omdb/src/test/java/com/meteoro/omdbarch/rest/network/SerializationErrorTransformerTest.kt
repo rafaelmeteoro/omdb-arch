@@ -8,7 +8,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.UnknownFieldException
 import org.junit.Test
 
-class SerializationErrorTransformerTest {
+internal class SerializationErrorTransformerTest {
 
     @Test
     fun `should handle missing field error`() {

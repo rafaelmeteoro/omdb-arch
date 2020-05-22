@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.domain.errors
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class NetworkingErrorTest {
+internal class NetworkingErrorTest {
 
     @Test
     fun `should be host unreachable`() {

@@ -5,12 +5,17 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.repository.CacheRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
 import com.meteoro.omdbarch.domain.state.ViewState
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 
-class MovieListViewModelTest {
+internal class MovieListViewModelTest {
 
     private lateinit var viewModel: MovieListViewModel
 

@@ -11,8 +11,8 @@ import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
-import okhttp3.Interceptor
 import javax.inject.Singleton
+import okhttp3.Interceptor
 
 @Module
 class AppModule {

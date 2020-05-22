@@ -17,7 +17,6 @@ buildscript {
         classpath(BuildPlugins.Dependencies.coveralls)
         classpath(BuildPlugins.Dependencies.testLogger)
         classpath(BuildPlugins.Dependencies.kotlinxSerialization)
-        classpath(BuildPlugins.Dependencies.ktlint)
         classpath(BuildPlugins.Dependencies.jacocoUnified)
         classpath(BuildPlugins.Dependencies.sonarCloud)
         classpath(BuildPlugins.Dependencies.detekt)

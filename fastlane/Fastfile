@@ -45,6 +45,11 @@ platform :android do
     gradle(task: "lintDebug")
   end
 
+  desc "Execute Statical Analysis"
+  lane :analysis do
+    gradle(task: "ktlintVerification")
+  end
+
   desc "Assemble source and test APKs"
   lane :assemble do
     gradle(task: "assembleDebug")
@@ -70,6 +75,7 @@ platform :android do
     gradle(task: "clean")
     compile
     lint
+    analysis
     assemble
     unit_test
     notification(subtitle: "Pipeline finished", message: "Execution successful.")

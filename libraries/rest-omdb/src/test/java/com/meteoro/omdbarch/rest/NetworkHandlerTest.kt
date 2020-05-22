@@ -10,7 +10,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class NetworkHandlerTest {
+internal class NetworkHandlerTest {
 
     private val context = mock<Context>()
     private val connectivityManager = mock<ConnectivityManager>()

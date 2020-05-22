@@ -5,7 +5,6 @@ object BuildPlugins {
     object Dependencies {
         const val androidSupport = "com.android.tools.build:gradle:${Versions.agp}"
         const val kotlinSupport = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinConfig.version}"
-        const val ktlint = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlint}"
         const val cobertura = "net.saliman:gradle-cobertura-plugin:${Versions.cobertura}"
         const val coveralls = "gradle.plugin.com.github.kt3k.coveralls:coveralls-gradle-plugin:${Versions.coveralls}"
         const val testLogger = "com.adarshr:gradle-test-logger-plugin:${Versions.testLogger}"
@@ -16,8 +15,6 @@ object BuildPlugins {
         const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
         const val realm = "io.realm:realm-gradle-plugin:${Versions.realm}"
-        const val moduleGraph =
-            "https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle"
     }
 
     object Ids {
@@ -43,7 +40,6 @@ object BuildPlugins {
 
     private object Versions {
         const val agp = "3.6.0"
-        const val ktlint = "8.2.0"
         const val cobertura = "3.0.0"
         const val coveralls = "2.8.4"
         const val testLogger = "2.0.0"

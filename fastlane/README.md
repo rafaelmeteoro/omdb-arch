@@ -36,6 +36,11 @@ Compile debug and test sources
 fastlane android lint
 ```
 Execute Android lint
+### android analysis
+```
+fastlane android analysis
+```
+Execute Statical Analysis
 ### android assemble
 ```
 fastlane android assemble

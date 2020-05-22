@@ -4,13 +4,17 @@ import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.repository.MovieRepository
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.util.movie
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-class FetchMovieTest {
+internal class FetchMovieTest {
 
     private val service = mock<MovieService>()
     private lateinit var usecase: MovieRepository

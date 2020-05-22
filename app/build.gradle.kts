@@ -3,8 +3,13 @@ import configs.KotlinConfig
 import configs.ProguardConfig
 import dependencies.InstrumentationTestsDependencies.Companion.instrumentationTest
 import dependencies.UnitTestDependencies.Companion.unitTest
+import modules.LibraryModule
+import modules.LibraryType
 import modules.ModuleNames
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+val dependencyGraph = LibraryModule(rootDir, LibraryType.DependencyGraph)
+val ktlintModule = LibraryModule(rootDir, LibraryType.KtLint)
 
 plugins {
     id(BuildPlugins.Ids.androidApplication)
@@ -14,7 +19,8 @@ plugins {
     id(BuildPlugins.Ids.realmAndroid)
 }
 
-apply(from = BuildPlugins.Dependencies.moduleGraph)
+apply(from = dependencyGraph.script())
+apply(from = ktlintModule.script())
 
 android {
     compileSdkVersion(AndroidConfig.compileSdk)

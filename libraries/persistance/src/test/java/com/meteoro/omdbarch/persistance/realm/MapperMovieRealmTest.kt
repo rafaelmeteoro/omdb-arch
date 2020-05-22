@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class MapperMovieRealmTest {
+internal class MapperMovieRealmTest {
 
     lateinit var mapper: MapperMovieRealm
 

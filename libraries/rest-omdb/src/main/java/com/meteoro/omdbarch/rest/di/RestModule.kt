@@ -5,7 +5,12 @@ import com.meteoro.omdbarch.domain.services.ConnectivityService
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.rest.*
+import com.meteoro.omdbarch.rest.BuildConfig
+import com.meteoro.omdbarch.rest.BuildRetrofit
+import com.meteoro.omdbarch.rest.ExecutionErrorHandler
+import com.meteoro.omdbarch.rest.MovieInfrastructure
+import com.meteoro.omdbarch.rest.NetworkHandler
+import com.meteoro.omdbarch.rest.SearchInfrastructure
 import com.meteoro.omdbarch.rest.api.OmdbAPI
 import com.meteoro.omdbarch.rest.executor.RemoteExecutor
 import com.meteoro.omdbarch.rest.executor.RemoteExecutorImpl
@@ -13,14 +18,14 @@ import com.meteoro.omdbarch.rest.interceptor.ApiInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
+import java.io.File
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import kotlinx.serialization.UnstableDefault
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import java.io.File
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @UnstableDefault
 @Module

@@ -3,7 +3,7 @@
 set -ex
 
 ./gradlew --stop
-./gradlew clean ktlintCheck --stacktrace
+./gradlew clean ktlintVerification --stacktrace
 ./gradlew clean detekt --stacktrace
 ./gradlew clean test --stacktrace
 ./gradlew clean jacocoTestReport --stacktrace
