@@ -31,11 +31,6 @@ Show update dependencies
 fastlane android compile
 ```
 Compile debug and test sources
-### android lint
-```
-fastlane android lint
-```
-Execute Android lint
 ### android analysis
 ```
 fastlane android analysis

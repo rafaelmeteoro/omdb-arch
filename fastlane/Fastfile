@@ -40,13 +40,9 @@ platform :android do
     gradle(task: "compileDebugAndroidTestSources")
   end
 
-  desc "Execute Android lint"
-  lane :lint do
-    gradle(task: "lintDebug")
-  end
-
   desc "Execute Statical Analysis"
   lane :analysis do
+    gradle(task: "lintDebug")
     gradle(task: "ktlintVerification")
     gradle(task: "detektVerification")
   end
@@ -75,7 +71,6 @@ platform :android do
   lane :pipeline do
     gradle(task: "clean")
     compile
-    lint
     analysis
     assemble
     unit_test

@@ -44,7 +44,7 @@ object BuildPlugins {
         const val jacocoUnified = "0.16.0"
         const val sonarCloud = "2.8"
         const val versions = "0.28.0"
-        const val safeArgs = "2.2.1"
+        const val safeArgs = "2.2.2"
         const val realm = "6.1.0"
     }
 }

@@ -30,9 +30,9 @@ jobs:
 
   ##########################################################
   # Lint Job:
-  # Install dependencies and execute lint debug
+  # Install dependencies and execute analysis debug
   ##########################################################
-  lint:
+  analysis:
     needs: compile
     runs-on: macOS-latest
     steps:
@@ -50,32 +50,7 @@ jobs:
       - name: Install Fastlane
         run: gem install fastlane
 
-      - name: Run Fastlane Lint Lane
-        run: fastlane lint
-
-  ##########################################################
-  # Lint Job:
-  # Install dependencies and execute lint debug
-  ##########################################################
-  analysis:
-    needs: lint
-    runs-on: macOS-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.6.x
-
-      - name: Install Dependencies
-        run: gem install bundler && bundle install
-
-      - name: Install Fastlane
-        run: gem install fastlane
-
-      - name: Run Fastlane Lint Lane
+      - name: Run Fastlane Analysis Lane
         run: fastlane analysis
 
   ##########################################################
