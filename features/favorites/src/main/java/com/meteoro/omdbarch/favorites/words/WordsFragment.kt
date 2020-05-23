@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.meteoro.omdbarch.components.extensions.ViewBindingHolder
+import com.meteoro.omdbarch.components.extensions.ViewBindingHolderImpl
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
@@ -19,7 +21,7 @@ import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class WordsFragment : Fragment() {
+class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by ViewBindingHolderImpl() {
 
     @Inject
     lateinit var logger: Logger
@@ -30,7 +32,6 @@ class WordsFragment : Fragment() {
     @Inject
     lateinit var viewModel: WordsViewModel
 
-    private lateinit var binding: FragmentWordsBinding
     private lateinit var bindingContent: StateWordsContentBinding
 
     override fun onAttach(context: Context) {
@@ -38,11 +39,12 @@ class WordsFragment : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentWordsBinding.inflate(inflater, container, false)
-        bindingContent = StateWordsContentBinding.bind(getContentView())
-
-        return binding.root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = initBinding(FragmentWordsBinding.inflate(layoutInflater), this) {
+        bindingContent = StateWordsContentBinding.bind(this.stateView.getView(FacedViewState.CONTENT))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,8 +52,6 @@ class WordsFragment : Fragment() {
         lifecycle.addObserver(disposer)
         getWordsSaved()
     }
-
-    private fun getContentView() = binding.stateView.getView<View>(FacedViewState.CONTENT)
 
     private fun getWordsSaved() {
         val toDispose = viewModel
@@ -75,7 +75,7 @@ class WordsFragment : Fragment() {
 
     private fun showWords(presentation: WordsPresentation) {
         logger.d("${presentation.words}")
-        binding.stateView.setState(FacedViewState.CONTENT)
+        binding?.stateView?.setState(FacedViewState.CONTENT)
 
         val words = presentation.words
 
@@ -91,21 +91,23 @@ class WordsFragment : Fragment() {
         logger.e("Failed to load words -> $reason")
 
         if (reason is NoResultsFound) {
-            binding.stateView.setState(FacedViewState.EMPTY)
+            binding?.stateView?.setState(FacedViewState.EMPTY)
             return
         }
 
-        binding.stateView.setState(FacedViewState.ERROR)
+        binding?.stateView?.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_words_error)
     }
 
     private fun startExecution() {
-        binding.stateView.setState(FacedViewState.LOADING)
+        binding?.stateView?.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {
-        Snackbar
-            .make(binding.wordsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
-            .show()
+        binding?.let {
+            Snackbar
+                .make(it.wordsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
+                .show()
+        }
     }
 }

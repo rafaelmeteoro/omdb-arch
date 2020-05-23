@@ -40,11 +40,26 @@ platform :android do
     gradle(task: "compileDebugAndroidTestSources")
   end
 
+  desc "Execute debug lint"
+  lane :lint do
+    gradle(task: "lintDebug")
+  end
+
+  desc "Execute Ktlint Verification"
+  lane :ktlint do
+    gradle(task: "ktlintVerification")
+  end
+
+  desc "Execute Detekt Verification"
+  lane :detekt do
+    gradle(task: "detektVerification")
+  end
+
   desc "Execute Statical Analysis"
   lane :analysis do
-    gradle(task: "lintDebug")
-    gradle(task: "ktlintVerification")
-    gradle(task: "detektVerification")
+    lint
+    ktlint
+    detekt
   end
 
   desc "Assemble source and test APKs"

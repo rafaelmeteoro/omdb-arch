@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import coil.api.load
 import com.google.android.material.snackbar.Snackbar
+import com.meteoro.omdbarch.components.extensions.ViewBindingHolder
+import com.meteoro.omdbarch.components.extensions.ViewBindingHolderImpl
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
@@ -20,7 +22,7 @@ import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class MovieDetailsFragment : Fragment() {
+class MovieDetailsFragment : Fragment(), ViewBindingHolder<FragmentMovieDetailsBinding> by ViewBindingHolderImpl() {
 
     @Inject
     lateinit var logger: Logger
@@ -31,7 +33,6 @@ class MovieDetailsFragment : Fragment() {
     @Inject
     lateinit var viewModel: MovieDetailsViewModel
 
-    private lateinit var binding: FragmentMovieDetailsBinding
     private lateinit var bindingContent: StateDetailsContentBinding
 
     override fun onAttach(context: Context) {
@@ -39,11 +40,12 @@ class MovieDetailsFragment : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-        bindingContent = StateDetailsContentBinding.bind(getContentView())
-
-        return binding.root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = initBinding(FragmentMovieDetailsBinding.inflate(layoutInflater), this) {
+        bindingContent = StateDetailsContentBinding.bind(this.stateView.getView(FacedViewState.CONTENT))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,8 +54,6 @@ class MovieDetailsFragment : Fragment() {
         val imdbId = arguments?.let { MovieDetailsFragmentArgs.fromBundle(it).imdbIdArg } ?: ""
         getMovieSaved(imdbId)
     }
-
-    private fun getContentView() = binding.stateView.getView<View>(FacedViewState.CONTENT)
 
     private fun getMovieSaved(imdbId: String) {
         val toDispose = viewModel
@@ -79,7 +79,7 @@ class MovieDetailsFragment : Fragment() {
         logger.d("${presentation.movie}")
 
         val movie = presentation.movie
-        binding.stateView.setState(FacedViewState.CONTENT)
+        binding?.stateView?.setState(FacedViewState.CONTENT)
 
         bindingContent.movieDetailPoster.load(movie.poster) {
             crossfade(true)
@@ -95,21 +95,23 @@ class MovieDetailsFragment : Fragment() {
         logger.e("Failed to load movies -> $reason")
 
         if (reason is NoResultsFound) {
-            binding.stateView.setState(FacedViewState.EMPTY)
+            binding?.stateView?.setState(FacedViewState.EMPTY)
             return
         }
 
-        binding.stateView.setState(FacedViewState.ERROR)
+        binding?.stateView?.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_movie_detail_error)
     }
 
     private fun startExecution() {
-        binding.stateView.setState(FacedViewState.LOADING)
+        binding?.stateView?.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {
-        Snackbar
-            .make(binding.movieDetailsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
-            .show()
+        binding?.let {
+            Snackbar
+                .make(it.movieDetailsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
+                .show()
+        }
     }
 }

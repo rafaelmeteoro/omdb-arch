@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
+import com.meteoro.omdbarch.components.extensions.ViewBindingHolder
+import com.meteoro.omdbarch.components.extensions.ViewBindingHolderImpl
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
@@ -27,7 +29,8 @@ import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
+class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener,
+    ViewBindingHolder<FragmentMovieListBinding> by ViewBindingHolderImpl() {
 
     @Inject
     lateinit var logger: Logger
@@ -38,7 +41,6 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     @Inject
     lateinit var viewModel: MovieListViewModel
 
-    private lateinit var binding: FragmentMovieListBinding
     private lateinit var bindingContent: StateListContentBinding
 
     override fun onAttach(context: Context) {
@@ -46,11 +48,12 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentMovieListBinding.inflate(inflater, container, false)
-        bindingContent = StateListContentBinding.bind(getContentView())
-
-        return binding.root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = initBinding(FragmentMovieListBinding.inflate(layoutInflater), this) {
+        bindingContent = StateListContentBinding.bind(this.stateView.getView(FacedViewState.CONTENT))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,8 +77,6 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
         }
         else -> super.onOptionsItemSelected(item)
     }
-
-    private fun getContentView() = binding.stateView.getView<View>(FacedViewState.CONTENT)
 
     private fun setupView() {
         bindingContent.movieListView.apply {
@@ -112,7 +113,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
     private fun handlePresentation(presentation: MovieListPresentation) {
         logger.d("${presentation.movies}")
 
-        binding.stateView.setState(FacedViewState.CONTENT)
+        binding?.stateView?.setState(FacedViewState.CONTENT)
         bindingContent.movieListView.adapter = MovieListAdapter(presentation, this)
     }
 
@@ -120,22 +121,24 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener {
         logger.e("Failed to load movies -> $reason")
 
         if (reason is NoResultsFound) {
-            binding.stateView.setState(FacedViewState.EMPTY)
+            binding?.stateView?.setState(FacedViewState.EMPTY)
             return
         }
 
-        binding.stateView.setState(FacedViewState.ERROR)
+        binding?.stateView?.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_movie_list_error)
     }
 
     private fun startExecution() {
-        binding.stateView.setState(FacedViewState.LOADING)
+        binding?.stateView?.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {
-        Snackbar
-            .make(binding.moviesListScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
-            .show()
+        binding?.let {
+            Snackbar
+                .make(it.moviesListScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
+                .show()
+        }
     }
 
     override fun navigateToMovie(movie: Movie) {
