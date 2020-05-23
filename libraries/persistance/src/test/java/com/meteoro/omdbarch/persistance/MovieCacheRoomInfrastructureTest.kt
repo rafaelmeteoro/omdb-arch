@@ -34,6 +34,8 @@ internal class MovieCacheRoomInfrastructureTest {
         )
     }
 
+    private val timeInvocation = 1
+
     @Before
     fun `before each test`() {
         cache = MovieCacheRoomInfrastructure(dao)
@@ -51,7 +53,7 @@ internal class MovieCacheRoomInfrastructureTest {
             .assertTerminated()
             .assertValue(movie)
 
-        verify(dao, times(timeInvocation())).favoriteMovie(imdb)
+        verify(dao, times(timeInvocation)).favoriteMovie(imdb)
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).clear()
@@ -68,7 +70,7 @@ internal class MovieCacheRoomInfrastructureTest {
             .assertTerminated()
             .assertValue(listOf(movie))
 
-        verify(dao, times(timeInvocation())).allFavoritesMovies()
+        verify(dao, times(timeInvocation)).allFavoritesMovies()
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).clear()
@@ -79,7 +81,7 @@ internal class MovieCacheRoomInfrastructureTest {
     fun `should save movie when provided`() {
         cache.save(movie)
 
-        verify(dao, times(timeInvocation())).insert(any())
+        verify(dao, times(timeInvocation)).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).clear()
         verify(dao, never()).favoriteMovie(anyString())
@@ -90,7 +92,7 @@ internal class MovieCacheRoomInfrastructureTest {
     fun `should delete movie when provided`() {
         cache.delete(movie)
 
-        verify(dao, times(timeInvocation())).remove(any())
+        verify(dao, times(timeInvocation)).remove(any())
         verify(dao, never()).insert(any())
         verify(dao, never()).clear()
         verify(dao, never()).favoriteMovie(anyString())
@@ -101,12 +103,10 @@ internal class MovieCacheRoomInfrastructureTest {
     fun `should clear all movies`() {
         cache.deleteAll()
 
-        verify(dao, times(timeInvocation())).clear()
+        verify(dao, times(timeInvocation)).clear()
         verify(dao, never()).insert(any())
         verify(dao, never()).remove(any())
         verify(dao, never()).favoriteMovie(anyString())
         verify(dao, never()).allFavoritesMovies()
     }
-
-    private fun timeInvocation() = 1
 }

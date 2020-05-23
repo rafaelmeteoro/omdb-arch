@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.adarshr.test-logger'
 apply from: "${rootDir}/buildSrc/shared/ktlint.gradle"
+apply from: "${rootDir}/buildSrc/shared/detekt.gradle"
 
 repositories {
     mavenCentral()

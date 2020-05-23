@@ -13,6 +13,7 @@ class LibraryModule(private val rootDir: File, private val type: LibraryType) {
         LibraryType.JacocoUnitTest -> jacocoUnitLogic
         LibraryType.DependencyGraph -> dependencyGraph
         LibraryType.KtLint -> ktlint
+        LibraryType.Detekt -> detekt
     }
 
     private companion object {
@@ -22,5 +23,6 @@ class LibraryModule(private val rootDir: File, private val type: LibraryType) {
         const val jacocoUnitLogic = "jacoco-unit-test.gradle"
         const val dependencyGraph = "projectDependencyGraph.gradle"
         const val ktlint = "ktlint.gradle"
+        const val detekt = "detekt.gradle"
     }
 }

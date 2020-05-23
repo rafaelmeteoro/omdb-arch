@@ -42,9 +42,6 @@ class FavoritesActivity : AppCompatActivity() {
         setupBottomNavigationBar()
     }
 
-    /**
-     * Called on first creation and when restoring state.
-     * */
     private fun setupBottomNavigationBar() {
         setSupportActionBar(binding.toolbar)
         val bottomNavigationView = binding.bottomNav

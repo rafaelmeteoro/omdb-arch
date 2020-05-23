@@ -1,5 +1,6 @@
 package com.meteoro.omdbarch.logger
 
+@Suppress("FunctionMinLength")
 object MutedLogger : Logger {
     override fun v(message: String) = Unit
 

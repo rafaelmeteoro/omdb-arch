@@ -25,9 +25,11 @@ class NetworkingErrorTransformer<T> : FlowableTransformer<T, T> {
     )
 
     private fun mapToDomainError(error: Throwable): NetworkingError {
-        if (isConnectionTimeout(error)) return NetworkingError.OperationTimeout
-        if (cannotReachHost(error)) return NetworkingError.HostUnreachable
-        return NetworkingError.ConnectionSpike
+        return when {
+            isConnectionTimeout(error) -> NetworkingError.OperationTimeout
+            cannotReachHost(error) -> NetworkingError.HostUnreachable
+            else -> NetworkingError.ConnectionSpike
+        }
     }
 
     private fun isNetworkingError(error: Throwable) =

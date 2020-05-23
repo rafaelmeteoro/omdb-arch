@@ -48,6 +48,7 @@ platform :android do
   desc "Execute Statical Analysis"
   lane :analysis do
     gradle(task: "ktlintVerification")
+    gradle(task: "detektVerification")
   end
 
   desc "Assemble source and test APKs"

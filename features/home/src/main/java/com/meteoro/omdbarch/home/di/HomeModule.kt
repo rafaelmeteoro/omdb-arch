@@ -23,7 +23,11 @@ abstract class HomeModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideHomeViewModel(fetch: SearchRepository, manager: ManagerRepository, scheduler: Scheduler): HomeViewModel =
+        fun provideHomeViewModel(
+            fetch: SearchRepository,
+            manager: ManagerRepository,
+            scheduler: Scheduler
+        ): HomeViewModel =
             HomeViewModel(
                 searchRepository = fetch,
                 managerRepository = manager,

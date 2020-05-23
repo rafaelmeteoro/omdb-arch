@@ -56,11 +56,11 @@ internal class MovieInfrastructureTest {
             director = "Joss Whedon",
             writer = "Joss Whedon (screenplay), Zak Penn (story), Joss Whedon (story)",
             actors = "Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth",
-            plot = "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
+            plot = "Earth's mightiest heroes must",
             language = "English, Russian, Hindi",
             country = "USA",
             awards = "Nominated for 1 Oscar. Another 38 wins & 79 nominations.",
-            poster = "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX1200.jpg",
+            poster = "https://V1_SX1200.jpg",
             ratings = listOf(
                 Rating(
                     source = "Internet Movie Database",

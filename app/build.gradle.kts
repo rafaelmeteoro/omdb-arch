@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val dependencyGraph = LibraryModule(rootDir, LibraryType.DependencyGraph)
 val ktlintModule = LibraryModule(rootDir, LibraryType.KtLint)
+val detektModule = LibraryModule(rootDir, LibraryType.Detekt)
 
 plugins {
     id(BuildPlugins.Ids.androidApplication)
@@ -21,6 +22,7 @@ plugins {
 
 apply(from = dependencyGraph.script())
 apply(from = ktlintModule.script())
+apply(from = detektModule.script())
 
 android {
     compileSdkVersion(AndroidConfig.compileSdk)

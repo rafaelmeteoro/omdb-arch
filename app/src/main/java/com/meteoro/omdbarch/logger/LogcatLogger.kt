@@ -2,6 +2,7 @@ package com.meteoro.omdbarch.logger
 
 import android.util.Log
 
+@Suppress("FunctionMinLength")
 internal object LogcatLogger : Logger {
 
     override fun v(message: String) {

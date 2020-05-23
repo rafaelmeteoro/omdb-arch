@@ -26,19 +26,7 @@ open class FavoriteMovieRealm(
         if (other !is FavoriteMovieRealm) return false
 
         return imdbId == other.imdbId &&
-                title == other.title &&
-                year == other.year &&
-                released == other.released &&
-                runtime == other.runtime &&
-                genre == other.genre &&
-                director == other.director &&
-                actors == other.actors &&
-                plot == other.plot &&
-                country == other.country &&
-                poster == other.poster &&
-                imdbRating == other.imdbRating &&
-                imdbVotes == other.imdbVotes &&
-                type == other.type
+                title == other.title
     }
 
     override fun hashCode(): Int {

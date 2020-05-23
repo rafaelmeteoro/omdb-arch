@@ -3,6 +3,7 @@ package com.meteoro.omdbarch.components
 import android.content.Context
 import androidx.annotation.StringRes
 
+@Suppress("SpreadOperator")
 class ResourceProvider(private val context: Context) {
 
     fun getString(@StringRes resId: Int): String =

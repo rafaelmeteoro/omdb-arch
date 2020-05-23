@@ -1,5 +1,6 @@
 package com.meteoro.omdbarch.logger
 
+@Suppress("FunctionMinLength")
 interface Logger {
     fun v(message: String)
     fun d(message: String)

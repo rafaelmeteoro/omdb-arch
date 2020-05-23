@@ -20,6 +20,8 @@ internal class FetchSearchTest {
     private val service = mock<SearchService>()
     private lateinit var usecase: SearchRepository
 
+    private val timeInvocation = 1
+
     @Before
     fun `before each test`() {
         usecase = FetchSearch(service)
@@ -35,7 +37,7 @@ internal class FetchSearchTest {
             .assertTerminated()
             .assertValue(resultSearch)
 
-        verify(service, times(timeInvocation()))
+        verify(service, times(timeInvocation))
             .searchMovies("Avengers", "", "")
     }
 
@@ -49,7 +51,7 @@ internal class FetchSearchTest {
             .assertTerminated()
             .assertError(NoResultsFound)
 
-        verify(service, times(timeInvocation()))
+        verify(service, times(timeInvocation))
             .searchMovies(anyString(), anyString(), anyString())
     }
 
@@ -60,8 +62,6 @@ internal class FetchSearchTest {
         verify(service, never())
             .searchMovies(anyString(), anyString(), anyString())
     }
-
-    private fun timeInvocation() = 1
 
     private fun simpleFetchSearch() =
         usecase.searchMovies("Avengers", "", "")

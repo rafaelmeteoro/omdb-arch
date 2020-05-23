@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *
  * This sample is a workaround until the Navigaton Component supports multiple back stacks.
  * */
+@Suppress("LongMethod")
 fun BottomNavigationView.setupWithNavController(
     navGraphIds: List<Int>,
     fragmentMananger: FragmentManager,

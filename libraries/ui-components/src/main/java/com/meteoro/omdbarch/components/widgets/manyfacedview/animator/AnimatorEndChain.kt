@@ -2,6 +2,7 @@ package com.meteoro.omdbarch.components.widgets.manyfacedview.animator
 
 import android.animation.Animator
 
+@Suppress("EmptyFunctionBlock")
 class AnimatorEndChain(private val animator: Animator?) : Animator.AnimatorListener {
     override fun onAnimationRepeat(animation: Animator?) {}
     override fun onAnimationCancel(animation: Animator?) {}

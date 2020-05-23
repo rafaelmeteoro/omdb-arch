@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
 import io.reactivex.Maybe
 
-/**
+/*
  * Maybe é usado para recuperar os filems para o stram chamar complete
  * @see https://medium.com/androiddevelopers/room-rxjava-acb0cd4f3757
  * */

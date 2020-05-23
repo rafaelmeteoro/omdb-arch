@@ -21,6 +21,8 @@ internal class MovieListViewModelTest {
 
     private val mockCache = mock<CacheRepository>()
 
+    private val timeInvocation = 1
+
     @Before
     fun `before each test`() {
         viewModel = MovieListViewModel(
@@ -48,7 +50,7 @@ internal class MovieListViewModelTest {
                 )
             )
 
-        verify(mockCache, times(timeInvocation())).getMovies()
+        verify(mockCache, times(timeInvocation)).getMovies()
         verify(mockCache, never()).deleteMovie(any())
         verify(mockCache, never()).deleteAll()
     }
@@ -68,7 +70,7 @@ internal class MovieListViewModelTest {
                 )
             )
 
-        verify(mockCache, times(timeInvocation())).getMovies()
+        verify(mockCache, times(timeInvocation)).getMovies()
         verify(mockCache, never()).deleteMovie(any())
         verify(mockCache, never()).deleteAll()
     }
@@ -77,7 +79,7 @@ internal class MovieListViewModelTest {
     fun `should call delete movie when provided`() {
         viewModel.deleteMovie(Movie())
 
-        verify(mockCache, times(timeInvocation())).deleteMovie(any())
+        verify(mockCache, times(timeInvocation)).deleteMovie(any())
         verify(mockCache, never()).getMovies()
         verify(mockCache, never()).deleteAll()
     }
@@ -86,10 +88,8 @@ internal class MovieListViewModelTest {
     fun `should call delete all`() {
         viewModel.deleteAll()
 
-        verify(mockCache, times(timeInvocation())).deleteAll()
+        verify(mockCache, times(timeInvocation)).deleteAll()
         verify(mockCache, never()).getMovies()
         verify(mockCache, never()).deleteMovie(any())
     }
-
-    private fun timeInvocation() = 1
 }

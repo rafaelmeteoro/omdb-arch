@@ -27,6 +27,8 @@ internal class DetailViewModelTest {
     private val mockCache = mock<CacheRepository>()
     private val mockProvider = mock<ResourceProvider>()
 
+    private val timeInvocation = 1
+
     private val result = Movie(
         title = "Avengers",
         year = "2012",
@@ -67,7 +69,7 @@ internal class DetailViewModelTest {
                 )
             )
 
-        verify(mockCache, times(timeInvocation())).saveMovie(result)
+        verify(mockCache, times(timeInvocation)).saveMovie(result)
     }
 
     @Test
@@ -87,6 +89,4 @@ internal class DetailViewModelTest {
 
         verify(mockCache, never()).saveMovie(any())
     }
-
-    private fun timeInvocation() = 1
 }

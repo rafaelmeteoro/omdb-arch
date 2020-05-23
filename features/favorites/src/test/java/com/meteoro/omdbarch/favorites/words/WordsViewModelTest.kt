@@ -22,6 +22,8 @@ internal class WordsViewModelTest {
 
     private val result = listOf("matrix", "avengers", "marvel")
 
+    private val timeInvocation = 1
+
     @Before
     fun `before each test`() {
         viewModel = WordsViewModel(
@@ -47,7 +49,7 @@ internal class WordsViewModelTest {
                 )
             )
 
-        verify(mockManager, times(timeInvocation())).fetchSearchList()
+        verify(mockManager, times(timeInvocation)).fetchSearchList()
         verify(mockManager, never()).delete(anyString())
     }
 
@@ -66,7 +68,7 @@ internal class WordsViewModelTest {
                 )
             )
 
-        verify(mockManager, times(timeInvocation())).fetchSearchList()
+        verify(mockManager, times(timeInvocation)).fetchSearchList()
         verify(mockManager, never()).delete(anyString())
     }
 
@@ -76,9 +78,7 @@ internal class WordsViewModelTest {
 
         viewModel.deleteWord(mockValue)
 
-        verify(mockManager, times(timeInvocation())).delete(mockValue)
+        verify(mockManager, times(timeInvocation)).delete(mockValue)
         verify(mockManager, never()).fetchSearchList()
     }
-
-    private fun timeInvocation() = 1
 }

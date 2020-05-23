@@ -20,6 +20,8 @@ internal class MovieDetailsViewModelTest {
 
     private val mockCache = mock<CacheRepository>()
 
+    private val timeInvocation = 1
+
     @Before
     fun `before each test`() {
         viewModel = MovieDetailsViewModel(
@@ -47,7 +49,7 @@ internal class MovieDetailsViewModelTest {
                 )
             )
 
-        verify(mockCache, times(timeInvocation())).getMovie(imdb)
+        verify(mockCache, times(timeInvocation)).getMovie(imdb)
     }
 
     @Test
@@ -67,8 +69,6 @@ internal class MovieDetailsViewModelTest {
                 )
             )
 
-        verify(mockCache, times(timeInvocation())).getMovie(imdb)
+        verify(mockCache, times(timeInvocation)).getMovie(imdb)
     }
-
-    private fun timeInvocation() = 1
 }

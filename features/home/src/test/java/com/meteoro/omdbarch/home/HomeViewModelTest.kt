@@ -24,6 +24,8 @@ internal class HomeViewModelTest {
     private val mockFetch = mock<SearchRepository>()
     private val mockManager = mock<ManagerRepository>()
 
+    private val timeInvocation = 1
+
     private val result = ResultSearch(
         search = listOf(
             Movie(
@@ -63,7 +65,7 @@ internal class HomeViewModelTest {
                 )
             )
 
-        verify(mockManager, times(timeInvocation())).save(title)
+        verify(mockManager, times(timeInvocation)).save(title)
     }
 
     @Test
@@ -103,8 +105,6 @@ internal class HomeViewModelTest {
                 )
             )
 
-        verify(mockManager, times(timeInvocation())).save(title)
+        verify(mockManager, times(timeInvocation)).save(title)
     }
-
-    private fun timeInvocation() = 1
 }
