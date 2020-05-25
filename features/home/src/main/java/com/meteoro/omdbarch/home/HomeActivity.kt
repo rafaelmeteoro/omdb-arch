@@ -20,12 +20,12 @@ import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.home.databinding.ActivityHomeBinding
 import com.meteoro.omdbarch.home.databinding.StateHomeContentBinding
 import com.meteoro.omdbarch.home.databinding.StateHomeErrorBinding
-import com.meteoro.omdbarch.logger.Logger
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import timber.log.Timber
 
 class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityStateListener {
 
@@ -33,9 +33,6 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
         private const val COLUMN_COUNT = 3
         private const val DEBOUNCE_TIME = 750L
     }
-
-    @Inject
-    lateinit var logger: Logger
 
     @Inject
     lateinit var disposer: Disposer
@@ -140,7 +137,7 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
             .searchMovie(title)
             .subscribeBy(
                 onNext = { changeState(it) },
-                onError = { logger.e("Error -> $it") }
+                onError = { Timber.e("Error -> $it") }
             )
 
         disposer.collect(toDispose)
@@ -156,7 +153,7 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
     }
 
     private fun showMovies(home: HomePresentation) {
-        logger.i("Loaded Movies")
+        Timber.i("Loaded Movies")
 
         binding.stateView.setState(FacedViewState.CONTENT)
         bindingContent.homeView.adapter = MoviesAdapter(home) {
@@ -165,7 +162,7 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
     }
 
     private fun handleError(reason: Throwable) {
-        logger.e("Error -> $reason")
+        Timber.e("Error -> $reason")
 
         if (reason is EmptyTerm) {
             emptyTerm()

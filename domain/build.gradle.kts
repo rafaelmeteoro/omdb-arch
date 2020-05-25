@@ -1,7 +1,6 @@
-import dependencies.UnitTestDependencies.Companion.unitTest
+import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
-import modules.ModuleNames
 
 val module = LibraryModule(rootDir, LibraryType.Android)
 
@@ -16,20 +15,9 @@ plugins {
 }
 
 dependencies {
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.rxJava)
-    implementation(Libraries.rxKotlin)
-    implementation(Libraries.lifecycleCommon)
-    implementation(Libraries.lifecycleJava8)
-    implementation(Libraries.dagger)
-    implementation(Libraries.daggerAndroid)
-    implementation(Libraries.daggerAndroidSupport)
-    kapt(Libraries.daggerCompiler)
-    kapt(Libraries.daggerAndroidProcessor)
-
-    implementation(project(ModuleNames.Libraries.Logger))
-
-    unitTest {
-        forEachDependency { testImplementation(it) }
+    moduleDependencies {
+        forEachDependencies(domain) { implementation(it) }
+        forEachCompilers(domain) { kapt(it) }
+        forEachTestDependencies(domain) { testImplementation(it) }
     }
 }

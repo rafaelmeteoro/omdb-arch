@@ -6,7 +6,6 @@ import modules.ModuleNames.MainApp
 include(
     MainApp,
     Domain,
-    Libraries.Logger,
     Libraries.Rest,
     Libraries.Persistance,
     Libraries.UiComponents,

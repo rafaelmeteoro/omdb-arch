@@ -1,4 +1,4 @@
-import dependencies.UnitTestDependencies.Companion.unitTest
+import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
 import modules.ModuleNames
@@ -15,28 +15,13 @@ plugins {
 }
 
 dependencies {
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.appCompat)
-    implementation(Libraries.materialDesign)
-    implementation(Libraries.constraintLayout)
-    implementation(Libraries.lifecycleCommon)
-    implementation(Libraries.lifecycleJava8)
-    implementation(Libraries.lifecycleViewModel)
-    implementation(Libraries.lifecycleExtensions)
-    implementation(Libraries.rxJava)
-    implementation(Libraries.rxKotlin)
-    implementation(Libraries.dagger)
-    implementation(Libraries.daggerAndroid)
-    implementation(Libraries.daggerAndroidSupport)
-    kapt(Libraries.daggerCompiler)
-    kapt(Libraries.daggerAndroidProcessor)
+    moduleDependencies {
+        forEachDependencies(onboarding) { implementation(it) }
+        forEachCompilers(onboarding) { kapt(it) }
+        forEachTestDependencies(onboarding) { testImplementation(it) }
+    }
 
     implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.Logger))
     implementation(project(ModuleNames.Libraries.UiComponents))
     implementation(project(ModuleNames.Libraries.Actions))
-
-    unitTest {
-        forEachDependency { testImplementation(it) }
-    }
 }

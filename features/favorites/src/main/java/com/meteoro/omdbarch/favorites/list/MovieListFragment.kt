@@ -24,16 +24,13 @@ import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.favorites.databinding.FragmentMovieListBinding
 import com.meteoro.omdbarch.favorites.databinding.StateListContentBinding
-import com.meteoro.omdbarch.logger.Logger
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
+import timber.log.Timber
 
 class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener,
     ViewBindingHolder<FragmentMovieListBinding> by ViewBindingHolderImpl() {
-
-    @Inject
-    lateinit var logger: Logger
 
     @Inject
     lateinit var disposer: Disposer
@@ -95,7 +92,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener,
             .fetchMoviesSaved()
             .subscribeBy(
                 onNext = { changeState(it) },
-                onError = { logger.e("Error -> $it") }
+                onError = { Timber.e("Error -> $it") }
             )
 
         disposer.collect(toDispose)
@@ -111,14 +108,14 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener,
     }
 
     private fun handlePresentation(presentation: MovieListPresentation) {
-        logger.d("${presentation.movies}")
+        Timber.d("${presentation.movies}")
 
         binding?.stateView?.setState(FacedViewState.CONTENT)
         bindingContent.movieListView.adapter = MovieListAdapter(presentation, this)
     }
 
     private fun handleError(reason: Throwable) {
-        logger.e("Failed to load movies -> $reason")
+        Timber.e("Failed to load movies -> $reason")
 
         if (reason is NoResultsFound) {
             binding?.stateView?.setState(FacedViewState.EMPTY)

@@ -1,8 +1,7 @@
 import configs.AndroidConfig
 import configs.KotlinConfig
 import configs.ProguardConfig
-import dependencies.InstrumentationTestsDependencies.Companion.instrumentationTest
-import dependencies.UnitTestDependencies.Companion.unitTest
+import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
 import modules.ModuleNames
@@ -73,7 +72,7 @@ android {
     }
 
     lintOptions {
-        isAbortOnError = false
+        setLintConfig(file("${rootDir}/buildSrc/config/lint.xml"))
     }
 
     viewBinding {
@@ -91,46 +90,16 @@ android {
 }
 
 dependencies {
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.kotlinSerialization)
-    implementation(Libraries.appCompat)
-    implementation(Libraries.cardView)
-    implementation(Libraries.recyclerView)
-    implementation(Libraries.materialDesign)
-    implementation(Libraries.coreAndroidx)
-    implementation(Libraries.constraintLayout)
-    implementation(Libraries.lifecycleCommon)
-    implementation(Libraries.lifecycleJava8)
-    implementation(Libraries.lifecycleViewModel)
-    implementation(Libraries.lifecycleExtensions)
-    implementation(Libraries.rxJava)
-    implementation(Libraries.rxKotlin)
-    implementation(Libraries.rxAndroid)
-    implementation(Libraries.okhttp)
-    implementation(Libraries.okhttpLogger)
-    implementation(Libraries.retrofit)
-    implementation(Libraries.retrofitRxAdapter)
-    implementation(Libraries.retrofitScalars)
-    implementation(Libraries.retrofitKotlinSerialization)
-    implementation(Libraries.retrofitGsonConverter)
-    implementation(Libraries.gson)
-    implementation(Libraries.picasso)
-    implementation(Libraries.coil)
-    implementation(Libraries.coilBase)
-    implementation(Libraries.stetho)
-    implementation(Libraries.stethoOkHttp)
-    implementation(Libraries.dagger)
-    implementation(Libraries.daggerAndroid)
-    implementation(Libraries.daggerAndroidSupport)
-    kapt(Libraries.daggerCompiler)
-    kapt(Libraries.daggerAndroidProcessor)
-    implementation(Libraries.roomRuntime)
-    implementation(Libraries.roomKtx)
-    implementation(Libraries.roomRxJava2)
-    kapt(Libraries.roomCompiler)
+    moduleDependencies {
+        forEachDependencies(app) { implementation(it) }
+        forEachCompilers(app) { kapt(it) }
+        forEachTestDependencies(app) { testImplementation(it) }
+        forEachAndroidTestDependencies(app) { androidTestImplementation(it) {} }
+    }
+
+    debugImplementation(Libraries.leakCanary)
 
     implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.Logger))
     implementation(project(ModuleNames.Libraries.Rest))
     implementation(project(ModuleNames.Libraries.Persistance))
     implementation(project(ModuleNames.Libraries.UiComponents))
@@ -139,16 +108,6 @@ dependencies {
     implementation(project(ModuleNames.Features.Home))
     implementation(project(ModuleNames.Features.Details))
     implementation(project(ModuleNames.Features.Favorites))
-
-    debugImplementation(Libraries.leakCanary)
-
-    unitTest {
-        forEachDependency { testImplementation(it) }
-    }
-
-    instrumentationTest {
-        forEachDependency { androidTestImplementation(it) }
-    }
 }
 
 androidExtensions {

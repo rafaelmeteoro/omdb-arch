@@ -4,22 +4,19 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.domain.disposer.Disposer
-import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.onboarding.databinding.ActivityOnboardingBinding
 import dagger.android.AndroidInjection
 import io.reactivex.Flowable
 import io.reactivex.rxkotlin.subscribeBy
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import timber.log.Timber
 
 class OnboardingActivity : AppCompatActivity() {
 
     companion object {
         private const val TIMER_COUNT = 1000L
     }
-
-    @Inject
-    lateinit var logger: Logger
 
     @Inject
     lateinit var disposer: Disposer
@@ -34,7 +31,7 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(binding.root)
         lifecycle.addObserver(disposer)
 
-        logger.d("Launch")
+        Timber.d("Launch")
         handleLaunch()
     }
 

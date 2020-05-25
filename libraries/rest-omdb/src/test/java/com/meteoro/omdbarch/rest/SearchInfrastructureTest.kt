@@ -6,7 +6,6 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.ResultSearch
 import com.meteoro.omdbarch.domain.services.ConnectivityService
 import com.meteoro.omdbarch.domain.services.SearchService
-import com.meteoro.omdbarch.logger.ConsoleLogger
 import com.meteoro.omdbarch.rest.executor.RemoteExecutor
 import com.meteoro.omdbarch.rest.executor.RemoteExecutorImpl
 import com.meteoro.omdbarch.rest.util.InfrastructureRule
@@ -33,7 +32,7 @@ internal class SearchInfrastructureTest {
         infrastructure = SearchInfrastructure(
             service = rule.api,
             executor = executor,
-            errorHandler = ExecutionErrorHandler(ConsoleLogger)
+            errorHandler = ExecutionErrorHandler()
         )
 
         whenever(service.isConnected()).thenReturn(true)

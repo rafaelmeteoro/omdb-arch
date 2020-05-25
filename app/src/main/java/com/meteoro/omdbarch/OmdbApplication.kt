@@ -3,6 +3,7 @@ package com.meteoro.omdbarch
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.meteoro.omdbarch.di.DaggerAppComponent
+import com.meteoro.omdbarch.logger.CrashlyticsTree
 import com.meteoro.omdbarch.persistance.realm.RealmDatabase
 import com.meteoro.omdbarch.rest.di.RestModule
 import dagger.android.AndroidInjector
@@ -12,6 +13,7 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import javax.inject.Inject
 import kotlinx.serialization.UnstableDefault
+import timber.log.Timber
 
 @UnstableDefault
 class OmdbApplication : Application(), HasAndroidInjector {
@@ -25,12 +27,13 @@ class OmdbApplication : Application(), HasAndroidInjector {
         super.onCreate()
         DaggerAppComponent.builder()
             .application(this)
-            .restModule(RestModule(BuildConfig.API_URL, BuildConfig.API_KEY_VALUE))
+            .restModule(RestModule(BuildConfig.API_URL, BuildConfig.API_KEY_VALUE, BuildConfig.DEBUG))
             .build()
             .inject(this)
 
         initRealm()
         initStetho()
+        initTimber()
     }
 
     private fun initRealm() {
@@ -47,6 +50,14 @@ class OmdbApplication : Application(), HasAndroidInjector {
     private fun initStetho() {
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this)
+        }
+    }
+
+    private fun initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(CrashlyticsTree())
         }
     }
 }

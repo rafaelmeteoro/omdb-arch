@@ -7,14 +7,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.meteoro.omdbarch.favorites.databinding.ActivityFavoritesBinding
-import com.meteoro.omdbarch.logger.Logger
 import dagger.android.AndroidInjection
-import javax.inject.Inject
+import timber.log.Timber
 
 class FavoritesActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var logger: Logger
 
     private lateinit var binding: ActivityFavoritesBinding
 
@@ -27,7 +23,7 @@ class FavoritesActivity : AppCompatActivity() {
         binding = ActivityFavoritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        logger.d("Launch")
+        Timber.d("Launch")
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()

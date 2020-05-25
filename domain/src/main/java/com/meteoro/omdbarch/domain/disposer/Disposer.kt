@@ -2,18 +2,18 @@ package com.meteoro.omdbarch.domain.disposer
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.meteoro.omdbarch.logger.Logger
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import timber.log.Timber
 
-class Disposer(private val logger: Logger) : DefaultLifecycleObserver {
+class Disposer : DefaultLifecycleObserver {
 
     private val trash by lazy {
         CompositeDisposable()
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
-        logger.i("Disposing at onDestroy -> ${trash.size()} items")
+        Timber.i("Disposing at onDestroy -> ${trash.size()} items")
         trash.clear()
         super.onDestroy(owner)
     }

@@ -1,4 +1,4 @@
-import dependencies.UnitTestDependencies.Companion.unitTest
+import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
 import modules.ModuleNames
@@ -16,25 +16,11 @@ plugins {
 }
 
 dependencies {
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.rxJava)
-    implementation(Libraries.rxKotlin)
-    implementation(Libraries.dagger)
-    implementation(Libraries.daggerAndroid)
-    implementation(Libraries.daggerAndroidSupport)
-    kapt(Libraries.daggerCompiler)
-    kapt(Libraries.daggerAndroidProcessor)
-    implementation(Libraries.roomRuntime)
-    implementation(Libraries.roomKtx)
-    implementation(Libraries.roomRxJava2)
-    kapt(Libraries.roomCompiler)
-    implementation(Libraries.archCoreCommon)
-    implementation(Libraries.archCoreRuntime)
+    moduleDependencies {
+        forEachDependencies(persistence) { implementation(it) }
+        forEachCompilers(persistence) { kapt(it) }
+        forEachTestDependencies(persistence) { testImplementation(it) }
+    }
 
     implementation(project(ModuleNames.Domain))
-
-    unitTest {
-        forEachDependency { testImplementation(it) }
-    }
-    testImplementation(Libraries.roomTesting)
 }

@@ -61,6 +61,7 @@ object Libraries {
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
     const val coil = "io.coil-kt:coil:${Versions.coil}"
     const val coilBase = "io.coil-kt:coil-base:${Versions.coil}"
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
     const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
     const val stethoOkHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
@@ -102,6 +103,7 @@ object Libraries {
         const val leakyCanary = "2.3"
         const val picasso = "2.71828"
         const val coil = "0.11.0"
+        const val timber = "4.7.1"
         const val stetho = "1.5.1"
         const val junit = "4.13"
         const val junitExt = "1.1.1"

@@ -1,7 +1,6 @@
 package com.meteoro.omdbarch.rest.network
 
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
-import com.meteoro.omdbarch.logger.ConsoleLogger
 import com.meteoro.omdbarch.rest.network.CheckErrorTransformation.Companion.checkTransformation
 import kotlinx.serialization.MissingFieldException
 import kotlinx.serialization.SerializationException
@@ -15,7 +14,7 @@ internal class SerializationErrorTransformerTest {
         checkTransformation(
             from = MissingFieldException("Missing field inside this JSON"),
             expected = RemoteServiceIntegrationError.UnexpectedResponse,
-            using = SerializationErrorTransformer<Any>(ConsoleLogger)
+            using = SerializationErrorTransformer<Any>()
         )
     }
 
@@ -24,7 +23,7 @@ internal class SerializationErrorTransformerTest {
         checkTransformation(
             from = UnknownFieldException(0),
             expected = RemoteServiceIntegrationError.UnexpectedResponse,
-            using = SerializationErrorTransformer<Any>(ConsoleLogger)
+            using = SerializationErrorTransformer<Any>()
         )
     }
 
@@ -33,7 +32,7 @@ internal class SerializationErrorTransformerTest {
         checkTransformation(
             from = SerializationException("Found comments inside this JSON"),
             expected = RemoteServiceIntegrationError.UnexpectedResponse,
-            using = SerializationErrorTransformer<Any>(ConsoleLogger)
+            using = SerializationErrorTransformer<Any>()
         )
     }
 
@@ -44,7 +43,7 @@ internal class SerializationErrorTransformerTest {
         checkTransformation(
             from = otherError,
             expected = otherError,
-            using = SerializationErrorTransformer<Any>(ConsoleLogger)
+            using = SerializationErrorTransformer<Any>()
         )
     }
 }

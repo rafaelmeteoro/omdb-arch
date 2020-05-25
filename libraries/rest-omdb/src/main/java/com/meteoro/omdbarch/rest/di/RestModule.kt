@@ -4,8 +4,6 @@ import android.app.Application
 import com.meteoro.omdbarch.domain.services.ConnectivityService
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.services.SearchService
-import com.meteoro.omdbarch.logger.Logger
-import com.meteoro.omdbarch.rest.BuildConfig
 import com.meteoro.omdbarch.rest.BuildRetrofit
 import com.meteoro.omdbarch.rest.ExecutionErrorHandler
 import com.meteoro.omdbarch.rest.MovieInfrastructure
@@ -29,7 +27,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 @UnstableDefault
 @Module
-class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
+class RestModule(private val apiUrl: String, private val apiKeyValue: String, private val isDebug: Boolean) {
 
     companion object {
         private const val TIMEOUT = 60L
@@ -47,7 +45,7 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
     @Singleton
     fun provideHttpLogging(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+            level = if (isDebug) HttpLoggingInterceptor.Level.BODY
             else HttpLoggingInterceptor.Level.NONE
         }
 
@@ -99,23 +97,19 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String) {
 
     @Provides
     @Singleton
-    fun provideMovieService(api: OmdbAPI, executor: RemoteExecutor, logger: Logger): MovieService =
+    fun provideMovieService(api: OmdbAPI, executor: RemoteExecutor): MovieService =
         MovieInfrastructure(
             service = api,
             executor = executor,
-            errorHandler = ExecutionErrorHandler(
-                logger = logger
-            )
+            errorHandler = ExecutionErrorHandler()
         )
 
     @Provides
     @Singleton
-    fun provideSearchService(api: OmdbAPI, executor: RemoteExecutor, logger: Logger): SearchService =
+    fun provideSearchService(api: OmdbAPI, executor: RemoteExecutor): SearchService =
         SearchInfrastructure(
             service = api,
             executor = executor,
-            errorHandler = ExecutionErrorHandler(
-                logger = logger
-            )
+            errorHandler = ExecutionErrorHandler()
         )
 }

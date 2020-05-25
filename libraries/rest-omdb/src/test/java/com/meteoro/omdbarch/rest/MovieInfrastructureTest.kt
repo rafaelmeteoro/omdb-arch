@@ -6,7 +6,6 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.model.Rating
 import com.meteoro.omdbarch.domain.services.ConnectivityService
 import com.meteoro.omdbarch.domain.services.MovieService
-import com.meteoro.omdbarch.logger.ConsoleLogger
 import com.meteoro.omdbarch.rest.executor.RemoteExecutor
 import com.meteoro.omdbarch.rest.executor.RemoteExecutorImpl
 import com.meteoro.omdbarch.rest.util.InfrastructureRule
@@ -33,7 +32,7 @@ internal class MovieInfrastructureTest {
         infrastructure = MovieInfrastructure(
             service = rule.api,
             executor = executor,
-            errorHandler = ExecutionErrorHandler(ConsoleLogger)
+            errorHandler = ExecutionErrorHandler()
         )
 
         whenever(service.isConnected()).thenReturn(true)

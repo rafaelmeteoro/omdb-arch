@@ -1,4 +1,4 @@
-import dependencies.UnitTestDependencies.Companion.unitTest
+import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
 
@@ -11,10 +11,8 @@ plugins {
 }
 
 dependencies {
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.coreAndroidx)
-
-    unitTest {
-        forEachDependency { testImplementation(it) }
+    moduleDependencies {
+        forEachDependencies(actions) { implementation(it) }
+        forEachTestDependencies(actions) { testImplementation(it) }
     }
 }

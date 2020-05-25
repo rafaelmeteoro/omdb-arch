@@ -16,15 +16,12 @@ import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.favorites.databinding.FragmentWordsBinding
 import com.meteoro.omdbarch.favorites.databinding.StateWordsContentBinding
-import com.meteoro.omdbarch.logger.Logger
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
+import timber.log.Timber
 
 class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by ViewBindingHolderImpl() {
-
-    @Inject
-    lateinit var logger: Logger
 
     @Inject
     lateinit var disposer: Disposer
@@ -58,7 +55,7 @@ class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by Vie
             .fetchWordsSaved()
             .subscribeBy(
                 onNext = { changeState(it) },
-                onError = { logger.e("Error -> $it") }
+                onError = { Timber.e("Error -> $it") }
             )
 
         disposer.collect(toDispose)
@@ -74,7 +71,7 @@ class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by Vie
     }
 
     private fun showWords(presentation: WordsPresentation) {
-        logger.d("${presentation.words}")
+        Timber.d("${presentation.words}")
         binding?.stateView?.setState(FacedViewState.CONTENT)
 
         val words = presentation.words
@@ -88,7 +85,7 @@ class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by Vie
     }
 
     private fun handleError(reason: Throwable) {
-        logger.e("Failed to load words -> $reason")
+        Timber.e("Failed to load words -> $reason")
 
         if (reason is NoResultsFound) {
             binding?.stateView?.setState(FacedViewState.EMPTY)

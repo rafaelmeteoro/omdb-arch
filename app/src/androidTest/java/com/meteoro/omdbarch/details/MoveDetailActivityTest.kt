@@ -9,7 +9,6 @@ import com.meteoro.omdbarch.actions.ImdbArgs
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.dsl.Visibility
-import com.meteoro.omdbarch.logger.Logger
 import com.meteoro.omdbarch.util.ActivityScenarioLauncher.Companion.scenarioLauncher
 import com.meteoro.omdbarch.util.createFakeMainActivityInjector
 import io.reactivex.Flowable
@@ -20,7 +19,6 @@ import org.mockito.MockitoAnnotations
 class MoveDetailActivityTest {
 
     val mockViewModel = Mockito.mock(DetailViewModelContract::class.java)
-    val mockLogger = Mockito.mock(Logger::class.java)
 
     @get:Rule
     val activityTestRule =
@@ -31,7 +29,7 @@ class MoveDetailActivityTest {
                     InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as OmdbApplication
                 myApp.injector = createFakeMainActivityInjector<MovieDetailActivity> {
                     viewModel = mockViewModel
-                    disposer = Disposer(mockLogger)
+                    disposer = Disposer()
                 }
             }
 

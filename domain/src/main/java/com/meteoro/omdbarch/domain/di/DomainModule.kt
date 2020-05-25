@@ -14,7 +14,6 @@ import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.services.SearchHistoryService
 import com.meteoro.omdbarch.domain.services.SearchService
-import com.meteoro.omdbarch.logger.Logger
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -24,7 +23,7 @@ import javax.inject.Singleton
 class DomainModule {
 
     @Provides
-    fun providerDisposer(logger: Logger): Disposer = Disposer(logger)
+    fun providerDisposer(): Disposer = Disposer()
 
     @Provides
     @Singleton

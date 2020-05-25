@@ -14,15 +14,12 @@ import com.meteoro.omdbarch.details.databinding.StateDetailErrorBinding
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.state.ViewState
-import com.meteoro.omdbarch.logger.Logger
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
+import timber.log.Timber
 
 class MovieDetailActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var logger: Logger
 
     @Inject
     lateinit var disposer: Disposer
@@ -55,7 +52,7 @@ class MovieDetailActivity : AppCompatActivity() {
             .fetchMovie(imdbId)
             .subscribeBy(
                 onNext = { changeState(it) },
-                onError = { logger.e("Error -> $it") }
+                onError = { Timber.e("Error -> $it") }
             )
 
         disposer.collect(toDispose)
@@ -71,7 +68,7 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun showMovie(movie: MovieDetailPresentation) {
-        logger.i("Loaded Movies")
+        Timber.i("Loaded Movies")
 
         binding.stateView.setState(FacedViewState.CONTENT)
         bindingContent.detailTitle.text = movie.title
@@ -86,7 +83,7 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun handleError(reason: Throwable) {
-        logger.e("Error -> $reason")
+        Timber.e("Error -> $reason")
 
         if (reason is EmptyTerm) {
             emptyTerm()
