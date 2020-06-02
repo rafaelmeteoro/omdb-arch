@@ -99,7 +99,7 @@ object Libraries {
         const val lifecycle = "2.2.0"
         const val navigation = "2.2.2"
         const val room = "2.2.5"
-        const val dagger = "2.27"
+        const val dagger = "2.28"
         const val leakyCanary = "2.3"
         const val picasso = "2.71828"
         const val coil = "0.11.0"
