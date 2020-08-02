@@ -112,9 +112,3 @@ jobs:
         with:
           lane: 'unit_test'
           bundle-install-path: 'vendor/bundle'
-
-      - name: Upload Reports
-        uses: actions/upload-artifact@v1
-        with:
-          name: reports
-          path: app/build/reports
