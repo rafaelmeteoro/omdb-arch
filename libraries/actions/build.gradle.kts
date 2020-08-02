@@ -13,6 +13,5 @@ plugins {
 dependencies {
     moduleDependencies {
         forEachDependencies(actions) { implementation(it) }
-        forEachTestDependencies(actions) { testImplementation(it) }
     }
 }
