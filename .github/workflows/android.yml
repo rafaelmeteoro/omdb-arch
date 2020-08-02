@@ -71,9 +71,10 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
-          - path: ~/.gradle/caches
-            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-            restore-keys: ${{ runner.os }}-gradle
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Run Analysis
         run: ./gradlew lintDebug ktlintVerification detektVerification
@@ -142,9 +143,10 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
-          - path: ~/.gradle/caches
-            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-            restore-keys: ${{ runner.os }}-gradle
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Run unit test
         run: ./gradlew testDebugUnitTest
