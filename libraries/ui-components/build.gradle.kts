@@ -17,8 +17,6 @@ plugins {
 dependencies {
     moduleDependencies {
         forEachDependencies(uicomponents) { implementation(it) }
-        forEachCompilers(uicomponents) { kapt(it) }
-        forEachTestDependencies(uicomponents) { testImplementation(it) }
     }
 
     implementation(project(ModuleNames.Domain))

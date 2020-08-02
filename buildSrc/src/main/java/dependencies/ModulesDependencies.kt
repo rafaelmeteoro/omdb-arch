@@ -49,8 +49,7 @@ class ModulesDependencies {
                 KEY_TEST_DEPENDENCIES, listOf(
                     Libraries.jUnit,
                     Libraries.assertj,
-                    Libraries.mockitoKotlin,
-                    Libraries.mockWebServer
+                    Libraries.mockitoKotlin
                 )
             )
         )
@@ -62,14 +61,6 @@ class ModulesDependencies {
                 KEY_DEPENDENCIES, listOf(
                     Libraries.kotlinStdLib,
                     Libraries.coreAndroidx
-                )
-            ),
-            Pair(
-                KEY_TEST_DEPENDENCIES, listOf(
-                    Libraries.jUnit,
-                    Libraries.assertj,
-                    Libraries.mockitoKotlin,
-                    Libraries.mockWebServer
                 )
             )
         )
@@ -144,8 +135,7 @@ class ModulesDependencies {
                     Libraries.jUnit,
                     Libraries.assertj,
                     Libraries.mockitoKotlin,
-                    Libraries.mockWebServer,
-                    Libraries.roomTesting
+                    Libraries.mockWebServer
                 )
             )
         )
@@ -159,29 +149,7 @@ class ModulesDependencies {
                     Libraries.appCompat,
                     Libraries.materialDesign,
                     Libraries.recyclerView,
-                    Libraries.rxJava,
-                    Libraries.rxKotlin,
-                    Libraries.lifecycleCommon,
-                    Libraries.lifecycleJava8,
-                    Libraries.dagger,
-                    Libraries.daggerAndroid,
-                    Libraries.daggerAndroidSupport,
-                    Libraries.timber
-                )
-            ),
-            Pair(
-                KEY_COMPILERS, listOf(
-                    Libraries.daggerCompiler,
-                    Libraries.daggerAndroidProcessor
-                )
-            ),
-            Pair(
-                KEY_TEST_DEPENDENCIES, listOf(
-                    Libraries.jUnit,
-                    Libraries.assertj,
-                    Libraries.mockitoKotlin,
-                    Libraries.mockWebServer,
-                    Libraries.roomTesting
+                    Libraries.lifecycleRuntime
                 )
             )
         )
