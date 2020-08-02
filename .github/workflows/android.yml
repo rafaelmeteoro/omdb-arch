@@ -68,7 +68,8 @@ jobs:
         with:
           java-version 1.8
 
-      - name: ./gradlew lintDebug ktlintVerification detektVerification
+      - name: Run Analysis
+        run: ./gradlew lintDebug ktlintVerification detektVerification
 
   ##########################################################
   # Assemble Job:
@@ -131,7 +132,8 @@ jobs:
         with:
           java-version 1.8
 
-      - name: ./gradlew testDebugUnitTest
+      - name: Run unit test
+        run: ./gradlew testDebugUnitTest
 
   ##########################################################
   # Instrumentation Test Job:
