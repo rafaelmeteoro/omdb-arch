@@ -195,13 +195,9 @@ class ModulesDependencies {
                     Libraries.appCompat,
                     Libraries.materialDesign,
                     Libraries.constraintLayout,
-                    Libraries.lifecycleCommon,
-                    Libraries.lifecycleJava8,
-                    Libraries.lifecycleCommon,
-                    Libraries.lifecycleViewModel,
-                    Libraries.lifecycleExtensions,
-                    Libraries.rxJava,
-                    Libraries.rxKotlin,
+                    Libraries.lifecycleRuntime,
+                    Libraries.coroutinesCore,
+                    Libraries.coroutinesAndroid,
                     Libraries.dagger,
                     Libraries.daggerAndroid,
                     Libraries.daggerAndroidSupport,
@@ -212,15 +208,6 @@ class ModulesDependencies {
                 KEY_COMPILERS, listOf(
                     Libraries.daggerCompiler,
                     Libraries.daggerAndroidProcessor
-                )
-            ),
-            Pair(
-                KEY_TEST_DEPENDENCIES, listOf(
-                    Libraries.jUnit,
-                    Libraries.assertj,
-                    Libraries.mockitoKotlin,
-                    Libraries.mockWebServer,
-                    Libraries.roomTesting
                 )
             )
         )

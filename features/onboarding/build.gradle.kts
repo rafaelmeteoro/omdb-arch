@@ -18,7 +18,6 @@ dependencies {
     moduleDependencies {
         forEachDependencies(onboarding) { implementation(it) }
         forEachCompilers(onboarding) { kapt(it) }
-        forEachTestDependencies(onboarding) { testImplementation(it) }
     }
 
     implementation(project(ModuleNames.Domain))
