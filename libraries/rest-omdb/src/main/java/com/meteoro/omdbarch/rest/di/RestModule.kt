@@ -16,14 +16,14 @@ import com.meteoro.omdbarch.rest.interceptor.ApiInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
-import java.io.File
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import kotlinx.serialization.UnstableDefault
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @UnstableDefault
 @Module

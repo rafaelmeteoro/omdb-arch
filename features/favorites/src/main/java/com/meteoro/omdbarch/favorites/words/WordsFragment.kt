@@ -18,8 +18,8 @@ import com.meteoro.omdbarch.favorites.databinding.FragmentWordsBinding
 import com.meteoro.omdbarch.favorites.databinding.StateWordsContentBinding
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
 class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by ViewBindingHolderImpl() {
 

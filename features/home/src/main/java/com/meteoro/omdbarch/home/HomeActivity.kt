@@ -23,9 +23,9 @@ import com.meteoro.omdbarch.home.databinding.StateHomeErrorBinding
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import timber.log.Timber
 
 class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityStateListener {
 

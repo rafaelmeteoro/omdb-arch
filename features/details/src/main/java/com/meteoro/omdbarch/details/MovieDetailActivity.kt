@@ -16,8 +16,8 @@ import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
 import com.meteoro.omdbarch.domain.state.ViewState
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
 class MovieDetailActivity : AppCompatActivity() {
 

@@ -8,9 +8,9 @@ import com.meteoro.omdbarch.onboarding.databinding.ActivityOnboardingBinding
 import dagger.android.AndroidInjection
 import io.reactivex.Flowable
 import io.reactivex.rxkotlin.subscribeBy
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import timber.log.Timber
 
 class OnboardingActivity : AppCompatActivity() {
 

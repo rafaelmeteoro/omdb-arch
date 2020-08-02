@@ -12,14 +12,15 @@ class FetchSearch(private val service: SearchService) : SearchRepository {
     override fun searchMovies(title: String, type: String?, year: String?): Flowable<ResultSearch> {
         return when {
             title.isEmpty() -> Flowable.error<ResultSearch>(EmptyTerm)
-            else -> service.searchMovies(title, type, year)
-                .flatMap {
-                    if (RESULT_OK == it.response) {
-                        Flowable.just(it)
-                    } else {
-                        Flowable.error(NoResultsFound)
+            else ->
+                service.searchMovies(title, type, year)
+                    .flatMap {
+                        if (RESULT_OK == it.response) {
+                            Flowable.just(it)
+                        } else {
+                            Flowable.error(NoResultsFound)
+                        }
                     }
-                }
         }
     }
 

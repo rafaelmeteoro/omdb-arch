@@ -38,38 +38,44 @@ class MovieCacheRealmInfrastructure : MovieCacheService {
     }
 
     override fun movieCached(imdbId: String): Flowable<Movie> {
-        return Flowable.create({ emmiter ->
-            val movieRealm = RealmManager.run {
-                realm.where<FavoriteMovieRealm>()
-                    .equalTo("imdbId", imdbId)
-                    .findFirst()
-                    ?.let { realm.copyFromRealm(it) }
-            }
+        return Flowable.create(
+            { emmiter ->
+                val movieRealm = RealmManager.run {
+                    realm.where<FavoriteMovieRealm>()
+                        .equalTo("imdbId", imdbId)
+                        .findFirst()
+                        ?.let { realm.copyFromRealm(it) }
+                }
 
-            if (movieRealm != null) {
-                emmiter.onNext(MapperMovieRealm().fromRealm(movieRealm))
-                emmiter.onComplete()
-            } else {
-                emmiter.onError(NoResultsFound)
-            }
-        }, BackpressureStrategy.DROP)
+                if (movieRealm != null) {
+                    emmiter.onNext(MapperMovieRealm().fromRealm(movieRealm))
+                    emmiter.onComplete()
+                } else {
+                    emmiter.onError(NoResultsFound)
+                }
+            },
+            BackpressureStrategy.DROP
+        )
     }
 
     override fun moviesCached(): Flowable<List<Movie>> {
-        return Flowable.create({ emmiter ->
-            val moviesRealm = RealmManager.run {
-                realm.where<FavoriteMovieRealm>()
-                    .findAll()
-                    .let { realm.copyFromRealm(it) }
-            }
+        return Flowable.create(
+            { emmiter ->
+                val moviesRealm = RealmManager.run {
+                    realm.where<FavoriteMovieRealm>()
+                        .findAll()
+                        .let { realm.copyFromRealm(it) }
+                }
 
-            val converted = Flowable.fromIterable(moviesRealm)
-                .map { MapperMovieRealm().fromRealm(it) }
-                .toList()
-                .blockingGet()
+                val converted = Flowable.fromIterable(moviesRealm)
+                    .map { MapperMovieRealm().fromRealm(it) }
+                    .toList()
+                    .blockingGet()
 
-            emmiter.onNext(converted)
-            emmiter.onComplete()
-        }, BackpressureStrategy.DROP)
+                emmiter.onNext(converted)
+                emmiter.onComplete()
+            },
+            BackpressureStrategy.DROP
+        )
     }
 }
