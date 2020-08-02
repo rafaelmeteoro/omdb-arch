@@ -13,7 +13,6 @@ plugins {
     kotlin(BuildPlugins.Ids.kotlinExtensions)
     kotlin(BuildPlugins.Ids.kotlinKapt)
     id(BuildPlugins.Ids.kotlinxSerialization)
-    id(BuildPlugins.Ids.coveralls)
 }
 
 dependencies {
