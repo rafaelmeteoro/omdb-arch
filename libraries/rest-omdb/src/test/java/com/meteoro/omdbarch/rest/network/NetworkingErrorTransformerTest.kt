@@ -3,12 +3,12 @@ package com.meteoro.omdbarch.rest.network
 import com.meteoro.omdbarch.domain.errors.NetworkingError
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import com.meteoro.omdbarch.rest.network.CheckErrorTransformation.Companion.checkTransformation
+import org.junit.Test
 import java.io.IOException
 import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import org.junit.Test
 
 internal class NetworkingErrorTransformerTest {
 

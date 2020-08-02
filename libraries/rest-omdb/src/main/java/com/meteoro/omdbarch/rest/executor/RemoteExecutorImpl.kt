@@ -14,8 +14,9 @@ class RemoteExecutorImpl(
     override fun <T> checkConnectionAndThanFlowable(action: Flowable<T>): Flowable<T> {
         return when (service.isConnected()) {
             false -> Flowable.error(NetworkingError.NoInternetConnection)
-            true -> action
-                .subscribeOn(targetScheduler)
+            true ->
+                action
+                    .subscribeOn(targetScheduler)
         }
     }
 }

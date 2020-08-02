@@ -19,8 +19,8 @@ import com.meteoro.omdbarch.favorites.databinding.FragmentMovieDetailsBinding
 import com.meteoro.omdbarch.favorites.databinding.StateDetailsContentBinding
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment(), ViewBindingHolder<FragmentMovieDetailsBinding> by ViewBindingHolderImpl() {
 

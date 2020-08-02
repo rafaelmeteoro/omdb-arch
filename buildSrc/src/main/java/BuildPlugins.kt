@@ -40,11 +40,11 @@ object BuildPlugins {
         const val agp = "3.6.3"
         const val cobertura = "3.0.0"
         const val coveralls = "2.8.4"
-        const val testLogger = "2.0.0"
+        const val testLogger = "2.1.0"
         const val jacocoUnified = "0.16.0"
-        const val sonarCloud = "2.8"
-        const val versions = "0.28.0"
-        const val safeArgs = "2.2.2"
+        const val sonarCloud = "3.0"
+        const val versions = "0.29.0"
+        const val safeArgs = "2.3.0"
         const val realm = "6.1.0"
     }
 }

@@ -26,10 +26,12 @@ import com.meteoro.omdbarch.favorites.databinding.FragmentMovieListBinding
 import com.meteoro.omdbarch.favorites.databinding.StateListContentBinding
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.subscribeBy
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
-class MovieListFragment : Fragment(), MovieListAdapter.MovieListLitener,
+class MovieListFragment :
+    Fragment(),
+    MovieListAdapter.MovieListLitener,
     ViewBindingHolder<FragmentMovieListBinding> by ViewBindingHolderImpl() {
 
     @Inject

@@ -26,7 +26,7 @@ open class FavoriteMovieRealm(
         if (other !is FavoriteMovieRealm) return false
 
         return imdbId == other.imdbId &&
-                title == other.title
+            title == other.title
     }
 
     override fun hashCode(): Int {

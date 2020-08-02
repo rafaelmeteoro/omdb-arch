@@ -11,9 +11,9 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import javax.inject.Inject
 import kotlinx.serialization.UnstableDefault
 import timber.log.Timber
+import javax.inject.Inject
 
 @UnstableDefault
 class OmdbApplication : Application(), HasAndroidInjector {
