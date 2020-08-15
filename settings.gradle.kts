@@ -1,19 +1,14 @@
-import modules.ModuleNames.Domain
-import modules.ModuleNames.Libraries
-import modules.ModuleNames.Features
-import modules.ModuleNames.MainApp
-
 include(
-    MainApp,
-    Domain,
-    Libraries.Rest,
-    Libraries.Persistance,
-    Libraries.UiComponents,
-    Libraries.Actions,
-    Libraries.Architecture,
-    Libraries.CoroutinesTestUtils,
-    Features.Onboarding,
-    Features.Home,
-    Features.Details,
-    Features.Favorites
+    ":app",
+    ":domain",
+    ":libraries:rest-omdb",
+    ":libraries:persistance",
+    ":libraries:ui-components",
+    ":libraries:actions",
+    ":libraries:unidirectional-dataflow",
+    ":libraries:coroutines-testutils",
+    ":features:onboarding",
+    ":features:home",
+    ":features:details",
+    ":features:favorites"
 )

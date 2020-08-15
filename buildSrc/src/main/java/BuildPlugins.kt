@@ -25,7 +25,7 @@ object BuildPlugins {
     }
 
     private object Versions {
-        const val agp = "3.6.3"
+        const val agp = "4.0.1"
         const val testLogger = "2.1.0"
         const val versions = "0.29.0"
         const val safeArgs = "2.3.0"
