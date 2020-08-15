@@ -23,4 +23,5 @@ dependencies {
     }
 
     implementation(project(ModuleNames.Domain))
+    testImplementation(project(ModuleNames.Libraries.CoroutinesTestUtils))
 }

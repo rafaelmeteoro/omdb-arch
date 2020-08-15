@@ -33,6 +33,7 @@ class ModulesDependencies {
                     Libraries.rxKotlin,
                     Libraries.lifecycleCommon,
                     Libraries.lifecycleJava8,
+                    Libraries.coroutinesCore,
                     Libraries.dagger,
                     Libraries.daggerAndroid,
                     Libraries.daggerAndroidSupport,
@@ -118,6 +119,7 @@ class ModulesDependencies {
                     Libraries.gson,
                     Libraries.rxJava,
                     Libraries.rxKotlin,
+                    Libraries.coroutinesCore,
                     Libraries.dagger,
                     Libraries.daggerAndroid,
                     Libraries.daggerAndroidSupport,
@@ -149,7 +151,45 @@ class ModulesDependencies {
                     Libraries.appCompat,
                     Libraries.materialDesign,
                     Libraries.recyclerView,
-                    Libraries.lifecycleRuntime
+                    Libraries.lifecycleRuntime,
+                    Libraries.lifecycleExtensions,
+                    Libraries.lifecycleViewModel,
+                    Libraries.rxJava,
+                    Libraries.rxKotlin
+                )
+            )
+        )
+    }
+
+    val architecture by lazy {
+        mapOf(
+            Pair(
+                KEY_DEPENDENCIES, listOf(
+                    Libraries.kotlinStdLib,
+                    Libraries.coroutinesCore,
+                    Libraries.rxJava,
+                    Libraries.rxKotlin
+                )
+            ),
+            Pair(
+                KEY_TEST_DEPENDENCIES, listOf(
+                    Libraries.jUnit,
+                    Libraries.assertj,
+                    Libraries.mockitoKotlin
+                )
+            )
+        )
+    }
+
+    val coroutinesTest by lazy {
+        mapOf(
+            Pair(
+                KEY_DEPENDENCIES, listOf(
+                    Libraries.kotlinStdLib,
+                    Libraries.coroutinesCore,
+                    Libraries.coroutinesTest,
+                    Libraries.coroutinesDebug,
+                    Libraries.jUnit
                 )
             )
         )
@@ -193,9 +233,12 @@ class ModulesDependencies {
                     Libraries.coreAndroidx,
                     Libraries.constraintLayout,
                     Libraries.lifecycleCommon,
+                    Libraries.lifecycleRuntime,
                     Libraries.lifecycleJava8,
                     Libraries.lifecycleViewModel,
                     Libraries.lifecycleExtensions,
+                    Libraries.coroutinesCore,
+                    Libraries.coroutinesAndroid,
                     Libraries.rxJava,
                     Libraries.rxKotlin,
                     Libraries.rxAndroid,

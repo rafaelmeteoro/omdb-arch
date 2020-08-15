@@ -1,15 +1,18 @@
 package com.meteoro.omdbarch.domain.di
 
 import com.meteoro.omdbarch.domain.CacheMovie
+import com.meteoro.omdbarch.domain.CorFetchSearch
 import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.FetchSearch
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.model.TypeDatabase
 import com.meteoro.omdbarch.domain.repository.CacheRepository
+import com.meteoro.omdbarch.domain.repository.CorSearchRepository
 import com.meteoro.omdbarch.domain.repository.ManagerRepository
 import com.meteoro.omdbarch.domain.repository.MovieRepository
 import com.meteoro.omdbarch.domain.repository.SearchRepository
+import com.meteoro.omdbarch.domain.services.CorSearchService
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.domain.services.MovieService
 import com.meteoro.omdbarch.domain.services.SearchHistoryService
@@ -44,4 +47,9 @@ class DomainModule {
     @Singleton
     fun provideManagerRepository(service: SearchHistoryService): ManagerRepository =
         ManagerSearch(service)
+
+    @Provides
+    @Singleton
+    fun provideCorSearchRepository(service: CorSearchService): CorSearchRepository =
+        CorFetchSearch(service)
 }

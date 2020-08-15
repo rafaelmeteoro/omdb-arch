@@ -20,4 +20,5 @@ dependencies {
     }
 
     implementation(project(ModuleNames.Domain))
+    implementation(project(ModuleNames.Libraries.Architecture))
 }

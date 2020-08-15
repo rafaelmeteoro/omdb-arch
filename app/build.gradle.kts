@@ -108,6 +108,7 @@ dependencies {
     implementation(project(ModuleNames.Features.Home))
     implementation(project(ModuleNames.Features.Details))
     implementation(project(ModuleNames.Features.Favorites))
+    implementation(project(ModuleNames.Libraries.Architecture))
 }
 
 androidExtensions {
