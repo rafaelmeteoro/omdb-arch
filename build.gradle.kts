@@ -14,7 +14,6 @@ buildscript {
         classpath(BuildPlugins.Dependencies.kotlinxSerialization)
         classpath(BuildPlugins.Dependencies.versions)
         classpath(BuildPlugins.Dependencies.safeArgs)
-        classpath(BuildPlugins.Dependencies.realm)
     }
 }
 

@@ -9,7 +9,6 @@ object BuildPlugins {
         const val kotlinxSerialization = "org.jetbrains.kotlin:kotlin-serialization:${KotlinConfig.version}"
         const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
-        const val realm = "io.realm:realm-gradle-plugin:${Versions.realm}"
     }
 
     object Ids {
@@ -23,7 +22,6 @@ object BuildPlugins {
         const val testLogger = "com.adarshr.test-logger"
         const val versions = "com.github.ben-manes.versions"
         const val safeArgs = "androidx.navigation.safeargs"
-        const val realmAndroid = "realm-android"
     }
 
     private object Versions {
@@ -31,6 +29,5 @@ object BuildPlugins {
         const val testLogger = "2.1.0"
         const val versions = "0.29.0"
         const val safeArgs = "2.3.0"
-        const val realm = "6.1.0"
     }
 }
