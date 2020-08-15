@@ -86,7 +86,7 @@ object Libraries {
     const val barista = "com.schibsted.spain:barista:${Versions.barista}"
 
     private object Versions {
-        const val kotlinSerialization = "0.14.0"
+        const val kotlinSerialization = "0.20.0"
         const val okHttp = "4.8.1"
         const val retrofit = "2.9.0"
         const val retrofitKotlinSerialization = "0.5.0"
