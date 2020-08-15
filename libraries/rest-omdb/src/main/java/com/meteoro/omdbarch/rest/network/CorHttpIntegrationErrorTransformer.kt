@@ -14,7 +14,10 @@ object CorHttpIntegrationErrorTransformer : ErrorTransformer {
 
     private fun translateUsingStatusCode(code: Int) =
         when (code) {
-            in 400..499 -> RemoteServiceIntegrationError.ClientOrigin
+            in FIRST_HTTP_CODE..LAST_HTTP_CODE -> RemoteServiceIntegrationError.ClientOrigin
             else -> RemoteServiceIntegrationError.RemoteSystem
         }
+
+    private const val FIRST_HTTP_CODE = 400
+    private const val LAST_HTTP_CODE = 499
 }

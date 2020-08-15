@@ -5,7 +5,11 @@ import com.meteoro.omdbarch.domain.repository.SearchRepository
 import com.meteoro.omdbarch.domain.services.SearchService
 import com.meteoro.omdbarch.domain.util.noResultSearch
 import com.meteoro.omdbarch.domain.util.resultSearch
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test

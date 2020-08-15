@@ -87,7 +87,7 @@ object Libraries {
 
     private object Versions {
         const val kotlinSerialization = "0.14.0"
-        const val okHttp = "4.8.0"
+        const val okHttp = "4.8.1"
         const val retrofit = "2.9.0"
         const val retrofitKotlinSerialization = "0.5.0"
         const val rxJava = "2.2.19"
@@ -102,7 +102,7 @@ object Libraries {
         const val archCore = "2.1.0"
         const val constraintLayout = "2.0.0-rc1"
         const val lifecycle = "2.2.0"
-        const val coroutines = "1.3.8"
+        const val coroutines = "1.3.9"
         const val navigation = "2.3.0"
         const val room = "2.2.5"
         const val dagger = "2.28.3"

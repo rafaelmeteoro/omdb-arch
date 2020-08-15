@@ -23,12 +23,12 @@ object CorNetworkingErrorTransformer : ErrorTransformer {
 
     private fun isRequestCanceled(error: Throwable) =
         error is IOException &&
-                error.message?.contentEquals("Canceled") ?: false
+            error.message?.contentEquals("Canceled") ?: false
 
     private fun cannotReachHost(error: Throwable) =
         error is UnknownHostException ||
-                error is ConnectException ||
-                error is NoRouteToHostException
+            error is ConnectException ||
+            error is NoRouteToHostException
 
     private fun isConnectionTimeout(error: Throwable) =
         error is SocketTimeoutException

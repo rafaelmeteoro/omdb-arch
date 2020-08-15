@@ -1,8 +1,12 @@
 package com.meteoro.omdbarch.coroutines.testutils
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 fun <T> Flow<T>.test(scope: CoroutineScope = GlobalScope, block: FlowTest<T>.() -> Unit) {
     val emissions = mutableListOf<T>()
@@ -10,6 +14,7 @@ fun <T> Flow<T>.test(scope: CoroutineScope = GlobalScope, block: FlowTest<T>.() 
     FlowTest(job, emissions).apply(block)
 }
 
+@Suppress("MemberNameEqualsClassName")
 class FlowTest<T>(private val parentJob: Job, private val emissions: List<T>) {
 
     fun triggerEmissions(action: suspend () -> Job) {

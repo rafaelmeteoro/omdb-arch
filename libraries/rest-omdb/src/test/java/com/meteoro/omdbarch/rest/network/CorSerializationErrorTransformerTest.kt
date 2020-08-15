@@ -15,7 +15,9 @@ internal class CorSerializationErrorTransformerTest {
         corCheckTransformation(
             from = MissingFieldException("Missing field inside this JSON"),
             using = CorSerializationErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(RemoteServiceIntegrationError.UnexpectedResponse) }
+            check = { transformed ->
+                assertThat(transformed).isEqualTo(RemoteServiceIntegrationError.UnexpectedResponse)
+            }
         )
     }
 
@@ -24,7 +26,9 @@ internal class CorSerializationErrorTransformerTest {
         corCheckTransformation(
             from = UnknownFieldException(0),
             using = CorSerializationErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(RemoteServiceIntegrationError.UnexpectedResponse) }
+            check = { transformed ->
+                assertThat(transformed).isEqualTo(RemoteServiceIntegrationError.UnexpectedResponse)
+            }
         )
     }
 
@@ -33,7 +37,9 @@ internal class CorSerializationErrorTransformerTest {
         corCheckTransformation(
             from = SerializationException("Found comments inside this JSON"),
             using = CorSerializationErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(RemoteServiceIntegrationError.UnexpectedResponse) }
+            check = { transformed ->
+                assertThat(transformed).isEqualTo(RemoteServiceIntegrationError.UnexpectedResponse)
+            }
         )
     }
 
@@ -44,7 +50,9 @@ internal class CorSerializationErrorTransformerTest {
         corCheckTransformation(
             from = otherError,
             using = CorSerializationErrorTransformer,
-            check = { transformed -> assertThat(transformed).isEqualTo(otherError) }
+            check = { transformed ->
+                assertThat(transformed).isEqualTo(otherError)
+            }
         )
     }
 }

@@ -4,7 +4,12 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.services.MovieCacheService
 import com.meteoro.omdbarch.persistance.model.FavoriteMovieRoom
 import com.meteoro.omdbarch.persistance.room.MovieDao
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
