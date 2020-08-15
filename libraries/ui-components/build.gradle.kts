@@ -1,7 +1,6 @@
 import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
-import modules.ModuleNames
 
 val module = LibraryModule(rootDir, LibraryType.Android)
 
@@ -19,6 +18,6 @@ dependencies {
         forEachDependencies(uicomponents) { implementation(it) }
     }
 
-    implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.Architecture))
+    implementation(project(":domain"))
+    implementation(project(":libraries:unidirectional-dataflow"))
 }

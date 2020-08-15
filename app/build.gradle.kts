@@ -4,7 +4,6 @@ import configs.ProguardConfig
 import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
-import modules.ModuleNames
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val dependencyGraph = LibraryModule(rootDir, LibraryType.DependencyGraph)
@@ -98,16 +97,16 @@ dependencies {
 
     debugImplementation(Libraries.leakCanary)
 
-    implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.Rest))
-    implementation(project(ModuleNames.Libraries.Persistance))
-    implementation(project(ModuleNames.Libraries.UiComponents))
-    implementation(project(ModuleNames.Libraries.Actions))
-    implementation(project(ModuleNames.Features.Onboarding))
-    implementation(project(ModuleNames.Features.Home))
-    implementation(project(ModuleNames.Features.Details))
-    implementation(project(ModuleNames.Features.Favorites))
-    implementation(project(ModuleNames.Libraries.Architecture))
+    implementation(project(":domain"))
+    implementation(project(":libraries:rest-omdb"))
+    implementation(project(":libraries:persistance"))
+    implementation(project(":libraries:ui-components"))
+    implementation(project(":libraries:actions"))
+    implementation(project(":features:onboarding"))
+    implementation(project(":features:home"))
+    implementation(project(":features:details"))
+    implementation(project(":features:favorites"))
+    implementation(project(":libraries:unidirectional-dataflow"))
 }
 
 androidExtensions {

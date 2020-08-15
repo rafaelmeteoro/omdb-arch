@@ -1,7 +1,6 @@
 import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
-import modules.ModuleNames
 
 val module = LibraryModule(rootDir, LibraryType.Android)
 
@@ -21,9 +20,9 @@ dependencies {
         forEachTestDependencies(home) { testImplementation(it) }
     }
 
-    implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.UiComponents))
-    implementation(project(ModuleNames.Libraries.Actions))
-    implementation(project(ModuleNames.Libraries.Architecture))
-    testImplementation(project(ModuleNames.Libraries.CoroutinesTestUtils))
+    implementation(project(":domain"))
+    implementation(project(":libraries:ui-components"))
+    implementation(project(":libraries:actions"))
+    implementation(project(":libraries:unidirectional-dataflow"))
+    testImplementation(project(":libraries:coroutines-testutils"))
 }

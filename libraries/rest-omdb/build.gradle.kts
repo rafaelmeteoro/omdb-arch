@@ -1,7 +1,6 @@
 import dependencies.ModulesDependencies.Companion.moduleDependencies
 import modules.LibraryModule
 import modules.LibraryType
-import modules.ModuleNames
 
 val module = LibraryModule(rootDir, LibraryType.Android)
 
@@ -22,6 +21,6 @@ dependencies {
         forEachTestDependencies(rest) { testImplementation(it) }
     }
 
-    implementation(project(ModuleNames.Domain))
-    testImplementation(project(ModuleNames.Libraries.CoroutinesTestUtils))
+    implementation(project(":domain"))
+    testImplementation(project(":libraries:coroutines-testutils"))
 }
