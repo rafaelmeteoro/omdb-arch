@@ -1,15 +1,10 @@
 package com.meteoro.omdbarch.rest.di
 
 import android.app.Application
-import com.meteoro.omdbarch.domain.services.ConnectivityService
-import com.meteoro.omdbarch.domain.services.MovieService
-import com.meteoro.omdbarch.domain.services.SearchService
-import com.meteoro.omdbarch.rest.BuildRetrofit
-import com.meteoro.omdbarch.rest.ExecutionErrorHandler
-import com.meteoro.omdbarch.rest.MovieInfrastructure
-import com.meteoro.omdbarch.rest.NetworkHandler
-import com.meteoro.omdbarch.rest.SearchInfrastructure
+import com.meteoro.omdbarch.domain.services.*
+import com.meteoro.omdbarch.rest.*
 import com.meteoro.omdbarch.rest.api.OmdbAPI
+import com.meteoro.omdbarch.rest.api.OmdbCoroutineAPI
 import com.meteoro.omdbarch.rest.executor.RemoteExecutor
 import com.meteoro.omdbarch.rest.executor.RemoteExecutorImpl
 import com.meteoro.omdbarch.rest.interceptor.ApiInterceptor
@@ -89,6 +84,17 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String, pr
 
     @Provides
     @Singleton
+    fun provideCorApi(client: OkHttpClient): OmdbCoroutineAPI {
+        val retrofit = CorBuildRetrofit(
+            apiURL = apiUrl,
+            httpClient = client
+        )
+
+        return retrofit.create(OmdbCoroutineAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideExecutor(service: ConnectivityService): RemoteExecutor =
         RemoteExecutorImpl(
             service = service,
@@ -112,4 +118,14 @@ class RestModule(private val apiUrl: String, private val apiKeyValue: String, pr
             executor = executor,
             errorHandler = ExecutionErrorHandler()
         )
+
+    @Provides
+    @Singleton
+    fun provideCorMovieService(api: OmdbCoroutineAPI): CorMovieService =
+        CorMovieInfrastructure(service = api)
+
+    @Provides
+    @Singleton
+    fun provideCorSearchService(api: OmdbCoroutineAPI): CorSearchService =
+        CorSearchInfrastructure(service = api)
 }

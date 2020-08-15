@@ -10,6 +10,8 @@ object ModuleNames {
         const val Persistance = ":libraries:persistance"
         const val UiComponents = ":libraries:ui-components"
         const val Actions = ":libraries:actions"
+        const val Architecture = ":libraries:unidirectional-dataflow"
+        const val CoroutinesTestUtils = ":libraries:coroutines-testutils"
     }
 
     object Features {

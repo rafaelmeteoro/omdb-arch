@@ -24,4 +24,6 @@ dependencies {
     implementation(project(ModuleNames.Domain))
     implementation(project(ModuleNames.Libraries.UiComponents))
     implementation(project(ModuleNames.Libraries.Actions))
+    implementation(project(ModuleNames.Libraries.Architecture))
+    testImplementation(project(ModuleNames.Libraries.CoroutinesTestUtils))
 }

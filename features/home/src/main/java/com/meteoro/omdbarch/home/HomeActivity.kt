@@ -6,25 +6,26 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.actions.Actions
+import com.meteoro.omdbarch.architecture.ViewState
 import com.meteoro.omdbarch.components.ErrorStateResources
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.connectivity.base.ConnectivityProvider
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.EmptyTerm
-import com.meteoro.omdbarch.domain.state.ViewState
 import com.meteoro.omdbarch.home.databinding.ActivityHomeBinding
 import com.meteoro.omdbarch.home.databinding.StateHomeContentBinding
 import com.meteoro.omdbarch.home.databinding.StateHomeErrorBinding
 import dagger.android.AndroidInjection
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityStateListener {
@@ -39,6 +40,9 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
 
     @Inject
     lateinit var viewModel: HomeViewModel
+
+    @Inject
+    lateinit var viewModelContainer: HomeContainerViewModel
 
     private val provider: ConnectivityProvider by lazy { ConnectivityProvider.createProvider(this) }
 
@@ -85,13 +89,14 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
         menuInflater.inflate(R.menu.home_menu, menu)
         (menu?.findItem(R.id.action_search)?.actionView as? SearchView)?.apply {
             queryHint = getString(R.string.action_search_hint)
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean = true
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    searchSubject.onNext(newText ?: "")
-                    return true
+            setOnQueryTextListener(
+                DebounceQueryTextListener(
+                    debouncePeriod = DEBOUNCE_TIME,
+                    lifecycle = this@HomeActivity.lifecycle
+                ) { newText ->
+                    viewModelContainer.handle(SearchQuery(newText))
                 }
-            })
+            )
         }
         return true
     }
@@ -122,33 +127,19 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
     }
 
     private fun setupSubject() {
-        val toDispose = searchSubject
-            .debounce(DEBOUNCE_TIME, TimeUnit.MILLISECONDS)
-            .distinctUntilChanged()
-            .subscribeBy(
-                onNext = { searchMovie(it) }
-            )
-
-        disposer.collect(toDispose)
+        lifecycleScope.launch {
+            viewModelContainer.bind().collect { renderState(it) }
+        }
     }
 
-    private fun searchMovie(title: String) {
-        val toDispose = viewModel
-            .searchMovie(title)
-            .subscribeBy(
-                onNext = { changeState(it) },
-                onError = { Timber.e("Error -> $it") }
-            )
-
-        disposer.collect(toDispose)
-    }
-
-    private fun changeState(event: ViewState<HomePresentation>) {
-        when (event) {
-            is ViewState.Launched -> startExecution()
-            is ViewState.Success -> showMovies(event.value)
-            is ViewState.Failed -> handleError(event.reason)
-            is ViewState.Done -> Unit
+    private fun renderState(state: ViewState<HomePresentation>) {
+        when (state) {
+            is ViewState.FirstLaunch -> Unit
+            is ViewState.Loading.FromEmpty -> startExecution()
+            is ViewState.Loading.FromPrevious -> showMovies(state.previous)
+            is ViewState.Success -> showMovies(state.value)
+            is ViewState.Failed -> handleError(state.reason)
+            else -> Unit
         }
     }
 
