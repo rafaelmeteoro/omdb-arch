@@ -70,7 +70,7 @@ android {
     }
 
     lintOptions {
-        setLintConfig(file("${rootDir}/buildSrc/config/lint.xml"))
+//        setLintConfig(file("${rootDir}/buildSrc/config/lint.xml"))
     }
 
     viewBinding {
