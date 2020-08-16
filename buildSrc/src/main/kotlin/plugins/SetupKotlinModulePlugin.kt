@@ -11,10 +11,12 @@ class SetupKotlinModulePlugin : Plugin<Project> {
         target.run {
             plugins.apply(BuildPlugins.Ids.kotlinJVM)
             plugins.apply(BuildPlugins.Ids.testLogger)
+            plugins.apply(BuildPlugins.Ids.ktlint)
             plugins.apply(BuildPlugins.Ids.detekt)
 
             configureKotlinTasks()
             configureTestLogger()
+            configureKtlint()
             configureDetekt()
         }
     }

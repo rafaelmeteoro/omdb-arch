@@ -9,6 +9,7 @@ object BuildPlugins {
         const val kotlinxSerialization = "org.jetbrains.kotlin:kotlin-serialization:${KotlinConfig.version}"
         const val versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.versions}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
+        const val ktlint = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlint}"
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
     }
 
@@ -23,6 +24,7 @@ object BuildPlugins {
         const val testLogger = "com.adarshr.test-logger"
         const val versions = "com.github.ben-manes.versions"
         const val safeArgs = "androidx.navigation.safeargs"
+        const val ktlint = "org.jlleitschuh.gradle.ktlint"
         const val detekt = "io.gitlab.arturbosch.detekt"
 
         const val kotlinModule = "kotlin-module"
@@ -34,6 +36,7 @@ object BuildPlugins {
         const val testLogger = "2.1.0"
         const val versions = "0.29.0"
         const val safeArgs = "2.3.0"
+        const val ktlint = "9.3.0"
         const val detekt = "1.11.0"
     }
 }

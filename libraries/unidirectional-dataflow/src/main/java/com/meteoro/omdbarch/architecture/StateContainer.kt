@@ -7,6 +7,7 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 
+//slsalskdfa
 interface StateContainer<T> : ViewStateRegistry<T>, ViewStatesEmmiter<T> {
 
     @FlowPreview
