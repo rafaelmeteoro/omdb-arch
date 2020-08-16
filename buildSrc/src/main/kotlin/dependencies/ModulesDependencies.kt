@@ -181,20 +181,6 @@ class ModulesDependencies {
         )
     }
 
-    val coroutinesTest by lazy {
-        mapOf(
-            Pair(
-                KEY_DEPENDENCIES, listOf(
-                    Libraries.kotlinStdLib,
-                    Libraries.coroutinesCore,
-                    Libraries.coroutinesTest,
-                    Libraries.coroutinesDebug,
-                    Libraries.jUnit
-                )
-            )
-        )
-    }
-
     val onboarding by lazy {
         mapOf(
             Pair(
