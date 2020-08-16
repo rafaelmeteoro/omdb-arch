@@ -73,8 +73,8 @@ android {
 //        setLintConfig(file("${rootDir}/buildSrc/config/lint.xml"))
     }
 
-    viewBinding {
-        isEnabled = true
+    buildFeatures {
+        viewBinding = true
     }
 
     tasks.withType<KotlinCompile> {
