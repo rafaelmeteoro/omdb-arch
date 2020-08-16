@@ -22,6 +22,9 @@ object BuildPlugins {
         const val testLogger = "com.adarshr.test-logger"
         const val versions = "com.github.ben-manes.versions"
         const val safeArgs = "androidx.navigation.safeargs"
+
+        const val kotlinModule = "kotlin-module"
+        const val androidModule = "android-module"
     }
 
     private object Versions {
