@@ -9,8 +9,9 @@ class SetupAndroidModulePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.run {
             plugins.apply(BuildPlugins.Ids.androidLibrary)
-            plugins.apply(BuildPlugins.Ids.kotlinAndroid)
-            plugins.apply(BuildPlugins.Ids.kotlinExtensions)
+            plugins.apply(BuildPlugins.Ids.newKotlinAndroid)
+            plugins.apply(BuildPlugins.Ids.kotlinAndroidExtensions)
+            plugins.apply(BuildPlugins.Ids.newKotlinKapt)
             plugins.apply(BuildPlugins.Ids.testLogger)
 
             configureKotlinTasks()

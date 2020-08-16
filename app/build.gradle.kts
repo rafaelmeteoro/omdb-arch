@@ -12,9 +12,9 @@ val detektModule = LibraryModule(rootDir, LibraryType.Detekt)
 
 plugins {
     id(BuildPlugins.Ids.androidApplication)
-    kotlin(BuildPlugins.Ids.kotlinAndroid)
-    kotlin(BuildPlugins.Ids.kotlinExtensions)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
+    id(BuildPlugins.Ids.newKotlinAndroid)
+    id(BuildPlugins.Ids.kotlinAndroidExtensions)
+    id(BuildPlugins.Ids.newKotlinKapt)
 }
 
 apply(from = dependencyGraph.script())
