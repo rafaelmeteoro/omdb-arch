@@ -14,7 +14,7 @@ fun <T> Flow<T>.test(scope: CoroutineScope = GlobalScope, block: FlowTest<T>.() 
     FlowTest(job, emissions).apply(block)
 }
 
-// @Suppress("MemberNameEqualsClassName")
+@Suppress("MemberNameEqualsClassName")
 class FlowTest<T>(private val parentJob: Job, private val emissions: List<T>) {
 
     fun triggerEmissions(action: suspend () -> Job) {

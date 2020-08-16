@@ -161,26 +161,6 @@ class ModulesDependencies {
         )
     }
 
-    val architecture by lazy {
-        mapOf(
-            Pair(
-                KEY_DEPENDENCIES, listOf(
-                    Libraries.kotlinStdLib,
-                    Libraries.coroutinesCore,
-                    Libraries.rxJava,
-                    Libraries.rxKotlin
-                )
-            ),
-            Pair(
-                KEY_TEST_DEPENDENCIES, listOf(
-                    Libraries.jUnit,
-                    Libraries.assertj,
-                    Libraries.mockitoKotlin
-                )
-            )
-        )
-    }
-
     val onboarding by lazy {
         mapOf(
             Pair(
