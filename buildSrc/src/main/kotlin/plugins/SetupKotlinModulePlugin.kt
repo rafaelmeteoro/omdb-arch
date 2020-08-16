@@ -12,9 +12,8 @@ class SetupKotlinModulePlugin : Plugin<Project> {
             plugins.apply(BuildPlugins.Ids.kotlinJVM)
             plugins.apply(BuildPlugins.Ids.testLogger)
 
-            tasks.withType().configureEach {
-
-            }
+            configureKotlinTasks()
+            configureTestLogger()
         }
     }
 }

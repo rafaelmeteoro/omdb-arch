@@ -19,9 +19,23 @@ buildscript {
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:4.0.1")
+    implementation("com.android.tools.build:gradle:4.1.0-rc01")
     implementation("com.adarshr:gradle-test-logger-plugin:2.1.0")
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("gradle-plugin"))
     implementation(kotlin("android-extensions"))
+}
+
+gradlePlugin {
+    plugins {
+        register("kotlin-module") {
+            id = "kotlin-module"
+            implementationClass = "plugins.SetupKotlinModulePlugin"
+        }
+
+        register("android-module") {
+            id = "android-module"
+            implementationClass = "plugins.SetupAndroidModulePlugin"
+        }
+    }
 }
