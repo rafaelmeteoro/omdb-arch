@@ -2,24 +2,24 @@ import configs.AndroidConfig
 import configs.KotlinConfig
 import configs.ProguardConfig
 import dependencies.ModulesDependencies.Companion.moduleDependencies
-import modules.LibraryModule
-import modules.LibraryType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-val dependencyGraph = LibraryModule(rootDir, LibraryType.DependencyGraph)
-val ktlintModule = LibraryModule(rootDir, LibraryType.KtLint)
-val detektModule = LibraryModule(rootDir, LibraryType.Detekt)
+import plugins.configureDetekt
+import plugins.configureKtlint
+import plugins.configureTestLogger
 
 plugins {
     id(BuildPlugins.Ids.androidApplication)
-    id(BuildPlugins.Ids.newKotlinAndroid)
+    id(BuildPlugins.Ids.kotlinAndroid)
     id(BuildPlugins.Ids.kotlinAndroidExtensions)
-    id(BuildPlugins.Ids.newKotlinKapt)
+    id(BuildPlugins.Ids.kotlinKapt)
+    id(BuildPlugins.Ids.testLogger)
+    id(BuildPlugins.Ids.ktlint)
+    id(BuildPlugins.Ids.detekt)
 }
 
-apply(from = dependencyGraph.script())
-apply(from = ktlintModule.script())
-apply(from = detektModule.script())
+configureTestLogger()
+configureKtlint()
+configureDetekt()
 
 android {
     compileSdkVersion(AndroidConfig.compileSdk)
@@ -70,7 +70,7 @@ android {
     }
 
     lintOptions {
-//        setLintConfig(file("${rootDir}/buildSrc/config/lint.xml"))
+        baseline(file("$rootDir/buildSrc/config/lint.xml"))
     }
 
     buildFeatures {
