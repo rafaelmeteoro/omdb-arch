@@ -72,7 +72,7 @@ jobs:
           bundle config path vendor/bundle
           bundle install
 
-      - name: Run Fastlane Compile Analysis
+      - name: Run Fastlane Analysis Lane
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: 'analysis'
@@ -107,10 +107,10 @@ jobs:
           bundle config path vendor/bundle
           bundle install
 
-      - name: Run Fastlane Compile Analysis
+      - name: Run Fastlane Jacoco Test Lane
         uses: maierj/fastlane-action@v1.4.0
         with:
-          lane: 'unit_test'
+          lane: 'jacoco_test'
           bundle-install-path: 'vendor/bundle'
 
       - name: Share test reports with Codecov
