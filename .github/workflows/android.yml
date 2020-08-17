@@ -112,3 +112,6 @@ jobs:
         with:
           lane: 'unit_test'
           bundle-install-path: 'vendor/bundle'
+
+      - name: Share test reports with Codecov
+        uses: codecov/codecov-action@v1.0.12
