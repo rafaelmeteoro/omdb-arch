@@ -1,26 +1,26 @@
-import dependencies.ModulesDependencies.Companion.moduleDependencies
-import modules.LibraryModule
-import modules.LibraryType
-import modules.ModuleNames
-
-val module = LibraryModule(rootDir, LibraryType.Android)
-
-apply(from = module.script())
+import dependencies.UnitTestDependencies.Companion.unitTest
 
 plugins {
-    id(BuildPlugins.Ids.androidLibrary)
-    kotlin(BuildPlugins.Ids.kotlinAndroid)
-    kotlin(BuildPlugins.Ids.kotlinExtensions)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
-    id(BuildPlugins.Ids.realmAndroid)
+    id(BuildPlugins.Ids.androidModule)
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(persistence) { implementation(it) }
-        forEachCompilers(persistence) { kapt(it) }
-        forEachTestDependencies(persistence) { testImplementation(it) }
-    }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
+    implementation(Libraries.dagger)
+    implementation(Libraries.daggerAndroid)
+    implementation(Libraries.daggerAndroidSupport)
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    implementation(Libraries.roomRxJava2)
+    implementation(Libraries.archCoreCommon)
+    implementation(Libraries.archCoreRuntime)
+    kapt(Libraries.daggerCompiler)
+    kapt(Libraries.daggerAndroidProcessor)
+    kapt(Libraries.roomCompiler)
 
-    implementation(project(ModuleNames.Domain))
+    implementation(project(":domain"))
+
+    unitTest { forEachDependency { testImplementation(it) } }
 }

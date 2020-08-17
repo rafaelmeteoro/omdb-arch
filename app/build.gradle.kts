@@ -1,27 +1,26 @@
 import configs.AndroidConfig
 import configs.KotlinConfig
 import configs.ProguardConfig
-import dependencies.ModulesDependencies.Companion.moduleDependencies
-import modules.LibraryModule
-import modules.LibraryType
-import modules.ModuleNames
+import dependencies.InstrumentationTestDependencies.Companion.instrumentationTest
+import dependencies.UnitTestDependencies.Companion.unitTest
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-val dependencyGraph = LibraryModule(rootDir, LibraryType.DependencyGraph)
-val ktlintModule = LibraryModule(rootDir, LibraryType.KtLint)
-val detektModule = LibraryModule(rootDir, LibraryType.Detekt)
+import plugins.configureDetekt
+import plugins.configureKtlint
+import plugins.configureTestLogger
 
 plugins {
     id(BuildPlugins.Ids.androidApplication)
-    kotlin(BuildPlugins.Ids.kotlinAndroid)
-    kotlin(BuildPlugins.Ids.kotlinExtensions)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
-    id(BuildPlugins.Ids.realmAndroid)
+    id(BuildPlugins.Ids.kotlinAndroid)
+    id(BuildPlugins.Ids.kotlinAndroidExtensions)
+    id(BuildPlugins.Ids.kotlinKapt)
+    id(BuildPlugins.Ids.testLogger)
+    id(BuildPlugins.Ids.ktlint)
+    id(BuildPlugins.Ids.detekt)
 }
 
-apply(from = dependencyGraph.script())
-apply(from = ktlintModule.script())
-apply(from = detektModule.script())
+configureTestLogger()
+configureKtlint()
+configureDetekt()
 
 android {
     compileSdkVersion(AndroidConfig.compileSdk)
@@ -72,11 +71,11 @@ android {
     }
 
     lintOptions {
-        setLintConfig(file("${rootDir}/buildSrc/config/lint.xml"))
+        baseline(file("$rootDir/buildSrc/config/lint.xml"))
     }
 
-    viewBinding {
-        isEnabled = true
+    buildFeatures {
+        viewBinding = true
     }
 
     tasks.withType<KotlinCompile> {
@@ -90,25 +89,58 @@ android {
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(app) { implementation(it) }
-        forEachCompilers(app) { kapt(it) }
-        forEachTestDependencies(app) { testImplementation(it) }
-        forEachAndroidTestDependencies(app) { androidTestImplementation(it) {} }
-    }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.appCompat)
+    implementation(Libraries.cardView)
+    implementation(Libraries.recyclerView)
+    implementation(Libraries.materialDesign)
+    implementation(Libraries.coreAndroidx)
+    implementation(Libraries.constraintLayout)
+    implementation(Libraries.lifecycleCommon)
+    implementation(Libraries.lifecycleJava8)
+    implementation(Libraries.lifecycleViewModel)
+    implementation(Libraries.lifecycleExtensions)
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
+    implementation(Libraries.rxAndroid)
+    implementation(Libraries.okhttp)
+    implementation(Libraries.okhttpLogger)
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitRxAdapter)
+    implementation(Libraries.retrofitScalars)
+    implementation(Libraries.retrofitKotlinSerialization)
+    implementation(Libraries.retrofitGsonConverter)
+    implementation(Libraries.gson)
+    implementation(Libraries.picasso)
+    implementation(Libraries.coil)
+    implementation(Libraries.coilBase)
+    implementation(Libraries.stetho)
+    implementation(Libraries.stethoOkHttp)
+    implementation(Libraries.dagger)
+    implementation(Libraries.daggerAndroid)
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    implementation(Libraries.roomRxJava2)
+    implementation(Libraries.timber)
+    kapt(Libraries.daggerCompiler)
+    kapt(Libraries.daggerAndroidProcessor)
+    kapt(Libraries.roomCompiler)
 
     debugImplementation(Libraries.leakCanary)
 
-    implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.Rest))
-    implementation(project(ModuleNames.Libraries.Persistance))
-    implementation(project(ModuleNames.Libraries.UiComponents))
-    implementation(project(ModuleNames.Libraries.Actions))
-    implementation(project(ModuleNames.Features.Onboarding))
-    implementation(project(ModuleNames.Features.Home))
-    implementation(project(ModuleNames.Features.Details))
-    implementation(project(ModuleNames.Features.Favorites))
-    implementation(project(ModuleNames.Libraries.Architecture))
+    implementation(project(":domain"))
+    implementation(project(":libraries:rest-omdb"))
+    implementation(project(":libraries:persistance"))
+    implementation(project(":libraries:ui-components"))
+    implementation(project(":libraries:actions"))
+    implementation(project(":features:onboarding"))
+    implementation(project(":features:home"))
+    implementation(project(":features:details"))
+    implementation(project(":features:favorites"))
+    implementation(project(":libraries:unidirectional-dataflow"))
+
+    unitTest { forEachDependency { testImplementation(it) } }
+    instrumentationTest { forEachDependency { androidTestImplementation(it) } }
 }
 
 androidExtensions {

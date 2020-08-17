@@ -86,7 +86,7 @@ object Libraries {
     const val barista = "com.schibsted.spain:barista:${Versions.barista}"
 
     private object Versions {
-        const val kotlinSerialization = "0.14.0"
+        const val kotlinSerialization = "0.20.0"
         const val okHttp = "4.8.1"
         const val retrofit = "2.9.0"
         const val retrofitKotlinSerialization = "0.5.0"
@@ -94,11 +94,11 @@ object Libraries {
         const val rxKotlin = "2.4.0"
         const val rxAndroid = "2.1.1"
         const val gson = "2.8.6"
-        const val appCompat = "1.1.0"
+        const val appCompat = "1.2.0"
         const val cardView = "1.0.0"
         const val recyclerView = "1.1.0"
-        const val materialDesign = "1.1.0"
-        const val coreAndroidx = "1.2.0"
+        const val materialDesign = "1.2.0"
+        const val coreAndroidx = "1.3.1"
         const val archCore = "2.1.0"
         const val constraintLayout = "2.0.0-rc1"
         const val lifecycle = "2.2.0"

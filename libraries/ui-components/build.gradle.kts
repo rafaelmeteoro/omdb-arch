@@ -1,24 +1,18 @@
-import dependencies.ModulesDependencies.Companion.moduleDependencies
-import modules.LibraryModule
-import modules.LibraryType
-import modules.ModuleNames
-
-val module = LibraryModule(rootDir, LibraryType.Android)
-
-apply(from = module.script())
-
 plugins {
-    id(BuildPlugins.Ids.androidLibrary)
-    kotlin(BuildPlugins.Ids.kotlinAndroid)
-    kotlin(BuildPlugins.Ids.kotlinExtensions)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
+    id(BuildPlugins.Ids.androidModule)
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(uicomponents) { implementation(it) }
-    }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.appCompat)
+    implementation(Libraries.materialDesign)
+    implementation(Libraries.recyclerView)
+    implementation(Libraries.lifecycleRuntime)
+    implementation(Libraries.lifecycleExtensions)
+    implementation(Libraries.lifecycleViewModel)
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
 
-    implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.Architecture))
+    implementation(project(":domain"))
+    implementation(project(":libraries:unidirectional-dataflow"))
 }

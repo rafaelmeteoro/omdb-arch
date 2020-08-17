@@ -1,25 +1,24 @@
-import dependencies.ModulesDependencies.Companion.moduleDependencies
-import modules.LibraryModule
-import modules.LibraryType
-import modules.ModuleNames
-
-val module = LibraryModule(rootDir, LibraryType.Android)
-
-apply(from = module.script())
+import dependencies.UnitTestDependencies.Companion.unitTest
 
 plugins {
-    id(BuildPlugins.Ids.androidLibrary)
-    kotlin(BuildPlugins.Ids.kotlinAndroid)
-    kotlin(BuildPlugins.Ids.kotlinExtensions)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
+    id(BuildPlugins.Ids.androidModule)
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(domain) { implementation(it) }
-        forEachCompilers(domain) { kapt(it) }
-        forEachTestDependencies(domain) { testImplementation(it) }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
+    implementation(Libraries.lifecycleCommon)
+    implementation(Libraries.lifecycleJava8)
+    implementation(Libraries.coroutinesCore)
+    implementation(Libraries.dagger)
+    implementation(Libraries.daggerAndroid)
+    implementation(Libraries.daggerAndroidSupport)
+    implementation(Libraries.timber)
+    kapt(Libraries.daggerCompiler)
+    kapt(Libraries.daggerAndroidProcessor)
 
-        testImplementation(project(ModuleNames.Libraries.CoroutinesTestUtils))
-    }
+    unitTest { forEachDependency { testImplementation(it) } }
+
+    testImplementation(project(":libraries:coroutines-testutils"))
 }

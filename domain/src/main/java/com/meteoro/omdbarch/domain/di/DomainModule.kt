@@ -6,7 +6,6 @@ import com.meteoro.omdbarch.domain.FetchMovie
 import com.meteoro.omdbarch.domain.FetchSearch
 import com.meteoro.omdbarch.domain.ManagerSearch
 import com.meteoro.omdbarch.domain.disposer.Disposer
-import com.meteoro.omdbarch.domain.model.TypeDatabase
 import com.meteoro.omdbarch.domain.repository.CacheRepository
 import com.meteoro.omdbarch.domain.repository.CorSearchRepository
 import com.meteoro.omdbarch.domain.repository.ManagerRepository
@@ -19,7 +18,6 @@ import com.meteoro.omdbarch.domain.services.SearchHistoryService
 import com.meteoro.omdbarch.domain.services.SearchService
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -30,7 +28,7 @@ class DomainModule {
 
     @Provides
     @Singleton
-    fun provideCacheRepository(@Named(TypeDatabase.ROOM) service: MovieCacheService): CacheRepository =
+    fun provideCacheRepository(service: MovieCacheService): CacheRepository =
         CacheMovie(service)
 
     @Provides

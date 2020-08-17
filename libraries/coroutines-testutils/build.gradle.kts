@@ -1,17 +1,11 @@
-import dependencies.ModulesDependencies.Companion.moduleDependencies
-import modules.LibraryModule
-import modules.LibraryType
-
-val module = LibraryModule(rootDir, LibraryType.Kotlin)
-
-apply(from = module.script())
-
 plugins {
-    id(BuildPlugins.Ids.kotlinJVM)
+    id(BuildPlugins.Ids.kotlinModule)
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(coroutinesTest) { implementation(it) }
-    }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.coroutinesCore)
+    implementation(Libraries.coroutinesTest)
+    implementation(Libraries.coroutinesDebug)
+    implementation(Libraries.jUnit)
 }

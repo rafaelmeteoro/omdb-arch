@@ -1,26 +1,23 @@
-import dependencies.ModulesDependencies.Companion.moduleDependencies
-import modules.LibraryModule
-import modules.LibraryType
-import modules.ModuleNames
-
-val module = LibraryModule(rootDir, LibraryType.Android)
-
-apply(from = module.script())
-
 plugins {
-    id(BuildPlugins.Ids.androidLibrary)
-    kotlin(BuildPlugins.Ids.kotlinAndroid)
-    kotlin(BuildPlugins.Ids.kotlinExtensions)
-    kotlin(BuildPlugins.Ids.kotlinKapt)
+    id(BuildPlugins.Ids.androidModule)
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(onboarding) { implementation(it) }
-        forEachCompilers(onboarding) { kapt(it) }
-    }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.appCompat)
+    implementation(Libraries.materialDesign)
+    implementation(Libraries.constraintLayout)
+    implementation(Libraries.lifecycleRuntime)
+    implementation(Libraries.coroutinesCore)
+    implementation(Libraries.coroutinesAndroid)
+    implementation(Libraries.dagger)
+    implementation(Libraries.daggerAndroid)
+    implementation(Libraries.daggerAndroidSupport)
+    implementation(Libraries.timber)
+    kapt(Libraries.daggerCompiler)
+    kapt(Libraries.daggerAndroidProcessor)
 
-    implementation(project(ModuleNames.Domain))
-    implementation(project(ModuleNames.Libraries.UiComponents))
-    implementation(project(ModuleNames.Libraries.Actions))
+    implementation(project(":domain"))
+    implementation(project(":libraries:ui-components"))
+    implementation(project(":libraries:actions"))
 }
