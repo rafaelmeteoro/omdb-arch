@@ -1,7 +1,8 @@
 import configs.AndroidConfig
 import configs.KotlinConfig
 import configs.ProguardConfig
-import dependencies.ModulesDependencies.Companion.moduleDependencies
+import dependencies.InstrumentationTestDependencies.Companion.instrumentationTest
+import dependencies.UnitTestDependencies.Companion.unitTest
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import plugins.configureDetekt
 import plugins.configureKtlint
@@ -88,12 +89,42 @@ android {
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(app) { implementation(it) }
-        forEachCompilers(app) { kapt(it) }
-        forEachTestDependencies(app) { testImplementation(it) }
-        forEachAndroidTestDependencies(app) { androidTestImplementation(it) {} }
-    }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.appCompat)
+    implementation(Libraries.cardView)
+    implementation(Libraries.recyclerView)
+    implementation(Libraries.materialDesign)
+    implementation(Libraries.coreAndroidx)
+    implementation(Libraries.constraintLayout)
+    implementation(Libraries.lifecycleCommon)
+    implementation(Libraries.lifecycleJava8)
+    implementation(Libraries.lifecycleViewModel)
+    implementation(Libraries.lifecycleExtensions)
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxKotlin)
+    implementation(Libraries.rxAndroid)
+    implementation(Libraries.okhttp)
+    implementation(Libraries.okhttpLogger)
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitRxAdapter)
+    implementation(Libraries.retrofitScalars)
+    implementation(Libraries.retrofitKotlinSerialization)
+    implementation(Libraries.retrofitGsonConverter)
+    implementation(Libraries.gson)
+    implementation(Libraries.picasso)
+    implementation(Libraries.coil)
+    implementation(Libraries.coilBase)
+    implementation(Libraries.stetho)
+    implementation(Libraries.stethoOkHttp)
+    implementation(Libraries.dagger)
+    implementation(Libraries.daggerAndroid)
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    implementation(Libraries.roomRxJava2)
+    implementation(Libraries.timber)
+    kapt(Libraries.daggerCompiler)
+    kapt(Libraries.daggerAndroidProcessor)
+    kapt(Libraries.roomCompiler)
 
     debugImplementation(Libraries.leakCanary)
 
@@ -107,6 +138,9 @@ dependencies {
     implementation(project(":features:details"))
     implementation(project(":features:favorites"))
     implementation(project(":libraries:unidirectional-dataflow"))
+
+    unitTest { forEachDependency { testImplementation(it) } }
+    instrumentationTest { forEachDependency { androidTestImplementation(it) } }
 }
 
 androidExtensions {

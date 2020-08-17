@@ -1,11 +1,8 @@
-import dependencies.ModulesDependencies.Companion.moduleDependencies
-
 plugins {
     id(BuildPlugins.Ids.androidModule)
 }
 
 dependencies {
-    moduleDependencies {
-        forEachDependencies(actions) { implementation(it) }
-    }
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.coreAndroidx)
 }

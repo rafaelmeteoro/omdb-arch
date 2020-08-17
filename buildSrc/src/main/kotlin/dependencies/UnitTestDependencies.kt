@@ -8,7 +8,9 @@ class UnitTestDependencies {
         listOf(
             Libraries.jUnit,
             Libraries.assertj,
-            Libraries.mockitoKotlin
+            Libraries.mockitoKotlin,
+            Libraries.mockWebServer,
+            Libraries.roomTesting
         )
     }
 
