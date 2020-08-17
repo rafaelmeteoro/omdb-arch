@@ -91,6 +91,14 @@ platform :android do
     )
   end
 
+  desc "Execute jacoco test report"
+  lane :jacoco_test do
+    gradle(
+      tasks: ["jacocoTestReport", "jacocoTestReportDebug"],
+      flags: "--no-daemon"
+    )
+  end
+
   desc "Execute instrumentation test on Emulator"
   lane :instrumentation_test do
     automated_test_emulator_run(
@@ -106,7 +114,7 @@ platform :android do
     compile
     analysis
     assemble
-    unit_test
+    jacoco_test
     notification(subtitle: "Pipeline finished", message: "Execution successful.")
   end
 end

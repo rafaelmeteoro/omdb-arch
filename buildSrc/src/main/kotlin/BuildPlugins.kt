@@ -11,6 +11,7 @@ object BuildPlugins {
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgs}"
         const val ktlint = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlint}"
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
+        const val jacocoUnified = "com.vanniktech:gradle-android-junit-jacoco-plugin:${Versions.jacocoUnified}"
     }
 
     object Ids {
@@ -26,6 +27,7 @@ object BuildPlugins {
         const val safeArgs = "androidx.navigation.safeargs"
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
         const val detekt = "io.gitlab.arturbosch.detekt"
+        const val jacocoUnified = "com.vanniktech.android.junit.jacoco"
 
         const val kotlinModule = "kotlin-module"
         const val androidModule = "android-module"
@@ -38,5 +40,6 @@ object BuildPlugins {
         const val safeArgs = "2.3.0"
         const val ktlint = "9.3.0"
         const val detekt = "1.11.0"
+        const val jacocoUnified = "0.16.0"
     }
 }
