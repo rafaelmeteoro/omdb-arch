@@ -115,3 +115,9 @@ jobs:
 
       - name: Share test reports with Codecov
         uses: codecov/codecov-action@v1.0.12
+
+#     Codecov container action is only supported on Linux
+#      - name: Run codacy coverage reports
+#        uses: codacy/codacy-coverage-reporter-action@master
+#        with:
+#          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
