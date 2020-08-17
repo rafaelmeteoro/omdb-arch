@@ -61,6 +61,11 @@ Assemble source and test APKs
 fastlane android unit_test
 ```
 Execute unit test
+### android jacoco_test
+```
+fastlane android jacoco_test
+```
+Execute jacoco test report
 ### android instrumentation_test
 ```
 fastlane android instrumentation_test

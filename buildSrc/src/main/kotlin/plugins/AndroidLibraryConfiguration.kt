@@ -50,7 +50,7 @@ fun Project.configureAsAndroidLibrary() {
         }
 
         lintOptions {
-            lintConfig = file("${rootDir}/buildSrc/config/lint.xml")
+            baseline(file("$rootDir/buildSrc/config/lint.xml"))
         }
 
         testOptions {

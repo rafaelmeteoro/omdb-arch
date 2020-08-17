@@ -1,3 +1,5 @@
+import com.vanniktech.android.junit.jacoco.JunitJacocoExtension
+
 buildscript {
     repositories {
         google()
@@ -16,6 +18,7 @@ buildscript {
         classpath(BuildPlugins.Dependencies.safeArgs)
         classpath(BuildPlugins.Dependencies.ktlint)
         classpath(BuildPlugins.Dependencies.detekt)
+        classpath(BuildPlugins.Dependencies.jacocoUnified)
     }
 }
 
@@ -31,3 +34,8 @@ allprojects {
 
 apply(plugin = BuildPlugins.Ids.testLogger)
 apply(plugin = BuildPlugins.Ids.versions)
+apply(plugin = BuildPlugins.Ids.jacocoUnified)
+
+configure<JunitJacocoExtension> {
+    jacocoVersion = "0.8.4"
+}

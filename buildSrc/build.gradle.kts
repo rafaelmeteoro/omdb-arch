@@ -23,6 +23,7 @@ dependencies {
     implementation("com.adarshr:gradle-test-logger-plugin:2.1.0")
     implementation("org.jlleitschuh.gradle:ktlint-gradle:9.3.0")
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.11.0")
+    implementation("com.vanniktech:gradle-android-junit-jacoco-plugin:0.16.0")
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("gradle-plugin"))
     implementation(kotlin("android-extensions"))
