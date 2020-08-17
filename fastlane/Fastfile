@@ -42,17 +42,26 @@ platform :android do
 
   desc "Execute debug lint"
   lane :lint do
-    gradle(task: "lintDebug")
+    gradle(
+      task: "lint",
+      flags: "--no-daemon --stacktrace"
+    )
   end
 
   desc "Execute Ktlint Verification"
   lane :ktlint do
-    gradle(task: "ktlintVerification")
+    gradle(
+      task: "ktlintCheck",
+      flags: "--no-daemon --stacktrace"
+    )
   end
 
   desc "Execute Detekt Verification"
   lane :detekt do
-    gradle(task: "detektVerification")
+    gradle(
+      task: "detekt",
+      flags: "--no-daemon --stacktrace"
+    )
   end
 
   desc "Execute Statical Analysis"
@@ -64,13 +73,22 @@ platform :android do
 
   desc "Assemble source and test APKs"
   lane :assemble do
-    gradle(task: "assembleDebug")
-    gradle(task: "assembleDebugAndroidTest")
+    gradle(
+      task: "assemble",
+      flags: "--no-daemon --stacktrace"
+    )
+    gradle(
+      task: "assembleAndroidTest",
+      flags: "--no-daemon --stacktrace"
+    )
   end
 
   desc "Execute unit test"
   lane :unit_test do
-    gradle(task: "testDebugUnitTest")
+    gradle(
+      task: "test",
+      flags: "--no-daemon --stacktrace"
+    )
   end
 
   desc "Execute instrumentation test on Emulator"
