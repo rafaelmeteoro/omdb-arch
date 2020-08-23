@@ -100,7 +100,7 @@ object Libraries {
         const val materialDesign = "1.2.0"
         const val coreAndroidx = "1.3.1"
         const val archCore = "2.1.0"
-        const val constraintLayout = "2.0.0-rc1"
+        const val constraintLayout = "2.0.0"
         const val lifecycle = "2.2.0"
         const val coroutines = "1.3.9"
         const val navigation = "2.3.0"
@@ -115,10 +115,10 @@ object Libraries {
         const val junitExt = "1.1.1"
         const val assertj = "3.16.1"
         const val mockitoKotlin = "2.2.0"
-        const val mockitoAndroid = "3.4.6"
+        const val mockitoAndroid = "3.5.5"
         const val androidxTest = "1.2.0"
         const val espresso = "3.2.0"
         const val roboletric = "4.3"
-        const val barista = "3.5.0"
+        const val barista = "3.6.0"
     }
 }
