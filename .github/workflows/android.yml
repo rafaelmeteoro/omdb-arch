@@ -94,7 +94,7 @@ jobs:
           java-version: 1.8
 
       - name: Assemble APK
-        run: ./gradlew clean assembleDebug --stacktrace
+        run: ./gradlew clean app:assembleDebug --stacktrace
 
 
   #     Codecov container action is only supported on Linux
