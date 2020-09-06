@@ -44,11 +44,13 @@ class AnimatorComposer private constructor(startingAnimator: Animator?) {
     }
 
     fun start(): AnimatorComposer {
-        nextAction(object : ActionCallback {
-            override fun execute() {
-                clearListeners()
+        nextAction(
+            object : ActionCallback {
+                override fun execute() {
+                    clearListeners()
+                }
             }
-        })
+        )
 
         firstAnimator?.start()
         return this
