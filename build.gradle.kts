@@ -38,4 +38,5 @@ apply(plugin = BuildPlugins.Ids.jacocoUnified)
 
 configure<JunitJacocoExtension> {
     jacocoVersion = "0.8.4"
+    includeNoLocationClasses = true
 }

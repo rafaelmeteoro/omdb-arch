@@ -55,6 +55,7 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
+            isTestCoverageEnabled = false
 
             buildConfigField("String", "API_KEY_VALUE", "\"1abc75a6\"")
             buildConfigField("String", "API_URL", "\"https://www.omdbapi.com/\"")
