@@ -166,18 +166,22 @@ class ManyFacedView @JvmOverloads constructor(context: Context, attrs: Attribute
 
         animatorComposer = AnimatorComposer
             .from(outAnimator, outView)
-            .nextAction(object : ActionCallback {
-                override fun execute() {
-                    hideOutView(outView)
-                    inView.visibility = View.VISIBLE
+            .nextAction(
+                object : ActionCallback {
+                    override fun execute() {
+                        hideOutView(outView)
+                        inView.visibility = View.VISIBLE
+                    }
                 }
-            })
+            )
             .next(inAnimator, inView)
-            .nextAction(object : ActionCallback {
-                override fun execute() {
-                    notifyStateChanged()
+            .nextAction(
+                object : ActionCallback {
+                    override fun execute() {
+                        notifyStateChanged()
+                    }
                 }
-            })
+            )
             .start()
     }
 
@@ -186,11 +190,13 @@ class ManyFacedView @JvmOverloads constructor(context: Context, attrs: Attribute
 
         animatorComposer = AnimatorComposer
             .from(inAnimator, inView)
-            .nextAction(object : ActionCallback {
-                override fun execute() {
-                    notifyStateChanged()
+            .nextAction(
+                object : ActionCallback {
+                    override fun execute() {
+                        notifyStateChanged()
+                    }
                 }
-            })
+            )
             .start()
     }
 
