@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.meteoro.omdbarch.home.databinding.MovieItemBinding
 
 class MoviesAdapter(

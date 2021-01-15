@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.details
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import coil.api.load
+import coil.load
 import com.meteoro.omdbarch.actions.EXTRA_IMDB
 import com.meteoro.omdbarch.actions.ImdbArgs
 import com.meteoro.omdbarch.components.ErrorStateResources

@@ -3,7 +3,7 @@ package com.meteoro.omdbarch.favorites.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.favorites.databinding.MovieListItemBinding
 

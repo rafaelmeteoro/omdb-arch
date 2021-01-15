@@ -108,7 +108,7 @@ object Libraries {
         const val dagger = "2.31"
         const val leakyCanary = "2.5"
         const val picasso = "2.71828"
-        const val coil = "0.13.0"
+        const val coil = "1.1.1"
         const val timber = "4.7.1"
         const val stetho = "1.5.1"
         const val junit = "4.13.1"
