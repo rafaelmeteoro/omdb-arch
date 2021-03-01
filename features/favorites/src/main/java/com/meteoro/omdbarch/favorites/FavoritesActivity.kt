@@ -1,33 +1,34 @@
 package com.meteoro.omdbarch.favorites
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.meteoro.omdbarch.components.binding.BindingActivity
 import com.meteoro.omdbarch.favorites.databinding.ActivityFavoritesBinding
 import dagger.android.AndroidInjection
-import timber.log.Timber
+import javax.inject.Inject
 
-class FavoritesActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityFavoritesBinding
+class FavoritesActivity : BindingActivity<ActivityFavoritesBinding>() {
 
     private var currentNavController: LiveData<NavController>? = null
 
+    @Inject
+    lateinit var objectActivity: ObjetoComActivity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-
         super.onCreate(savedInstanceState)
-        binding = ActivityFavoritesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    }
 
-        Timber.d("Launch")
+    override fun setupViewBinding(inflater: LayoutInflater): ActivityFavoritesBinding {
+        return ActivityFavoritesBinding.inflate(inflater)
+    }
 
-        if (savedInstanceState == null) {
-            setupBottomNavigationBar()
-        } // Else, need to wait for onRestoreInstanceState
+    override fun init() {
+        setupBottomNavigationBar()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
