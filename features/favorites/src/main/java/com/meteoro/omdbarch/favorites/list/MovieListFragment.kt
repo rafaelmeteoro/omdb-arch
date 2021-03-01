@@ -21,6 +21,7 @@ import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.state.ViewState
+import com.meteoro.omdbarch.favorites.ObjetoComActivity
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.favorites.databinding.FragmentMovieListBinding
 import com.meteoro.omdbarch.favorites.databinding.StateListContentBinding
@@ -39,6 +40,9 @@ class MovieListFragment :
 
     @Inject
     lateinit var viewModel: MovieListViewModel
+
+    @Inject
+    lateinit var objetoActivity: ObjetoComActivity
 
     private lateinit var bindingContent: StateListContentBinding
 
@@ -61,6 +65,8 @@ class MovieListFragment :
         setHasOptionsMenu(true)
         setupView()
         getMoviesSaved()
+
+        Timber.d("Message: ${objetoActivity.getTextObject()}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -5,6 +5,7 @@ import com.meteoro.omdbarch.OmdbApplication
 import com.meteoro.omdbarch.details.di.DetailsModule
 import com.meteoro.omdbarch.domain.di.DomainModule
 import com.meteoro.omdbarch.favorites.di.FavoritesModule
+import com.meteoro.omdbarch.favorites.di.FavoritesProvider
 import com.meteoro.omdbarch.home.di.HomeModule
 import com.meteoro.omdbarch.onboarding.di.OnboardingModule
 import com.meteoro.omdbarch.persistance.di.PersistanceModule
@@ -28,7 +29,7 @@ import javax.inject.Singleton
         OnboardingModule::class,
         HomeModule::class,
         DetailsModule::class,
-        FavoritesModule::class
+        FavoritesProvider::class
     ]
 )
 interface AppComponent : AndroidInjector<OmdbApplication> {

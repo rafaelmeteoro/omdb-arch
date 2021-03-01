@@ -9,12 +9,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.meteoro.omdbarch.favorites.databinding.ActivityFavoritesBinding
 import dagger.android.AndroidInjection
 import timber.log.Timber
+import javax.inject.Inject
 
 class FavoritesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoritesBinding
 
     private var currentNavController: LiveData<NavController>? = null
+
+    @Inject
+    lateinit var objectActivity: ObjetoComActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -24,6 +28,7 @@ class FavoritesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Timber.d("Launch")
+        Timber.d("Message: ${objectActivity.getTextObject()}")
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
