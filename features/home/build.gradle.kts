@@ -16,7 +16,6 @@ dependencies {
     implementation(Libraries.lifecycleRuntime)
     implementation(Libraries.lifecycleJava8)
     implementation(Libraries.lifecycleViewModel)
-    implementation(Libraries.lifecycleExtensions)
     implementation(Libraries.coroutinesCore)
     implementation(Libraries.coroutinesAndroid)
     implementation(Libraries.rxJava)

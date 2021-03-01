@@ -16,7 +16,6 @@ dependencies {
     implementation(Libraries.lifecycleCommon)
     implementation(Libraries.lifecycleJava8)
     implementation(Libraries.lifecycleViewModel)
-    implementation(Libraries.lifecycleExtensions)
     implementation(Libraries.navigationFragmentKtx)
     implementation(Libraries.navigationRuntimeKtx)
     implementation(Libraries.navigationCommontKtx)

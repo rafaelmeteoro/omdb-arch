@@ -15,7 +15,6 @@ dependencies {
     implementation(Libraries.lifecycleCommon)
     implementation(Libraries.lifecycleJava8)
     implementation(Libraries.lifecycleViewModel)
-    implementation(Libraries.lifecycleExtensions)
     implementation(Libraries.rxJava)
     implementation(Libraries.rxKotlin)
     implementation(Libraries.rxAndroid)

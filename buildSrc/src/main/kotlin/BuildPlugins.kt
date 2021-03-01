@@ -37,7 +37,7 @@ object BuildPlugins {
         const val agp = "4.0.1"
         const val testLogger = "2.1.1"
         const val versions = "0.36.0"
-        const val safeArgs = "2.3.2"
+        const val safeArgs = "2.3.3"
         const val ktlint = "9.4.1"
         const val detekt = "1.15.0"
         const val jacocoUnified = "0.16.0"
