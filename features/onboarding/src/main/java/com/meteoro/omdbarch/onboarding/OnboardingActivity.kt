@@ -1,30 +1,25 @@
 package com.meteoro.omdbarch.onboarding
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
 import com.meteoro.omdbarch.actions.Actions
+import com.meteoro.omdbarch.components.binding.BindingActivity
 import com.meteoro.omdbarch.onboarding.databinding.ActivityOnboardingBinding
-import dagger.android.AndroidInjection
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class OnboardingActivity : AppCompatActivity() {
+class OnboardingActivity : BindingActivity<ActivityOnboardingBinding>() {
 
     companion object {
         private const val TIMER_COUNT = 1000L
     }
 
-    private lateinit var binding: ActivityOnboardingBinding
+    override fun setupViewBinding(inflater: LayoutInflater): ActivityOnboardingBinding {
+        return ActivityOnboardingBinding.inflate(inflater)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-
-        super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun init() {
         Timber.d("Launch")
         handleLaunch()
     }

@@ -1,18 +1,17 @@
 package com.meteoro.omdbarch.home
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.meteoro.omdbarch.actions.Actions
 import com.meteoro.omdbarch.architecture.ViewState
 import com.meteoro.omdbarch.components.ErrorStateResources
+import com.meteoro.omdbarch.components.binding.BindingActivity
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.connectivity.base.ConnectivityProvider
@@ -28,7 +27,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityStateListener {
+class HomeActivity : BindingActivity<ActivityHomeBinding>(), ConnectivityProvider.ConnectivityStateListener {
 
     companion object {
         private const val COLUMN_COUNT = 3
@@ -46,7 +45,6 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
 
     private val provider: ConnectivityProvider by lazy { ConnectivityProvider.createProvider(this) }
 
-    private lateinit var binding: ActivityHomeBinding
     private lateinit var bindingContent: StateHomeContentBinding
     private lateinit var bindingError: StateHomeErrorBinding
 
@@ -54,14 +52,17 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        bindingContent = StateHomeContentBinding.bind(getHomeView())
-        bindingError = StateHomeErrorBinding.bind(getErrorView())
-        setContentView(binding.root)
-        lifecycle.addObserver(disposer)
+    }
 
+    override fun setupViewBinding(inflater: LayoutInflater): ActivityHomeBinding {
+        val homeBinding = ActivityHomeBinding.inflate(inflater)
+        bindingContent = StateHomeContentBinding.bind(homeBinding.stateView.getView(FacedViewState.CONTENT))
+        bindingError = StateHomeErrorBinding.bind(homeBinding.stateView.getView(FacedViewState.ERROR))
+        return homeBinding
+    }
+
+    override fun init() {
         setupView()
         setupSubject()
     }
@@ -108,9 +109,6 @@ class HomeActivity : AppCompatActivity(), ConnectivityProvider.ConnectivityState
         }
         else -> super.onOptionsItemSelected(item)
     }
-
-    private fun getHomeView() = binding.stateView.getView<RecyclerView>(FacedViewState.CONTENT)
-    private fun getErrorView() = binding.stateView.getView<View>(FacedViewState.ERROR)
 
     private fun setupView() {
         bindingContent.homeView.apply {

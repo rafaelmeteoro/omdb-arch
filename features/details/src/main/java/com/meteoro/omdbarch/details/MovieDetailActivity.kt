@@ -1,12 +1,12 @@
 package com.meteoro.omdbarch.details
 
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
 import coil.load
 import com.meteoro.omdbarch.actions.EXTRA_IMDB
 import com.meteoro.omdbarch.actions.ImdbArgs
 import com.meteoro.omdbarch.components.ErrorStateResources
+import com.meteoro.omdbarch.components.binding.BindingActivity
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.details.databinding.ActivityMovieDetailBinding
 import com.meteoro.omdbarch.details.databinding.StateDetailContentBinding
@@ -19,7 +19,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject
 
-class MovieDetailActivity : AppCompatActivity() {
+class MovieDetailActivity : BindingActivity<ActivityMovieDetailBinding>() {
 
     @Inject
     lateinit var disposer: Disposer
@@ -27,25 +27,25 @@ class MovieDetailActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: DetailViewModelContract
 
-    private lateinit var binding: ActivityMovieDetailBinding
     private lateinit var bindingContent: StateDetailContentBinding
     private lateinit var bindingError: StateDetailErrorBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-
         super.onCreate(savedInstanceState)
-        binding = ActivityMovieDetailBinding.inflate(layoutInflater)
-        bindingContent = StateDetailContentBinding.bind(getContentView())
-        bindingError = StateDetailErrorBinding.bind(getErrorView())
-        setContentView(binding.root)
-        lifecycle.addObserver(disposer)
+    }
+
+    override fun setupViewBinding(inflater: LayoutInflater): ActivityMovieDetailBinding {
+        val movieDetailBinding = ActivityMovieDetailBinding.inflate(inflater)
+        bindingContent = StateDetailContentBinding.bind(movieDetailBinding.stateView.getView(FacedViewState.CONTENT))
+        bindingError = StateDetailErrorBinding.bind(movieDetailBinding.stateView.getView(FacedViewState.ERROR))
+        return movieDetailBinding
+    }
+
+    override fun init() {
         val args = intent.getParcelableExtra(EXTRA_IMDB) as ImdbArgs
         loadMovie(args.imdbId)
     }
-
-    private fun getContentView() = binding.stateView.getView<View>(FacedViewState.CONTENT)
-    private fun getErrorView() = binding.stateView.getView<View>(FacedViewState.ERROR)
 
     private fun loadMovie(imdbId: String) {
         val toDispose = viewModel

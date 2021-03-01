@@ -1,14 +1,10 @@
 package com.meteoro.omdbarch.favorites.words
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.meteoro.omdbarch.components.extensions.ViewBindingHolder
-import com.meteoro.omdbarch.components.extensions.ViewBindingHolderImpl
+import com.meteoro.omdbarch.components.binding.BindingFragment
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
@@ -21,7 +17,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject
 
-class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by ViewBindingHolderImpl() {
+class WordsFragment : BindingFragment<FragmentWordsBinding>() {
 
     @Inject
     lateinit var disposer: Disposer
@@ -36,17 +32,13 @@ class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by Vie
         super.onAttach(context)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentWordsBinding.inflate(layoutInflater), this) {
-        bindingContent = StateWordsContentBinding.bind(this.stateView.getView(FacedViewState.CONTENT))
+    override fun setupViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentWordsBinding {
+        val fragmentWords = FragmentWordsBinding.inflate(inflater, container, false)
+        bindingContent = StateWordsContentBinding.bind(fragmentWords.stateView.getView(FacedViewState.CONTENT))
+        return fragmentWords
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        lifecycle.addObserver(disposer)
+    override fun init() {
         getWordsSaved()
     }
 
@@ -72,7 +64,7 @@ class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by Vie
 
     private fun showWords(presentation: WordsPresentation) {
         Timber.d("${presentation.words}")
-        binding?.stateView?.setState(FacedViewState.CONTENT)
+        binding.stateView.setState(FacedViewState.CONTENT)
 
         val words = presentation.words
 
@@ -88,20 +80,20 @@ class WordsFragment : Fragment(), ViewBindingHolder<FragmentWordsBinding> by Vie
         Timber.e("Failed to load words -> $reason")
 
         if (reason is NoResultsFound) {
-            binding?.stateView?.setState(FacedViewState.EMPTY)
+            binding.stateView.setState(FacedViewState.EMPTY)
             return
         }
 
-        binding?.stateView?.setState(FacedViewState.ERROR)
+        binding.stateView.setState(FacedViewState.ERROR)
         showErrorReport(R.string.fragment_words_error)
     }
 
     private fun startExecution() {
-        binding?.stateView?.setState(FacedViewState.LOADING)
+        binding.stateView.setState(FacedViewState.LOADING)
     }
 
     private fun showErrorReport(targetMessageId: Int) {
-        binding?.let {
+        binding.let {
             Snackbar
                 .make(it.wordsScreenRoot, targetMessageId, Snackbar.LENGTH_INDEFINITE)
                 .show()

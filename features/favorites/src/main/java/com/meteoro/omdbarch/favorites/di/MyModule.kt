@@ -3,7 +3,6 @@ package com.meteoro.omdbarch.favorites.di
 import com.meteoro.omdbarch.domain.repository.CacheRepository
 import com.meteoro.omdbarch.domain.repository.ManagerRepository
 import com.meteoro.omdbarch.domain.state.StateMachine
-import com.meteoro.omdbarch.favorites.FavoritesActivity
 import com.meteoro.omdbarch.favorites.ObjetoComActivity
 import com.meteoro.omdbarch.favorites.details.MovieDetailsViewModel
 import com.meteoro.omdbarch.favorites.list.MovieListViewModel

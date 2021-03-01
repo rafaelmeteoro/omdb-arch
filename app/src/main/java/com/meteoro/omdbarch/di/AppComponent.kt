@@ -4,7 +4,6 @@ import android.app.Application
 import com.meteoro.omdbarch.OmdbApplication
 import com.meteoro.omdbarch.details.di.DetailsModule
 import com.meteoro.omdbarch.domain.di.DomainModule
-import com.meteoro.omdbarch.favorites.di.FavoritesModule
 import com.meteoro.omdbarch.favorites.di.FavoritesProvider
 import com.meteoro.omdbarch.home.di.HomeModule
 import com.meteoro.omdbarch.onboarding.di.OnboardingModule
