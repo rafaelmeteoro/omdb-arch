@@ -3,3 +3,4 @@ codecov:
 
 ignore:
   - "**/*Fragment*.kt"
+  - "**/*Adapter*.kt"

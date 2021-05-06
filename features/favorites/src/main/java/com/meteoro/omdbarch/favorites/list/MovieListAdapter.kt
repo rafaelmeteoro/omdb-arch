@@ -8,9 +8,15 @@ import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.favorites.databinding.MovieListItemBinding
 
 class MovieListAdapter(
-    private val presentation: MovieListPresentation,
-    private val listener: MovieListLitener
+    private val listener: MovieListListener
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListHolder>() {
+
+    private var data: MovieListPresentation? = null
+
+    fun setData(presentation: MovieListPresentation) {
+        data = presentation
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListHolder {
         val inflate = LayoutInflater.from(parent.context)
@@ -18,10 +24,12 @@ class MovieListAdapter(
         return MovieListHolder(binding)
     }
 
-    override fun getItemCount(): Int = presentation.movies.size
+    override fun getItemCount(): Int = data?.movies?.size ?: 0
 
     override fun onBindViewHolder(holder: MovieListHolder, position: Int) {
-        holder.bind(presentation.movies[position])
+        data?.let { presentation ->
+            holder.bind(presentation.movies[position])
+        }
     }
 
     inner class MovieListHolder(private val itemBinding: MovieListItemBinding) :
@@ -40,7 +48,7 @@ class MovieListAdapter(
         }
     }
 
-    interface MovieListLitener {
+    interface MovieListListener {
         fun navigateToMovie(movie: Movie)
         fun deleteMovie(movie: Movie)
     }

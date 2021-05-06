@@ -1,23 +1,25 @@
 package com.meteoro.omdbarch.favorites.list
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.meteoro.omdbarch.components.binding.BindingFragment
 import com.meteoro.omdbarch.components.decoration.GridItemDecoration
+import com.meteoro.omdbarch.components.delegate.autoCleaned
 import com.meteoro.omdbarch.components.widgets.manyfacedview.view.FacedViewState
 import com.meteoro.omdbarch.domain.disposer.Disposer
 import com.meteoro.omdbarch.domain.errors.SearchMoviesError.NoResultsFound
 import com.meteoro.omdbarch.domain.model.Movie
 import com.meteoro.omdbarch.domain.state.ViewState
-import com.meteoro.omdbarch.favorites.ObjetoComActivity
 import com.meteoro.omdbarch.favorites.R
 import com.meteoro.omdbarch.favorites.databinding.FragmentMovieListBinding
 import com.meteoro.omdbarch.favorites.databinding.StateListContentBinding
@@ -26,7 +28,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject
 
-class MovieListFragment : BindingFragment<FragmentMovieListBinding>(), MovieListAdapter.MovieListLitener {
+class MovieListFragment : Fragment(), MovieListAdapter.MovieListListener {
 
     @Inject
     lateinit var disposer: Disposer
@@ -34,28 +36,26 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding>(), MovieList
     @Inject
     lateinit var viewModel: MovieListViewModel
 
-    @Inject
-    lateinit var objetoActivity: ObjetoComActivity
-
-    private lateinit var bindingContent: StateListContentBinding
+    private var binding: FragmentMovieListBinding by autoCleaned()
+    private var bindingContent: StateListContentBinding by autoCleaned()
+    private val movieListAdapter: MovieListAdapter by autoCleaned { MovieListAdapter(this) }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
 
-    override fun setupViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentMovieListBinding {
-        val fragmentMovieList = FragmentMovieListBinding.inflate(inflater, container, false)
-        bindingContent = StateListContentBinding.bind(fragmentMovieList.stateView.getView(FacedViewState.CONTENT))
-        return fragmentMovieList
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentMovieListBinding.inflate(inflater, container, false)
+        bindingContent = StateListContentBinding.bind(binding.stateView.getView(FacedViewState.CONTENT))
+        return binding.root
     }
 
-    override fun init() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         setupView()
         getMoviesSaved()
-
-        Timber.d("Message: ${objetoActivity.getTextObject()}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -81,6 +81,7 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding>(), MovieList
                     noOfColumns = 1
                 )
             )
+            adapter = movieListAdapter
         }
     }
 
@@ -108,7 +109,7 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding>(), MovieList
         Timber.d("${presentation.movies}")
 
         binding.stateView.setState(FacedViewState.CONTENT)
-        bindingContent.movieListView.adapter = MovieListAdapter(presentation, this)
+        movieListAdapter.setData(presentation)
     }
 
     private fun handleError(reason: Throwable) {
