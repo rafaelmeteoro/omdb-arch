@@ -16,23 +16,27 @@ class AutoCleanedValue<T : Any>(
     private var _value: T? = null
 
     init {
-        fragment.lifecycle.addObserver(object : DefaultLifecycleObserver {
-            val viewLifecycleOwnerObserver = Observer<LifecycleOwner?> { viewLifecycleOwner ->
-                viewLifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
-                    override fun onDestroy(owner: LifecycleOwner) {
-                        _value = null
-                    }
-                })
-            }
+        fragment.lifecycle.addObserver(
+            object : DefaultLifecycleObserver {
+                val viewLifecycleOwnerObserver = Observer<LifecycleOwner?> { viewLifecycleOwner ->
+                    viewLifecycleOwner?.lifecycle?.addObserver(
+                        object : DefaultLifecycleObserver {
+                            override fun onDestroy(owner: LifecycleOwner) {
+                                _value = null
+                            }
+                        }
+                    )
+                }
 
-            override fun onCreate(owner: LifecycleOwner) {
-                fragment.viewLifecycleOwnerLiveData.observeForever(viewLifecycleOwnerObserver)
-            }
+                override fun onCreate(owner: LifecycleOwner) {
+                    fragment.viewLifecycleOwnerLiveData.observeForever(viewLifecycleOwnerObserver)
+                }
 
-            override fun onDestroy(owner: LifecycleOwner) {
-                fragment.viewLifecycleOwnerLiveData.removeObserver(viewLifecycleOwnerObserver)
+                override fun onDestroy(owner: LifecycleOwner) {
+                    fragment.viewLifecycleOwnerLiveData.removeObserver(viewLifecycleOwnerObserver)
+                }
             }
-        })
+        )
     }
 
     override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
