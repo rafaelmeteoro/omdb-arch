@@ -8,6 +8,7 @@ dependencies {
     implementation(Libraries.materialDesign)
     implementation(Libraries.recyclerView)
     implementation(Libraries.lifecycleRuntime)
+    implementation(Libraries.lifecycleJava8)
     implementation(Libraries.lifecycleViewModel)
     implementation(Libraries.rxJava)
     implementation(Libraries.rxKotlin)
