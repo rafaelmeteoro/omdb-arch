@@ -22,7 +22,6 @@ import com.meteoro.omdbarch.rest.interceptor.ApiInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
-import kotlinx.serialization.UnstableDefault
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -32,7 +31,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Suppress("TooManyFunctions")
-@UnstableDefault
 @Module
 class RestModule(private val apiUrl: String, private val apiKeyValue: String, private val isDebug: Boolean) {
 

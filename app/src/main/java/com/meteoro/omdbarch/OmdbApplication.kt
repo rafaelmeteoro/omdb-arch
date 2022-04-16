@@ -8,11 +8,9 @@ import com.meteoro.omdbarch.rest.di.RestModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import kotlinx.serialization.UnstableDefault
 import timber.log.Timber
 import javax.inject.Inject
 
-@UnstableDefault
 class OmdbApplication : Application(), HasAndroidInjector {
 
     @Inject

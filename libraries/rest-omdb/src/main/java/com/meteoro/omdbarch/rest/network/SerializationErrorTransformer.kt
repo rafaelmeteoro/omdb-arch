@@ -3,9 +3,7 @@ package com.meteoro.omdbarch.rest.network
 import com.meteoro.omdbarch.domain.errors.RemoteServiceIntegrationError
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
-import kotlinx.serialization.MissingFieldException
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.UnknownFieldException
 import org.reactivestreams.Publisher
 import timber.log.Timber
 
@@ -19,8 +17,6 @@ class SerializationErrorTransformer<T> : FlowableTransformer<T, T> {
         error.message?.let { Timber.e(it) } ?: error.printStackTrace()
 
         val mapped = when (error) {
-            is MissingFieldException,
-            is UnknownFieldException,
             is SerializationException -> RemoteServiceIntegrationError.UnexpectedResponse
             else -> error
         }
