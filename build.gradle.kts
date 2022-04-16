@@ -3,8 +3,7 @@ import com.vanniktech.android.junit.jacoco.JunitJacocoExtension
 buildscript {
     repositories {
         google()
-        jcenter()
-        maven(url = "https://kotlin.bintray.com/kotlinx")
+        mavenCentral()
         maven(url = "https://plugins.gradle.org/m2/")
         maven(url = "https://jitpack.io")
     }
@@ -25,8 +24,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven(url = "https://kotlin.bintray.com/kotlinx")
+        mavenCentral()
         maven(url = "https://plugins.gradle.org/m2/")
         maven(url = "https://jitpack.io")
     }
